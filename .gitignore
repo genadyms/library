@@ -1,7 +1,5 @@
 .project
+.settings/
 dataccess/.classpath
-dataccess/
 datamodel/.classpath
-datamodel/.settings/
 services/.classpath
-services/.settings/
