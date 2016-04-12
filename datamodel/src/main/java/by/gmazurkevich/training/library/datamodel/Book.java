@@ -13,6 +13,7 @@ public class Book {
 	private List<Author> author;
 	private List<BookComment> bookComment;
 	private List<Keyword> keyword;
+	private String publishingOffice;
 
 	public Long getIsbn() {
 		return isbn;
@@ -76,5 +77,13 @@ public class Book {
 
 	public void setKeyword(List<Keyword> keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getPublishingOffice() {
+		return publishingOffice;
+	}
+
+	public void setPublishingOffice(String publishingOffice) {
+		this.publishingOffice = publishingOffice;
 	}
 }

@@ -4,6 +4,7 @@ CREATE TABLE "book" (
 	"title" character varying(200) NOT NULL,
 	"pages" int NOT NULL,
 	"year" TIMESTAMP NOT NULL,
+	"publishing_office" character varying(200) NOT NULL,
 	CONSTRAINT book_pk PRIMARY KEY ("isbn")
 ) WITH (
   OIDS=FALSE
@@ -121,8 +122,8 @@ CREATE TABLE "department" (
 
 CREATE TABLE "keyword" (
 	"id" serial NOT NULL,
+	"key" character varying(200) NOT NULL,
 	"value" character varying(200) NOT NULL,
-	"weight" int NOT NULL,
 	CONSTRAINT keyword_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -162,22 +163,22 @@ CREATE TABLE "comment" (
 
 
 
-CREATE TABLE "book_comment" (
-	"comment_id" int NOT NULL,
-	"book_isbn" int NOT NULL,
-	"like" int,
-	"dislike" int,
-	CONSTRAINT book_comment_pk PRIMARY KEY ("comment_id")
+CREATE TABLE "order_comment" (
+	"comment_id" serial NOT NULL,
+	"order_id" serial NOT NULL,
+	CONSTRAINT order_comment_pk PRIMARY KEY ("comment_id")
 ) WITH (
   OIDS=FALSE
 );
 
 
 
-CREATE TABLE "order_comment" (
-	"comment_id" serial NOT NULL,
-	"order_id" serial NOT NULL,
-	CONSTRAINT order_comment_pk PRIMARY KEY ("comment_id")
+CREATE TABLE "book_comment" (
+	"comment_id" int NOT NULL,
+	"book_isbn" int NOT NULL,
+	"like" int,
+	"dislike" int,
+	CONSTRAINT book_comment_pk PRIMARY KEY ("comment_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -215,9 +216,9 @@ ALTER TABLE "book_2_keyword" ADD CONSTRAINT "book_2_keyword_fk1" FOREIGN KEY ("k
 
 ALTER TABLE "comment" ADD CONSTRAINT "comment_fk0" FOREIGN KEY ("user_profile_id") REFERENCES "user_profile"("id");
 
-ALTER TABLE "book_comment" ADD CONSTRAINT "book_comment_fk0" FOREIGN KEY ("comment_id") REFERENCES "comment"("id");
-ALTER TABLE "book_comment" ADD CONSTRAINT "book_comment_fk1" FOREIGN KEY ("book_isbn") REFERENCES "book"("isbn");
-
 ALTER TABLE "order_comment" ADD CONSTRAINT "order_comment_fk0" FOREIGN KEY ("comment_id") REFERENCES "comment"("id");
 ALTER TABLE "order_comment" ADD CONSTRAINT "order_comment_fk1" FOREIGN KEY ("order_id") REFERENCES "order"("id");
+
+ALTER TABLE "book_comment" ADD CONSTRAINT "book_comment_fk0" FOREIGN KEY ("comment_id") REFERENCES "comment"("id");
+ALTER TABLE "book_comment" ADD CONSTRAINT "book_comment_fk1" FOREIGN KEY ("book_isbn") REFERENCES "book"("isbn");
 

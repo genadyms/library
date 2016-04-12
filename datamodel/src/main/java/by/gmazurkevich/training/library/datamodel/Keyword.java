@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Keyword extends AbstractModel {
 	private String value;
-	private Integer weight;
+	private String key;
 	private List<Book> book;
 
 	public String getValue() {
@@ -15,12 +15,12 @@ public class Keyword extends AbstractModel {
 		this.value = value;
 	}
 
-	public Integer getWeight() {
-		return weight;
+	public String getKey() {
+		return key;
 	}
 
-	public void setWeight(Integer weight) {
-		this.weight = weight;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public List<Book> getBook() {
@@ -30,4 +30,5 @@ public class Keyword extends AbstractModel {
 	public void setBook(List<Book> book) {
 		this.book = book;
 	}
+
 }
