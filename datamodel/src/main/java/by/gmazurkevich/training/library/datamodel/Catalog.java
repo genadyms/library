@@ -1,22 +1,22 @@
 package by.gmazurkevich.training.library.datamodel;
 
 public class Catalog extends AbstractModel {
-	private Catalog parent;
-	private String title;
+	private String path;
+	private String pathParent;
 
-	public Catalog getParent() {
-		return parent;
+	public String getPath() {
+		return path;
 	}
 
-	public void setParent(Catalog parent) {
-		this.parent = parent;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getPathParent() {
+		return pathParent;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setPathParent(String pathParent) {
+		this.pathParent = pathParent;
 	}
 }

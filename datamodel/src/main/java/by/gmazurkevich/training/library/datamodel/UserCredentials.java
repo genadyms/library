@@ -8,8 +8,6 @@ public class UserCredentials extends AbstractModel {
 
 	private String password;
 
-	private UserRole role;
-
 	public String getEmail() {
 		return email;
 	}
@@ -24,14 +22,6 @@ public class UserCredentials extends AbstractModel {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public UserRole getRole() {
-		return role;
-	}
-
-	public void setRole(UserRole role) {
-		this.role = role;
 	}
 
 	public UserProfile getProfile() {

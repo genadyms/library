@@ -11,7 +11,7 @@ public class Order extends AbstractModel {
 	private Date created;
 	private Date handled;
 	private Date closed;
-	private List<OrderComment> comment;
+	private List<Comment> comment;
 
 
 	public CopyBook getCopyBook() {
@@ -54,11 +54,11 @@ public class Order extends AbstractModel {
 		this.closed = closed;
 	}
 
-	public List<OrderComment> getComment() {
+	public List<Comment> getComment() {
 		return comment;
 	}
 
-	public void setComment(List<OrderComment> comment) {
+	public void setComment(List<Comment> comment) {
 		this.comment = comment;
 	}
 

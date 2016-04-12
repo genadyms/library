@@ -11,8 +11,7 @@ public class Book {
 	private Integer pages;
 	private Date year;
 	private List<Author> author;
-	private List<BookComment> bookComment;
-	private List<Keyword> keyword;
+	private List<Comment> bookComment;
 	private String publishingOffice;
 
 	public Long getIsbn() {
@@ -63,20 +62,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public List<BookComment> getBookComment() {
+	public List<Comment> getBookComment() {
 		return bookComment;
 	}
 
-	public void setBookComment(List<BookComment> bookComment) {
+	public void setBookComment(List<Comment> bookComment) {
 		this.bookComment = bookComment;
-	}
-
-	public List<Keyword> getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(List<Keyword> keyword) {
-		this.keyword = keyword;
 	}
 
 	public String getPublishingOffice() {

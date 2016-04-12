@@ -6,6 +6,24 @@ public class Comment extends AbstractModel {
 	private UserProfile userProfile;
 	private String content;
 	private Date created;
+	private Integer like;
+	private Integer dislike;
+
+	public Integer getLike() {
+		return like;
+	}
+
+	public void setLike(Integer like) {
+		this.like = like;
+	}
+
+	public Integer getDislike() {
+		return dislike;
+	}
+
+	public void setDislike(Integer dislike) {
+		this.dislike = dislike;
+	}
 
 	public String getContent() {
 		return content;
@@ -30,6 +48,5 @@ public class Comment extends AbstractModel {
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;
 	}
-
 
 }

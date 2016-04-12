@@ -1,16 +1,8 @@
 package by.gmazurkevich.training.library.datamodel;
 
 public class Contact extends AbstractModel {
-	private Integer phone;
+	private String phone;
 	private String address;
-
-	public Integer getPhone() {
-		return phone;
-	}
-
-	public void setPhone(Integer phone) {
-		this.phone = phone;
-	}
 
 	public String getAddress() {
 		return address;
@@ -18,5 +10,13 @@ public class Contact extends AbstractModel {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

@@ -10,6 +10,7 @@ public class UserProfile extends AbstractModel {
 	private Date created;
 	private Contact contact;
 	private UserState userState;
+	private UserRole role;
 
 	public String getFirstName() {
 		return firstName;
@@ -57,5 +58,13 @@ public class UserProfile extends AbstractModel {
 
 	public void setUserState(UserState userState) {
 		this.userState = userState;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 }
