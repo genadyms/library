@@ -1,11 +1,15 @@
 package by.gmazurkevich.training.library.datamodel;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class UserCredentials extends AbstractModel {
 
-	private UserProfile profile;
-
+	@Column(updatable = false)
 	private String email;
 
+	@Column
 	private String password;
 
 	public String getEmail() {
@@ -24,11 +28,4 @@ public class UserCredentials extends AbstractModel {
 		this.password = password;
 	}
 
-	public UserProfile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(UserProfile profile) {
-		this.profile = profile;
-	}
 }

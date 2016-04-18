@@ -2,11 +2,27 @@ package by.gmazurkevich.training.library.datamodel;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Comment extends AbstractModel {
+	
+	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
 	private UserProfile userProfile;
+	
+	@Column
 	private String content;
+	
+	@Column
 	private Date created;
+	
+	@Column
 	private Integer like;
+	
+	@Column
 	private Integer dislike;
 
 	public Integer getLike() {

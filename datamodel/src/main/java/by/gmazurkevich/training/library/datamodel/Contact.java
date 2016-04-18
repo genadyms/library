@@ -1,7 +1,15 @@
 package by.gmazurkevich.training.library.datamodel;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Contact extends AbstractModel {
+	
+	@Column
 	private String phone;
+	
+	@Column
 	private String address;
 
 	public String getAddress() {

@@ -2,14 +2,42 @@ package by.gmazurkevich.training.library.datamodel;
 
 import java.util.Date;
 
-public class UserProfile extends AbstractModel {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
+@Entity
+public class UserProfile extends AbstractModel {
+	@MapsId
+	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(nullable = false, updatable = false, name = "id")
 	private UserCredentials userCredentials;
+
+	@Column
 	private String firstName;
+
+	@Column
 	private String lastName;
+
+	@Column
 	private Date created;
+
+	@ManyToOne(targetEntity = Contact.class, fetch = FetchType.LAZY)
 	private Contact contact;
+
+	@Column
+	@Enumerated(value = EnumType.STRING)
 	private UserState userState;
+
+	@Column
+	@Enumerated(value = EnumType.STRING)
 	private UserRole role;
 
 	public String getFirstName() {

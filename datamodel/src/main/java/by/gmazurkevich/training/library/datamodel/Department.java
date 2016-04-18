@@ -1,7 +1,13 @@
 package by.gmazurkevich.training.library.datamodel;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Department extends AbstractModel {
+	@Column
 	private String name;
+	@Column
 	private Contact contact;
 
 	public String getName() {

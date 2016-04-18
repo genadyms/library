@@ -3,24 +3,45 @@ package by.gmazurkevich.training.library.datamodel;
 import java.util.Date;
 import java.util.List;
 
-public class Book {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-	private Long isbn;
+@Entity
+public class Book extends AbstractModel {
+	@Column
+	private String isbn;
+
+	@ManyToOne(targetEntity = Catalog.class, fetch = FetchType.LAZY)
 	private Catalog catalog;
+
+	@Column
 	private String title;
+
+	@Column
 	private Integer pages;
+
+	@Column
 	private Date year;
+
+	@JoinTable(name = "book_2_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "author_id") })
+	@ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY)
 	private List<Author> author;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "book_2_comment", joinColumns = {
+			@JoinColumn(name = "id", referencedColumnName = "book_id") }, inverseJoinColumns = {
+					@JoinColumn(name = "comment_id", referencedColumnName = "id", unique = true) })
 	private List<Comment> bookComment;
+
+	@Column
 	private String publishingOffice;
-
-	public Long getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(Long isbn) {
-		this.isbn = isbn;
-	}
 
 	public Catalog getCatalog() {
 		return catalog;
@@ -28,6 +49,14 @@ public class Book {
 
 	public void setCatalog(Catalog catalog) {
 		this.catalog = catalog;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 	public String getTitle() {
