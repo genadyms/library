@@ -6,10 +6,10 @@
 	<parent>
 		<groupId>by.gmazurkevich.training.library</groupId>
 		<artifactId>library-project</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>dataccess</artifactId>
+	<artifactId>dataaccess</artifactId>
 
 
 
