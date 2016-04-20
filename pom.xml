@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>by.gmazurkevich.training.library</groupId>
-	<artifactId>parent-project</artifactId>
+	<artifactId>library-project</artifactId>
 	<version>1.0.0</version>
 
 	<packaging>pom</packaging>
