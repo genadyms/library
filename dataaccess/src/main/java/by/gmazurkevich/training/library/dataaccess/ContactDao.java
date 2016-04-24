@@ -1,5 +1,7 @@
 package by.gmazurkevich.training.library.dataaccess;
 
-public interface ContactDao {
+import by.gmazurkevich.training.library.datamodel.Contact;
+
+public interface ContactDao extends AbstractDao<Contact, Long> {
 
 }

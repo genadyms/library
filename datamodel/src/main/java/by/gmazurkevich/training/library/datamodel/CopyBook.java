@@ -1,7 +1,5 @@
 package by.gmazurkevich.training.library.datamodel;
 
-import java.awt.print.Book;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

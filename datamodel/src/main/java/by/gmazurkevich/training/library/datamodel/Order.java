@@ -12,19 +12,20 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Order extends AbstractModel {
-	@Column(name="reader_id")
+	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinColumn(nullable = false, updatable = false, name = "id")
+	@JoinColumn(nullable = false, updatable = false, name = "id")
 	private UserProfile reader;
-	
-	@Column(name="librarian_id")
+
+	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinColumn(updatable = false, name = "id")
+	@JoinColumn(nullable = false, updatable = false, name = "id")
 	private UserProfile librarian;
 
 	@ManyToOne(targetEntity = CopyBook.class, fetch = FetchType.LAZY)
@@ -44,8 +45,9 @@ public class Order extends AbstractModel {
 	private Date closed;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="order_2_comment", joinColumns={ @JoinColumn(name="order_id", referencedColumnName="id")},
-	inverseJoinColumns={ @JoinColumn(name="comment_id",referencedColumnName="id", unique=true)})
+	@JoinTable(name = "order_2_comment", joinColumns = {
+			@JoinColumn(name = "order_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "comment_id", referencedColumnName = "id", unique = true) })
 	private List<Comment> comment;
 
 	public CopyBook getCopyBook() {

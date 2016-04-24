@@ -9,7 +9,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
@@ -29,15 +28,17 @@ public class UserProfile extends AbstractModel {
 	@Column
 	private Date created;
 
-	@ManyToOne(targetEntity = Contact.class, fetch = FetchType.LAZY)
+	@MapsId
+	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(nullable = false, updatable = false, name = "id")
 	private Contact contact;
 
 	@Column
-	@Enumerated(value = EnumType.STRING)
+	@Enumerated(value = EnumType.ORDINAL)
 	private UserState userState;
 
 	@Column
-	@Enumerated(value = EnumType.STRING)
+	@Enumerated(value = EnumType.ORDINAL)
 	private UserRole role;
 
 	public String getFirstName() {

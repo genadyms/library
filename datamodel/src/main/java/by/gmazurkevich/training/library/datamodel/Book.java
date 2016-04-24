@@ -35,9 +35,8 @@ public class Book extends AbstractModel {
 	private List<Author> author;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "book_2_comment", joinColumns = {
-			@JoinColumn(name = "id", referencedColumnName = "book_id") }, inverseJoinColumns = {
-					@JoinColumn(name = "comment_id", referencedColumnName = "id", unique = true) })
+	@JoinTable(name = "book_2_comment", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "comment_id", unique = true) })
 	private List<Comment> bookComment;
 
 	@Column

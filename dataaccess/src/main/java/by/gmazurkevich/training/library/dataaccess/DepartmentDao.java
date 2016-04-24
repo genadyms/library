@@ -1,5 +1,7 @@
 package by.gmazurkevich.training.library.dataaccess;
 
-public interface DepartmentDao {
+import by.gmazurkevich.training.library.datamodel.Department;
+
+public interface DepartmentDao extends AbstractDao<Department, Long> {
 
 }

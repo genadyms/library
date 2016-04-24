@@ -6,18 +6,11 @@ import by.gmazurkevich.training.library.dataaccess.CommentDao;
 import by.gmazurkevich.training.library.datamodel.Comment;
 
 @Repository
-public class CommentDaoImpl extends AbstractDaoImpl implements CommentDao {
+public class CommentDaoImpl extends AbstractDaoImpl<Comment,Long> implements CommentDao {
 
-	@Override
-	public Comment get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected CommentDaoImpl() {
+		super(Comment.class);
 	}
 
-	@Override
-	public Comment save() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

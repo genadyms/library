@@ -1,5 +1,7 @@
 package by.gmazurkevich.training.library.dataaccess;
 
-public interface CopyBookDao {
+import by.gmazurkevich.training.library.datamodel.CopyBook;
+
+public interface CopyBookDao extends AbstractDao<CopyBook, Long> {
 
 }

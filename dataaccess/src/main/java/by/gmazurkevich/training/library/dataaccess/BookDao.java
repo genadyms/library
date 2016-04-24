@@ -2,8 +2,6 @@ package by.gmazurkevich.training.library.dataaccess;
 
 import by.gmazurkevich.training.library.datamodel.Book;
 
-public interface BookDao {
-	Book get(Long id);
+public interface BookDao extends AbstractDao<Book, Long> {
 
-	Book save();
 }

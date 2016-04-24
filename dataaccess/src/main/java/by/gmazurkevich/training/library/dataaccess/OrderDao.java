@@ -1,5 +1,7 @@
 package by.gmazurkevich.training.library.dataaccess;
 
-public interface OrderDao {
+import by.gmazurkevich.training.library.datamodel.Order;
+
+public interface OrderDao extends AbstractDao<Order, Long> {
 
 }

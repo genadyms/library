@@ -15,15 +15,15 @@ public class Catalog extends AbstractModel {
 	@Column
 	private String pathParent;
 
-	@OneToMany(mappedBy = "Catalog", fetch = FetchType.LAZY)
-	private List<Book> books;
+	@OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY)
+	private List<Book> book;
 
 	public List<Book> getBooks() {
-		return books;
+		return book;
 	}
 
 	public void setBooks(List<Book> books) {
-		this.books = books;
+		this.book = books;
 	}
 
 	public String getPath() {
