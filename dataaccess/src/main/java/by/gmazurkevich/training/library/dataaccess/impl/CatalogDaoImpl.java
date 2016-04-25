@@ -11,5 +11,6 @@ public class CatalogDaoImpl extends AbstractDaoImpl<Catalog, Long> implements Ca
 	protected CatalogDaoImpl() {
 		super(Catalog.class);
 	}
-
+	
+	
 }

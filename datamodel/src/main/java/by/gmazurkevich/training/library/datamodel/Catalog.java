@@ -15,7 +15,7 @@ public class Catalog extends AbstractModel {
 	@Column
 	private String pathParent;
 
-	@OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "catalog")
 	private List<Book> book;
 
 	public List<Book> getBooks() {

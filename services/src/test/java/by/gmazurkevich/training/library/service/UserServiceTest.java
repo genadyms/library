@@ -71,5 +71,6 @@ public class UserServiceTest {
 		userProfile.setUserState(UserState.ACTIVE);
 		userService.register(userProfile, userCredentials, contact);
 	}
-
+	
+	
 }

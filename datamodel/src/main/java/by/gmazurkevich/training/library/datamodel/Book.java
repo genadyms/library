@@ -17,7 +17,9 @@ public class Book extends AbstractModel {
 	@Column
 	private String isbn;
 
-	@ManyToOne(targetEntity = Catalog.class, fetch = FetchType.LAZY)
+//	@ManyToOne(targetEntity = Catalog.class, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="catalog_id")
 	private Catalog catalog;
 
 	@Column

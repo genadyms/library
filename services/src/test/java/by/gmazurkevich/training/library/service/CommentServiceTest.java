@@ -20,7 +20,7 @@ import by.gmazurkevich.training.library.datamodel.UserState;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class CommentTest {
+public class CommentServiceTest {
 	
 	@Inject
 	private CommentService commentService;
@@ -39,8 +39,8 @@ public class CommentTest {
 	@Test
 	public void create(){
 		Comment comment = new Comment();
-		comment.setContent("content");
-		comment.setCreated(new Date());
+		comment.setContent("content2");
+//		comment.setCreated(new Date());
 		comment.setUserProfile(userService.getProfile(111L));
 //		commentDao.insert(comment);
 		commentService.create(comment);

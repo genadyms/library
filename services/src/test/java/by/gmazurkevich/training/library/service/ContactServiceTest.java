@@ -12,7 +12,7 @@ import by.gmazurkevich.training.library.dataaccess.ContactDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class ContactTest {
+public class ContactServiceTest {
 
 	@Inject
 	private ContactDao contactDao;
