@@ -8,9 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class UserProfile extends AbstractModel {
@@ -25,12 +30,16 @@ public class UserProfile extends AbstractModel {
 	@Column
 	private String lastName;
 
-	@Column
+	@Column(insertable=false)
 	private Date created;
+	
+	@PrePersist
+	protected void onCreate() {
+	    created = new Date();
+	}
 
-	@MapsId
-	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(nullable = false, updatable = false, name = "id")
+	@OneToOne
+	@JoinColumn(name = "contact_id")
 	private Contact contact;
 
 	@Column

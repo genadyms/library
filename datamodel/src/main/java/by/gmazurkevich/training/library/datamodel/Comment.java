@@ -16,29 +16,29 @@ public class Comment extends AbstractModel {
 	@Column
 	private String content;
 	
-	@Column
+	@Column(insertable=false)
 	private Date created;
 	
 	@Column
-	private Integer like;
+	private Integer likeCount;
 	
 	@Column
-	private Integer dislike;
+	private Integer dislikeCount;
 
 	public Integer getLike() {
-		return like;
+		return likeCount;
 	}
 
 	public void setLike(Integer like) {
-		this.like = like;
+		this.likeCount = like;
 	}
 
 	public Integer getDislike() {
-		return dislike;
+		return dislikeCount;
 	}
 
 	public void setDislike(Integer dislike) {
-		this.dislike = dislike;
+		this.dislikeCount = dislike;
 	}
 
 	public String getContent() {
