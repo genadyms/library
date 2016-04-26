@@ -2,7 +2,6 @@ package by.gmazurkevich.training.library.service;
 
 import javax.transaction.Transactional;
 
-import by.gmazurkevich.training.library.datamodel.Contact;
 import by.gmazurkevich.training.library.datamodel.UserCredentials;
 import by.gmazurkevich.training.library.datamodel.UserProfile;
 
@@ -19,5 +18,5 @@ public interface UserService {
 	void delete(Long id);
 	
 	@Transactional
-	void register(UserProfile profile, UserCredentials userCredentials, Contact contact);
+	void register(UserProfile profile, UserCredentials userCredentials);
 }

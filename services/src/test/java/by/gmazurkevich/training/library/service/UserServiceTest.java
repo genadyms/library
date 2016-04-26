@@ -2,32 +2,29 @@ package by.gmazurkevich.training.library.service;
 
 import javax.inject.Inject;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import by.gmazurkevich.training.library.datamodel.Contact;
 import by.gmazurkevich.training.library.datamodel.UserCredentials;
 import by.gmazurkevich.training.library.datamodel.UserProfile;
-import by.gmazurkevich.training.library.datamodel.UserRole;
 import by.gmazurkevich.training.library.datamodel.UserState;
 import by.gmazurkevich.training.library.service.UserService;
+import by.gmazurkevich.training.library.service.util.MockUser;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class UserServiceTest {
-
+public class UserServiceTest extends MockUser {
 	@Inject
 	private UserService userService;
 
-	private UserProfile userProfile;
-	private UserCredentials userCredentials;
-	private Contact contact;
-
+	public UserServiceTest() {
+		super();
+	}
 	@Test
 	public void testRegistration() {
+		userService.register(userProfile, userCredentials);
 		UserProfile registredProfile = userService.getProfile(userProfile.getId());
 		UserCredentials registredCredentials = userService.getCredentials(userCredentials.getId());
 		Assert.assertNotNull(registredProfile);
@@ -36,6 +33,7 @@ public class UserServiceTest {
 
 	@Test
 	public void testUpdateUserProfile() {
+		userService.register(userProfile, userCredentials);
 		String firstName = "OtherFirstName";
 		String lastName = "OtherLastName";
 		UserState state = UserState.BLOCKED;
@@ -50,27 +48,10 @@ public class UserServiceTest {
 
 	@Test
 	public void delete() {
+		userService.register(userProfile, userCredentials);
 		userService.delete(userProfile.getId());
 		Assert.assertNull(userService.getProfile(userProfile.getId()));
 		Assert.assertNull(userService.getCredentials(userCredentials.getId()));
 	}
 
-	@Before
-	public void initializeData() {
-		userProfile = new UserProfile();
-		userCredentials = new UserCredentials();
-		Long randomValue = System.currentTimeMillis();
-		contact = new Contact();
-		contact.setAddress("Grodno, Sovetskaya "+randomValue);
-		contact.setPhone(String.valueOf(randomValue));
-		userCredentials.setEmail( randomValue + "mail@test.by");
-		userCredentials.setPassword("pswd");
-		userProfile.setFirstName("Vasya");
-		userProfile.setLastName("Ivanov");
-		userProfile.setRole(UserRole.ADMIN);
-		userProfile.setUserState(UserState.ACTIVE);
-		userService.register(userProfile, userCredentials, contact);
-	}
-	
-	
 }

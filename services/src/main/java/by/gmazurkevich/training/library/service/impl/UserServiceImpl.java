@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import by.gmazurkevich.training.library.dataaccess.ContactDao;
 import by.gmazurkevich.training.library.dataaccess.UserCredentialsDao;
 import by.gmazurkevich.training.library.dataaccess.UserProfileDao;
-import by.gmazurkevich.training.library.datamodel.Contact;
 import by.gmazurkevich.training.library.datamodel.UserCredentials;
 import by.gmazurkevich.training.library.datamodel.UserProfile;
 import by.gmazurkevich.training.library.service.UserService;
@@ -24,11 +23,10 @@ public class UserServiceImpl implements UserService {
 	private ContactDao contactDao;
 
 	@Override
-	public void register(UserProfile profile, UserCredentials userCredentials, Contact contact) {
-		contactDao.insert(contact);
+	public void register(UserProfile profile, UserCredentials userCredentials) {
+		contactDao.insert(profile.getContact());
 		userCredentialsDao.insert(userCredentials);
 		profile.setUserCredentials(userCredentials);
-		profile.setContact(contact);
 		userProfileDao.insert(profile);
 	}
 
