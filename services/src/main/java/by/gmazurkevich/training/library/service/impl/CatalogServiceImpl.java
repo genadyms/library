@@ -18,8 +18,8 @@ public class CatalogServiceImpl implements CatalogService {
 	@Inject
 	private CatalogDao catalogDao;
 	
-	@Inject
-	private BookDao bookDao;
+//	@Inject
+//	private BookDao bookDao;
 	
 	@Override
 	public Catalog getCatalog(Long id) {
@@ -31,34 +31,34 @@ public class CatalogServiceImpl implements CatalogService {
 		catalogDao.insert(catalog);
 	}
 
-	@Override
-	public void addBook(Catalog catalog, Book book) {
-//		book.setCatalog(catalog);
-//		bookDao.update(book);
-	}
-
-	@Override
-	public void deleteBook(Catalog catalog, Book book) {
-	}
-
-	@Override
-	public void update(Catalog catalog) {
-		catalogDao.update(catalog);
-	}
+//	@Override
+//	public void addBook(Catalog catalog, Book book) {
+////		book.setCatalog(catalog);
+////		bookDao.update(book);
+//	}
+//
+//	@Override
+//	public void deleteBook(Catalog catalog, Book book) {
+//	}
+//
+//	@Override
+//	public void update(Catalog catalog) {
+//		catalogDao.update(catalog);
+//	}
 
 	@Override
 	public void delete(Catalog catalog) {
 		catalogDao.delete(catalog.getId());
 	}
-
-	@Override
-	public List<Catalog> getChildCatalog() {
-		return null;
-	}
-
-	@Override
-	public List<Book> getBooks() {
-		return null;
-	}
+//
+//	@Override
+//	public List<Catalog> getChildCatalog() {
+//		return null;
+//	}
+//
+//	@Override
+//	public List<Book> getBooks() {
+//		return null;
+//	}
 
 }

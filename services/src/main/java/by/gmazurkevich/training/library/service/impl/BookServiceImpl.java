@@ -16,23 +16,6 @@ import by.gmazurkevich.training.library.service.CommentService;
 public class BookServiceImpl implements BookService {
 	@Inject
 	private BookDao bookDao;
-	
-	@Inject
-	private CommentService commentService;
-	
-	@Override
-	public void setCatalog(Book book) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void addComment(Book book, Comment comment) {
-		commentService.create(comment);
-		book.getBookComment().add(comment);
-		bookDao.update(book);
-//		update(book);
-	}
 
 	@Override
 	public void update(Book book) {
@@ -46,18 +29,12 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void delete(Book book) {
-		// TODO Auto-generated method stub
-
+		bookDao.delete(book.getId());
 	}
 
 	@Override
 	public Book getBook(Long id) {
 		return bookDao.get(id);
-	}
-
-	@Override
-	public List<Comment> getComments(Book book) {
-		return null;
 	}
 
 }

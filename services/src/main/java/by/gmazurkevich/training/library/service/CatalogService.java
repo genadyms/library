@@ -11,18 +11,18 @@ public interface CatalogService {
 
 	Catalog getCatalog(Long id);
 
-	List<Catalog> getChildCatalog();
+//	List<Catalog> getChildCatalog();
 
-	List<Book> getBooks();
+//	List<Book> getBooks();
 
-	@Transactional
-	void addBook(Catalog catalog, Book book);
+//	@Transactional
+//	void addBook(Catalog catalog, Book book);
 
-	@Transactional
-	void deleteBook(Catalog catalog, Book book);
+//	@Transactional
+//	void deleteBook(Catalog catalog, Book book);
 
-	@Transactional
-	void update(Catalog catalog);
+//	@Transactional
+//	void update(Catalog catalog);
 
 	@Transactional
 	void delete(Catalog catalog);

@@ -9,11 +9,11 @@ import by.gmazurkevich.training.library.datamodel.Comment;
 
 public interface BookService {
 	
-	@Transactional
-	void setCatalog(Book book);
-	
-	@Transactional
-	void addComment(Book book, Comment comment);
+//	@Transactional
+//	void setCatalog(Book book);
+//	
+//	@Transactional
+//	void addComment(Book book, Comment comment);
 	
 	@Transactional
 	void update(Book book);
@@ -26,5 +26,5 @@ public interface BookService {
 	
 	Book getBook(Long id);
 	
-	List<Comment> getComments(Book book);
+//	List<Comment> getComments(Book book);
 }
