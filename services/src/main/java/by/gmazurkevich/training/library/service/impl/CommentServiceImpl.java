@@ -5,13 +5,11 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import by.gmazurkevich.training.library.dataaccess.CommentDao;
-import by.gmazurkevich.training.library.dataaccess.UserProfileDao;
 import by.gmazurkevich.training.library.datamodel.Comment;
-import by.gmazurkevich.training.library.datamodel.UserProfile;
 import by.gmazurkevich.training.library.service.CommentService;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 	@Inject
 	private CommentDao commentDao;
 
@@ -21,20 +19,19 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public void update(Comment comment, String content) {
-		
+	public void update(Comment comment) {
+		commentDao.update(comment);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		commentDao.delete(id);
+
 	}
 
 	@Override
 	public Comment getComment(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return commentDao.get(id);
 	}
 
 }

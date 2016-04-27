@@ -7,12 +7,24 @@ import by.gmazurkevich.training.library.datamodel.UserRole;
 import by.gmazurkevich.training.library.datamodel.UserState;
 
 public class MockUser {
-	protected UserProfile userProfile;
-	protected UserCredentials userCredentials;
-	protected Contact contact;
-	
-	public MockUser(){
+	private UserProfile userProfile;
+	private UserCredentials userCredentials;
+	private Contact contact;
+
+	public MockUser() {
 		initialize();
+	}
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public UserCredentials getUserCredentials() {
+		return userCredentials;
+	}
+
+	public Contact getContact() {
+		return contact;
 	}
 
 	private void initialize() {
@@ -20,9 +32,9 @@ public class MockUser {
 		userCredentials = new UserCredentials();
 		Long randomValue = System.currentTimeMillis();
 		contact = new Contact();
-		contact.setAddress("Grodno, Sovetskaya "+randomValue);
+		contact.setAddress("Grodno, Sovetskaya " + randomValue);
 		contact.setPhone(String.valueOf(randomValue));
-		userCredentials.setEmail( randomValue + "mail@test.by");
+		userCredentials.setEmail(randomValue + "mail@test.by");
 		userCredentials.setPassword("pswd");
 		userProfile.setFirstName("Vasya");
 		userProfile.setLastName("Ivanov");

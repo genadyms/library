@@ -3,7 +3,6 @@ package by.gmazurkevich.training.library.service;
 import javax.transaction.Transactional;
 
 import by.gmazurkevich.training.library.datamodel.Comment;
-import by.gmazurkevich.training.library.datamodel.UserProfile;
 
 public interface CommentService {
 	
@@ -11,7 +10,7 @@ public interface CommentService {
 	void create(Comment comment);
 	
 	@Transactional
-	void update(Comment comment, String content);
+	void update(Comment comment);
 	
 	@Transactional
 	void delete(Long id);

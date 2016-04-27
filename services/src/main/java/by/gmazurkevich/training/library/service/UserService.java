@@ -1,5 +1,7 @@
 package by.gmazurkevich.training.library.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import by.gmazurkevich.training.library.datamodel.UserCredentials;
@@ -17,6 +19,9 @@ public interface UserService {
 	@Transactional
 	void delete(Long id);
 	
+	
 	@Transactional
 	void register(UserProfile profile, UserCredentials userCredentials);
+
+	List<UserProfile> getAll();
 }

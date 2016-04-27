@@ -1,5 +1,7 @@
 package by.gmazurkevich.training.library.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -36,6 +38,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public List<UserProfile> getAll() {
+		return userProfileDao.getAll();
+	}
+
+	@Override
 	public UserCredentials getCredentials(Long id) {
 		return userCredentialsDao.get(id);
 	}
@@ -47,10 +54,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void delete(Long id) {
-		Long contactId = userProfileDao.get(id).getContact().getId();
+		Long contactId = getProfile(id).getContact().getId();
 		userProfileDao.delete(id);
 		contactDao.delete(contactId);
 		userCredentialsDao.delete(id);
 	}
-
+	
 }
