@@ -18,8 +18,8 @@ public class CatalogServiceImpl implements CatalogService {
 	@Inject
 	private CatalogDao catalogDao;
 	
-//	@Inject
-//	private BookDao bookDao;
+	@Inject
+	private BookDao bookDao;
 	
 	@Override
 	public Catalog getCatalog(Long id) {
@@ -56,9 +56,9 @@ public class CatalogServiceImpl implements CatalogService {
 //		return null;
 //	}
 //
-//	@Override
-//	public List<Book> getBooks() {
-//		return null;
-//	}
+	@Override
+	public List<Book> getBooks(Catalog catalog) {
+		return bookDao.getBooks(catalog);
+	}
 
 }

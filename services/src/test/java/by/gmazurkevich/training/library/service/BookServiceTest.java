@@ -2,6 +2,7 @@ package by.gmazurkevich.training.library.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,19 +20,27 @@ import by.gmazurkevich.training.library.service.util.MockBook;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class BookServiceTest extends MockBook{
-	@Test
-	public void testCreateBook() {
-		Book book = new MockBook().createMockBook();
-		Book bookDb = bookService.getBook(book.getId());
-		Assert.assertNotNull(bookDb);
-	}
-
+public class BookServiceTest extends MockBook {
+	@Inject
+	protected CatalogService catalogService;
 	// @Test
-	// public void testFromDb(){
-	// Book book = bookService.getBook(25L);
-	// System.out.println(book.getBookComment().get(0).getContent());
-	// }
+//	public void testCreateBook() {
+//		Book book = new MockBook().createMockBook();
+//		Book bookDb = bookService.getBook(book.getId());
+//		Assert.assertNotNull(bookDb);
+//	}
+//
+//	@Test
+//	public void test() {
+//		Assert.assertNotNull(bookService);
+//	}
+
+	@Test
+	public void testFromDb() {
+		List<Book> books = catalogService.getBooks(catalogService.getCatalog(32L));
+		System.out.println(books.get(0).getTitle());
+		Assert.assertNotNull(books);
+	}
 	//
 	//// @Test
 	// public void testAddComment(){

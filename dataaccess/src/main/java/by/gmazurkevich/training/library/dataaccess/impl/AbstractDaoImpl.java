@@ -13,7 +13,11 @@ public class AbstractDaoImpl<T, ID> implements AbstractDao<T, ID> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final Class<T> entityClass;
+    protected EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	private final Class<T> entityClass;
 
     protected AbstractDaoImpl(final Class<T> entityClass) {
         this.entityClass = entityClass;

@@ -13,7 +13,7 @@ public interface CatalogService {
 
 //	List<Catalog> getChildCatalog();
 
-//	List<Book> getBooks();
+	List<Book> getBooks(Catalog catalog);
 
 //	@Transactional
 //	void addBook(Catalog catalog, Book book);
