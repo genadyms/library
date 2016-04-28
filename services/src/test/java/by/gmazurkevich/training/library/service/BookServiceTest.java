@@ -23,24 +23,24 @@ import by.gmazurkevich.training.library.service.util.MockBook;
 public class BookServiceTest extends MockBook {
 	@Inject
 	protected CatalogService catalogService;
-	// @Test
-//	public void testCreateBook() {
-//		Book book = new MockBook().createMockBook();
-//		Book bookDb = bookService.getBook(book.getId());
-//		Assert.assertNotNull(bookDb);
-//	}
+	 @Test
+	public void testCreateBook() {
+		Book book = new MockBook().createMockBook();
+		Book bookDb = bookService.getBook(book.getId());
+		Assert.assertNotNull(bookDb);
+	}
 //
 //	@Test
 //	public void test() {
 //		Assert.assertNotNull(bookService);
 //	}
 
-	@Test
-	public void testFromDb() {
-		List<Book> books = catalogService.getBooks(catalogService.getCatalog(32L));
-		System.out.println(books.get(0).getTitle());
-		Assert.assertNotNull(books);
-	}
+//	@Test
+//	public void testFromDb() {
+//		List<Book> books = catalogService.getBooks(catalogService.getCatalog(32L));
+//		System.out.println(books.get(0).getTitle());
+//		Assert.assertNotNull(books);
+//	}
 	//
 	//// @Test
 	// public void testAddComment(){

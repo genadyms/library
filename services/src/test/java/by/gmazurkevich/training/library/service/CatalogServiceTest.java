@@ -1,5 +1,7 @@
 package by.gmazurkevich.training.library.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Assert;
@@ -14,20 +16,26 @@ import by.gmazurkevich.training.library.service.util.MockCatalog;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
 public class CatalogServiceTest extends MockCatalog {
-
-	@Test
-	public void testCreateCatalog() {
-		Catalog newCat = createMockCatalog();
-		Catalog catalogDb = catalogService.getCatalog(newCat.getId());
-		Assert.assertNotNull(catalogDb);
-		clearDb(catalogDb);
+	
+	@Test 
+	public void testGetChildCatalog(){
+		Catalog parent = catalogService.getCatalog(85L);
+		List<Catalog> childs = catalogService.getChildCatalog(parent);
+		Assert.assertNotNull(childs);
 	}
-
-	@Test
-	public void testDeleteCatalog() {
-		Catalog newCat = createMockCatalog();
-		catalogService.delete(newCat);
-		Catalog catalogDb = catalogService.getCatalog(newCat.getId());
-		Assert.assertNull(catalogDb);
-	}
+//	@Test
+//	public void testCreateCatalog() {
+//		Catalog newCat = createMockCatalog();
+//		Catalog catalogDb = catalogService.getCatalog(newCat.getId());
+//		Assert.assertNotNull(catalogDb);
+////		clearDb(catalogDb);
+//	}
+	
+//	@Test
+//	public void testDeleteCatalog() {
+//		Catalog newCat = createMockCatalog();
+//		catalogService.delete(newCat);
+//		Catalog catalogDb = catalogService.getCatalog(newCat.getId());
+//		Assert.assertNull(catalogDb);
+//	}
 }

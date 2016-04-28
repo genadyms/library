@@ -61,4 +61,9 @@ public class CatalogServiceImpl implements CatalogService {
 		return bookDao.getBooks(catalog);
 	}
 
+	@Override
+	public List<Catalog> getChildCatalog(Catalog parent) {
+		return catalogDao.getChild(parent);
+	}
+
 }

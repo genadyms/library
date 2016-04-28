@@ -13,7 +13,7 @@ public class Catalog extends AbstractModel {
 	private String path;
 
 	@Column
-	private String pathParent;
+	private String pathParent="";
 
 	@OneToMany(mappedBy = "catalog")
 	private List<Book> book;

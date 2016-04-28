@@ -11,10 +11,10 @@ public class MockCatalog {
 
 	public Catalog createMockCatalog(){
 		Catalog catalog = new Catalog();
-		catalog.setPath("russian litrature");
+		catalog.setPath("belorussian litrature");
 		catalog.setPathParent("liturature");
 		catalogService.create(catalog);
-		return catalog;
+		return catalogService.getCatalog(catalog.getId());
 	}
 	
 	public void clearDb(Catalog catalog){

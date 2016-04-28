@@ -11,8 +11,6 @@ public interface CatalogService {
 
 	Catalog getCatalog(Long id);
 
-//	List<Catalog> getChildCatalog();
-
 	List<Book> getBooks(Catalog catalog);
 
 //	@Transactional
@@ -29,5 +27,7 @@ public interface CatalogService {
 
 	@Transactional
 	void create(Catalog catalog);
+
+	List<Catalog> getChildCatalog(Catalog parent);
 
 }

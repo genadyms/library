@@ -57,16 +57,16 @@ public class UserServiceTest {
 		Assert.assertNull(userService.getCredentials(userCredentials.getId()));
 	}
 
-	@Test
-	public void testGetAll() {
-		int countUsers = 105;
-		MockUser[] users = new MockUser[countUsers];
-		for (int i = 0; i < countUsers; i++) {
-			users[i] = registerUser();
-		}
-		Assert.assertEquals(userService.getAll().size(), countUsers);
-		clearDb(users);
-	}
+//	@Test
+//	public void testGetAll() {
+//		int countUsers = 105;
+//		MockUser[] users = new MockUser[countUsers];
+//		for (int i = 0; i < countUsers; i++) {
+//			users[i] = registerUser();
+//		}
+//		Assert.assertEquals(userService.getAll().size(), countUsers);
+//		clearDb(users);
+//	}
 
 	public MockUser registerUser() {
 		MockUser mUser = new MockUser();
