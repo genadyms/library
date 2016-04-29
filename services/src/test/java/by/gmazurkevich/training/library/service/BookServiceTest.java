@@ -13,34 +13,57 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import by.gmazurkevich.training.library.datamodel.Author;
 import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.datamodel.Catalog;
 import by.gmazurkevich.training.library.datamodel.Comment;
-import by.gmazurkevich.training.library.service.util.MockBook;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class BookServiceTest extends MockBook {
+public class BookServiceTest extends CatalogServiceTest{
+	
 	@Inject
-	protected CatalogService catalogService;
-	 @Test
+	protected BookService bookService;
+
+	@Test
 	public void testCreateBook() {
-		Book book = new MockBook().createMockBook();
-		Book bookDb = bookService.getBook(book.getId());
+		System.out.println(" test create book in book");
+		Book bookDb = bookService.getBook(createBook().getId());
 		Assert.assertNotNull(bookDb);
 	}
-//
-//	@Test
-//	public void test() {
-//		Assert.assertNotNull(bookService);
-//	}
 
-//	@Test
-//	public void testFromDb() {
-//		List<Book> books = catalogService.getBooks(catalogService.getCatalog(32L));
-//		System.out.println(books.get(0).getTitle());
-//		Assert.assertNotNull(books);
-//	}
+	public Book createBook() {
+		System.out.println(" create book in book");
+		Book book = new Book();
+		book.setIsbn(String.valueOf(System.currentTimeMillis()));
+//		List<Author> authors = new ArrayList<>();
+//		Author author = new Author();
+//		author.setFirstName("firstName");
+//		author.setSecondName("secondName");
+//		authors.add(author);
+//		book.setAuthor(authors);
+		
+		book.setCatalog(createCatalog());
+		book.setPages(234);
+		book.setPublishingOffice("Manning");
+		book.setTitle("Mumu");
+		book.setYear(new Date());
+		bookService.create(book);
+		return book;
+	}
+	//
+	// @Test
+	// public void test() {
+	// Assert.assertNotNull(bookService);
+	// }
+
+	// @Test
+	// public void testFromDb() {
+	// List<Book> books =
+	// catalogService.getBooks(catalogService.getCatalog(32L));
+	// System.out.println(books.get(0).getTitle());
+	// Assert.assertNotNull(books);
+	// }
 	//
 	//// @Test
 	// public void testAddComment(){

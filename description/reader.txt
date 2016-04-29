@@ -1,0 +1,30 @@
+reader
+1. role = reader
+2. state = active, blocked
+3. order book
+4. find book
+5. make comments to order
+6. make comments to book
+
+librarian
+1. role = librarian
+2. state = active, blocked
+3. edit order 
+	order	
+	3.1 edit time issue
+	3.2 edit copy_book_id
+	3.3 edit type_order
+	3.4 close order
+	copy_book
+	3.5 change state copy_book
+4. make comment to order
+5. make comment to order
+6. block reader, add reader
+7. make order for add, edit book, copybook 
+
+admin
+1. role = admin
+2. add librarian, change state librarian
+3. add, edit book and copybook
+4. edit order
+ 
