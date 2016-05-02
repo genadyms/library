@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.datamodel.Catalog;
 import by.gmazurkevich.training.library.datamodel.Comment;
@@ -17,7 +18,7 @@ public interface BookService {
 //	void addComment(Book book, Comment comment);
 
 
-	List<Book> getBooks(Catalog catalog);
+	List<Book> find(BookFilter bookFilter);
 	
 	@Transactional
 	void update(Book book);

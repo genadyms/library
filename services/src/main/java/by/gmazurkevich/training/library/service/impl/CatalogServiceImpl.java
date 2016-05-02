@@ -60,8 +60,8 @@ public class CatalogServiceImpl implements CatalogService {
 	//
 	
 	@Override
-	public List<Catalog> getChildCatalog(Catalog parent) {
-		return catalogDao.getChild(parent);
+	public List<Catalog> getCatalogs(Catalog parent) {
+		return catalogDao.getCatalogs(parent);
 	}
 
 }

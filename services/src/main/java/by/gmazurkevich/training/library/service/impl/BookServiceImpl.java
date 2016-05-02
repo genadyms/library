@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import by.gmazurkevich.training.library.dataaccess.BookDao;
+import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.datamodel.Catalog;
 import by.gmazurkevich.training.library.datamodel.Comment;
@@ -39,8 +40,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> getBooks(Catalog catalog) {
-		return bookDao.getBooks(catalog);
+	public List<Book> find(BookFilter bookFilter) {
+		return bookDao.find(bookFilter);
 	}
 
+	
 }

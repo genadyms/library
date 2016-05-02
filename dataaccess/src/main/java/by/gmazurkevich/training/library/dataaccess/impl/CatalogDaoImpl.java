@@ -21,7 +21,7 @@ public class CatalogDaoImpl extends AbstractDaoImpl<Catalog, Long> implements Ca
 	}
 
 	@Override
-	public List<Catalog> getChild(Catalog parent) {
+	public List<Catalog> getCatalogs(Catalog parent) {
 		EntityManager em = getEntityManager();
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<String> criteriaQuery = builder.createQuery(String.class);

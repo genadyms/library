@@ -26,6 +26,6 @@ public interface CatalogService {
 	@Transactional
 	void create(Catalog catalog);
 
-	List<Catalog> getChildCatalog(Catalog parent);
+	List<Catalog> getCatalogs(Catalog parent);
 
 }

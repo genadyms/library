@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Author;
 import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.datamodel.Catalog;
@@ -40,28 +41,48 @@ public class BookServiceTest extends CatalogServiceTest {
 		System.out.println(bookDb.getTitle());
 	}
 
-//	@Test
-	public void testGetBook() {
+	@Test
+	public void testFindByCatalog() {
 		Book book = createBook();
 		Catalog catalog = book.getCatalog();
+		BookFilter bf = new BookFilter();
+		bf.setCatalog(catalog);
+		System.out.println(catalog.getPath());
 		Book[] books = new Book[5];
 		books[0] = book;
 		for(int i=1;i<books.length; i++){
 			books[i] = createBook(catalog);
 		}
-		Assert.assertEquals(bookService.getBooks(catalog).size(), books.length);
+		Assert.assertEquals(bookService.find(bf).size(), books.length);
 		for(Book b: books)	{
 			System.out.println(b);
 		}
 	}
+	
 	@Test
-	public void testGetBook2() {
-		Catalog catalog = catalogService.getCatalog(140L);
-		List<Book> books = bookService.getBooks(catalog);
-		Assert.assertEquals(books.size(), 5);
-//		for(Book b: books)	{
-//			System.out.println(b);
-//		}
+	public void testFindByIsbn() {
+		Book book = createBook();
+		BookFilter bf = new BookFilter();
+		bf.setIsbn(book.getIsbn());
+		Assert.assertEquals(bookService.find(bf).size(), 1);
+	}
+	
+	@Test
+	public void testFindByPublishingOffice() {
+		Book book = createBook();
+		BookFilter bf = new BookFilter();
+		bf.setPublishingOffice(book.getPublishingOffice());
+		Assert.assertNotEquals(bookService.find(bf).size(), 0);
+		
+	}
+	
+	@Test
+	public void testFindByTitle() {
+		Book book = createBook();
+		BookFilter bf = new BookFilter();
+		bf.setPublishingOffice(book.getTitle());
+		Assert.assertNotEquals(bookService.find(bf).size(), 1);
+		
 	}
 	public Book createBook() {
 		Catalog catalog = createCatalog();

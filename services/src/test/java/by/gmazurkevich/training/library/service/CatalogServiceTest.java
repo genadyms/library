@@ -26,7 +26,7 @@ public class CatalogServiceTest {
 	// Assert.assertNotNull(childs);
 	// }
 
-//	@Test
+	@Test
 	public void testCreateCatalog() {
 		System.out.println("test create catalog in catalog");
 		Catalog catalogDb = null;
@@ -39,7 +39,7 @@ public class CatalogServiceTest {
 		clearDb(catalogDb);
 	}
 
-//	@Test
+	@Test
 	public void testDeleteCatalog() {
 		Catalog newCat = createCatalog();
 		catalogService.delete(newCat);
