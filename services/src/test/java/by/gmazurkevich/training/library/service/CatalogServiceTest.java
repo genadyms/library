@@ -25,10 +25,17 @@ public class CatalogServiceTest {
 	// List<Catalog> childs = catalogService.getChildCatalog(parent);
 	// Assert.assertNotNull(childs);
 	// }
-
 	@Test
+	public void testCreateBigCatalog() {
+		Catalog parent1 = createCatalog();
+		Catalog child1 = createCatalog(parent1);
+		Catalog child2 = createCatalog(parent1);
+		List<Catalog> res = catalogService.getCatalogs(parent1.getPath());
+		System.out.println(res.size());
+//		catalogService.delete(parent1);
+	}
+//	@Test
 	public void testCreateCatalog() {
-		System.out.println("test create catalog in catalog");
 		Catalog catalogDb = null;
 		try {
 			catalogDb = catalogService.getCatalog(createCatalog().getId());
@@ -36,31 +43,36 @@ public class CatalogServiceTest {
 			System.out.println("catalog don't create!!!!");
 		}
 		Assert.assertNotNull(catalogDb);
-		clearDb(catalogDb);
+//		clearDb(catalogDb);
 	}
 
-	@Test
+//	@Test
 	public void testDeleteCatalog() {
 		Catalog newCat = createCatalog();
-		catalogService.delete(newCat);
+		try {
+			catalogService.delete(newCat);
+		} catch (ParentElementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Catalog catalogDb = catalogService.getCatalog(newCat.getId());
 		Assert.assertNull(catalogDb);
 	}
-//	@Test
+	@Test
 	public void testDeleteParentCatalog() {
 		Catalog parent = createCatalog();
 		Catalog child = createCatalog(parent);
-		System.out.println(parent.getId());
-		System.out.println(child.getId());
-		Assert.assertNotNull(catalogService.getCatalog(child.getId()));
-		Assert.assertNotNull(catalogService.getCatalog(parent.getId()));
-		catalogService.delete(parent);
+		try {
+			catalogService.delete(parent);
+		} catch (ParentElementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Catalog catalogDb = catalogService.getCatalog(parent.getId());
 		Assert.assertNull(catalogDb);
 	}
 
 	public Catalog createCatalog() {
-		System.out.println("create catalog in catalog");
 		Catalog catalog = new Catalog();
 		catalog.setPath("belorussian litrature " + System.currentTimeMillis());
 		catalog.setPathParent("liturature");
@@ -69,7 +81,6 @@ public class CatalogServiceTest {
 	}
 
 	public Catalog createCatalog(Catalog parent) {
-		System.out.println("create catalog in catalog");
 		Catalog catalog = new Catalog();
 		catalog.setPath("belorussian litrature " + System.currentTimeMillis());
 		catalog.setPathParent(parent.getPath());
@@ -77,10 +88,10 @@ public class CatalogServiceTest {
 		return catalog;
 	}
 
-	public void clearDb(Catalog catalog) {
-		catalogService.delete(catalog);
-	}
-	public void clearCatalogDb(Long id) {
-		catalogService.delete(catalogService.getCatalog(id));
-	}
+//	public void clearDb(Catalog catalog) {
+//		catalogService.delete(catalog);
+//	}
+//	public void clearCatalogDb(Long id) {
+//		catalogService.delete(catalogService.getCatalog(id));
+//	}
 }

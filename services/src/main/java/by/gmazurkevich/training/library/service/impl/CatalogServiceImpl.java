@@ -1,5 +1,6 @@
 package by.gmazurkevich.training.library.service.impl;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Service;
 
 import by.gmazurkevich.training.library.dataaccess.BookDao;
 import by.gmazurkevich.training.library.dataaccess.CatalogDao;
+import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.datamodel.Catalog;
+import by.gmazurkevich.training.library.service.BookService;
 import by.gmazurkevich.training.library.service.CatalogService;
+import by.gmazurkevich.training.library.service.ParentElementException;
 
 @Service
 public class CatalogServiceImpl implements CatalogService {
@@ -20,7 +24,7 @@ public class CatalogServiceImpl implements CatalogService {
 	private CatalogDao catalogDao;
 
 	@Inject
-	private BookDao bookDao;
+	private BookService bookService;
 
 	@Override
 	public Catalog getCatalog(Long id) {
@@ -32,36 +36,23 @@ public class CatalogServiceImpl implements CatalogService {
 		catalogDao.insert(catalog);
 	}
 
-	// @Override
-	// public void addBook(Catalog catalog, Book book) {
-	//// book.setCatalog(catalog);
-	//// bookDao.update(book);
-	// }
-	//
-	// @Override
-	// public void deleteBook(Catalog catalog, Book book) {
-	// }
-	//
-	// @Override
-	// public void update(Catalog catalog) {
-	// catalogDao.update(catalog);
-	// }
-
 	@Override
-	public void delete(Catalog catalog) {
+	public void delete(Catalog catalog) throws ParentElementException {
+		if(catalogDao.getCatalogs(catalog.getPath()).size()>0||hasBooks(catalog)) {
+			throw new ParentElementException();
+		}
 		catalogDao.delete(catalog.getId());
 	}
 
-	//
-	// @Override
-	// public List<Catalog> getChildCatalog() {
-	// return null;
-	// }
-	//
-	
+	private boolean hasBooks(Catalog catalog) {
+		BookFilter bookFilter = new BookFilter();
+		bookFilter.setCatalog(catalog);
+		return (bookService.find(bookFilter).size()>0);
+	}
+
 	@Override
-	public List<Catalog> getCatalogs(Catalog parent) {
-		return catalogDao.getCatalogs(parent);
+	public List<Catalog> getCatalogs(String parentCatalog) {
+		return catalogDao.getCatalogs(parentCatalog);
 	}
 
 }

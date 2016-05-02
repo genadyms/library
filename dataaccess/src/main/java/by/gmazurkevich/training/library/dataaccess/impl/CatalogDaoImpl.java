@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import by.gmazurkevich.training.library.dataaccess.CatalogDao;
 import by.gmazurkevich.training.library.datamodel.Book;
+import by.gmazurkevich.training.library.datamodel.Book_;
 import by.gmazurkevich.training.library.datamodel.Catalog;
+import by.gmazurkevich.training.library.datamodel.Catalog_;
 
 @Repository
 public class CatalogDaoImpl extends AbstractDaoImpl<Catalog, Long> implements CatalogDao {
@@ -21,16 +23,15 @@ public class CatalogDaoImpl extends AbstractDaoImpl<Catalog, Long> implements Ca
 	}
 
 	@Override
-	public List<Catalog> getCatalogs(Catalog parent) {
+	public List<Catalog> getCatalogs(String parentCatalog) {
 		EntityManager em = getEntityManager();
-		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<String> criteriaQuery = builder.createQuery(String.class);
-		Root<Catalog> catalogRoot = criteriaQuery.from(Catalog.class);
-		criteriaQuery.select(catalogRoot.get("path").as(String.class));
-		criteriaQuery.where(builder.equal(catalogRoot.get("pathParent"),parent.getPathParent()));
-		List<String> nameList = em.createQuery(criteriaQuery).getResultList();
-		for(String s: nameList) System.out.println(s);
-		return null;
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Catalog> cq = cb.createQuery(Catalog.class);
+		Root<Catalog> from = cq.from(Catalog.class);
+		cq.select(from);
+		cq.where(cb.equal(from.get(Catalog_.pathParent), parentCatalog));
+		List<Catalog> res = em.createQuery(cq).getResultList();
+		return res;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package by.gmazurkevich.training.library.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -21,11 +22,11 @@ public interface CatalogService {
 //	void update(Catalog catalog);
 
 	@Transactional
-	void delete(Catalog catalog);
+	void delete(Catalog catalog) throws ParentElementException;
 
 	@Transactional
 	void create(Catalog catalog);
 
-	List<Catalog> getCatalogs(Catalog parent);
+	List<Catalog> getCatalogs(String parentCatalog);
 
 }
