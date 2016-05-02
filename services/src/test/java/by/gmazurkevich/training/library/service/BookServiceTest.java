@@ -20,30 +20,58 @@ import by.gmazurkevich.training.library.datamodel.Comment;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class BookServiceTest extends CatalogServiceTest{
-	
+public class BookServiceTest extends CatalogServiceTest {
+
 	@Inject
 	protected BookService bookService;
 
-	@Test
+//	@Test
 	public void testCreateBook() {
-		System.out.println(" test create book in book");
 		Book bookDb = bookService.getBook(createBook().getId());
 		Assert.assertNotNull(bookDb);
 	}
 
+//	@Test
+	public void testDeleteBook() {
+		Book bookDb = bookService.getBook(createBook().getId());
+		bookService.delete(bookDb);
+		Assert.assertNull(bookService.getBook(bookDb.getId()));
+		Assert.assertNotNull(bookDb);
+		System.out.println(bookDb.getTitle());
+	}
+
+//	@Test
+	public void testGetBook() {
+		Book book = createBook();
+		Catalog catalog = book.getCatalog();
+		Book[] books = new Book[5];
+		books[0] = book;
+		for(int i=1;i<books.length; i++){
+			books[i] = createBook(catalog);
+		}
+		Assert.assertEquals(bookService.getBooks(catalog).size(), books.length);
+		for(Book b: books)	{
+			System.out.println(b);
+		}
+	}
+	@Test
+	public void testGetBook2() {
+		Catalog catalog = catalogService.getCatalog(140L);
+		List<Book> books = bookService.getBooks(catalog);
+		Assert.assertEquals(books.size(), 5);
+//		for(Book b: books)	{
+//			System.out.println(b);
+//		}
+	}
 	public Book createBook() {
-		System.out.println(" create book in book");
+		Catalog catalog = createCatalog();
+		return createBook(catalog);
+	}
+
+	public Book createBook(Catalog catalog) {
 		Book book = new Book();
 		book.setIsbn(String.valueOf(System.currentTimeMillis()));
-//		List<Author> authors = new ArrayList<>();
-//		Author author = new Author();
-//		author.setFirstName("firstName");
-//		author.setSecondName("secondName");
-//		authors.add(author);
-//		book.setAuthor(authors);
-		
-		book.setCatalog(createCatalog());
+		book.setCatalog(catalog);
 		book.setPages(234);
 		book.setPublishingOffice("Manning");
 		book.setTitle("Mumu");

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import by.gmazurkevich.training.library.datamodel.Book;
+import by.gmazurkevich.training.library.datamodel.Catalog;
 import by.gmazurkevich.training.library.datamodel.Comment;
 
 public interface BookService {
@@ -14,6 +15,9 @@ public interface BookService {
 //	
 //	@Transactional
 //	void addComment(Book book, Comment comment);
+
+
+	List<Book> getBooks(Catalog catalog);
 	
 	@Transactional
 	void update(Book book);

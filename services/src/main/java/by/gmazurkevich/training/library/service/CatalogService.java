@@ -11,8 +11,6 @@ public interface CatalogService {
 
 	Catalog getCatalog(Long id);
 
-	List<Book> getBooks(Catalog catalog);
-
 //	@Transactional
 //	void addBook(Catalog catalog, Book book);
 

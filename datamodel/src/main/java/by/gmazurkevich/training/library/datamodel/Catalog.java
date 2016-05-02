@@ -9,6 +9,11 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Catalog extends AbstractModel {
+	@Override
+	public String toString() {
+		return "Catalog [path=" + path + ", pathParent=" + pathParent + ", book=" + book + "]";
+	}
+
 	@Column
 	private String path;
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import by.gmazurkevich.training.library.dataaccess.BookDao;
 import by.gmazurkevich.training.library.datamodel.Book;
+import by.gmazurkevich.training.library.datamodel.Catalog;
 import by.gmazurkevich.training.library.datamodel.Comment;
 import by.gmazurkevich.training.library.service.BookService;
 import by.gmazurkevich.training.library.service.CommentService;
@@ -35,6 +36,11 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book getBook(Long id) {
 		return bookDao.get(id);
+	}
+
+	@Override
+	public List<Book> getBooks(Catalog catalog) {
+		return bookDao.getBooks(catalog);
 	}
 
 }

@@ -14,6 +14,13 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Book extends AbstractModel {
+	@Override
+	public String toString() {
+		return "Book [isbn=" + isbn + ", catalog=" + catalog + ", title=" + title + ", pages=" + pages + ", year="
+				+ year + ", author=" + author + ", bookComment=" + bookComment + ", publishingOffice="
+				+ publishingOffice + "]";
+	}
+
 	@Column
 	private String isbn;
 
