@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -32,10 +30,6 @@ public class Order extends AbstractModel {
 	private CopyBook copyBook;
 
 	@Column
-	@Enumerated(value = EnumType.STRING)
-	private TypeOrder typeOrder;
-
-	@Column
 	private Date created;
 
 	@Column
@@ -56,14 +50,6 @@ public class Order extends AbstractModel {
 
 	public void setCopyBook(CopyBook copyBook) {
 		this.copyBook = copyBook;
-	}
-
-	public TypeOrder getTypeOrder() {
-		return typeOrder;
-	}
-
-	public void setTypeOrder(TypeOrder typeOrder) {
-		this.typeOrder = typeOrder;
 	}
 
 	public Date getCreated() {

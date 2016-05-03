@@ -19,14 +19,11 @@ public class Abonement extends AbstractModel{
 	private Order order;
 	
 	@Column (updatable = false)
-	private Date issue;
+	private Date dateTake;
 	
 	@Column
-	private Date returnDate;
+	private Date dateReturn;
 	
-	@Column
-	private Date returnDateFact;
-
 	public Order getOrder() {
 		return order;
 	}
@@ -35,27 +32,21 @@ public class Abonement extends AbstractModel{
 		this.order = order;
 	}
 
-	public Date getIssue() {
-		return issue;
+	protected Date getDateTake() {
+		return dateTake;
 	}
 
-	public void setIssue(Date issue) {
-		this.issue = issue;
+	protected void setDateTake(Date dateTake) {
+		this.dateTake = dateTake;
 	}
 
-	public Date getReturnDate() {
-		return returnDate;
+	protected Date getDateReturn() {
+		return dateReturn;
 	}
 
-	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
+	protected void setDateReturn(Date dateReturn) {
+		this.dateReturn = dateReturn;
 	}
 
-	public Date getReturnDateFact() {
-		return returnDateFact;
-	}
 
-	public void setReturnDateFact(Date returnDateFact) {
-		this.returnDateFact = returnDateFact;
-	}
 }

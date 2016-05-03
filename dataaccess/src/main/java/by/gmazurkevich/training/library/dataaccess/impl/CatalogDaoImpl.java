@@ -10,8 +10,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import by.gmazurkevich.training.library.dataaccess.CatalogDao;
-import by.gmazurkevich.training.library.datamodel.Book;
-import by.gmazurkevich.training.library.datamodel.Book_;
 import by.gmazurkevich.training.library.datamodel.Catalog;
 import by.gmazurkevich.training.library.datamodel.Catalog_;
 
@@ -33,6 +31,5 @@ public class CatalogDaoImpl extends AbstractDaoImpl<Catalog, Long> implements Ca
 		List<Catalog> res = em.createQuery(cq).getResultList();
 		return res;
 	}
-	
-	
+
 }

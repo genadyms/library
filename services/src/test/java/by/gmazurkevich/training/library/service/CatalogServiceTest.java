@@ -19,63 +19,73 @@ public class CatalogServiceTest {
 	@Inject
 	protected CatalogService catalogService;
 
-	// @Test
-	// public void testGetChildCatalog() {
-	// Catalog parent = catalogService.getCatalog(85L);
-	// List<Catalog> childs = catalogService.getChildCatalog(parent);
-	// Assert.assertNotNull(childs);
-	// }
 	@Test
-	public void testCreateBigCatalog() {
-		Catalog parent1 = createCatalog();
-		Catalog child1 = createCatalog(parent1);
-		Catalog child2 = createCatalog(parent1);
-		List<Catalog> res = catalogService.getCatalogs(parent1.getPath());
-		System.out.println(res.size());
-//		catalogService.delete(parent1);
-	}
-//	@Test
-	public void testCreateCatalog() {
-		Catalog catalogDb = null;
-		try {
-			catalogDb = catalogService.getCatalog(createCatalog().getId());
-		} catch (Exception e) {
-			System.out.println("catalog don't create!!!!");
-		}
-		Assert.assertNotNull(catalogDb);
-//		clearDb(catalogDb);
+	public void testGetCatalogs() {
+		Catalog catalog = createCatalog();
+		createCatalog(catalog);
+		createCatalog(catalog);
+		createCatalog(catalog);
+		List<Catalog> res = catalogService.getCatalogs(catalog.getPath());
+		Assert.assertEquals(res.size(), 3);
 	}
 
-//	@Test
-	public void testDeleteCatalog() {
-		Catalog newCat = createCatalog();
-		try {
-			catalogService.delete(newCat);
-		} catch (ParentElementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Catalog catalogDb = catalogService.getCatalog(newCat.getId());
-		Assert.assertNull(catalogDb);
-	}
 	@Test
-	public void testDeleteParentCatalog() {
+	public void testCreateCatalog() {
+		Catalog catalogDb = catalogService.getCatalog(createCatalog().getId());
+		Assert.assertNotNull(catalogDb);
+	}
+
+	@Test
+	public void testDeleteCatalog() {
 		Catalog parent = createCatalog();
 		Catalog child = createCatalog(parent);
+		ElementHasChildException exception = null;
 		try {
 			catalogService.delete(parent);
-		} catch (ParentElementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ElementHasChildException e) {
+			exception = e;
 		}
-		Catalog catalogDb = catalogService.getCatalog(parent.getId());
-		Assert.assertNull(catalogDb);
+		Assert.assertNotNull(exception);
+		Assert.assertNotNull(catalogService.getCatalog(parent.getId()));
+		exception = null;
+		try {
+			catalogService.delete(child);
+		} catch (ElementHasChildException e) {
+			exception = e;
+		}
+		Assert.assertNull(exception);
+		Assert.assertNull(catalogService.getCatalog(child.getId()));
+	}
+
+	@Test
+	public void testUpdateCatalog() {
+		Catalog catalog = createCatalog();
+		String newPath = "new path " + Math.random();
+		catalog.setPath(newPath);
+		ModifiedParentCatalogException exception = null;
+		try {
+			catalogService.update(catalog);
+		} catch (ModifiedParentCatalogException e) {
+			exception = e;
+		}
+		Assert.assertEquals(catalogService.getCatalog(catalog.getId()).getPath(), newPath);
+		Assert.assertNull(exception);
+		
+		String pathParent = catalog.getPathParent();
+		catalog.setPathParent(newPath);
+		try {
+			catalogService.update(catalog);
+		} catch (ModifiedParentCatalogException e) {
+			exception = e;
+		}
+		Assert.assertNotNull(exception);
+		Assert.assertEquals(catalogService.getCatalog(catalog.getId()).getPathParent(), pathParent);
 	}
 
 	public Catalog createCatalog() {
 		Catalog catalog = new Catalog();
 		catalog.setPath("belorussian litrature " + System.currentTimeMillis());
-		catalog.setPathParent("liturature");
+		catalog.setPathParent("litrature");
 		catalogService.create(catalog);
 		return catalog;
 	}
@@ -88,10 +98,4 @@ public class CatalogServiceTest {
 		return catalog;
 	}
 
-//	public void clearDb(Catalog catalog) {
-//		catalogService.delete(catalog);
-//	}
-//	public void clearCatalogDb(Long id) {
-//		catalogService.delete(catalogService.getCatalog(id));
-//	}
 }

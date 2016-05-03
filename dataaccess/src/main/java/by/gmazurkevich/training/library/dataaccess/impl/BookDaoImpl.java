@@ -58,7 +58,6 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		if (bookFilter.getCatalog()!=null){
 			from.fetch(Book_.catalog, JoinType.LEFT);
 			cq.where(cb.equal(from.get(Book_.catalog), bookFilter.getCatalog()));
-			
 		}
 		if (bookFilter.getIsbn()!=null){
 			cq.where(cb.equal(from.get(Book_.isbn), bookFilter.getIsbn()));
