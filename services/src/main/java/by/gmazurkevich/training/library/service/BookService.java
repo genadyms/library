@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 
 import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Book;
-import by.gmazurkevich.training.library.datamodel.Catalog;
+import by.gmazurkevich.training.library.datamodel.CatalogOld;
 import by.gmazurkevich.training.library.datamodel.Comment;
 
 public interface BookService {

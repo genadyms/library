@@ -16,12 +16,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Author;
 import by.gmazurkevich.training.library.datamodel.Book;
-import by.gmazurkevich.training.library.datamodel.Catalog;
+import by.gmazurkevich.training.library.datamodel.CatalogOld;
 import by.gmazurkevich.training.library.datamodel.Comment;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class BookServiceTest extends CatalogServiceTest {
+public class BookServiceTest extends CatalogOldServiceTest {
 
 	@Inject
 	protected BookService bookService;
@@ -44,7 +44,7 @@ public class BookServiceTest extends CatalogServiceTest {
 	@Test
 	public void testFindByCatalog() {
 		Book book = createBook();
-		Catalog catalog = book.getCatalog();
+		CatalogOld catalog = book.getCatalog();
 		BookFilter bf = new BookFilter();
 		bf.setCatalog(catalog);
 		System.out.println(catalog.getPath());
@@ -85,11 +85,11 @@ public class BookServiceTest extends CatalogServiceTest {
 		
 	}
 	public Book createBook() {
-		Catalog catalog = createCatalog();
+		CatalogOld catalog = createCatalog();
 		return createBook(catalog);
 	}
 
-	public Book createBook(Catalog catalog) {
+	public Book createBook(CatalogOld catalog) {
 		Book book = new Book();
 		book.setIsbn(String.valueOf(System.currentTimeMillis()));
 		book.setCatalog(catalog);

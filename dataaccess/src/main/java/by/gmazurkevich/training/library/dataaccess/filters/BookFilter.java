@@ -2,11 +2,11 @@ package by.gmazurkevich.training.library.dataaccess.filters;
 
 import javax.persistence.metamodel.SingularAttribute;
 
-import by.gmazurkevich.training.library.datamodel.Catalog;
+import by.gmazurkevich.training.library.datamodel.CatalogOld;
 
 public class BookFilter {
 	private String isbn;
-	private Catalog catalog;
+	private CatalogOld catalog;
 	private String publishingOffice;
 	private String title;
 //	private SingularAttribute sortProperty;
@@ -17,11 +17,11 @@ public class BookFilter {
 //	private boolean isFetchAuthors;
 
 	
-	public Catalog getCatalog() {
+	public CatalogOld getCatalog() {
 		return catalog;
 	}
 
-	public void setCatalog(Catalog catalog) {
+	public void setCatalog(CatalogOld catalog) {
 		this.catalog = catalog;
 	}
 

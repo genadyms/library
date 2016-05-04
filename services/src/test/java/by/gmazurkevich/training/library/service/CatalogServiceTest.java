@@ -1,5 +1,6 @@
 package by.gmazurkevich.training.library.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,85 +19,68 @@ public class CatalogServiceTest {
 
 	@Inject
 	protected CatalogService catalogService;
-
+	
+//	@Test
+//	public void test() {
+//		Assert.assertNotNull(catalogTestService);
+//	}
+//	
+//	@Test
+	public void testGetChilds(){
+		Catalog parent = catalogService.getCatalogTest("root1");
+		List<Catalog> childs = catalogService.getCatalogs(parent);
+		for(Catalog cat : childs){
+			System.out.println(cat.getId());
+		}
+		Assert.assertEquals(childs.size(), 2);
+	}
 	@Test
-	public void testGetCatalogs() {
-		Catalog catalog = createCatalog();
-		createCatalog(catalog);
-		createCatalog(catalog);
-		createCatalog(catalog);
-		List<Catalog> res = catalogService.getCatalogs(catalog.getPath());
-		Assert.assertEquals(res.size(), 3);
+	public void testGetRoots(){
+		List<Catalog> roots = catalogService.getRootCatalogs();
+		for(Catalog cat : roots){
+			System.out.println(cat.getId());
+		}
+		Assert.assertEquals(roots.size(), 3);
 	}
-
 //	@Test
-//	public void testCreateCatalog() {
-//		Catalog catalogDb = catalogService.getCatalog(createCatalog().getId());
-//		Assert.assertNotNull(catalogDb);
-//	}
-//
-//	@Test
-//	public void testDeleteCatalog() {
-//		Catalog parent = createCatalog();
-//		Catalog child = createCatalog(parent);
-//		ElementHasChildException exception = null;
-//		try {
-//			catalogService.delete(parent);
-//		} catch (ElementHasChildException e) {
-//			exception = e;
-//		}
-//		Assert.assertNotNull(exception);
-//		Assert.assertNotNull(catalogService.getCatalog(parent.getId()));
-//		exception = null;
-//		try {
-//			catalogService.delete(child);
-//		} catch (ElementHasChildException e) {
-//			exception = e;
-//		}
-//		Assert.assertNull(exception);
-//		Assert.assertNull(catalogService.getCatalog(child.getId()));
-//	}
-//
-//	@Test
-//	public void testUpdateCatalog() {
-//		Catalog catalog = createCatalog();
-//		String newPath = "new path " + Math.random();
-//		catalog.setPath(newPath);
-//		ModifiedParentCatalogException exception = null;
-//		try {
-//			catalogService.update(catalog);
-//		} catch (ModifiedParentCatalogException e) {
-//			exception = e;
-//		}
-//		Assert.assertEquals(catalogService.getCatalog(catalog.getId()).getPath(), newPath);
-//		Assert.assertNull(exception);
-//		
-//		String pathParent = catalog.getPathParent();
-//		catalog.setPathParent(newPath);
-//		try {
-//			catalogService.update(catalog);
-//		} catch (ModifiedParentCatalogException e) {
-//			exception = e;
-//		}
-//		Assert.assertNotNull(exception);
-//		Assert.assertEquals(catalogService.getCatalog(catalog.getId()).getPathParent(), pathParent);
-//	}
-
-	public Catalog createCatalog() {
-		Catalog catalog = new Catalog();
-		catalog.setPath("belorussian litrature " + System.currentTimeMillis());
-		catalog.setPathParent("litrature");
-		catalogService.create(catalog);
-		return catalog;
+	public void testCreate(){
+		Catalog root1 = new Catalog();
+		root1.setId("root1");
+		root1.setParent(null);
+		catalogService.create(root1);
+		
+		Catalog root2 = new Catalog();
+		root2.setId("root2");
+		root2.setParent(root1);
+		catalogService.create(root2);
+		
+		Catalog root3 = new Catalog();
+		root3.setId("root3");
+		root3.setParent(root2);
+		catalogService.create(root3);
+		
+		Catalog root4 = new Catalog();
+		root4.setId("root4");
+		root4.setParent(root2);
+		catalogService.create(root4);
+		
+		Assert.assertNotNull(catalogService.getCatalogTest(root3.getId()));
 	}
-
-	public Catalog createCatalog(Catalog parent) {
-		Catalog catalog = new Catalog();
-		catalog.setPath("belorussian litrature " + System.currentTimeMillis());
-//		catalog.setPathParent(parent.getPathParent()+"/"+parent.getPath());
-		catalog.setPathParent(parent.getPath());
-		catalogService.create(catalog);
-		return catalog;
+	
+//	@Test
+	public void testSave(){
+		Catalog root1 = new Catalog();
+		root1.setId("root11");
+		root1.setParent(null);
+//		catalogTestService.create(root1);
+		List<Catalog> list = new ArrayList<>();
+		Catalog root2 = new Catalog();
+		root2.setId("root112");
+		list.add(root2);
+		root1.setChilds(list);;
+		catalogService.create(root1);
+//		catalogTestService.create(root2);
+		
+		Assert.assertNotNull(catalogService.getCatalogTest(root2.getId()));
 	}
-
 }

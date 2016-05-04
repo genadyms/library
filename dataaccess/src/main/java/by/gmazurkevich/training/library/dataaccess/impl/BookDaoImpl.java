@@ -14,7 +14,7 @@ import by.gmazurkevich.training.library.dataaccess.BookDao;
 import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.datamodel.Book_;
-import by.gmazurkevich.training.library.datamodel.Catalog;
+import by.gmazurkevich.training.library.datamodel.CatalogOld;
 import by.gmazurkevich.training.library.datamodel.Catalog_;
 
 @Repository
