@@ -93,7 +93,8 @@ public class CatalogServiceTest {
 	public Catalog createCatalog(Catalog parent) {
 		Catalog catalog = new Catalog();
 		catalog.setPath("belorussian litrature " + System.currentTimeMillis());
-		catalog.setPathParent(parent.getPathParent()+"/"+parent.getPath());
+//		catalog.setPathParent(parent.getPathParent()+"/"+parent.getPath());
+		catalog.setPathParent(parent.getPath());
 		catalogService.create(catalog);
 		return catalog;
 	}
