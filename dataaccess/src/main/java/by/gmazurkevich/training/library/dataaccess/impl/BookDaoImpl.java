@@ -68,6 +68,10 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		if (bookFilter.getTitle()!=null){
 			cq.where(cb.equal(from.get(Book_.title), bookFilter.getTitle()));
 		}
+//		if(bookFilter.isFetchAuthor()){
+//			from.fetch(Book_.author);
+//			cq.where(cb.in(from.get(Book_.author), null));
+//		}
 		List<Book> res = em.createQuery(cq).getResultList();
 		return res;
 	}

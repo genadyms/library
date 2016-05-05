@@ -9,6 +9,7 @@ public class BookFilter {
 	private Catalog catalog;
 	private String publishingOffice;
 	private String title;
+	private boolean fetchAuthor;;
 //	private SingularAttribute sortProperty;
 //	private boolean sortOrder;
 //	private Integer offset;
@@ -47,5 +48,13 @@ public class BookFilter {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public boolean isFetchAuthor() {
+		return fetchAuthor;
+	}
+
+	public void setFetchAuthor(boolean fetchAuthor) {
+		this.fetchAuthor = fetchAuthor;
 	}
 }
