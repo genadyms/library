@@ -24,8 +24,8 @@ public class Book extends AbstractModel {
 	@Column
 	private String isbn;
 
-	@ManyToOne(targetEntity = CatalogOld.class, fetch = FetchType.LAZY)
-	private CatalogOld catalog;
+	@ManyToOne(targetEntity = Catalog.class, fetch = FetchType.LAZY)
+	private Catalog catalog;
 
 	@Column
 	private String title;
@@ -49,11 +49,11 @@ public class Book extends AbstractModel {
 	@Column
 	private String publishingOffice;
 
-	public CatalogOld getCatalog() {
+	public Catalog getCatalog() {
 		return catalog;
 	}
 
-	public void setCatalog(CatalogOld catalog) {
+	public void setCatalog(Catalog catalog) {
 		this.catalog = catalog;
 	}
 

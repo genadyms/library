@@ -1,11 +1,14 @@
 package by.gmazurkevich.training.library.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,68 +22,113 @@ public class CatalogServiceTest {
 
 	@Inject
 	protected CatalogService catalogService;
-	
-//	@Test
-//	public void test() {
-//		Assert.assertNotNull(catalogTestService);
-//	}
-//	
-//	@Test
-	public void testGetChilds(){
-		Catalog parent = catalogService.getCatalogTest("root1");
-		List<Catalog> childs = catalogService.getCatalogs(parent);
-		for(Catalog cat : childs){
-			System.out.println(cat.getId());
-		}
-		Assert.assertEquals(childs.size(), 2);
-	}
+
 	@Test
-	public void testGetRoots(){
-		List<Catalog> roots = catalogService.getRootCatalogs();
-		for(Catalog cat : roots){
-			System.out.println(cat.getId());
+	public void testGetRootCatalogs() {
+		int countRootCatalogs = 20;
+		for(int i=0; i<countRootCatalogs; i++){
+			createCatalog("root"+i, null);
 		}
-		Assert.assertEquals(roots.size(), 3);
+		Assert.assertEquals(catalogService.getChildCatalogs(null).size(), countRootCatalogs);
 	}
-//	@Test
-	public void testCreate(){
-		Catalog root1 = new Catalog();
-		root1.setId("root1");
-		root1.setParent(null);
-		catalogService.create(root1);
-		
-		Catalog root2 = new Catalog();
-		root2.setId("root2");
-		root2.setParent(root1);
-		catalogService.create(root2);
-		
-		Catalog root3 = new Catalog();
-		root3.setId("root3");
-		root3.setParent(root2);
-		catalogService.create(root3);
-		
-		Catalog root4 = new Catalog();
-		root4.setId("root4");
-		root4.setParent(root2);
-		catalogService.create(root4);
-		
-		Assert.assertNotNull(catalogService.getCatalogTest(root3.getId()));
+
+	@Test
+	public void testGetCatalogs() {
+		Catalog root = createCatalog("root", null);
+		int countRootCatalogs = 20;
+		for(int i=0; i<countRootCatalogs; i++){
+			createCatalog("root"+i, root.getPath());
+		}
+		Assert.assertEquals(catalogService.getChildCatalogs(root.getPath()).size(), countRootCatalogs);
 	}
 	
-//	@Test
-	public void testSave(){
-		Catalog root1 = new Catalog();
-		root1.setId("root11");
-		root1.setParent(null);
-//		catalogTestService.create(root1);
-		List<Catalog> list = new ArrayList<>();
-		Catalog root2 = new Catalog();
-		root2.setId("root112");
-		list.add(root2);
-		root1.setChilds(list);;
-		catalogService.create(root1);
-//		catalogTestService.create(root2);
-		
-		Assert.assertNotNull(catalogService.getCatalogTest(root2.getId()));
+
+	@Test
+	public void testCreateCatalog() {
+		Catalog catalogDb = catalogService.getCatalog(createCatalog("root", null).getId());
+		Assert.assertNotNull(catalogDb);
 	}
+
+	@Test
+	public void testDeleteCatalog() {
+		Catalog parent = createCatalog("parent", null);
+		Catalog child = createCatalog("child", parent.getPath());
+		ElementHasChildException exception = null;
+		try {
+			catalogService.delete(parent);
+		} catch (ElementHasChildException e) {
+			exception = e;
+		}
+		Assert.assertNotNull(exception);
+		Assert.assertNotNull(catalogService.getCatalog(parent.getId()));
+		exception = null;
+		try {
+			catalogService.delete(child);
+		} catch (ElementHasChildException e) {
+			exception = e;
+		}
+		Assert.assertNull(exception);
+		Assert.assertNull(catalogService.getCatalog(child.getId()));
+	}
+
+	@Test
+	public void testUpdateCatalog() {
+		Catalog catalog = createCatalog("root", null);
+		String newPath = "new path ";
+		catalog.setPath(newPath);
+		ModifiedParentCatalogException exception = null;
+		try {
+			catalogService.update(catalog);
+		} catch (ModifiedParentCatalogException e) {
+			exception = e;
+		}
+		Assert.assertEquals(catalogService.getCatalog(catalog.getId()).getPath(), newPath);
+		Assert.assertNull(exception);
+
+		String pathParent = catalog.getPathParent();
+		catalog.setPathParent(newPath);
+		try {
+			catalogService.update(catalog);
+		} catch (ModifiedParentCatalogException e) {
+			exception = e;
+		}
+		Assert.assertNotNull(exception);
+		Assert.assertEquals(catalogService.getCatalog(catalog.getId()).getPathParent(), pathParent);
+	}
+
+	public Catalog createCatalog(String path, String pathParent) {
+		Catalog catalog = new Catalog();
+		catalog.setPath(path);
+		catalog.setPathParent(pathParent);
+		catalogService.create(catalog);
+		return catalog;
+	}
+	
+	@Before
+	@After
+	public void clearDb() {
+		List<Catalog> roots = catalogService.getChildCatalogs(null);
+		List<Long> idDel = new ArrayList<Long>();
+		reqursive(roots, idDel);
+		Collections.reverse(idDel);
+		for (Long cat : idDel) {
+			try {
+				catalogService.delete(catalogService.getCatalog(cat));
+			} catch (ElementHasChildException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void reqursive(List<Catalog> roots, List<Long> idDel) {
+		if (roots == null || roots.isEmpty()) {
+			return;
+		} else {
+			for (Catalog curr : roots) {
+				idDel.add(curr.getId());
+				reqursive(catalogService.getChildCatalogs(curr.getPath()), idDel);
+			}
+		}
+	}
+
 }

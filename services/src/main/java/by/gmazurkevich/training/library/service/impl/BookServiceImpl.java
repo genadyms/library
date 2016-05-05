@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import by.gmazurkevich.training.library.dataaccess.BookDao;
 import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Book;
-import by.gmazurkevich.training.library.datamodel.CatalogOld;
+import by.gmazurkevich.training.library.datamodel.Catalog;
 import by.gmazurkevich.training.library.datamodel.Comment;
 import by.gmazurkevich.training.library.service.BookService;
 import by.gmazurkevich.training.library.service.CommentService;

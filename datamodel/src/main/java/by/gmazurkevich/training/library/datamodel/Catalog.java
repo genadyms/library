@@ -2,53 +2,48 @@ package by.gmazurkevich.training.library.datamodel;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Catalog {
-	
-	@Id
-	private String id;
-	
-	@ManyToOne(targetEntity = Catalog.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_id")
-	private Catalog parent;
-	
+public class Catalog extends AbstractModel {
 	@Override
 	public String toString() {
-		return "CatalogTest [id=" + id + ", parent=" + parent + ", childs=" + childs + "]";
+		return "Catalog [path=" + path + ", pathParent=" + pathParent + ", book=" + book + "]";
 	}
 
-	@OneToMany(mappedBy = "parent")
-	private List<Catalog> childs;
+	@Column
+	private String path;
 
-	public List<Catalog> getChilds() {
-		return childs;
+	@Column
+	private String pathParent;
+
+	@OneToMany(mappedBy = "catalog")
+	private List<Book> book;
+
+	public List<Book> getBooks() {
+		return book;
 	}
 
-	public void setChilds(List<Catalog> childs) {
-		this.childs = childs;
+	public void setBooks(List<Book> books) {
+		this.book = books;
 	}
 
-	public String getId() {
-		return id;
+	public String getPath() {
+		return path;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
-	public Catalog getParent() {
-		return parent;
+	public String getPathParent() {
+		return pathParent;
 	}
 
-	public void setParent(Catalog parent) {
-		this.parent = parent;
+	public void setPathParent(String pathParent) {
+		this.pathParent = pathParent;
 	}
-	
 }
