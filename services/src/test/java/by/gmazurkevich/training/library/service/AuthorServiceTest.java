@@ -1,5 +1,8 @@
 package by.gmazurkevich.training.library.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import by.gmazurkevich.training.library.datamodel.Author;
+import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.service.mocks.MockAuthor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -53,7 +57,16 @@ public class AuthorServiceTest extends MockAuthor{
 	
 	@Test
 	public void testDeleteWithBook() {
-		Author author = createAuthorWithBook();
+		System.out.println(authorService.getBooks(createAuthorWithBook()).size());
+//		for (Book b : authorService.getBooks( createAuthorWithBook())){
+//			System.out.println(b.getTitle());
+//			if (!b.getAuthor().isEmpty()){
+//				for(Author a : b.getAuthor()){
+//					System.out.println(a.getFirstName());
+//				}
+//			}
+//		}
+//		Author author = createAuthorWithBook();
 //		try {
 //			authorService.delete(author);
 //		} catch (ElementHasChildException e) {

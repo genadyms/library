@@ -23,15 +23,18 @@ public class MockAuthor extends MockBook {
 		return author;
 	}
 
-	public Author createAuthorWithBook() {
-		Author author = new Author();
-		author.setFirstName("Anton");
-		author.setSecondName("Chehov");
-		authorService.create(author);
-		List<Author>  authors = new ArrayList();
-		authors.add(author);
+	public List<Author> createAuthorWithBook() {
+		List<Author> authors = new ArrayList();
+		for (int i = 30; i < 33; i++) {
+			Author a = new Author();
+			a.setFirstName(String.format("namne %d", i));
+			a.setSecondName(String.format("secnamne %d", i));
+			authorService.create(a);
+			authors.add(a);
+
+		}
 		createBook(null, authors);
-		return author;
+		return authors;
 	}
 
 	public void deleteAllAuthors() {

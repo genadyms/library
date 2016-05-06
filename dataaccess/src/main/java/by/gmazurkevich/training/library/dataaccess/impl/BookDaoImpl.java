@@ -5,13 +5,19 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Fetch;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.SetJoin;
 
 import org.springframework.stereotype.Repository;
 
 import by.gmazurkevich.training.library.dataaccess.BookDao;
 import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
+import by.gmazurkevich.training.library.datamodel.Author;
 import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.datamodel.Book_;
 import by.gmazurkevich.training.library.datamodel.Catalog;
@@ -68,10 +74,11 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		if (bookFilter.getTitle()!=null){
 			cq.where(cb.equal(from.get(Book_.title), bookFilter.getTitle()));
 		}
-//		if(bookFilter.isFetchAuthor()){
-//			from.fetch(Book_.author);
-//			cq.where(cb.in(from.get(Book_.author), null));
-//		}
+		if(bookFilter.getAuthors()!=null && !bookFilter.getAuthors().isEmpty()){
+			from.fetch(Book_.author);
+			Join<Book, Author> authors = from.join(Book_.author);
+			cq.where(authors.in(bookFilter.getAuthors()));
+		}
 		List<Book> res = em.createQuery(cq).getResultList();
 		return res;
 	}

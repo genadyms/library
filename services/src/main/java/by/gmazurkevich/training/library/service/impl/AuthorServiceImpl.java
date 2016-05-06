@@ -10,6 +10,7 @@ import by.gmazurkevich.training.library.dataaccess.AuthorDao;
 import by.gmazurkevich.training.library.dataaccess.BookDao;
 import by.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import by.gmazurkevich.training.library.datamodel.Author;
+import by.gmazurkevich.training.library.datamodel.Book;
 import by.gmazurkevich.training.library.service.AuthorService;
 import by.gmazurkevich.training.library.service.ElementHasChildException;
 
@@ -51,6 +52,13 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public List<Author> getAll() {
 		return authorDao.getAll();
+	}
+
+	@Override
+	public List<Book> getBooks(List<Author> authors) {
+		BookFilter bf = new BookFilter();
+		bf.setAuthors(authors);
+		return bookDao.find(bf);
 	}
 
 }

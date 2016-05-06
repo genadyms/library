@@ -1,7 +1,10 @@
 package by.gmazurkevich.training.library.dataaccess.filters;
 
+import java.util.List;
+
 import javax.persistence.metamodel.SingularAttribute;
 
+import by.gmazurkevich.training.library.datamodel.Author;
 import by.gmazurkevich.training.library.datamodel.Catalog;
 
 public class BookFilter {
@@ -9,7 +12,7 @@ public class BookFilter {
 	private Catalog catalog;
 	private String publishingOffice;
 	private String title;
-	private boolean fetchAuthor;;
+	private List<Author> authors;;
 //	private SingularAttribute sortProperty;
 //	private boolean sortOrder;
 //	private Integer offset;
@@ -50,11 +53,13 @@ public class BookFilter {
 		this.title = title;
 	}
 
-	public boolean isFetchAuthor() {
-		return fetchAuthor;
+	public List<Author> getAuthors() {
+		return authors;
 	}
 
-	public void setFetchAuthor(boolean fetchAuthor) {
-		this.fetchAuthor = fetchAuthor;
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
 	}
+
+
 }
