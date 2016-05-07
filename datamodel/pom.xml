@@ -4,7 +4,7 @@
 
 
 	<parent>
-		<groupId>by.gmazurkevich.training.library</groupId>
+		<groupId>com.gmazurkevich.training.library</groupId>
 		<artifactId>library-project</artifactId>
 		<version>1.0.1</version>
 	</parent>

@@ -16,12 +16,12 @@
 
 	<context:annotation-config />
 
-	<context:component-scan base-package="by.gmazurkevich.training.library.service.impl" />
-	<context:component-scan	base-package="by.gmazurkevich.training.library.dataaccess.impl" />
+	<context:component-scan base-package="com.gmazurkevich.training.library.service.impl" />
+	<context:component-scan	base-package="com.gmazurkevich.training.library.dataaccess.impl" />
 
 
 	<bean id="dataSource"
-		class="by.gmazurkevich.training.library.datamodel.util.SchemaNameAwareBasicDataSource"
+		class="com.gmazurkevich.training.library.datamodel.util.SchemaNameAwareBasicDataSource"
 		destroy-method="close" p:driverClassName="org.postgresql.Driver"
 		p:url="jdbc:postgresql://localhost:5432/library" p:username="postgres"
 		p:password="postgres" p:schema="public" />
