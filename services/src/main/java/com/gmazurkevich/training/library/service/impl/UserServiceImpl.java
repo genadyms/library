@@ -13,6 +13,8 @@ import com.gmazurkevich.training.library.datamodel.UserCredentials;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
 import com.gmazurkevich.training.library.service.UserService;
 
+import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
+
 @Service
 public class UserServiceImpl implements UserService {
 	@Inject
@@ -59,5 +61,9 @@ public class UserServiceImpl implements UserService {
 		contactDao.delete(contactId);
 		userCredentialsDao.delete(id);
 	}
+	@Override
+	public	List<UserProfile> find(UserFilter filter) {
+        return userProfileDao.find(filter);
+    }
 	
 }

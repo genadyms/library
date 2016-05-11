@@ -1,10 +1,13 @@
 package com.gmazurkevich.training.library.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.ContactDao;
+import com.gmazurkevich.training.library.dataaccess.filters.ContactFilter;
 import com.gmazurkevich.training.library.datamodel.Contact;
 import com.gmazurkevich.training.library.service.ContactService;
 @Service
@@ -31,6 +34,11 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public Contact getContact(Long id) {
 		return contactDao.get(id);	
+	}
+
+	@Override
+	public List<Contact> find(ContactFilter contactFilter) {
+		return contactDao.find(contactFilter);
 	}
 
 }

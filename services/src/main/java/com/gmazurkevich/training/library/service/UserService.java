@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 import com.gmazurkevich.training.library.datamodel.UserCredentials;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
 
@@ -24,4 +25,6 @@ public interface UserService {
 	void register(UserProfile profile, UserCredentials userCredentials);
 
 	List<UserProfile> getAll();
+	
+	List<UserProfile> find(UserFilter userFilter);
 }

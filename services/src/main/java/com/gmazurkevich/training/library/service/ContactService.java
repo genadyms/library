@@ -1,7 +1,10 @@
 package com.gmazurkevich.training.library.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import com.gmazurkevich.training.library.dataaccess.filters.ContactFilter;
 import com.gmazurkevich.training.library.datamodel.Contact;
 
 public interface ContactService {
@@ -17,5 +20,6 @@ public interface ContactService {
 	
 	Contact getContact(Long id);
 	
+	List<Contact> find(ContactFilter contactFilter);
 
 }

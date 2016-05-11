@@ -3,6 +3,7 @@ package com.gmazurkevich.training.library.service;
 import javax.inject.Inject;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -10,11 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gmazurkevich.training.library.dataaccess.ContactDao;
 import com.gmazurkevich.training.library.datamodel.Contact;
-import com.gmazurkevich.training.library.service.mocks.MockContact;
+import com.gmazurkevich.training.library.service.mocks.ContactUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class ContactServiceTest extends MockContact{
+public class ContactServiceTest extends ContactUtil{
 
 	@Inject
 	private ContactService contactService;
@@ -26,14 +27,14 @@ public class ContactServiceTest extends MockContact{
 	
 	@Test
 	public void testPersist(){
-		Contact contact = MockContact.createContact();
+		Contact contact = ContactUtil.createContact();
 		contactService.persist(contact);
 		Assert.assertNotNull(contactService.getContact(contact.getId()));
 	}
 	
 	@Test
 	public void testDelete(){
-		Contact contact = MockContact.createContact();
+		Contact contact = ContactUtil.createContact();
 		contactService.persist(contact);
 		Contact savedContact = contactService.getContact(contact.getId());
 		Assert.assertNotNull(savedContact);
@@ -44,7 +45,7 @@ public class ContactServiceTest extends MockContact{
 	
 	@Test
 	public void testUpdate(){
-		Contact contact = MockContact.createContact();
+		Contact contact = ContactUtil.createContact();
 		contactService.persist(contact);
 		Contact savedContact = contactService.getContact(contact.getId());
 		String newAddress = "new test "+savedContact.getAddress();
@@ -55,5 +56,10 @@ public class ContactServiceTest extends MockContact{
 		Contact updatedContact = contactService.getContact(savedContact.getId());
 		Assert.assertEquals(savedContact.getAddress(), newAddress);
 		Assert.assertEquals(savedContact.getPhone(), newPhone);
+	}
+	
+	@Before
+	public void clearDb(){
+		ContactUtil.deleteAllContact(contactService);
 	}
 }
