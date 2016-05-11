@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.2
 -- Dumped by pg_dump version 9.5.2
 
--- Started on 2016-05-07 12:06:23
+-- Started on 2016-05-11 17:10:09
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,7 +16,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 8 (class 2615 OID 19941)
+-- TOC entry 8 (class 2615 OID 25756)
 -- Name: test; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -28,7 +28,7 @@ SET search_path = test, pg_catalog;
 SET default_with_oids = false;
 
 --
--- TOC entry 208 (class 1259 OID 19942)
+-- TOC entry 208 (class 1259 OID 25758)
 -- Name: abonement; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -40,7 +40,7 @@ CREATE TABLE abonement (
 
 
 --
--- TOC entry 209 (class 1259 OID 19945)
+-- TOC entry 209 (class 1259 OID 25761)
 -- Name: author; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -52,7 +52,7 @@ CREATE TABLE author (
 
 
 --
--- TOC entry 210 (class 1259 OID 19948)
+-- TOC entry 210 (class 1259 OID 25764)
 -- Name: author_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -65,7 +65,7 @@ CREATE SEQUENCE author_id_seq
 
 
 --
--- TOC entry 2335 (class 0 OID 0)
+-- TOC entry 2334 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: author_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -74,7 +74,7 @@ ALTER SEQUENCE author_id_seq OWNED BY author.id;
 
 
 --
--- TOC entry 211 (class 1259 OID 19950)
+-- TOC entry 211 (class 1259 OID 25766)
 -- Name: book_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -87,7 +87,7 @@ CREATE SEQUENCE book_id_seq
 
 
 --
--- TOC entry 212 (class 1259 OID 19952)
+-- TOC entry 212 (class 1259 OID 25768)
 -- Name: book; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -103,7 +103,7 @@ CREATE TABLE book (
 
 
 --
--- TOC entry 213 (class 1259 OID 19956)
+-- TOC entry 213 (class 1259 OID 25772)
 -- Name: book_2_author; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -114,7 +114,7 @@ CREATE TABLE book_2_author (
 
 
 --
--- TOC entry 214 (class 1259 OID 19959)
+-- TOC entry 214 (class 1259 OID 25775)
 -- Name: book_2_comment; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -125,7 +125,7 @@ CREATE TABLE book_2_comment (
 
 
 --
--- TOC entry 215 (class 1259 OID 19962)
+-- TOC entry 215 (class 1259 OID 25778)
 -- Name: catalog; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -137,7 +137,7 @@ CREATE TABLE catalog (
 
 
 --
--- TOC entry 216 (class 1259 OID 19968)
+-- TOC entry 216 (class 1259 OID 25781)
 -- Name: catalog_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -150,7 +150,7 @@ CREATE SEQUENCE catalog_id_seq
 
 
 --
--- TOC entry 2336 (class 0 OID 0)
+-- TOC entry 2335 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: catalog_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -159,7 +159,7 @@ ALTER SEQUENCE catalog_id_seq OWNED BY catalog.id;
 
 
 --
--- TOC entry 217 (class 1259 OID 19970)
+-- TOC entry 217 (class 1259 OID 25783)
 -- Name: comment; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -174,7 +174,7 @@ CREATE TABLE comment (
 
 
 --
--- TOC entry 218 (class 1259 OID 19974)
+-- TOC entry 218 (class 1259 OID 25787)
 -- Name: comment_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -187,7 +187,7 @@ CREATE SEQUENCE comment_id_seq
 
 
 --
--- TOC entry 2337 (class 0 OID 0)
+-- TOC entry 2336 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: comment_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -196,7 +196,7 @@ ALTER SEQUENCE comment_id_seq OWNED BY comment.id;
 
 
 --
--- TOC entry 219 (class 1259 OID 19976)
+-- TOC entry 219 (class 1259 OID 25789)
 -- Name: contact; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -208,7 +208,7 @@ CREATE TABLE contact (
 
 
 --
--- TOC entry 220 (class 1259 OID 19979)
+-- TOC entry 220 (class 1259 OID 25792)
 -- Name: contact_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -221,7 +221,7 @@ CREATE SEQUENCE contact_id_seq
 
 
 --
--- TOC entry 2338 (class 0 OID 0)
+-- TOC entry 2337 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -230,7 +230,7 @@ ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
 
 
 --
--- TOC entry 221 (class 1259 OID 19981)
+-- TOC entry 221 (class 1259 OID 25794)
 -- Name: copy_book; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -242,7 +242,7 @@ CREATE TABLE copy_book (
 
 
 --
--- TOC entry 222 (class 1259 OID 19984)
+-- TOC entry 222 (class 1259 OID 25797)
 -- Name: copy_book_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -255,7 +255,7 @@ CREATE SEQUENCE copy_book_id_seq
 
 
 --
--- TOC entry 2339 (class 0 OID 0)
+-- TOC entry 2338 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: copy_book_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -264,7 +264,7 @@ ALTER SEQUENCE copy_book_id_seq OWNED BY copy_book.id;
 
 
 --
--- TOC entry 223 (class 1259 OID 19986)
+-- TOC entry 223 (class 1259 OID 25799)
 -- Name: department; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -277,7 +277,7 @@ CREATE TABLE department (
 
 
 --
--- TOC entry 224 (class 1259 OID 19989)
+-- TOC entry 224 (class 1259 OID 25802)
 -- Name: department_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -290,7 +290,7 @@ CREATE SEQUENCE department_id_seq
 
 
 --
--- TOC entry 2340 (class 0 OID 0)
+-- TOC entry 2339 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: department_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -299,7 +299,7 @@ ALTER SEQUENCE department_id_seq OWNED BY department.id;
 
 
 --
--- TOC entry 225 (class 1259 OID 19991)
+-- TOC entry 225 (class 1259 OID 25804)
 -- Name: order; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -315,7 +315,7 @@ CREATE TABLE "order" (
 
 
 --
--- TOC entry 226 (class 1259 OID 19994)
+-- TOC entry 226 (class 1259 OID 25807)
 -- Name: order_2_comment; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -326,7 +326,7 @@ CREATE TABLE order_2_comment (
 
 
 --
--- TOC entry 227 (class 1259 OID 19997)
+-- TOC entry 227 (class 1259 OID 25810)
 -- Name: order_2_comment_comment_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -339,7 +339,7 @@ CREATE SEQUENCE order_2_comment_comment_id_seq
 
 
 --
--- TOC entry 2341 (class 0 OID 0)
+-- TOC entry 2340 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: order_2_comment_comment_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -348,7 +348,7 @@ ALTER SEQUENCE order_2_comment_comment_id_seq OWNED BY order_2_comment.comment_i
 
 
 --
--- TOC entry 228 (class 1259 OID 19999)
+-- TOC entry 228 (class 1259 OID 25812)
 -- Name: order_2_comment_order_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -361,7 +361,7 @@ CREATE SEQUENCE order_2_comment_order_id_seq
 
 
 --
--- TOC entry 2342 (class 0 OID 0)
+-- TOC entry 2341 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: order_2_comment_order_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -370,7 +370,7 @@ ALTER SEQUENCE order_2_comment_order_id_seq OWNED BY order_2_comment.order_id;
 
 
 --
--- TOC entry 229 (class 1259 OID 20001)
+-- TOC entry 229 (class 1259 OID 25814)
 -- Name: order_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -383,7 +383,7 @@ CREATE SEQUENCE order_id_seq
 
 
 --
--- TOC entry 2343 (class 0 OID 0)
+-- TOC entry 2342 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -392,7 +392,7 @@ ALTER SEQUENCE order_id_seq OWNED BY "order".id;
 
 
 --
--- TOC entry 230 (class 1259 OID 20003)
+-- TOC entry 230 (class 1259 OID 25816)
 -- Name: user_credentials; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -404,7 +404,7 @@ CREATE TABLE user_credentials (
 
 
 --
--- TOC entry 231 (class 1259 OID 20006)
+-- TOC entry 231 (class 1259 OID 25819)
 -- Name: user_credentials_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -417,7 +417,7 @@ CREATE SEQUENCE user_credentials_id_seq
 
 
 --
--- TOC entry 2344 (class 0 OID 0)
+-- TOC entry 2343 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: user_credentials_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -426,7 +426,7 @@ ALTER SEQUENCE user_credentials_id_seq OWNED BY user_credentials.id;
 
 
 --
--- TOC entry 232 (class 1259 OID 20008)
+-- TOC entry 232 (class 1259 OID 25821)
 -- Name: user_profile; Type: TABLE; Schema: test; Owner: -
 --
 
@@ -442,7 +442,7 @@ CREATE TABLE user_profile (
 
 
 --
--- TOC entry 233 (class 1259 OID 20012)
+-- TOC entry 233 (class 1259 OID 25825)
 -- Name: user_profile_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
@@ -455,7 +455,7 @@ CREATE SEQUENCE user_profile_id_seq
 
 
 --
--- TOC entry 2345 (class 0 OID 0)
+-- TOC entry 2344 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: user_profile_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
@@ -464,7 +464,7 @@ ALTER SEQUENCE user_profile_id_seq OWNED BY user_profile.id;
 
 
 --
--- TOC entry 2124 (class 2604 OID 20014)
+-- TOC entry 2123 (class 2604 OID 25827)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -472,7 +472,7 @@ ALTER TABLE ONLY author ALTER COLUMN id SET DEFAULT nextval('author_id_seq'::reg
 
 
 --
--- TOC entry 2126 (class 2604 OID 20015)
+-- TOC entry 2125 (class 2604 OID 25828)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -480,7 +480,7 @@ ALTER TABLE ONLY catalog ALTER COLUMN id SET DEFAULT nextval('catalog_id_seq'::r
 
 
 --
--- TOC entry 2128 (class 2604 OID 20016)
+-- TOC entry 2127 (class 2604 OID 25829)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -488,7 +488,7 @@ ALTER TABLE ONLY comment ALTER COLUMN id SET DEFAULT nextval('comment_id_seq'::r
 
 
 --
--- TOC entry 2129 (class 2604 OID 20017)
+-- TOC entry 2128 (class 2604 OID 25830)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -496,7 +496,7 @@ ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::r
 
 
 --
--- TOC entry 2130 (class 2604 OID 20018)
+-- TOC entry 2129 (class 2604 OID 25831)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -504,7 +504,7 @@ ALTER TABLE ONLY copy_book ALTER COLUMN id SET DEFAULT nextval('copy_book_id_seq
 
 
 --
--- TOC entry 2131 (class 2604 OID 20019)
+-- TOC entry 2130 (class 2604 OID 25832)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -512,7 +512,7 @@ ALTER TABLE ONLY department ALTER COLUMN id SET DEFAULT nextval('department_id_s
 
 
 --
--- TOC entry 2132 (class 2604 OID 20020)
+-- TOC entry 2131 (class 2604 OID 25833)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -520,7 +520,7 @@ ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::reg
 
 
 --
--- TOC entry 2133 (class 2604 OID 20021)
+-- TOC entry 2132 (class 2604 OID 25834)
 -- Name: comment_id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -528,7 +528,7 @@ ALTER TABLE ONLY order_2_comment ALTER COLUMN comment_id SET DEFAULT nextval('or
 
 
 --
--- TOC entry 2134 (class 2604 OID 20022)
+-- TOC entry 2133 (class 2604 OID 25835)
 -- Name: order_id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -536,7 +536,7 @@ ALTER TABLE ONLY order_2_comment ALTER COLUMN order_id SET DEFAULT nextval('orde
 
 
 --
--- TOC entry 2135 (class 2604 OID 20023)
+-- TOC entry 2134 (class 2604 OID 25836)
 -- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
@@ -544,7 +544,7 @@ ALTER TABLE ONLY user_credentials ALTER COLUMN id SET DEFAULT nextval('user_cred
 
 
 --
--- TOC entry 2305 (class 0 OID 19942)
+-- TOC entry 2304 (class 0 OID 25758)
 -- Dependencies: 208
 -- Data for Name: abonement; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -552,7 +552,7 @@ ALTER TABLE ONLY user_credentials ALTER COLUMN id SET DEFAULT nextval('user_cred
 
 
 --
--- TOC entry 2306 (class 0 OID 19945)
+-- TOC entry 2305 (class 0 OID 25761)
 -- Dependencies: 209
 -- Data for Name: author; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -593,7 +593,7 @@ INSERT INTO author (id, first_name, second_name) VALUES (54, 'namne 9', 'secnamn
 
 
 --
--- TOC entry 2346 (class 0 OID 0)
+-- TOC entry 2345 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: author_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -602,7 +602,7 @@ SELECT pg_catalog.setval('author_id_seq', 85, true);
 
 
 --
--- TOC entry 2309 (class 0 OID 19952)
+-- TOC entry 2308 (class 0 OID 25768)
 -- Dependencies: 212
 -- Data for Name: book; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -610,7 +610,7 @@ SELECT pg_catalog.setval('author_id_seq', 85, true);
 
 
 --
--- TOC entry 2310 (class 0 OID 19956)
+-- TOC entry 2309 (class 0 OID 25772)
 -- Dependencies: 213
 -- Data for Name: book_2_author; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -639,7 +639,7 @@ INSERT INTO book_2_author (book_id, author_id) VALUES (413, 85);
 
 
 --
--- TOC entry 2311 (class 0 OID 19959)
+-- TOC entry 2310 (class 0 OID 25775)
 -- Dependencies: 214
 -- Data for Name: book_2_comment; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -647,33 +647,37 @@ INSERT INTO book_2_author (book_id, author_id) VALUES (413, 85);
 
 
 --
--- TOC entry 2347 (class 0 OID 0)
+-- TOC entry 2346 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: book_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
-SELECT pg_catalog.setval('book_id_seq', 413, true);
+SELECT pg_catalog.setval('book_id_seq', 679, true);
 
 
 --
--- TOC entry 2312 (class 0 OID 19962)
+-- TOC entry 2311 (class 0 OID 25778)
 -- Dependencies: 215
 -- Data for Name: catalog; Type: TABLE DATA; Schema: test; Owner: -
 --
 
+INSERT INTO catalog (id, title, parent_id) VALUES (3664, 'root1462970918830', NULL);
+INSERT INTO catalog (id, title, parent_id) VALUES (3665, 'root1462971015260', NULL);
+INSERT INTO catalog (id, title, parent_id) VALUES (3666, 'root1462971043362', NULL);
+INSERT INTO catalog (id, title, parent_id) VALUES (3667, 'root1462971073575', NULL);
 
 
 --
--- TOC entry 2348 (class 0 OID 0)
+-- TOC entry 2347 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: catalog_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
-SELECT pg_catalog.setval('catalog_id_seq', 2517, true);
+SELECT pg_catalog.setval('catalog_id_seq', 3672, true);
 
 
 --
--- TOC entry 2314 (class 0 OID 19970)
+-- TOC entry 2313 (class 0 OID 25783)
 -- Dependencies: 217
 -- Data for Name: comment; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -681,7 +685,7 @@ SELECT pg_catalog.setval('catalog_id_seq', 2517, true);
 
 
 --
--- TOC entry 2349 (class 0 OID 0)
+-- TOC entry 2348 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: comment_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -690,24 +694,30 @@ SELECT pg_catalog.setval('comment_id_seq', 60, true);
 
 
 --
--- TOC entry 2316 (class 0 OID 19976)
+-- TOC entry 2315 (class 0 OID 25789)
 -- Dependencies: 219
 -- Data for Name: contact; Type: TABLE DATA; Schema: test; Owner: -
 --
 
+INSERT INTO contact (id, phone, address) VALUES (761, '632-236', 'Grodno, ul. Gorkogo');
+INSERT INTO contact (id, phone, address) VALUES (764, 'phone 1462974891653', 'Grodno 1462974891653');
+INSERT INTO contact (id, phone, address) VALUES (766, 'phone 1462975270907', 'Grodno 1462975270907');
+INSERT INTO contact (id, phone, address) VALUES (768, 'phone 1462975271979', 'new test Grodno 1462975271979');
+INSERT INTO contact (id, phone, address) VALUES (769, 'phone 1462975340162', 'Grodno 1462975340162');
+INSERT INTO contact (id, phone, address) VALUES (771, 'new phone phone 1462975341085', 'new test Grodno 1462975341085');
 
 
 --
--- TOC entry 2350 (class 0 OID 0)
+-- TOC entry 2349 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 760, true);
+SELECT pg_catalog.setval('contact_id_seq', 771, true);
 
 
 --
--- TOC entry 2318 (class 0 OID 19981)
+-- TOC entry 2317 (class 0 OID 25794)
 -- Dependencies: 221
 -- Data for Name: copy_book; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -715,7 +725,7 @@ SELECT pg_catalog.setval('contact_id_seq', 760, true);
 
 
 --
--- TOC entry 2351 (class 0 OID 0)
+-- TOC entry 2350 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: copy_book_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -724,7 +734,7 @@ SELECT pg_catalog.setval('copy_book_id_seq', 1, false);
 
 
 --
--- TOC entry 2320 (class 0 OID 19986)
+-- TOC entry 2319 (class 0 OID 25799)
 -- Dependencies: 223
 -- Data for Name: department; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -732,7 +742,7 @@ SELECT pg_catalog.setval('copy_book_id_seq', 1, false);
 
 
 --
--- TOC entry 2352 (class 0 OID 0)
+-- TOC entry 2351 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: department_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -741,7 +751,7 @@ SELECT pg_catalog.setval('department_id_seq', 1, false);
 
 
 --
--- TOC entry 2322 (class 0 OID 19991)
+-- TOC entry 2321 (class 0 OID 25804)
 -- Dependencies: 225
 -- Data for Name: order; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -749,7 +759,7 @@ SELECT pg_catalog.setval('department_id_seq', 1, false);
 
 
 --
--- TOC entry 2323 (class 0 OID 19994)
+-- TOC entry 2322 (class 0 OID 25807)
 -- Dependencies: 226
 -- Data for Name: order_2_comment; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -757,7 +767,7 @@ SELECT pg_catalog.setval('department_id_seq', 1, false);
 
 
 --
--- TOC entry 2353 (class 0 OID 0)
+-- TOC entry 2352 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: order_2_comment_comment_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -766,7 +776,7 @@ SELECT pg_catalog.setval('order_2_comment_comment_id_seq', 1, false);
 
 
 --
--- TOC entry 2354 (class 0 OID 0)
+-- TOC entry 2353 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: order_2_comment_order_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -775,7 +785,7 @@ SELECT pg_catalog.setval('order_2_comment_order_id_seq', 1, false);
 
 
 --
--- TOC entry 2355 (class 0 OID 0)
+-- TOC entry 2354 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: order_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -784,7 +794,7 @@ SELECT pg_catalog.setval('order_id_seq', 1, false);
 
 
 --
--- TOC entry 2327 (class 0 OID 20003)
+-- TOC entry 2326 (class 0 OID 25816)
 -- Dependencies: 230
 -- Data for Name: user_credentials; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -792,7 +802,7 @@ SELECT pg_catalog.setval('order_id_seq', 1, false);
 
 
 --
--- TOC entry 2356 (class 0 OID 0)
+-- TOC entry 2355 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: user_credentials_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -801,7 +811,7 @@ SELECT pg_catalog.setval('user_credentials_id_seq', 788, true);
 
 
 --
--- TOC entry 2329 (class 0 OID 20008)
+-- TOC entry 2328 (class 0 OID 25821)
 -- Dependencies: 232
 -- Data for Name: user_profile; Type: TABLE DATA; Schema: test; Owner: -
 --
@@ -809,7 +819,7 @@ SELECT pg_catalog.setval('user_credentials_id_seq', 788, true);
 
 
 --
--- TOC entry 2357 (class 0 OID 0)
+-- TOC entry 2356 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: user_profile_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
@@ -818,7 +828,7 @@ SELECT pg_catalog.setval('user_profile_id_seq', 1, false);
 
 
 --
--- TOC entry 2138 (class 2606 OID 20025)
+-- TOC entry 2137 (class 2606 OID 25838)
 -- Name: abonement_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -827,7 +837,7 @@ ALTER TABLE ONLY abonement
 
 
 --
--- TOC entry 2140 (class 2606 OID 20027)
+-- TOC entry 2139 (class 2606 OID 25840)
 -- Name: author_first_name_second_name_key; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -836,7 +846,7 @@ ALTER TABLE ONLY author
 
 
 --
--- TOC entry 2142 (class 2606 OID 20029)
+-- TOC entry 2141 (class 2606 OID 25842)
 -- Name: author_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -845,7 +855,7 @@ ALTER TABLE ONLY author
 
 
 --
--- TOC entry 2148 (class 2606 OID 20031)
+-- TOC entry 2147 (class 2606 OID 25844)
 -- Name: book_2_comment_comment_id_book_id_key; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -854,7 +864,7 @@ ALTER TABLE ONLY book_2_comment
 
 
 --
--- TOC entry 2150 (class 2606 OID 20033)
+-- TOC entry 2149 (class 2606 OID 25846)
 -- Name: book_2_comment_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -863,7 +873,7 @@ ALTER TABLE ONLY book_2_comment
 
 
 --
--- TOC entry 2144 (class 2606 OID 20035)
+-- TOC entry 2143 (class 2606 OID 25848)
 -- Name: book_isbn_key; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -872,7 +882,7 @@ ALTER TABLE ONLY book
 
 
 --
--- TOC entry 2146 (class 2606 OID 20037)
+-- TOC entry 2145 (class 2606 OID 25850)
 -- Name: book_pkey; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -881,7 +891,7 @@ ALTER TABLE ONLY book
 
 
 --
--- TOC entry 2152 (class 2606 OID 20041)
+-- TOC entry 2151 (class 2606 OID 25852)
 -- Name: catalog_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -890,7 +900,7 @@ ALTER TABLE ONLY catalog
 
 
 --
--- TOC entry 2154 (class 2606 OID 20043)
+-- TOC entry 2153 (class 2606 OID 25854)
 -- Name: comment_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -899,7 +909,7 @@ ALTER TABLE ONLY comment
 
 
 --
--- TOC entry 2156 (class 2606 OID 20045)
+-- TOC entry 2155 (class 2606 OID 25856)
 -- Name: contact_phone_key; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -908,7 +918,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- TOC entry 2158 (class 2606 OID 20047)
+-- TOC entry 2157 (class 2606 OID 25858)
 -- Name: contact_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -917,7 +927,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- TOC entry 2160 (class 2606 OID 20049)
+-- TOC entry 2159 (class 2606 OID 25860)
 -- Name: copy_book_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -926,7 +936,7 @@ ALTER TABLE ONLY copy_book
 
 
 --
--- TOC entry 2162 (class 2606 OID 20051)
+-- TOC entry 2161 (class 2606 OID 25862)
 -- Name: department_contact_id_name_key; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -935,7 +945,7 @@ ALTER TABLE ONLY department
 
 
 --
--- TOC entry 2164 (class 2606 OID 20053)
+-- TOC entry 2163 (class 2606 OID 25864)
 -- Name: department_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -944,7 +954,7 @@ ALTER TABLE ONLY department
 
 
 --
--- TOC entry 2168 (class 2606 OID 20055)
+-- TOC entry 2167 (class 2606 OID 25866)
 -- Name: order_2_comment_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -953,7 +963,7 @@ ALTER TABLE ONLY order_2_comment
 
 
 --
--- TOC entry 2166 (class 2606 OID 20057)
+-- TOC entry 2165 (class 2606 OID 25868)
 -- Name: order_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -962,7 +972,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- TOC entry 2170 (class 2606 OID 20059)
+-- TOC entry 2169 (class 2606 OID 25870)
 -- Name: user_credentials_email_key; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -971,7 +981,7 @@ ALTER TABLE ONLY user_credentials
 
 
 --
--- TOC entry 2172 (class 2606 OID 20061)
+-- TOC entry 2171 (class 2606 OID 25872)
 -- Name: user_credentials_email_password_key; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -980,7 +990,7 @@ ALTER TABLE ONLY user_credentials
 
 
 --
--- TOC entry 2174 (class 2606 OID 20063)
+-- TOC entry 2173 (class 2606 OID 25874)
 -- Name: user_credentials_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -989,7 +999,7 @@ ALTER TABLE ONLY user_credentials
 
 
 --
--- TOC entry 2176 (class 2606 OID 20065)
+-- TOC entry 2175 (class 2606 OID 25876)
 -- Name: user_profile_pk; Type: CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -998,7 +1008,7 @@ ALTER TABLE ONLY user_profile
 
 
 --
--- TOC entry 2177 (class 2606 OID 20066)
+-- TOC entry 2176 (class 2606 OID 25877)
 -- Name: abonement_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1007,7 +1017,7 @@ ALTER TABLE ONLY abonement
 
 
 --
--- TOC entry 2179 (class 2606 OID 20071)
+-- TOC entry 2178 (class 2606 OID 25882)
 -- Name: book_2_comment_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1016,7 +1026,7 @@ ALTER TABLE ONLY book_2_comment
 
 
 --
--- TOC entry 2178 (class 2606 OID 20076)
+-- TOC entry 2177 (class 2606 OID 25887)
 -- Name: book_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1025,7 +1035,7 @@ ALTER TABLE ONLY book
 
 
 --
--- TOC entry 2180 (class 2606 OID 20142)
+-- TOC entry 2179 (class 2606 OID 25892)
 -- Name: catalog_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1034,7 +1044,7 @@ ALTER TABLE ONLY catalog
 
 
 --
--- TOC entry 2181 (class 2606 OID 20081)
+-- TOC entry 2180 (class 2606 OID 25897)
 -- Name: comment_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1043,7 +1053,7 @@ ALTER TABLE ONLY comment
 
 
 --
--- TOC entry 2182 (class 2606 OID 20086)
+-- TOC entry 2181 (class 2606 OID 25902)
 -- Name: copy_book_fk1; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1052,7 +1062,7 @@ ALTER TABLE ONLY copy_book
 
 
 --
--- TOC entry 2183 (class 2606 OID 20091)
+-- TOC entry 2182 (class 2606 OID 25907)
 -- Name: department_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1061,7 +1071,7 @@ ALTER TABLE ONLY department
 
 
 --
--- TOC entry 2187 (class 2606 OID 20096)
+-- TOC entry 2186 (class 2606 OID 25912)
 -- Name: order_2_comment_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1070,7 +1080,7 @@ ALTER TABLE ONLY order_2_comment
 
 
 --
--- TOC entry 2188 (class 2606 OID 20101)
+-- TOC entry 2187 (class 2606 OID 25917)
 -- Name: order_2_comment_fk1; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1079,7 +1089,7 @@ ALTER TABLE ONLY order_2_comment
 
 
 --
--- TOC entry 2184 (class 2606 OID 20106)
+-- TOC entry 2183 (class 2606 OID 25922)
 -- Name: order_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1088,7 +1098,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- TOC entry 2185 (class 2606 OID 20111)
+-- TOC entry 2184 (class 2606 OID 25927)
 -- Name: order_fk1; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1097,7 +1107,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- TOC entry 2186 (class 2606 OID 20116)
+-- TOC entry 2185 (class 2606 OID 25932)
 -- Name: order_fk2; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1106,7 +1116,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- TOC entry 2189 (class 2606 OID 20121)
+-- TOC entry 2188 (class 2606 OID 25937)
 -- Name: user_profile_fk0; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1115,7 +1125,7 @@ ALTER TABLE ONLY user_profile
 
 
 --
--- TOC entry 2190 (class 2606 OID 20126)
+-- TOC entry 2189 (class 2606 OID 25942)
 -- Name: user_profile_fk1; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -1123,7 +1133,7 @@ ALTER TABLE ONLY user_profile
     ADD CONSTRAINT user_profile_fk1 FOREIGN KEY (contact_id) REFERENCES contact(id);
 
 
--- Completed on 2016-05-07 12:06:25
+-- Completed on 2016-05-11 17:10:10
 
 --
 -- PostgreSQL database dump complete

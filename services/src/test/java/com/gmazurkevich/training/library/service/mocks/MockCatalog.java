@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.gmazurkevich.training.library.datamodel.Catalog;
+import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
 import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
 
@@ -17,6 +18,9 @@ public class MockCatalog {
 	@Inject
 	protected CatalogService catalogService;
 
+	@Inject
+	protected BookService bookService;
+	
 	public Catalog createCatalog() {
 		Catalog catalog = createCatalog(null);
 		return catalog;

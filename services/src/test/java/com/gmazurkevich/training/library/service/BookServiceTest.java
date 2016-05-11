@@ -1,10 +1,7 @@
 package com.gmazurkevich.training.library.service;
 
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -40,8 +37,8 @@ public class BookServiceTest extends MockBook {
 
 	@Test
 	public void testFindByCatalog() {
-		Book book = createBook();
-		Catalog catalog = book.getCatalog();
+		Catalog catalog = createCatalog();
+		Book book = createBook(catalog);
 		BookFilter bf = new BookFilter();
 		bf.setCatalog(catalog);
 		Book[] books = new Book[5];
@@ -74,25 +71,17 @@ public class BookServiceTest extends MockBook {
 	public void testFindByTitle() {
 		Book book = createBook();
 		BookFilter bf = new BookFilter();
-		bf.setPublishingOffice(book.getTitle());
+		String title = book.getTitle();
+		bf.setTitle(title);
+		Assert.assertEquals(bookService.find(bf).size(), 1);
+		bf.setTitle("test title");
 		Assert.assertNotEquals(bookService.find(bf).size(), 1);
 
 	}
 
 	@After
 	public void clearDb() {
-		deleteAllBooks();
+		 deleteAllBooks();
 	}
-
-	//// @Test
-	// public void testAddComment(){
-	// Comment comment = new Comment();
-	// comment.setContent("test add comment in book");
-	// comment.setUserProfile(userService.getProfile(111L));
-	// bookService.addComment(book, comment);
-	// System.out.println(comment.getId());
-	//// Comment savedComment = commentService.getComment(comment.getId());
-	//// System.out.println(savedComment.getContent());
-	// }
 
 }

@@ -14,43 +14,40 @@ import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
 
-public class MockBook extends MockCatalog{
-	
-	@Inject
-	protected BookService bookService;
-	
+public class MockBook extends MockCatalog {
+
 	public Book createBook(Catalog catalog) {
 		return createBook(catalog, null);
 	}
-	
+
 	public Book createBook() {
 		return createBook(null, null);
 	}
-	
+
 	public Book createBook(Catalog catalog, List<Author> authors) {
-//		if (catalog==null) catalog = createCatalog("books for test", null);
 		Book book = new Book();
-		book.setIsbn(String.valueOf(System.currentTimeMillis()));
-		book.setCatalog(catalog);
+		book.setIsbn(String.valueOf(Math.random()));
 		book.setPages(234);
 		book.setPublishingOffice("Manning");
 		book.setTitle("Mumu");
 		book.setYear(new Date());
-		if(authors!=null) {
+		if (authors != null) {
 			book.setAuthor(authors);
+		}
+		if(catalog!=null) {
+			book.setCatalog(catalog);
 		}
 		bookService.create(book);
 		return book;
-		
+
 	}
-	
-	public void deleteAllBooks(){
+
+	public void deleteAllBooks() {
 		BookFilter bf = new BookFilter();
-		for (Book book : bookService.find(bf)){
+		for (Book book : bookService.find(bf)) {
 			bookService.delete(book);
 		}
 		deleteTempCatalog();
 	}
-	
-	
+
 }

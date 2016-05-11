@@ -30,6 +30,4 @@ public interface BookService {
 	void delete(Book book);
 	
 	Book getBook(Long id);
-	
-//	List<Comment> getComments(Book book);
 }

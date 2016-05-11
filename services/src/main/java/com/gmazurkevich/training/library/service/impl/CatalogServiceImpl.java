@@ -50,15 +50,15 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 	private boolean catalogNotEmpty(Catalog catalog) {
-		boolean isNotEmpty = true;
-		if (getChilds(catalog).isEmpty()) {
-			isNotEmpty = false;
+		boolean isNotEmpty = false;
+		if (!getChilds(catalog).isEmpty()) {
+			isNotEmpty = true;
 		}
 		if (!isNotEmpty) {
 			BookFilter bookFilter = new BookFilter();
 			bookFilter.setCatalog(catalog);
-			if (bookService.find(bookFilter).isEmpty()) {
-				isNotEmpty = false;
+			if (!bookService.find(bookFilter).isEmpty()) {
+				isNotEmpty = true;
 			}
 		}
 		return isNotEmpty;

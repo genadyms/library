@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
@@ -31,7 +30,7 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		Root<Book> from = cq.from(Book.class);
 		cq.select(from);
 		if (bookFilter.getCatalog() != null) {
-			from.fetch(Book_.catalog, JoinType.LEFT);
+			from.fetch(Book_.catalog);
 			cq.where(cb.equal(from.get(Book_.catalog), bookFilter.getCatalog()));
 		}
 		if (bookFilter.getIsbn() != null) {

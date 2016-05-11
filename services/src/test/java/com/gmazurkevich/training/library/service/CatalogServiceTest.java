@@ -2,8 +2,6 @@ package com.gmazurkevich.training.library.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,15 +13,11 @@ import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
 import com.gmazurkevich.training.library.service.mocks.MockBook;
-import com.gmazurkevich.training.library.service.mocks.MockCatalog;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class CatalogServiceTest extends MockCatalog {
-	
-	@Inject
-	private BookService bookService;
-	
+public class CatalogServiceTest extends MockBook {
+
 	@After
 	public void clearTempCatalog() {
 		deleteTempCatalog();
@@ -74,6 +68,7 @@ public class CatalogServiceTest extends MockCatalog {
 		}
 		childs = catalogService.getChilds(parent);
 		Assert.assertEquals(childs.size(), 0);
+
 		try {
 			catalogService.delete(parent);
 		} catch (DeleteNotEmptyParentException e) {
@@ -82,21 +77,31 @@ public class CatalogServiceTest extends MockCatalog {
 		Assert.assertNull(exception);
 		Assert.assertNull(catalogService.getCatalog(parent.getId()));
 	}
+
 	@Test
-	public void testDeleteWithBook(){
+	public void testDeleteWithBook() {
 		Catalog catalog = createCatalog();
-		MockBook mockBook = new MockBook();
-		mockBook.createBook(catalog);
-//		book.setCatalog(catalog);
-//		bookService.create(book);
-//		try {
-//			catalogService.delete(catalog);
-//		} catch (DeleteNotEmptyParentException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		Book book = createBook(catalog);
+		Assert.assertNotNull(bookService.getBook(book.getId()));
+		DeleteNotEmptyParentException exception = null;
+		try {
+			catalogService.delete(catalog);
+		} catch (DeleteNotEmptyParentException e) {
+			exception = e;
+		}
+		Assert.assertNotNull(exception);
+		Assert.assertNotNull(catalogService.getCatalog(catalog.getId()));
+		bookService.delete(book);
+		try {
+			catalogService.delete(catalog);
+			exception = null;
+		} catch (DeleteNotEmptyParentException e) {
+			exception = e;
+		}
+		Assert.assertNull(exception);
+		Assert.assertNull(catalogService.getCatalog(catalog.getId()));
 	}
-	
+
 	@Test
 	public void testUpdateCatalog() {
 		Catalog newParent = createCatalog();
