@@ -47,10 +47,6 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 			cq.where(cb.equal(from.get(Book_.title), bookFilter.getTitle()));
 		}
 		if (bookFilter.getAuthors() != null/* && !bookFilter.getAuthors().isEmpty()*/) {
-//			from.fetch(Book_.author);
-//			Join<Book, Author> authors = from.join(Book_.author);
-//			cq.where(authors.in(bookFilter.getAuthors()));
-			System.out.println("HERE I AM");
 			final List<Predicate> ands = new ArrayList();
 			Set<Author> authors = bookFilter.getAuthors();
 			for(final Author author : authors) {
@@ -59,7 +55,6 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 			cq.where(cb.and(ands.toArray(new Predicate[ands.size()])));
 		}
 		List<Book> res = em.createQuery(cq).getResultList();
-		System.out.println(res.size());
 		return res;
 	}
 

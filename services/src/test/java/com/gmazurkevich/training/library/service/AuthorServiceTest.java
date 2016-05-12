@@ -94,12 +94,7 @@ public class AuthorServiceTest /*extends MockAuthor*/{
 		}
 		Assert.assertNotNull(exception);
 		Assert.assertNotNull(authorService.getAuthor(author.getId()));
-
-		
+	
 	}
 	
-//	@Before
-//	public void clearDb() {
-//		deleteAllAuthors();
-//	}
 }
