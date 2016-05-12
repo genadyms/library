@@ -1,6 +1,7 @@
 package com.gmazurkevich.training.library.dataaccess.filters;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.metamodel.SingularAttribute;
 
@@ -12,7 +13,7 @@ public class BookFilter {
 	private Catalog catalog;
 	private String publishingOffice;
 	private String title;
-	private List<Author> authors;
+	private Set<Author> authors;
 //	private SingularAttribute sortProperty;
 //	private boolean sortOrder;
 //	private Integer offset;
@@ -53,11 +54,11 @@ public class BookFilter {
 		this.title = title;
 	}
 
-	public List<Author> getAuthors() {
+	public Set<Author> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(List<Author> authors) {
+	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
 

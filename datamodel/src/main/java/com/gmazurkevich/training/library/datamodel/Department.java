@@ -1,11 +1,15 @@
 package com.gmazurkevich.training.library.datamodel;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Department extends AbstractModel {
@@ -15,10 +19,33 @@ public class Department extends AbstractModel {
 	@Column
 	@Enumerated(value = EnumType.ORDINAL)
 	private DepartmentType type;
+	
+	@Column
+	private String phone;
+	
+	@Column
+	private String address;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "department_2_user_profile", joinColumns = { @JoinColumn(name = "department_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "user_profile_id", unique = true) })
+	private List<UserProfile> librarian;
+	
+	public String getPhone() {
+		return phone;
+	}
 
-	@OneToOne
-	@JoinColumn(name = "contact_id")
-	private Contact contact;
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getName() {
 		return name;
@@ -26,14 +53,6 @@ public class Department extends AbstractModel {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Contact getContact() {
-		return contact;
-	}
-
-	public void setContact(Contact contact) {
-		this.contact = contact;
 	}
 
 	public DepartmentType getType() {

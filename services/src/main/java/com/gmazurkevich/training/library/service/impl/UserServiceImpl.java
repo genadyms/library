@@ -6,13 +6,13 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.gmazurkevich.training.library.dataaccess.ContactDao;
 import com.gmazurkevich.training.library.dataaccess.UserCredentialsDao;
 import com.gmazurkevich.training.library.dataaccess.UserProfileDao;
 import com.gmazurkevich.training.library.datamodel.UserCredentials;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
+import com.gmazurkevich.training.library.datamodel.UserState;
 import com.gmazurkevich.training.library.service.UserService;
-
+import com.gmazurkevich.training.library.service.exception.DeleteActiveUserException;
 import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 
 @Service
@@ -23,12 +23,8 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	private UserCredentialsDao userCredentialsDao;
 
-	@Inject
-	private ContactDao contactDao;
-
 	@Override
 	public void register(UserProfile profile, UserCredentials userCredentials) {
-		contactDao.insert(profile.getContact());
 		userCredentialsDao.insert(userCredentials);
 		profile.setUserCredentials(userCredentials);
 		userProfileDao.insert(profile);
@@ -55,10 +51,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(Long id) {
-		Long contactId = getProfile(id).getContact().getId();
+	public void delete(Long id) throws DeleteActiveUserException{
+		UserProfile userProfile = userProfileDao.get(id);
+		if(userProfile.getUserState()!=UserState.NOT_ACTIVE) throw new DeleteActiveUserException();
 		userProfileDao.delete(id);
-		contactDao.delete(contactId);
 		userCredentialsDao.delete(id);
 	}
 	@Override

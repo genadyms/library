@@ -1,12 +1,13 @@
 package com.gmazurkevich.training.library.service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteAuthorWithBooksException;
 
 public interface AuthorService {
 
@@ -16,13 +17,13 @@ public interface AuthorService {
 	void update(Author author);
 
 	@Transactional
-	void delete(Author author) throws DeleteNotEmptyParentException;
+	void delete(Author author) throws DeleteAuthorWithBooksException;
 
 	@Transactional
 	void create(Author author);
-	
+
 	List<Author> getAll();
-	
-	List<Book> getBooks(List<Author> authors);
+
+	Set<Book> getBooks(Set<Author> authors);
 
 }

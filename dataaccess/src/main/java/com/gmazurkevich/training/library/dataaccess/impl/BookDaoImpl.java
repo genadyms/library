@@ -1,12 +1,16 @@
 package com.gmazurkevich.training.library.dataaccess.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 
 import com.gmazurkevich.training.library.dataaccess.BookDao;
@@ -42,12 +46,20 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		if (bookFilter.getTitle() != null) {
 			cq.where(cb.equal(from.get(Book_.title), bookFilter.getTitle()));
 		}
-		if (bookFilter.getAuthors() != null && !bookFilter.getAuthors().isEmpty()) {
-			from.fetch(Book_.author);
-			Join<Book, Author> authors = from.join(Book_.author);
-			cq.where(authors.in(bookFilter.getAuthors()));
+		if (bookFilter.getAuthors() != null/* && !bookFilter.getAuthors().isEmpty()*/) {
+//			from.fetch(Book_.author);
+//			Join<Book, Author> authors = from.join(Book_.author);
+//			cq.where(authors.in(bookFilter.getAuthors()));
+			System.out.println("HERE I AM");
+			final List<Predicate> ands = new ArrayList();
+			Set<Author> authors = bookFilter.getAuthors();
+			for(final Author author : authors) {
+				ands.add(cb.isMember(author, from.get(Book_.authors)));
+			}
+			cq.where(cb.and(ands.toArray(new Predicate[ands.size()])));
 		}
 		List<Book> res = em.createQuery(cq).getResultList();
+		System.out.println(res.size());
 		return res;
 	}
 

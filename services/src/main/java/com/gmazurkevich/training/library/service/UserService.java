@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 import com.gmazurkevich.training.library.datamodel.UserCredentials;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
+import com.gmazurkevich.training.library.service.exception.DeleteActiveUserException;
 
 public interface UserService {
 	
@@ -18,7 +19,7 @@ public interface UserService {
 	void update(UserProfile profile);
 
 	@Transactional
-	void delete(Long id);
+	void delete(Long id) throws DeleteActiveUserException;
 	
 	
 	@Transactional

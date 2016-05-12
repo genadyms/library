@@ -1,6 +1,8 @@
 package com.gmazurkevich.training.library.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -12,7 +14,7 @@ import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.service.AuthorService;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteAuthorWithBooksException;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -34,14 +36,18 @@ public class AuthorServiceImpl implements AuthorService {
 	}
 
 	@Override
-	public void delete(Author author) throws DeleteNotEmptyParentException {
-//		if (authorHasBooks()) throw new ElementHasChildException();
+	public void delete(Author author) throws DeleteAuthorWithBooksException {
+		if (authorHasBooks(author)) throw new DeleteAuthorWithBooksException();
 		authorDao.delete(author.getId());
 	}
 
-	private boolean authorHasBooks() {
-		BookFilter bf = new BookFilter(); 
-		return true;
+	private boolean authorHasBooks(Author author) {
+		BookFilter bookFilter = new BookFilter();
+		Set<Author> authors = new HashSet<Author>();
+		authors.add(author);
+		bookFilter.setAuthors(authors);
+		List<Book> books = bookDao.find(bookFilter);
+		return !books.isEmpty();
 	}
 
 	@Override
@@ -55,10 +61,12 @@ public class AuthorServiceImpl implements AuthorService {
 	}
 
 	@Override
-	public List<Book> getBooks(List<Author> authors) {
+	public Set<Book> getBooks(Set<Author> authors) {
 		BookFilter bf = new BookFilter();
 		bf.setAuthors(authors);
-		return bookDao.find(bf);
+		Set<Book> books = new HashSet();
+		books.addAll(bookDao.find(bf));
+		return books;
 	}
 
 }

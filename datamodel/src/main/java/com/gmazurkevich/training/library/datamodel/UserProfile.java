@@ -38,10 +38,6 @@ public class UserProfile extends AbstractModel {
 	    created = new Date();
 	}
 
-	@OneToOne
-	@JoinColumn(name = "contact_id")
-	private Contact contact;
-
 	@Column
 	@Enumerated(value = EnumType.ORDINAL)
 	private UserState userState;
@@ -49,6 +45,28 @@ public class UserProfile extends AbstractModel {
 	@Column
 	@Enumerated(value = EnumType.ORDINAL)
 	private UserRole role;
+	
+	@Column
+	private String phone;
+
+	@Column
+	private String address;
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -82,13 +100,6 @@ public class UserProfile extends AbstractModel {
 		this.userCredentials = userCredentials;
 	}
 
-	public Contact getContact() {
-		return contact;
-	}
-
-	public void setContact(Contact contact) {
-		this.contact = contact;
-	}
 
 	public UserState getUserState() {
 		return userState;

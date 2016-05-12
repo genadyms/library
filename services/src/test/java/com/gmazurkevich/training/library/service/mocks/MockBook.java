@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -24,7 +25,7 @@ public class MockBook extends MockCatalog {
 		return createBook(null, null);
 	}
 
-	public Book createBook(Catalog catalog, List<Author> authors) {
+	public Book createBook(Catalog catalog, Set<Author> authors) {
 		Book book = new Book();
 		book.setIsbn(String.valueOf(Math.random()));
 		book.setPages(234);
@@ -32,7 +33,7 @@ public class MockBook extends MockCatalog {
 		book.setTitle("Mumu");
 		book.setYear(new Date());
 		if (authors != null) {
-			book.setAuthor(authors);
+			book.setAuthors(authors);
 		}
 		if(catalog!=null) {
 			book.setCatalog(catalog);

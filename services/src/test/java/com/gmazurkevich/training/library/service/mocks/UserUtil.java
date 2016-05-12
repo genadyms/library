@@ -11,12 +11,13 @@ public class UserUtil {
 	
 	public static UserProfile createUser(){
 		UserProfile userProfile = new UserProfile();
-		userProfile.setContact(ContactUtil.createContact());
 		userProfile.setCreated(new Date());
 		userProfile.setRole(UserRole.ADMIN);
 		userProfile.setFirstName("Ivan");
 		userProfile.setLastName("Ivanov");
-		userProfile.setUserState(UserState.ACTIVE);
+		userProfile.setAddress("Grodno, ul.Gorkogo, 89");
+		userProfile.setPhone(String.valueOf(System.currentTimeMillis()));
+		userProfile.setUserState(UserState.NOT_ACTIVE);
 		UserCredentials userCredentials = new UserCredentials();
 		userCredentials.setEmail(System.currentTimeMillis()+"test@gmail.com");
 		userCredentials.setPassword("pass");

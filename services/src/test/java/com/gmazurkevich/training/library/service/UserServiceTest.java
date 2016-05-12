@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.hibernate.sql.Delete;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,13 +15,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 import com.gmazurkevich.training.library.datamodel.UserCredentials;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
+import com.gmazurkevich.training.library.datamodel.UserRole;
 import com.gmazurkevich.training.library.datamodel.UserState;
 import com.gmazurkevich.training.library.service.UserService;
+import com.gmazurkevich.training.library.service.exception.DeleteActiveUserException;
 import com.gmazurkevich.training.library.service.mocks.UserUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
 public class UserServiceTest {
+	
 	@Inject
 	private UserService userService;
 
@@ -40,25 +44,55 @@ public class UserServiceTest {
 		UserProfile userProfile = UserUtil.createUser();
 		UserCredentials userCredentials = userProfile.getUserCredentials();
 		userService.register(userProfile, userCredentials);
+		UserProfile savedUserProfile = userService.getProfile(userProfile.getId());
 		String firstName = "OtherFirstName";
 		String lastName = "OtherLastName";
-		UserProfile savedUserProfile = userService.getProfile(userProfile.getId());
-		UserState state = UserState.BLOCKED;
+		String newPhone = "(095)-1234-54321";
+		String newAddress = "Grodno, ul.NewStreet";
+		UserRole newRole = UserRole.READER;
+		UserState state = UserState.NOT_ACTIVE;
 		savedUserProfile.setFirstName(firstName);
 		savedUserProfile.setLastName(lastName);
 		savedUserProfile.setUserState(state);
+		savedUserProfile.setPhone(newPhone);
+		savedUserProfile.setAddress(newAddress);
+		savedUserProfile.setRole(newRole);
 		userService.update(savedUserProfile);
 		Assert.assertEquals(firstName, savedUserProfile.getFirstName());
 		Assert.assertEquals(lastName, savedUserProfile.getLastName());
 		Assert.assertEquals(state, savedUserProfile.getUserState());
+		Assert.assertEquals(newPhone, savedUserProfile.getPhone());
+		Assert.assertEquals(newRole, savedUserProfile.getRole());
+		Assert.assertEquals(newAddress, savedUserProfile.getAddress());
 	}
 
 	@Test
 	public void testDelete() {
 		UserProfile userProfile = UserUtil.createUser();
+		userProfile.setUserState(UserState.ACTIVE);
 		UserCredentials userCredentials = userProfile.getUserCredentials();
 		userService.register(userProfile, userCredentials);
-		userService.delete(userProfile.getId());
+		DeleteActiveUserException exception = null;
+		try {
+			userService.delete(userProfile.getId());
+		} catch (DeleteActiveUserException e) {
+			exception=e;
+		}
+		Assert.assertNotNull(exception);
+		Assert.assertNotNull(userService.getProfile(userProfile.getId()));
+		Assert.assertNotNull(userService.getCredentials(userCredentials.getId()));
+		
+		userProfile = userService.getProfile(userProfile.getId());
+		userProfile.setUserState(UserState.NOT_ACTIVE);
+		userService.update(userProfile);
+		
+		exception = null;
+		try {
+			userService.delete(userProfile.getId());
+		} catch (DeleteActiveUserException e) {
+			exception=e;
+		}
+		Assert.assertNull(exception);
 		Assert.assertNull(userService.getProfile(userProfile.getId()));
 		Assert.assertNull(userService.getCredentials(userCredentials.getId()));
 	}
@@ -71,24 +105,18 @@ public class UserServiceTest {
 		UserFilter userFilter = new UserFilter();
 		userFilter.setUserName(firstName);
 		Assert.assertEquals(userService.find(userFilter).size(), 1);
-		int limit = 5;
-		int cntUserProfile = limit+5;
-		for(int i=0; i<cntUserProfile; i++){
-			UserProfile userPr = UserUtil.createUser();
-			userService.register(userPr, userPr.getUserCredentials());
-		}
-		Assert.assertEquals(userService.getAll().size(), cntUserProfile+1);
-		userFilter = new UserFilter();
-		userFilter.setLimit(limit);
-		Assert.assertEquals(userService.find(userFilter).size(), limit);
-		
 	}
 	
 	@Before
 	public void clearDb(){
 		List<UserProfile> userProfiles = userService.getAll();
 		for(UserProfile currentUser: userProfiles){
-			userService.delete(currentUser.getId());
+			try {
+				userService.delete(currentUser.getId());
+			} catch (DeleteActiveUserException e) {
+				e.printStackTrace();
+			}
 		}
 	}
+	
 }
