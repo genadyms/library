@@ -14,10 +14,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Book extends AbstractModel {
 	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity=Comment.class)
+	@JoinTable(name = "book_2_comment", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "comment_id", referencedColumnName="id", unique = true) })
+	private List<Comment> comments;
+
+	@Column
+	private String publishingOffice;
 
 	@Column
 	private String isbn;
@@ -34,17 +40,15 @@ public class Book extends AbstractModel {
 	@Column
 	private Date year;
 
-	@JoinTable(name = "book_2_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "author_id") })
-    @ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY)
-//
-//	@JoinTable(name = "book_2_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "author_id") })
-//    @ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "book_2_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "author_id") })
+	@ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY)
 	private Set<Author> authors;
 
 	@Override
 	public String toString() {
 		return "Book [isbn=" + isbn + ", title=" + title + ", pages=" + pages + ", year=" + year + ", bookComment="
-				+ bookComment + ", publishingOffice=" + publishingOffice + "]";
+				+ comments + ", publishingOffice=" + publishingOffice + "]";
 	}
 
 	@Override
@@ -104,13 +108,6 @@ public class Book extends AbstractModel {
 		this.authors = authors;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "book_2_comment", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "comment_id", unique = true) })
-	private List<Comment> bookComment;
-
-	@Column
-	private String publishingOffice;
 
 	public Catalog getCatalog() {
 		return catalog;
@@ -152,13 +149,12 @@ public class Book extends AbstractModel {
 		this.year = year;
 	}
 
-	
 	public List<Comment> getBookComment() {
-		return bookComment;
+		return comments;
 	}
 
 	public void setBookComment(List<Comment> bookComment) {
-		this.bookComment = bookComment;
+		this.comments = bookComment;
 	}
 
 	public String getPublishingOffice() {

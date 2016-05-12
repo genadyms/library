@@ -9,9 +9,10 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Comment extends AbstractModel {
-	
+
 	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
 	private UserProfile userProfile;
+
 	
 	@Column
 	private String content;
@@ -24,6 +25,22 @@ public class Comment extends AbstractModel {
 	
 	@Column
 	private Integer dislikeCount;
+
+	public Integer getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(Integer likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public Integer getDislikeCount() {
+		return dislikeCount;
+	}
+
+	public void setDislikeCount(Integer dislikeCount) {
+		this.dislikeCount = dislikeCount;
+	}
 
 	public Integer getLike() {
 		return likeCount;

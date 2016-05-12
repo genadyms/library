@@ -1,7 +1,10 @@
 package com.gmazurkevich.training.library.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import com.gmazurkevich.training.library.dataaccess.filters.CommentFilter;
 import com.gmazurkevich.training.library.datamodel.Comment;
 
 public interface CommentService {
@@ -14,6 +17,8 @@ public interface CommentService {
 	
 	@Transactional
 	void delete(Long id);
+	
+	List<Comment> find(CommentFilter commentFilter);
 	
 	Comment getComment(Long id);
 

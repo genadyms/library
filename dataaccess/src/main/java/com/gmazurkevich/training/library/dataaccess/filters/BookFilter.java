@@ -3,6 +3,7 @@ package com.gmazurkevich.training.library.dataaccess.filters;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.criteria.Expression;
 import javax.persistence.metamodel.SingularAttribute;
 
 import com.gmazurkevich.training.library.datamodel.Author;
@@ -14,6 +15,8 @@ public class BookFilter {
 	private String publishingOffice;
 	private String title;
 	private Set<Author> authors;
+	private boolean fetchComment;
+	private Long id;
 //	private SingularAttribute sortProperty;
 //	private boolean sortOrder;
 //	private Integer offset;
@@ -22,6 +25,14 @@ public class BookFilter {
 //	private boolean isFetchAuthors;
 
 	
+	public boolean isFetchComment() {
+		return fetchComment;
+	}
+
+	public void setFetchComment(boolean fetchComment) {
+		this.fetchComment = fetchComment;
+	}
+
 	public Catalog getCatalog() {
 		return catalog;
 	}
@@ -61,6 +72,15 @@ public class BookFilter {
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 
 }
