@@ -1,10 +1,8 @@
 package com.gmazurkevich.training.library.datamodel;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,15 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Book extends AbstractModel {
 	
-	@OneToMany(fetch = FetchType.LAZY, targetEntity=Comment.class)
-	@JoinTable(name = "book_2_comment", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "comment_id", referencedColumnName="id", unique = true) })
-	private List<Comment> comments;
+//	@OneToMany(fetch = FetchType.LAZY, targetEntity=Comment.class)
+//	@JoinTable(name = "book_2_comment", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
+//			@JoinColumn(name = "comment_id", referencedColumnName="id", unique = true) })
+//	private List<Comment> comments;
 
 	@Column
 	private String publishingOffice;
@@ -48,7 +45,7 @@ public class Book extends AbstractModel {
 	@Override
 	public String toString() {
 		return "Book [isbn=" + isbn + ", title=" + title + ", pages=" + pages + ", year=" + year + ", bookComment="
-				+ comments + ", publishingOffice=" + publishingOffice + "]";
+				/*+ comments*/ + ", publishingOffice=" + publishingOffice + "]";
 	}
 
 	@Override
@@ -149,13 +146,13 @@ public class Book extends AbstractModel {
 		this.year = year;
 	}
 
-	public List<Comment> getBookComment() {
-		return comments;
-	}
-
-	public void setBookComment(List<Comment> bookComment) {
-		this.comments = bookComment;
-	}
+//	public List<Comment> getBookComment() {
+//		return comments;
+//	}
+//
+//	public void setBookComment(List<Comment> bookComment) {
+//		this.comments = bookComment;
+//	}
 
 	public String getPublishingOffice() {
 		return publishingOffice;

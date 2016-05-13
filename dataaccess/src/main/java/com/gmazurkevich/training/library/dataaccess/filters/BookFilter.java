@@ -16,15 +16,13 @@ public class BookFilter {
 	private String title;
 	private Set<Author> authors;
 	private boolean fetchComment;
-	private Long id;
-//	private SingularAttribute sortProperty;
-//	private boolean sortOrder;
-//	private Integer offset;
-//	private Integer limit;
-//	private boolean isFetchCatalog;
-//	private boolean isFetchAuthors;
+	// private SingularAttribute sortProperty;
+	// private boolean sortOrder;
+	// private Integer offset;
+	// private Integer limit;
+	// private boolean isFetchCatalog;
+	// private boolean isFetchAuthors;
 
-	
 	public boolean isFetchComment() {
 		return fetchComment;
 	}
@@ -72,15 +70,5 @@ public class BookFilter {
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.gmazurkevich.training.library.datamodel.Catalog;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
 
 public interface CatalogService {
 
@@ -14,7 +14,7 @@ public interface CatalogService {
 	void update(Catalog catalog);
 
 	@Transactional
-	void delete(Catalog catalog) throws DeleteNotEmptyParentException;
+	void delete(Catalog catalog) throws DeleteNotEmptyItemException;
 
 	@Transactional
 	void create(Catalog catalog);

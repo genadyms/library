@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
 
 public class MockCatalog {
 
@@ -49,7 +49,7 @@ public class MockCatalog {
 		for (Catalog current : tempCatalogs) {
 			try {
 				catalogService.delete(current);
-			} catch (DeleteNotEmptyParentException e) {
+			} catch (DeleteNotEmptyItemException e) {
 				e.printStackTrace();
 			}
 		}

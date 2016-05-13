@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,21 +41,18 @@ public class CommentServiceTest {
 		userService.register(userProfile, userProfile.getUserCredentials());
 		List<Comment> comments = new ArrayList();
 		int countComments = 10;
+		Book book = BookUtil.createBook(null, null);
+		bookService.save(book);
 		for (int i = 0; i < countComments; i++) {
 			Comment comment = CommentUtil.createComment(userProfile);
+			comment.setBook(book);
 			commentService.create(comment);
 			comments.add(comment);
 
 		}
-		Book book = BookUtil.createBook(null, null);
-		book.setBookComment(comments);
-		bookService.create(book);
 		CommentFilter commentFilter = new CommentFilter();
 		commentFilter.setBook(book);
 		Assert.assertEquals(commentService.find(commentFilter).size(), countComments);
-		// commentService.create(comment);
-		// Comment commentDb = commentService.getComment(comment.getId());
-		// Assert.assertNotNull(commentDb);
 	}
 
 	@Test
@@ -87,5 +85,11 @@ public class CommentServiceTest {
 		Assert.assertEquals(commentDb.getDislike(), dislike);
 		Assert.assertEquals(commentDb.getLike(), like);
 	}
-
+	
+	@After
+	public void clearDB(){
+		CommentFilter commentFilter = new CommentFilter();
+		List<Comment> comments = commentService.find(commentFilter);
+		for(Comment comment:comments) commentService.delete(comment.getId());
+	}
 }

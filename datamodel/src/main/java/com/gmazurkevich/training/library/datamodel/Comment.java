@@ -5,24 +5,29 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Comment extends AbstractModel {
 
 	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
 	private UserProfile userProfile;
-
+	
+	@ManyToOne(fetch = FetchType.LAZY,optional=true)
+	@JoinTable(name="book_2_comment", joinColumns={@JoinColumn(name="comment_id", unique=true)}, inverseJoinColumns= {@JoinColumn(name="book_id")})
+	private Book book;
 	
 	@Column
 	private String content;
-	
-	@Column(insertable=false)
+
+	@Column(insertable = false)
 	private Date created;
-	
+
 	@Column
 	private Integer likeCount;
-	
+
 	@Column
 	private Integer dislikeCount;
 
@@ -44,6 +49,14 @@ public class Comment extends AbstractModel {
 
 	public Integer getLike() {
 		return likeCount;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	public void setLike(Integer like) {

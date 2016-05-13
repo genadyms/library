@@ -24,7 +24,7 @@ public interface BookService {
 	void update(Book book);
 	
 	@Transactional
-	void create(Book book);
+	void save(Book book);
 	
 	@Transactional
 	void delete(Book book);

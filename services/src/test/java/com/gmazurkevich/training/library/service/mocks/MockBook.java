@@ -13,7 +13,7 @@ import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.BookService;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
 
 public class MockBook extends MockCatalog {
 
@@ -38,7 +38,7 @@ public class MockBook extends MockCatalog {
 		if(catalog!=null) {
 			book.setCatalog(catalog);
 		}
-		bookService.create(book);
+		bookService.save(book);
 		return book;
 
 	}

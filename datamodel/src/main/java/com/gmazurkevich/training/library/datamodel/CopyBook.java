@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 public class CopyBook extends AbstractModel {
 	@ManyToOne(targetEntity = Book.class, fetch = FetchType.LAZY)
 	private Book book;
-	
+
 	@ManyToOne(targetEntity = Department.class, fetch = FetchType.LAZY)
 	private Department department;
 
@@ -19,7 +19,6 @@ public class CopyBook extends AbstractModel {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-//
 
 	public Book getBook() {
 		return book;

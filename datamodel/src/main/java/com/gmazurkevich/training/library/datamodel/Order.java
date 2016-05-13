@@ -16,15 +16,11 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Order extends AbstractModel {
-	@MapsId
-	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(nullable = false, updatable = false, name = "id")
-	private UserProfile reader;
+	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
+	private UserProfile readerId;
 
-	@MapsId
-	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(nullable = false, updatable = false, name = "id")
-	private UserProfile librarian;
+	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
+	private UserProfile librarianId;
 
 	@ManyToOne(targetEntity = CopyBook.class, fetch = FetchType.LAZY)
 	private CopyBook copyBook;
@@ -84,20 +80,21 @@ public class Order extends AbstractModel {
 		this.comment = comment;
 	}
 
-	public UserProfile getReader() {
-		return reader;
+	public UserProfile getReaderId() {
+		return readerId;
 	}
 
-	public void setReader(UserProfile reader) {
-		this.reader = reader;
+	public void setReaderId(UserProfile readerId) {
+		this.readerId = readerId;
 	}
 
-	public UserProfile getLibrarian() {
-		return librarian;
+	public UserProfile getLibrarianId() {
+		return librarianId;
 	}
 
-	public void setLibrarian(UserProfile librarian) {
-		this.librarian = librarian;
+	public void setLibrarianId(UserProfile librarianId) {
+		this.librarianId = librarianId;
 	}
 
+	
 }

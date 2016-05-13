@@ -11,7 +11,7 @@ import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.service.AuthorService;
 import com.gmazurkevich.training.library.service.exception.DeleteAuthorWithBooksException;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
 
 public class MockAuthor extends MockBook {
 

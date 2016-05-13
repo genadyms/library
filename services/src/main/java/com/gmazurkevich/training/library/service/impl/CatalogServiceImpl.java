@@ -10,7 +10,7 @@ import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
 
 @Service
 public class CatalogServiceImpl implements CatalogService {
@@ -32,9 +32,9 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 	@Override
-	public void delete(Catalog catalog) throws DeleteNotEmptyParentException {
+	public void delete(Catalog catalog) throws DeleteNotEmptyItemException {
 		if (catalogNotEmpty(catalog)) {
-			throw new DeleteNotEmptyParentException();
+			throw new DeleteNotEmptyItemException();
 		}
 		catalogDao.delete(catalog.getId());
 	}

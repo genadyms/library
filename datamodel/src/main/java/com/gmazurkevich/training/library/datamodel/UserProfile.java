@@ -8,14 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class UserProfile extends AbstractModel {
@@ -24,8 +22,20 @@ public class UserProfile extends AbstractModel {
 	@JoinColumn(nullable = false, updatable = false, name = "id")
 	private UserCredentials userCredentials;
 
+	@ManyToOne(fetch = FetchType.LAZY, optional=true)
+	@JoinTable(name="department_2_user_profile", joinColumns={@JoinColumn(name="user_profile_id", unique=true)}, inverseJoinColumns= {@JoinColumn(name="department_id")})
+	private Department department;
+	
 	@Column
 	private String firstName;
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 
 	@Column
 	private String lastName;

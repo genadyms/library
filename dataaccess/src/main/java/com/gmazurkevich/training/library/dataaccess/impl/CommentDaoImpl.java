@@ -37,8 +37,10 @@ public class CommentDaoImpl extends AbstractDaoImpl<Comment, Long> implements Co
 		Root<Comment> from = cq.from(Comment.class);
 		cq.select(from);
 		if (commentFilter.getBook() != null) {
-			cq.where(cb.equal(from.get(Comment_.id), commentFilter.getBook().getBookComment()));
+			cq.where(cb.equal(from.get(Comment_.book), commentFilter.getBook()));
 		}
+		List<Comment> res = em.createQuery(cq).getResultList();
+		return res;
 //		if (commentFilter.getIsbn() != null) {
 //			cq.where(cb.equal(from.get(Book_.isbn), commentFilter.getIsbn()));
 //		}
@@ -57,8 +59,7 @@ public class CommentDaoImpl extends AbstractDaoImpl<Comment, Long> implements Co
 //			}
 //			cq.where(cb.and(ands.toArray(new Predicate[ands.size()])));
 //		}
-		List<Comment> res = em.createQuery(cq).getResultList();
-		return res;
+		
 //		return null;
 	}
 

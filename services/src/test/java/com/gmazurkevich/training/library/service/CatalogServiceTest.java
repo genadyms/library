@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Catalog;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyParentException;
+import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
 import com.gmazurkevich.training.library.service.mocks.MockBook;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -48,10 +48,10 @@ public class CatalogServiceTest extends MockBook {
 		}
 		List<Catalog> childs = catalogService.getChilds(parent);
 		Assert.assertEquals(childs.size(), countChilds);
-		DeleteNotEmptyParentException exception = null;
+		DeleteNotEmptyItemException exception = null;
 		try {
 			catalogService.delete(parent);
-		} catch (DeleteNotEmptyParentException e) {
+		} catch (DeleteNotEmptyItemException e) {
 			exception = e;
 		}
 		Assert.assertNotNull(exception);
@@ -60,7 +60,7 @@ public class CatalogServiceTest extends MockBook {
 		for (Catalog child : childs) {
 			try {
 				catalogService.delete(child);
-			} catch (DeleteNotEmptyParentException e) {
+			} catch (DeleteNotEmptyItemException e) {
 				exception = e;
 			}
 			Assert.assertNull(exception);
@@ -71,7 +71,7 @@ public class CatalogServiceTest extends MockBook {
 
 		try {
 			catalogService.delete(parent);
-		} catch (DeleteNotEmptyParentException e) {
+		} catch (DeleteNotEmptyItemException e) {
 			exception = e;
 		}
 		Assert.assertNull(exception);
@@ -83,10 +83,10 @@ public class CatalogServiceTest extends MockBook {
 		Catalog catalog = createCatalog();
 		Book book = createBook(catalog);
 		Assert.assertNotNull(bookService.getBook(book.getId()));
-		DeleteNotEmptyParentException exception = null;
+		DeleteNotEmptyItemException exception = null;
 		try {
 			catalogService.delete(catalog);
-		} catch (DeleteNotEmptyParentException e) {
+		} catch (DeleteNotEmptyItemException e) {
 			exception = e;
 		}
 		Assert.assertNotNull(exception);
@@ -95,7 +95,7 @@ public class CatalogServiceTest extends MockBook {
 		try {
 			catalogService.delete(catalog);
 			exception = null;
-		} catch (DeleteNotEmptyParentException e) {
+		} catch (DeleteNotEmptyItemException e) {
 			exception = e;
 		}
 		Assert.assertNull(exception);

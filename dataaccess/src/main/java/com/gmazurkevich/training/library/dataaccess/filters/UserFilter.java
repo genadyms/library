@@ -2,6 +2,8 @@ package com.gmazurkevich.training.library.dataaccess.filters;
 
 import javax.persistence.metamodel.SingularAttribute;
 
+import com.gmazurkevich.training.library.datamodel.Department;
+
 public class UserFilter {
 
     private String userName;
@@ -9,8 +11,17 @@ public class UserFilter {
     private boolean sortOrder;
     private Integer offset;
     private Integer limit;
+    private Department department;
 
-    private boolean isFetchCredentials;
+    public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	private boolean isFetchCredentials;
 
     public String getUserName() {
         return userName;

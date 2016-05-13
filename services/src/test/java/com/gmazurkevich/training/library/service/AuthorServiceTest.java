@@ -82,7 +82,7 @@ public class AuthorServiceTest /*extends MockAuthor*/{
 		int countBooks = 5;
 		for (int i=0; i<countBooks; i++){
 			Book book = BookUtil.createBook(null, authors);
-			bookService.create(book);
+			bookService.save(book);
 		}
 		Set<Book> savedBooks = authorService.getBooks(authors);
 		Assert.assertEquals(savedBooks.size(), countBooks);

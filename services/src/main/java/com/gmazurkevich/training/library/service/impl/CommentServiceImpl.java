@@ -46,14 +46,6 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> find(CommentFilter commentFilter) {
-		if(commentFilter.getBook()!=null){
-			BookFilter bookFilter = new BookFilter();
-			bookFilter.setFetchComment(true);
-			bookFilter.setId(commentFilter.getBook().getId());
-			List<Book> books = bookService.find(bookFilter);
-			System.out.println("__________"+books.size());
-			return books.get(0).getBookComment();
-		}
 		return commentDao.find(commentFilter);
 	}
 

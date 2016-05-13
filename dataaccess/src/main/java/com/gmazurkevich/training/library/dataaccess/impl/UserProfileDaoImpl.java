@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.gmazurkevich.training.library.dataaccess.UserProfileDao;
 import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 import com.gmazurkevich.training.library.dataaccess.impl.AbstractDaoImpl;
+import com.gmazurkevich.training.library.datamodel.Comment_;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
 
 import com.gmazurkevich.training.library.datamodel.UserProfile_;
@@ -44,6 +45,10 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile, Long> imple
 			Predicate fNameEqualCondition = cb.equal(from.get(UserProfile_.firstName), filter.getUserName());
 			Predicate lNameEqualCondition = cb.equal(from.get(UserProfile_.lastName), filter.getUserName());
 			cq.where(cb.or(fNameEqualCondition, lNameEqualCondition));
+		}
+		//select on department field
+		if(filter.getDepartment()!= null){
+			cq.where(cb.equal(from.get(UserProfile_.department), filter.getDepartment()));
 		}
 		// set fetching
 		if (filter.isFetchCredentials()) {

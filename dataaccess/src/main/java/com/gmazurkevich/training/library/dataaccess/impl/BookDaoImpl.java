@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -18,7 +17,6 @@ import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Book_;
-import com.gmazurkevich.training.library.datamodel.Comment;
 
 @Repository
 public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao {
@@ -54,10 +52,6 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 				ands.add(cb.isMember(author, from.get(Book_.authors)));
 			}
 			cq.where(cb.and(ands.toArray(new Predicate[ands.size()])));
-		}
-		if (bookFilter.isFetchComment()){
-			from.fetch(Book_.comments);
-			cq.where(cb.equal(from.get(Book_.id), bookFilter.getId()));
 		}
 		List<Book> res = em.createQuery(cq).getResultList();
 		return res;
