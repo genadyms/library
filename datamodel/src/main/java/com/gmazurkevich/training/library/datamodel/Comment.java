@@ -18,6 +18,18 @@ public class Comment extends AbstractModel {
 	@ManyToOne(fetch = FetchType.LAZY,optional=true)
 	@JoinTable(name="book_2_comment", joinColumns={@JoinColumn(name="comment_id", unique=true)}, inverseJoinColumns= {@JoinColumn(name="book_id")})
 	private Book book;
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY,optional=true)
+	@JoinTable(name="order_2_comment", joinColumns={@JoinColumn(name="comment_id", unique=true)}, inverseJoinColumns= {@JoinColumn(name="order_id")})
+	private Order order;
 	
 	@Column
 	private String content;

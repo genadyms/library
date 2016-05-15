@@ -19,12 +19,8 @@ public class CommentServiceImpl implements CommentService {
 	@Inject
 	private CommentDao commentDao;
 
-	@Inject
-	private BookService bookService;
-
-	
 	@Override
-	public void create(Comment comment) {
+	public void save(Comment comment) {
 		commentDao.insert(comment);
 	}
 

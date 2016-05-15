@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void delete(Long id) throws DeleteActiveOrderException {
 		Order order = get(id);
-		if (order.getLibrarianId() != null || order.getHandled() != null)
+		if (order.getLibrarian() != null || order.getHandled() != null)
 			throw new DeleteActiveOrderException();
 		orderDao.delete(id);
 	}

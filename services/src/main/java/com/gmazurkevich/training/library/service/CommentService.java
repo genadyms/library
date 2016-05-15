@@ -10,7 +10,7 @@ import com.gmazurkevich.training.library.datamodel.Comment;
 public interface CommentService {
 	
 	@Transactional
-	void create(Comment comment);
+	void save(Comment comment);
 	
 	@Transactional
 	void update(Comment comment);
