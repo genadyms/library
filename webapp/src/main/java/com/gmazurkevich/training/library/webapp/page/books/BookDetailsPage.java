@@ -1,17 +1,17 @@
-package com.gmazurkevich.training.library.webapp.page.product;
+package com.gmazurkevich.training.library.webapp.page.books;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 
-public class ProductDetailsPage extends AbstractPage {
+public class BookDetailsPage extends AbstractPage {
 
-    public ProductDetailsPage(PageParameters parameters) {
+    public BookDetailsPage(PageParameters parameters) {
         super(parameters);
     }
 
-    public ProductDetailsPage(Book book) {
+    public BookDetailsPage(Book book) {
         super();
 
     }

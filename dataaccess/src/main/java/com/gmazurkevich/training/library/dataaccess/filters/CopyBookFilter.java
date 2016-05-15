@@ -1,27 +1,41 @@
 package com.gmazurkevich.training.library.dataaccess.filters;
 
-import javax.persistence.metamodel.SingularAttribute;
-
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Department;
 
 public class CopyBookFilter {
+
 	private Book book;
+
+	private boolean findFreeCopyBook;
+
 	public Book getBook() {
 		return book;
 	}
+
 	public void setBook(Book book) {
 		this.book = book;
 	}
+
 	public Department getDepartment() {
 		return department;
 	}
+
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+
+	public boolean isFindFreeCopyBook() {
+		return findFreeCopyBook;
+	}
+
+	public void setFindFreeCopyBook(boolean findFreeCopyBook) {
+		this.findFreeCopyBook = findFreeCopyBook;
+	}
+
 	private Department department;
-//	private SingularAttribute sortProperty;
-//	private boolean sortOrder;
-//	private Integer offset;
-//	private Integer limit;
+	// private SingularAttribute sortProperty;
+	// private boolean sortOrder;
+	// private Integer offset;
+	// private Integer limit;
 }

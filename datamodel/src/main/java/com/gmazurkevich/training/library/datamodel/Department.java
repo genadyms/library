@@ -1,25 +1,34 @@
 package com.gmazurkevich.training.library.datamodel;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Department extends AbstractModel {
 	@Column
 	private String name;
 
+	@OneToMany(mappedBy = "department")
+	private List<CopyBook> copyBooks;
+
+	@OneToMany(mappedBy = "department")
+	private List<UserProfile> librarians;
+
 	@Column
 	@Enumerated(value = EnumType.ORDINAL)
 	private DepartmentType type;
-	
+
 	@Column
 	private String phone;
-	
+
 	@Column
 	private String address;
-	
+
 	@Override
 	public String toString() {
 		return "Department [name=" + name + ", type=" + type + ", phone=" + phone + ", address=" + address + "]";
@@ -65,8 +74,6 @@ public class Department extends AbstractModel {
 		return true;
 	}
 
-	
-	
 	public String getPhone() {
 		return phone;
 	}
@@ -97,6 +104,22 @@ public class Department extends AbstractModel {
 
 	public void setType(DepartmentType type) {
 		this.type = type;
+	}
+
+	public List<CopyBook> getCopyBooks() {
+		return copyBooks;
+	}
+
+	public void setCopyBooks(List<CopyBook> copyBooks) {
+		this.copyBooks = copyBooks;
+	}
+
+	public List<UserProfile> getLibrarians() {
+		return librarians;
+	}
+
+	public void setLibrarians(List<UserProfile> librarians) {
+		this.librarians = librarians;
 	}
 
 }

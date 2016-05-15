@@ -3,8 +3,8 @@ package com.gmazurkevich.training.library.webapp.component.menu;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
+import com.gmazurkevich.training.library.webapp.page.books.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
-import com.gmazurkevich.training.library.webapp.page.product.ProductsPage;
 
 public class MenuPanel extends Panel {
 
@@ -24,12 +24,43 @@ public class MenuPanel extends Panel {
             }
         });
 
-        add(new Link("link-products") {
+        add(new Link("link-books") {
             @Override
             public void onClick() {
-                setResponsePage(new ProductsPage());
+                setResponsePage(new BooksPage());
             }
         });
+        
 
+        add(new Link("link-find") {
+            @Override
+            public void onClick() {
+                setResponsePage(new BooksPage());
+            }
+        });
+        
+
+        add(new Link("link-catalogs") {
+            @Override
+            public void onClick() {
+                setResponsePage(new BooksPage());
+            }
+        });
+        
+
+        add(new Link("link-departments") {
+            @Override
+            public void onClick() {
+                setResponsePage(new BooksPage());
+            }
+        });
+        
+
+        add(new Link("link-comments") {
+            @Override
+            public void onClick() {
+                setResponsePage(new BooksPage());
+            }
+        });
     }
 }

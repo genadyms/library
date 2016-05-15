@@ -13,8 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="\"order\"")
+@Table(name = "\"order\"")
 public class Order extends AbstractModel {
+
 	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
 	private UserProfile reader;
 
@@ -24,7 +25,12 @@ public class Order extends AbstractModel {
 	@ManyToOne(targetEntity = CopyBook.class, fetch = FetchType.LAZY)
 	private CopyBook copyBook;
 
-	@Column(insertable=false, updatable=false)
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = Comment.class)
+	@JoinTable(name = "order_2_comment", joinColumns = { @JoinColumn(name = "order_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "comment_id", referencedColumnName = "id", unique = true) })
+	private List<Comment> comments;
+
+	@Column(insertable = false, updatable = false)
 	private Date created;
 
 	@Column
@@ -33,11 +39,6 @@ public class Order extends AbstractModel {
 	@Column
 	private Date closed;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "order_2_comment", joinColumns = {
-			@JoinColumn(name = "order_id", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "comment_id", referencedColumnName = "id", unique = true) })
-	private List<Comment> comment;
 
 	public CopyBook getCopyBook() {
 		return copyBook;
@@ -48,7 +49,7 @@ public class Order extends AbstractModel {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((closed == null) ? 0 : closed.hashCode());
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((copyBook == null) ? 0 : copyBook.hashCode());
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
 		result = prime * result + ((handled == null) ? 0 : handled.hashCode());
@@ -71,10 +72,10 @@ public class Order extends AbstractModel {
 				return false;
 		} else if (!closed.equals(other.closed))
 			return false;
-		if (comment == null) {
-			if (other.comment != null)
+		if (comments == null) {
+			if (other.comments != null)
 				return false;
-		} else if (!comment.equals(other.comment))
+		} else if (!comments.equals(other.comments))
 			return false;
 		if (copyBook == null) {
 			if (other.copyBook != null)
@@ -130,14 +131,6 @@ public class Order extends AbstractModel {
 
 	public void setClosed(Date closed) {
 		this.closed = closed;
-	}
-
-	public List<Comment> getComment() {
-		return comment;
-	}
-
-	public void setComment(List<Comment> comment) {
-		this.comment = comment;
 	}
 
 	public UserProfile getReader() {

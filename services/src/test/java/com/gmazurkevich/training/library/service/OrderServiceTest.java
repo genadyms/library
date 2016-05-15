@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Department;
@@ -141,5 +142,38 @@ public class OrderServiceTest {
 		Assert.assertNotNull(exception);
 		Assert.assertNotNull(orderService.get(savedOrder.getId()));
 
+	}
+
+	@Test
+	public void testTempFindCopyBook() {
+		UserProfile reader = UserUtil.createUser();
+		reader.setRole(UserRole.READER);
+		userService.register(reader, reader.getUserCredentials());
+		UserProfile librarian = UserUtil.createUser();
+		librarian.setRole(UserRole.LIBRARIAN);
+		userService.register(librarian, librarian.getUserCredentials());
+		Book book = BookUtil.createBook(null, null);
+		bookService.save(book);
+		Department department = DepartmentUtil.createDepartment();
+		departmentService.save(department);
+
+		int countCopyBook = 10;
+		for (int i = 0; i < countCopyBook; i++) {
+			CopyBook copyBook = new CopyBook();
+			copyBook.setBook(book);
+			copyBook.setDepartment(department);
+			copyBookService.save(copyBook);
+			Order order = new Order();
+			order.setCopyBook(copyBook);
+			order.setReader(reader);
+			order.setLibrarian(librarian);
+			if (i<9)
+				order.setClosed(new Date());
+			orderService.save(order);
+		}
+		CopyBookFilter filter = new CopyBookFilter();
+		filter.setFindFreeCopyBook(true);
+		filter.setBook(book);
+		Assert.assertEquals(copyBookService.find(filter).size(), 9);//countCopyBook);
 	}
 }

@@ -5,7 +5,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.gmazurkevich.training.library.webapp.component.menu.MenuPanel;
 import com.gmazurkevich.training.library.webapp.component.menu.MenuPanelLoggedUser;
-import com.gmazurkevich.training.library.webapp.page.product.ProductsPage;
+import com.gmazurkevich.training.library.webapp.page.books.BooksPage;
 
 public abstract class AbstractPage extends WebPage {
 
@@ -21,7 +21,7 @@ public abstract class AbstractPage extends WebPage {
     protected void onInitialize() {
         super.onInitialize();
 
-        if (getPage().getClass().equals(ProductsPage.class)) {
+        if (getPage().getClass().equals(BooksPage.class)) {
             add(new MenuPanelLoggedUser("menu-panel"));
         } else {
             add(new MenuPanel("menu-panel"));

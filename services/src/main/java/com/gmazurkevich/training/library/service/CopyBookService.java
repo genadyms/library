@@ -1,8 +1,6 @@
 package com.gmazurkevich.training.library.service;
 
 import java.util.List;
-import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
