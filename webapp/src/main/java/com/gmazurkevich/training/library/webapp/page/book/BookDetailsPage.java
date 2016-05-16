@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.webapp.page.books;
+package com.gmazurkevich.training.library.webapp.page.book;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 

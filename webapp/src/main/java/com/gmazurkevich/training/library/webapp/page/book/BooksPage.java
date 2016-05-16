@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.webapp.page.books;
+package com.gmazurkevich.training.library.webapp.page.book;
 
 import javax.inject.Inject;
 
@@ -13,7 +13,7 @@ public class BooksPage extends AbstractPage {
     public BooksPage() {
         super();
 
-        System.out.print(bookService);
+        System.out.print("bookservice = "+bookService);
     }
 
 }

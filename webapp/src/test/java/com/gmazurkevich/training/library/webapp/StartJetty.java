@@ -1,4 +1,4 @@
-package com.epam.training.webapp;
+package com.gmazurkevich.training.library.webapp;
 
 import java.lang.management.ManagementFactory;
 
