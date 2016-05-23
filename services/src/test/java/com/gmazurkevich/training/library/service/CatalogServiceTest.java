@@ -46,7 +46,7 @@ public class CatalogServiceTest extends MockBook {
 		for (int i = 0; i < countChilds; i++) {
 			createCatalog(parent);
 		}
-		List<Catalog> childs = catalogService.getChilds(parent);
+		List<Catalog> childs = catalogService.getCatalogs(parent);
 		Assert.assertEquals(childs.size(), countChilds);
 		DeleteNotEmptyItemException exception = null;
 		try {
@@ -66,7 +66,7 @@ public class CatalogServiceTest extends MockBook {
 			Assert.assertNull(exception);
 			Assert.assertNull(catalogService.getCatalog(child.getId()));
 		}
-		childs = catalogService.getChilds(parent);
+		childs = catalogService.getCatalogs(parent);
 		Assert.assertEquals(childs.size(), 0);
 
 		try {
@@ -112,7 +112,7 @@ public class CatalogServiceTest extends MockBook {
 		catalog.setTitle(newTitle);
 		catalogService.update(catalog);
 		Catalog savedCatalog = catalogService.getCatalog(catalog.getId());
-		Assert.assertEquals(catalogService.getChilds(newParent).get(0).getTitle(), savedCatalog.getTitle());
+		Assert.assertEquals(catalogService.getCatalogs(newParent).get(0).getTitle(), savedCatalog.getTitle());
 		Assert.assertEquals(savedCatalog.getTitle(), newTitle);
 	}
 
@@ -120,7 +120,7 @@ public class CatalogServiceTest extends MockBook {
 	public void testGetRootCatalogs() {
 		int countRootCatalogs = 5;
 		createCatalogs(null, countRootCatalogs);
-		List<Catalog> roots = catalogService.getChilds(null);
+		List<Catalog> roots = catalogService.getCatalogs(null);
 		Assert.assertEquals(roots.size(), countRootCatalogs);
 	}
 
@@ -129,7 +129,7 @@ public class CatalogServiceTest extends MockBook {
 		int countTempCatalogs = 5;
 		Catalog parent = createCatalog();
 		createCatalogs(parent, countTempCatalogs);
-		List<Catalog> savedCatalogs = catalogService.getChilds(parent);
+		List<Catalog> savedCatalogs = catalogService.getCatalogs(parent);
 		Assert.assertEquals(savedCatalogs.size(), countTempCatalogs);
 	}
 

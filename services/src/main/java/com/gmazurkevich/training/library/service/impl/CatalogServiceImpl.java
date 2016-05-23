@@ -45,13 +45,13 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 	@Override
-	public List<Catalog> getChilds(Catalog parent) {
+	public List<Catalog> getCatalogs(Catalog parent) {
 		return catalogDao.getChilds(parent);
 	}
 
 	private boolean catalogNotEmpty(Catalog catalog) {
 		boolean isNotEmpty = false;
-		if (!getChilds(catalog).isEmpty()) {
+		if (!getCatalogs(catalog).isEmpty()) {
 			isNotEmpty = true;
 		}
 		if (!isNotEmpty) {

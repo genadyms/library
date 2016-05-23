@@ -40,7 +40,7 @@ public class Author extends AbstractModel {
 
 	@Override
 	public String toString() {
-		return "Author [firstName=" + firstName + ", secondName=" + secondName + "]";
+		return "Author [firstName=" + firstName + ", secondName=" + secondName + ", getId()=" + getId() + "]";
 	}
 
 	@Override
