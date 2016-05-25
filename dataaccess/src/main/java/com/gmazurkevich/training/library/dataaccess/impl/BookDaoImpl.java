@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -24,7 +25,18 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 	protected BookDaoImpl() {
 		super(Book.class);
 	}
-	
+
+	@Override
+	public Long count(BookFilter filter) {
+		EntityManager em = getEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+		Root<Book> from = cq.from(Book.class);
+		cq.select(cb.count(from));
+		TypedQuery<Long> q = em.createQuery(cq);
+		return q.getSingleResult();
+	}
+
 	@Override
 	public List<Book> find(BookFilter bookFilter) {
 		EntityManager em = getEntityManager();
@@ -45,10 +57,11 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		if (bookFilter.getTitle() != null) {
 			cq.where(cb.equal(from.get(Book_.title), bookFilter.getTitle()));
 		}
-		if (bookFilter.getAuthors() != null/* && !bookFilter.getAuthors().isEmpty()*/) {
+		if (bookFilter
+				.getAuthors() != null/* && !bookFilter.getAuthors().isEmpty() */) {
 			final List<Predicate> ands = new ArrayList();
 			Set<Author> authors = bookFilter.getAuthors();
-			for(final Author author : authors) {
+			for (final Author author : authors) {
 				ands.add(cb.isMember(author, from.get(Book_.authors)));
 			}
 			cq.where(cb.and(ands.toArray(new Predicate[ands.size()])));

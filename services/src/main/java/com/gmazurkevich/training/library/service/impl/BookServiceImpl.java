@@ -14,10 +14,16 @@ import com.gmazurkevich.training.library.datamodel.Comment;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CommentService;
 
+
 @Service
 public class BookServiceImpl implements BookService {
 	@Inject
 	private BookDao bookDao;
+
+	@Override
+	public Long count(BookFilter filter) {
+		return bookDao.count(filter);
+	}
 
 	@Override
 	public void update(Book book) {
@@ -44,5 +50,4 @@ public class BookServiceImpl implements BookService {
 		return bookDao.find(bookFilter);
 	}
 
-	
 }

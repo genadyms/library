@@ -2,6 +2,7 @@ package com.gmazurkevich.training.library.webapp.page.book.panel;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
@@ -86,16 +87,21 @@ public class BooksListPanel extends Panel {
 
 		BooksDataProvider() {
 			bookFilter = new BookFilter();
+
+			System.out.println(bookService.find(bookFilter).size());
 		}
 
 		@Override
 		public Iterator<? extends Book> iterator(long first, long count) {
-			return bookService.find(bookFilter).iterator();
+			List<Book> books = bookService.find(bookFilter);
+			System.out.println("______________");
+			System.out.println(bookService.getBook(414L).getTitle());
+			return books.iterator();
 		}
 
 		@Override
 		public long size() {
-			return 0;
+			return bookService.count(bookFilter);
 		}
 
 		@Override

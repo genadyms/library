@@ -21,4 +21,7 @@ public interface BookService {
 	void delete(Book book);
 
 	Book getBook(Long id);
+
+	Long count(BookFilter filter);
+
 }

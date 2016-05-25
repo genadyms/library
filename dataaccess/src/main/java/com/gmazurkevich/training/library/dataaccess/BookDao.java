@@ -9,4 +9,5 @@ public interface BookDao extends AbstractDao<Book, Long> {
 
 	List<Book> find(BookFilter bookFilter);
 
+	Long count(BookFilter filter);
 }
