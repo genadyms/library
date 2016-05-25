@@ -10,58 +10,35 @@ import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 
 public class MenuPanel extends Panel {
 
-    public MenuPanel(String id) {
-        super(id);
-    }
+	public MenuPanel(String id) {
+		super(id);
+	}
 
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 
-        add(new Link("link-home") {
-            @Override
-            public void onClick() {
-                setResponsePage(new HomePage());
-            }
-        });
+		add(new Link("link-home") {
+			@Override
+			public void onClick() {
+				setResponsePage(new HomePage());
+			}
+		});
 
-        add(new Link("link-books") {
-            @Override
-            public void onClick() {
-                setResponsePage(new BooksPage());
-            }
-        });
-        
+		add(new Link("link-books") {
+			@Override
+			public void onClick() {
+				setResponsePage(new BooksPage());
+			}
+		});
+	
+		
+		add(new Link("link-departments") {
+			@Override
+			public void onClick() {
+				setResponsePage(new BooksPage());
+			}
+		});
 
-        add(new Link("link-find") {
-            @Override
-            public void onClick() {
-                setResponsePage(new BooksPage());
-            }
-        });
-        
-
-        add(new Link("link-catalogs") {
-            @Override
-            public void onClick() {
-                setResponsePage(new CatalogsPage());
-            }
-        });
-        
-
-        add(new Link("link-departments") {
-            @Override
-            public void onClick() {
-                setResponsePage(new BooksPage());
-            }
-        });
-        
-
-        add(new Link("link-comments") {
-            @Override
-            public void onClick() {
-                setResponsePage(new CommentsPage());
-            }
-        });
-    }
+	}
 }

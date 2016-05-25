@@ -1,5 +1,6 @@
 package com.gmazurkevich.training.library.dataaccess.filters;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 
-public class BookFilter {
+public class BookFilter implements Serializable{
 	private String isbn;
 	private Catalog catalog;
 	private String publishingOffice;

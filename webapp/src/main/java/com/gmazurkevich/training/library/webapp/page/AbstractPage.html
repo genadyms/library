@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
-	<head>
-		<meta charset="utf-8" />
-		<title>MGM Library</title>
-		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
-		<link rel="stylesheet" href="custom.css" type="text/css" media="screen" title="Stylesheet" />
-	</head>
-	<body>
-		<div id="hd">
-			<div id="logo">
-				<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
-				<h1>MGM Library</h1>
-			</div>
+<head>
+<meta charset="utf-8" />
+<title>MGM Library</title>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+<link rel="stylesheet" href="reset.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<h1>Library</h1>
+			<h2>The personal project</h2>
 		</div>
-		<div id="bd">
-			<wicket:container wicket:id="menu-panel"></wicket:container>
-			<wicket:child/>
+		<!--end header-->
+		<div id="nav">
+			<ul>
+				<wicket:container wicket:id="menu-panel"></wicket:container>
+			</ul>
 		</div>
-		<div id="ft">
+		<!--end nav-->
+		<div id="featured-img">
+			<img src="images/featured-img.png" alt="" width="550" height="304" />
 		</div>
-	</body>
+		<!--end featured-img-->
+		<wicket:child>
+
+		</wicket:child>
+		<div id="footer">
+			<p>
+				Copyright &copy; <a href="#">Test Library</a> - All Rights Reserved
+			</p>
+		</div>
+		<!--end footer-->
+	</div>
+</body>
 </html>
