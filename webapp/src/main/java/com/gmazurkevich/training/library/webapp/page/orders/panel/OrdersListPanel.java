@@ -25,8 +25,8 @@ import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.datamodel.Order_;
 import com.gmazurkevich.training.library.service.OrderService;
 import com.gmazurkevich.training.library.service.impl.DeleteActiveOrderException;
-import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderEditPage;
+import com.gmazurkevich.training.library.webapp.page.orders.OrdersPage;
 
 public class OrdersListPanel extends Panel {
 
@@ -63,7 +63,7 @@ public class OrdersListPanel extends Panel {
 							System.out.println("caughth persistance exception");
 						}
 
-						setResponsePage(new BooksPage());
+						setResponsePage(new OrdersPage());
 					}
 				});
 
@@ -72,6 +72,7 @@ public class OrdersListPanel extends Panel {
 		add(dataView);
 		add(new PagingNavigator("paging", dataView));
 
+		add(new OrderByBorder("sort-id", Order_.id, ordersDataProvider));
 		add(new OrderByBorder("sort-created", Order_.created, ordersDataProvider));
 		add(new OrderByBorder("sort-handled", Order_.handled, ordersDataProvider));
 		add(new OrderByBorder("sort-closed", Order_.closed, ordersDataProvider));

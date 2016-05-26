@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> find(OrderFilter filter) {
-		return null;
+		return orderDao.find(filter);
 	}
 
 	@Override

@@ -1,3 +1,6 @@
+http://examples7x.wicket.apache.org/index.html
+http://www.7thweb.net/wicket-jquery-ui/kendo/menu/KendoMenuPage?15
+
 reader
 1. role = reader
 2. state = active, blocked
