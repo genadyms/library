@@ -9,11 +9,7 @@ import org.springframework.stereotype.Service;
 import com.gmazurkevich.training.library.dataaccess.BookDao;
 import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Book;
-import com.gmazurkevich.training.library.datamodel.Catalog;
-import com.gmazurkevich.training.library.datamodel.Comment;
 import com.gmazurkevich.training.library.service.BookService;
-import com.gmazurkevich.training.library.service.CommentService;
-
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -48,6 +44,15 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<Book> find(BookFilter bookFilter) {
 		return bookDao.find(bookFilter);
+	}
+
+	@Override
+	public void saveOrUpdate(Book book) {
+		if (book.getId() == null) {
+			bookDao.insert(book);
+		} else {
+			bookDao.update(book);
+		}
 	}
 
 }

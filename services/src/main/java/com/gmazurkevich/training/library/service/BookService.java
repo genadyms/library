@@ -24,4 +24,7 @@ public interface BookService {
 
 	Long count(BookFilter filter);
 
+	@Transactional
+	void saveOrUpdate(Book book);
+
 }

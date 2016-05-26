@@ -4,20 +4,21 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 import com.gmazurkevich.training.library.dataaccess.AbstractDao;
+import com.gmazurkevich.training.library.dataaccess.filters.AbstractFilter;
+import com.gmazurkevich.training.library.datamodel.AbstractModel;
+
+
 
 public class AbstractDaoImpl<T, ID> implements AbstractDao<T, ID> {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    protected EntityManager getEntityManager() {
-		return entityManager;
-	}
-
-	private final Class<T> entityClass;
+    private final Class<T> entityClass;
 
     protected AbstractDaoImpl(final Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -56,5 +57,16 @@ public class AbstractDaoImpl<T, ID> implements AbstractDao<T, ID> {
 
     public Class<T> getEntityClass() {
         return entityClass;
+    }
+
+    protected EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    protected void setPaging(AbstractFilter filter, TypedQuery<? extends AbstractModel> q) {
+        if (filter.getOffset() != null && filter.getLimit() != null) {
+            q.setFirstResult(filter.getOffset());
+            q.setMaxResults(filter.getLimit());
+        }
     }
 }

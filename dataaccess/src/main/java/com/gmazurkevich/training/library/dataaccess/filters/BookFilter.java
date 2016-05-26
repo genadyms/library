@@ -1,28 +1,17 @@
 package com.gmazurkevich.training.library.dataaccess.filters;
 
-import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
-
-import javax.persistence.criteria.Expression;
-import javax.persistence.metamodel.SingularAttribute;
 
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 
-public class BookFilter implements Serializable{
+public class BookFilter extends AbstractFilter{
 	private String isbn;
 	private Catalog catalog;
 	private String publishingOffice;
 	private String title;
 	private Set<Author> authors;
 	private boolean fetchComment;
-	// private SingularAttribute sortProperty;
-	// private boolean sortOrder;
-	// private Integer offset;
-	// private Integer limit;
-	// private boolean isFetchCatalog;
-	// private boolean isFetchAuthors;
 
 	public boolean isFetchComment() {
 		return fetchComment;
