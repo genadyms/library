@@ -44,4 +44,18 @@ public class OrderServiceImpl implements OrderService {
 		return null;
 	}
 
+	@Override
+	public void saveOrUpdate(Order order) {
+		if (order.getId() == null) {
+			orderDao.insert(order);
+		} else {
+			orderDao.update(order);
+		}
+	}
+
+	@Override
+	public long count(OrderFilter filter) {
+		return orderDao.count(filter);
+	}
+
 }

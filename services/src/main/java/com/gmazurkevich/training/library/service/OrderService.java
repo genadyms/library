@@ -21,4 +21,8 @@ public interface OrderService {
 	void save(Order order);
 
 	List<Order> find(OrderFilter filter);
+
+	void saveOrUpdate(Order order);
+
+	long count(OrderFilter orderFilter);
 }

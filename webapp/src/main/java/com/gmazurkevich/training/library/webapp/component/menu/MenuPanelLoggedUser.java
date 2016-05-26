@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.link.Link;
 
 import com.gmazurkevich.training.library.webapp.page.catalog.CatalogsPage;
 import com.gmazurkevich.training.library.webapp.page.comment.CommentsPage;
+import com.gmazurkevich.training.library.webapp.page.orders.OrdersPage;
 
 public class MenuPanelLoggedUser extends MenuPanel {
 
@@ -26,6 +27,13 @@ public class MenuPanelLoggedUser extends MenuPanel {
 			@Override
 			public void onClick() {
 				setResponsePage(new CommentsPage());
+			}
+		});
+		
+		add(new Link("link-orders") {
+			@Override
+			public void onClick() {
+				setResponsePage(new OrdersPage());
 			}
 		});
 	}
