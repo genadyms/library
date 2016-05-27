@@ -40,6 +40,7 @@ public class BookEditPage extends AbstractPage {
 
 		TextField<String> titleField = new TextField<>("title");
 		titleField.setRequired(true);
+		titleField.setEnabled(false);
 		form.add(titleField);
 
 		TextField<String> publishingOfficeField = new TextField<>("publishingOffice");

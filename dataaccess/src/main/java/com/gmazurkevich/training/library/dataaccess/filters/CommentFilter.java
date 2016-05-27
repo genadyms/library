@@ -3,7 +3,7 @@ package com.gmazurkevich.training.library.dataaccess.filters;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Order;
 
-public class CommentFilter {
+public class CommentFilter extends AbstractFilter {
 	private Book book;
 	private Order order;
 

@@ -3,7 +3,7 @@ package com.gmazurkevich.training.library.dataaccess.filters;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Department;
 
-public class CopyBookFilter {
+public class CopyBookFilter extends AbstractFilter {
 
 	private Book book;
 
@@ -34,8 +34,4 @@ public class CopyBookFilter {
 	}
 
 	private Department department;
-	// private SingularAttribute sortProperty;
-	// private boolean sortOrder;
-	// private Integer offset;
-	// private Integer limit;
 }

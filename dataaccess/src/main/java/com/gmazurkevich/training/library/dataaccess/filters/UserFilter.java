@@ -4,7 +4,7 @@ import javax.persistence.metamodel.SingularAttribute;
 
 import com.gmazurkevich.training.library.datamodel.Department;
 
-public class UserFilter {
+public class UserFilter extends AbstractFilter {
 
     private String userName;
     private SingularAttribute sortProperty;

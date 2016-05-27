@@ -2,7 +2,7 @@ package com.gmazurkevich.training.library.dataaccess.filters;
 
 import com.gmazurkevich.training.library.datamodel.Catalog;
 
-public class CatalogFilter {
+public class CatalogFilter extends AbstractFilter {
 	private String title;
 	private Catalog parent;
 	private boolean fetchParent;
