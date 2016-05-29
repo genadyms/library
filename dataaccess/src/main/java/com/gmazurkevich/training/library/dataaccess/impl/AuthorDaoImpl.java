@@ -11,5 +11,15 @@ public class AuthorDaoImpl extends AbstractDaoImpl<Author,Long> implements Autho
 		super(Author.class);
 	}
 
-	
+//	@Override
+//	public List<Author> find(Book book) {
+//		EntityManager em = getEntityManager();
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<Author> cq = cb.createQuery(Author.class);
+//        Root<Author> from = cq.from(Author.class);
+//        cq.select(from).where(cb.isMember(book,from.get(Author_.books)));
+//        return em.createQuery(cq).getResultList();
+//	}
+//
+//	
 }

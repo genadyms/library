@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.jpa.criteria.OrderImpl;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import com.gmazurkevich.training.library.dataaccess.BookDao;
 import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Book;
+import com.gmazurkevich.training.library.datamodel.Book_;
+
 
 @Repository
 public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao {
@@ -49,6 +52,32 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 	        setPaging(bookFilter, q);
 	        return q.getResultList();
 	    }
+
+	@Override
+	public Book getBookFetchAll(Long id) {
+		 EntityManager em = getEntityManager();
+
+	        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+	        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+
+	        Root<Book> from = cq.from(Book.class);
+
+	        // set selection
+	        cq.select(from);
+
+	        from.fetch(Book_.authors, JoinType.LEFT);
+
+	        from.fetch(Book_.catalog, JoinType.LEFT);
+
+	        cq.where(cb.equal(from.get(Book_.id), id));
+	        cq.distinct(true);
+
+	        TypedQuery<Book> q = em.createQuery(cq);
+
+	        // set execute query
+	        return q.getSingleResult();
+	}
 
 //	@Override
 //	public List<Book> find(BookFilter bookFilter) {

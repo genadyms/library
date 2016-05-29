@@ -1,7 +1,6 @@
 package com.gmazurkevich.training.library.dataaccess.filters;
 
-import java.util.Set;
-
+import java.util.List;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 
@@ -10,7 +9,7 @@ public class BookFilter extends AbstractFilter{
 	private Catalog catalog;
 	private String publishingOffice;
 	private String title;
-	private Set<Author> authors;
+	private List<Author> authors;
 	private boolean fetchComment;
 
 	public boolean isFetchComment() {
@@ -53,11 +52,11 @@ public class BookFilter extends AbstractFilter{
 		this.title = title;
 	}
 
-	public Set<Author> getAuthors() {
+	public List<Author> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(Set<Author> authors) {
+	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
 

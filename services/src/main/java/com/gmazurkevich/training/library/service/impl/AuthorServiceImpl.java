@@ -1,9 +1,7 @@
 package com.gmazurkevich.training.library.service.impl;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -43,7 +41,7 @@ public class AuthorServiceImpl implements AuthorService {
 
 	private boolean authorHasBooks(Author author) {
 		BookFilter bookFilter = new BookFilter();
-		Set<Author> authors = new HashSet<Author>();
+		List<Author> authors = new ArrayList<Author>();
 		authors.add(author);
 		bookFilter.setAuthors(authors);
 		List<Book> books = bookDao.find(bookFilter);
@@ -60,13 +58,15 @@ public class AuthorServiceImpl implements AuthorService {
 		return authorDao.getAll();
 	}
 
-	@Override
-	public Set<Book> getBooks(Set<Author> authors) {
-		BookFilter bf = new BookFilter();
-		bf.setAuthors(authors);
-		Set<Book> books = new HashSet();
-		books.addAll(bookDao.find(bf));
-		return books;
-	}
+//	@Override
+//	public List<Book> getBooks(List<Author> authors) {
+//		BookFilter bf = new BookFilter();
+//		return bookDao.find(bf);
+//	}
+	//
+	// @Override
+	// public List<Author> find(Book book) {
+	// return authorDao.find(book);
+	// }
 
 }

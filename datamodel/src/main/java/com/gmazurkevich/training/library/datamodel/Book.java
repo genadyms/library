@@ -1,6 +1,8 @@
 package com.gmazurkevich.training.library.datamodel;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,12 +15,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Book extends AbstractModel {
-	
-//	@OneToMany(fetch = FetchType.LAZY, targetEntity=Comment.class)
-//	@JoinTable(name = "book_2_comment", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
-//			@JoinColumn(name = "comment_id", referencedColumnName="id", unique = true) })
-//	private List<Comment> comments;
-
 	@Column
 	private String publishingOffice;
 
@@ -40,12 +36,12 @@ public class Book extends AbstractModel {
 	@JoinTable(name = "book_2_author", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "author_id") })
 	@ManyToMany(targetEntity = Author.class, fetch = FetchType.LAZY)
-	private Set<Author> authors;
+	private List<Author> authors = new ArrayList<Author>();
 
 	@Override
 	public String toString() {
 		return "Book [isbn=" + isbn + ", title=" + title + ", pages=" + pages + ", year=" + year + ", bookComment="
-				/*+ comments*/ + ", publishingOffice=" + publishingOffice + "]";
+		/* + comments */ + ", publishingOffice=" + publishingOffice + "]";
 	}
 
 	@Override
@@ -97,14 +93,13 @@ public class Book extends AbstractModel {
 		return true;
 	}
 
-	public Set<Author> getAuthors() {
+	public List<Author> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(Set<Author> authors) {
+	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
-
 
 	public Catalog getCatalog() {
 		return catalog;
@@ -145,14 +140,6 @@ public class Book extends AbstractModel {
 	public void setYear(Date year) {
 		this.year = year;
 	}
-
-//	public List<Comment> getBookComment() {
-//		return comments;
-//	}
-//
-//	public void setBookComment(List<Comment> bookComment) {
-//		this.comments = bookComment;
-//	}
 
 	public String getPublishingOffice() {
 		return publishingOffice;

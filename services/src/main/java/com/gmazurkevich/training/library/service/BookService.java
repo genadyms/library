@@ -27,4 +27,6 @@ public interface BookService {
 	@Transactional
 	void saveOrUpdate(Book book);
 
+	Book getBookFetchAll(Book book);
+
 }

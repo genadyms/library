@@ -26,8 +26,8 @@ public class MockAuthor extends MockBook {
 		return author;
 	}
 
-	public Set<Author> createAuthorWithBook() {
-		Set<Author> authors = new HashSet();
+	public List<Author> createAuthorWithBook() {
+		List<Author> authors = new ArrayList();
 		for (int i = 30; i < 33; i++) {
 			Author a = new Author();
 			a.setFirstName(String.format("namne %d", i));

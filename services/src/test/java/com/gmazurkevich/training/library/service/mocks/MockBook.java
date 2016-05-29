@@ -25,7 +25,7 @@ public class MockBook extends MockCatalog {
 		return createBook(null, null);
 	}
 
-	public Book createBook(Catalog catalog, Set<Author> authors) {
+	public Book createBook(Catalog catalog, List<Author> authors) {
 		Book book = new Book();
 		book.setIsbn(String.valueOf(Math.random()));
 		book.setPages(234);

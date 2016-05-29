@@ -27,10 +27,10 @@ import com.gmazurkevich.training.library.service.mocks.MockAuthor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
-public class AuthorServiceTest /*extends MockAuthor*/{
+public class AuthorServiceTest /* extends MockAuthor */ {
 	@Inject
 	private AuthorService authorService;
-	
+
 	@Inject
 	private BookService bookService;
 
@@ -51,7 +51,7 @@ public class AuthorServiceTest /*extends MockAuthor*/{
 		Author author = AuthorUtil.createAuthor();
 		authorService.create(author);
 		String newFirstName = "new first name";
-		String newSecondName = "new second name "+System.currentTimeMillis();
+		String newSecondName = "new second name " + System.currentTimeMillis();
 		author.setFirstName(newFirstName);
 		author.setSecondName(newSecondName);
 		authorService.update(author);
@@ -71,30 +71,49 @@ public class AuthorServiceTest /*extends MockAuthor*/{
 		}
 		Assert.assertNull(authorService.getAuthor(author.getId()));
 	}
-	
+
 	@Test
 	public void testDeleteWithBook() {
 		Author author = AuthorUtil.createAuthor();
 		authorService.create(author);
-		Set<Author> authors = new HashSet<Author>();
+		Author author2 = AuthorUtil.createAuthor();
+		authorService.create(author2);
+		
+		List<Author> authors = new ArrayList<Author>();
 		authors.add(author);
-		Assert.assertNotNull(authorService.getAuthor(author.getId()));
-		int countBooks = 5;
-		for (int i=0; i<countBooks; i++){
-			Book book = BookUtil.createBook(null, authors);
-			bookService.save(book);
+		authors.add(author2);
+		
+		Book book = BookUtil.createBook(null, authors);
+		bookService.save(book);
+		
+		Book bookDb = bookService.getBookFetchAll(book);
+		for(Author a: bookDb.getAuthors()){
+			System.out.println(a.getFirstName());
+			System.out.println(a.getSecondName());
+			System.out.println("----------------------");
 		}
-		Set<Book> savedBooks = authorService.getBooks(authors);
-		Assert.assertEquals(savedBooks.size(), countBooks);
-		DeleteAuthorWithBooksException exception = null;
-		try {
-			authorService.delete(author);
-		} catch (DeleteAuthorWithBooksException e) {
-			exception=e;
+		Author newAuth =AuthorUtil.createAuthor();
+		authorService.create(newAuth);
+		bookDb.getAuthors().add(newAuth);
+		bookService.update(bookDb);
+		Book bookDb1 = bookService.getBookFetchAll(book);
+		for(Author a: bookDb1.getAuthors()){
+			System.out.println(a.getFirstName());
+			System.out.println(a.getSecondName());
+			System.out.println("----------------------");
 		}
-		Assert.assertNotNull(exception);
-		Assert.assertNotNull(authorService.getAuthor(author.getId()));
-	
+		// List<Book> savedBooks = authorService.getBooks(authors);
+		// Assert.assertEquals(savedBooks.size(), countBooks);
+		// DeleteAuthorWithBooksException exception = null;
+		// try {
+		// authorService.delete(author);
+		// } catch (DeleteAuthorWithBooksException e) {
+		// exception=e;
+		// }
+		// Assert.assertNotNull(exception);
+		// Assert.assertNotNull(null);
+		// Assert.assertNotNull(authorService.getAuthor(author.getId()));
+		//
 	}
-	
+
 }

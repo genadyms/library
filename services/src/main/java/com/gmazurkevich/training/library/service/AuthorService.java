@@ -1,12 +1,9 @@
 package com.gmazurkevich.training.library.service;
 
 import java.util.List;
-import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import com.gmazurkevich.training.library.datamodel.Author;
-import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.service.exception.DeleteAuthorWithBooksException;
 
 public interface AuthorService {
@@ -23,7 +20,5 @@ public interface AuthorService {
 	void create(Author author);
 
 	List<Author> getAll();
-
-	Set<Book> getBooks(Set<Author> authors);
 
 }

@@ -21,4 +21,6 @@ public interface CatalogService {
 
 	List<Catalog> getCatalogs(Catalog parent);
 
+	List<Catalog> getAll();
+
 }

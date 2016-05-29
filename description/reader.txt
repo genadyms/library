@@ -30,4 +30,53 @@ admin
 2. add librarian, change state librarian
 3. add, edit book and copybook
 4. edit order
- 
+---------------------------------------------------------------------------------
+pages:
+
+--users:
+----Home
+----Books
+----Departments
+--------------------------------
+--readers:
+----books
+-------find
+----orders
+-------order copybook
+----catalogs
+-------see
+----comments
+------add bookcomment
+
+--------------------------------
+--librarians:
+--Orders
+-----copybooks
+-------add
+-----orders
+-------handled
+-------close
+-----abonement
+-------create
+-------edit
+-------close
+-----comments
+-------add bookcomment
+-------add ordercomment
+---
+--------------------------------
+admin
+--book
+----create
+----edit
+----delete
+--catalogs
+    create edit delete
+--users
+-----create librarian
+--departmets
+    create edit delete
+
+--------------------------------------------
+book.getAuthors()
+

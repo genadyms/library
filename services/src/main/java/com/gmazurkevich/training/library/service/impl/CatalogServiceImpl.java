@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.CatalogDao;
 import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
+import com.gmazurkevich.training.library.dataaccess.filters.CatalogFilter;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
@@ -62,6 +63,11 @@ public class CatalogServiceImpl implements CatalogService {
 			}
 		}
 		return isNotEmpty;
+	}
+
+	@Override
+	public List<Catalog> getAll() {
+		return catalogDao.getAll();
 	}
 
 }

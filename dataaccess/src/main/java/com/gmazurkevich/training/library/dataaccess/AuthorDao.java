@@ -1,7 +1,10 @@
 package com.gmazurkevich.training.library.dataaccess;
 
-import com.gmazurkevich.training.library.datamodel.Author;
+import java.util.List;
 
-public interface AuthorDao  extends AbstractDao<Author, Long>{
+import com.gmazurkevich.training.library.datamodel.Author;
+import com.gmazurkevich.training.library.datamodel.Book;
+
+public interface AuthorDao extends AbstractDao<Author, Long> {
 
 }
