@@ -1,0 +1,31 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<h2>Department edit</h2>
+
+	<form wicket:id="form">
+
+		<table>
+			<tr>
+				<td><b>Name:</b></td>
+				<td><input type="text" wicket:id="name" /></td>
+			</tr>
+			<tr>
+				<td><b>type:</b></td>
+				<td><select wicket:id="type"></select></td>
+			</tr>
+			<tr>
+				<td><b>phone:</b></td>
+				<td><input type="text" wicket:id="phone" /></td>
+			</tr>
+			<tr>
+				<td><b>address:</b></td>
+				<td><input type="text" wicket:id="address" /></td>
+			</tr>
+			<tr>
+				<td><button type="submit" wicket:id="save">SAVE</button></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	<div wicket:id="feedback"></div>
+
+</wicket:extend>

@@ -28,4 +28,6 @@ public interface UserService {
 	List<UserProfile> getAll();
 	
 	List<UserProfile> find(UserFilter userFilter);
+
+	long count(UserFilter userFilter);
 }

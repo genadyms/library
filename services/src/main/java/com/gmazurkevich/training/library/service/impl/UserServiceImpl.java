@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void delete(Long id) throws DeleteActiveUserException{
 		UserProfile userProfile = userProfileDao.get(id);
-		if(userProfile.getUserState()!=UserState.NOT_ACTIVE) throw new DeleteActiveUserException();
+		if(userProfile.getState()!=UserState.NOT_ACTIVE) throw new DeleteActiveUserException();
 		userProfileDao.delete(id);
 		userCredentialsDao.delete(id);
 	}
@@ -61,5 +61,10 @@ public class UserServiceImpl implements UserService {
 	public	List<UserProfile> find(UserFilter filter) {
         return userProfileDao.find(filter);
     }
+
+	@Override
+	public long count(UserFilter userFilter) {
+		return userProfileDao.count(userFilter);
+	}
 	
 }

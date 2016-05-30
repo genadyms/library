@@ -46,8 +46,8 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile, Long> imple
 			Predicate lNameEqualCondition = cb.equal(from.get(UserProfile_.lastName), filter.getUserName());
 			cq.where(cb.or(fNameEqualCondition, lNameEqualCondition));
 		}
-		//select on department field
-		if(filter.getDepartment()!= null){
+		// select on department field
+		if (filter.getDepartment() != null) {
 			cq.where(cb.equal(from.get(UserProfile_.department), filter.getDepartment()));
 		}
 		// set fetching
@@ -71,6 +71,35 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile, Long> imple
 		// set execute query
 		List<UserProfile> allitems = q.getResultList();
 		return allitems;
+	}
+
+	@Override
+	public long count(UserFilter filter) {
+		EntityManager em = getEntityManager();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+
+		Root<UserProfile> from = cq.from(UserProfile.class);
+
+		cq.select(cb.count(from));
+
+		handleFilterParameters(filter, cb, cq, from);
+
+		TypedQuery<Long> q = em.createQuery(cq);
+
+		return q.getSingleResult();
+	}
+
+	private void handleFilterParameters(UserFilter filter, CriteriaBuilder cb, CriteriaQuery<?> cq,
+			Root<UserProfile> from) {
+		if (filter.getUserName() != null) {
+			Predicate fNameEqualCondition = cb.equal(from.get(UserProfile_.firstName), filter.getUserName());
+			Predicate lNameEqualCondition = cb.equal(from.get(UserProfile_.lastName), filter.getUserName());
+			cq.where(cb.or(fNameEqualCondition, lNameEqualCondition));
+		}
+
 	}
 
 }

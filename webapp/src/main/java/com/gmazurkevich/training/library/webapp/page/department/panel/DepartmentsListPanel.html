@@ -1,0 +1,27 @@
+<wicket:panel>
+	<table class="list-table">
+		<thead>
+			<tr>
+				<th><a wicket:id="sort-id">id</a></th>
+				<th><a wicket:id="sort-name">name</a></th>
+				<th><a wicket:id="sort-type">type</a></th>
+				<th>phone</th>
+				<th><a wicket:id="sort-address">address</a></th>
+				<th>actions</th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="id"/></td>
+				<td><span wicket:id="name"/></td>
+				<td><span wicket:id="type"/> </td>
+				<td><span wicket:id="phone"/> </td>
+				<td><span wicket:id="address"/> </td>
+				<td><a wicket:id="delete-link">delete</a>/<a wicket:id="edit-link">edit</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div wicket:id="paging"></div>
+
+</wicket:panel>

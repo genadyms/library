@@ -17,7 +17,7 @@ public class UserUtil {
 		userProfile.setLastName("Ivanov");
 		userProfile.setAddress("Grodno, ul.Gorkogo, 89");
 		userProfile.setPhone(String.valueOf(System.currentTimeMillis()));
-		userProfile.setUserState(UserState.NOT_ACTIVE);
+		userProfile.setState(UserState.NOT_ACTIVE);
 		UserCredentials userCredentials = new UserCredentials();
 		userCredentials.setEmail(System.currentTimeMillis()+"test@gmail.com");
 		userCredentials.setPassword("pass");

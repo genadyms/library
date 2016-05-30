@@ -1,0 +1,20 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<h2>User edit</h2>
+
+	<form wicket:id="form">
+
+		<table>
+			<tr>
+				<td><b>Role:</b></td>
+				<td><select wicket:id="role"></select></td>
+			</tr>
+			<tr>
+				<td><b>State:</b></td>
+				<td><select wicket:id="state"></select></td>
+			</tr>
+		</table>
+		<button type="submit" wicket:id="save">SAVE</button>
+	</form>
+	<div wicket:id="feedback"></div>
+
+</wicket:extend>

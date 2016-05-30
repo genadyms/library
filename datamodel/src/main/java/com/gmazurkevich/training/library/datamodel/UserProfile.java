@@ -50,7 +50,7 @@ public class UserProfile extends AbstractModel {
 
 	@Column
 	@Enumerated(value = EnumType.ORDINAL)
-	private UserState userState;
+	private UserState state;
 
 	@Column
 	@Enumerated(value = EnumType.ORDINAL)
@@ -111,12 +111,13 @@ public class UserProfile extends AbstractModel {
 	}
 
 
-	public UserState getUserState() {
-		return userState;
+	
+	public UserState getState() {
+		return state;
 	}
 
-	public void setUserState(UserState userState) {
-		this.userState = userState;
+	public void setState(UserState state) {
+		this.state = state;
 	}
 
 	public UserRole getRole() {

@@ -53,14 +53,14 @@ public class UserServiceTest {
 		UserState state = UserState.NOT_ACTIVE;
 		savedUserProfile.setFirstName(firstName);
 		savedUserProfile.setLastName(lastName);
-		savedUserProfile.setUserState(state);
+		savedUserProfile.setState(state);
 		savedUserProfile.setPhone(newPhone);
 		savedUserProfile.setAddress(newAddress);
 		savedUserProfile.setRole(newRole);
 		userService.update(savedUserProfile);
 		Assert.assertEquals(firstName, savedUserProfile.getFirstName());
 		Assert.assertEquals(lastName, savedUserProfile.getLastName());
-		Assert.assertEquals(state, savedUserProfile.getUserState());
+		Assert.assertEquals(state, savedUserProfile.getState());
 		Assert.assertEquals(newPhone, savedUserProfile.getPhone());
 		Assert.assertEquals(newRole, savedUserProfile.getRole());
 		Assert.assertEquals(newAddress, savedUserProfile.getAddress());
@@ -69,7 +69,7 @@ public class UserServiceTest {
 	@Test
 	public void testDelete() {
 		UserProfile userProfile = UserUtil.createUser();
-		userProfile.setUserState(UserState.ACTIVE);
+		userProfile.setState(UserState.ACTIVE);
 		UserCredentials userCredentials = userProfile.getUserCredentials();
 		userService.register(userProfile, userCredentials);
 		DeleteActiveUserException exception = null;
@@ -83,7 +83,7 @@ public class UserServiceTest {
 		Assert.assertNotNull(userService.getCredentials(userCredentials.getId()));
 		
 		userProfile = userService.getProfile(userProfile.getId());
-		userProfile.setUserState(UserState.NOT_ACTIVE);
+		userProfile.setState(UserState.NOT_ACTIVE);
 		userService.update(userProfile);
 		
 		exception = null;

@@ -1,11 +1,14 @@
 package com.gmazurkevich.training.library.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.DepartmentDao;
 import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
+import com.gmazurkevich.training.library.dataaccess.filters.DepartmentFilter;
 import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 import com.gmazurkevich.training.library.datamodel.Department;
 import com.gmazurkevich.training.library.service.CopyBookService;
@@ -61,6 +64,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public void save(Department department) {
 		departmentDao.insert(department);
+	}
+
+	@Override
+	public List<Department> find(DepartmentFilter departmentFilter) {
+		return departmentDao.find(departmentFilter);
+	}
+
+	@Override
+	public Long count(DepartmentFilter departmentFilter) {
+		return departmentDao.count(departmentFilter);
+	}
+
+	@Override
+	public List<Department> getAll() {
+		return departmentDao.getAll();
 	}
 
 }

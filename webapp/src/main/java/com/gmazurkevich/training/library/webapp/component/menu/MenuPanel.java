@@ -6,6 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.catalog.CatalogsPage;
 import com.gmazurkevich.training.library.webapp.page.comment.CommentsPage;
+import com.gmazurkevich.training.library.webapp.page.department.DepartmentsPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 
 public class MenuPanel extends Panel {
@@ -36,7 +37,7 @@ public class MenuPanel extends Panel {
 		add(new Link("link-departments") {
 			@Override
 			public void onClick() {
-				setResponsePage(new BooksPage());
+				setResponsePage(new DepartmentsPage());
 			}
 		});
 
