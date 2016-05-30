@@ -6,8 +6,6 @@ import java.util.Iterator;
 import javax.inject.Inject;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.apache.wicket.authorization.Action;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
@@ -22,11 +20,12 @@ import org.apache.wicket.model.Model;
 
 import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 import com.gmazurkevich.training.library.datamodel.UserCredentials;
-import com.gmazurkevich.training.library.datamodel.UserCredentials_;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
 import com.gmazurkevich.training.library.datamodel.UserProfile_;
 import com.gmazurkevich.training.library.service.UserService;
+import com.gmazurkevich.training.library.service.exception.DeleteActiveUserException;
 import com.gmazurkevich.training.library.webapp.page.user.UsersEditPage;
+import com.gmazurkevich.training.library.webapp.page.user.UsersPage;
 
 public class UsersListPanel extends Panel {
 
@@ -34,34 +33,42 @@ public class UsersListPanel extends Panel {
 	private UserService userService;
 
 	public UsersListPanel(String id) {
-        super(id);
+		super(id);
 
-        UsersDataProvider userDataProvider = new UsersDataProvider();
-        DataView<UserProfile> dataView = new DataView<UserProfile>("rows", userDataProvider, 5) {
-            @Override
-            protected void populateItem(Item<UserProfile> item) {
-                UserProfile user = item.getModelObject();
-                UserCredentials credentials = userService.getCredentials(user.getId());
-                item.add(new Label("id", user.getId()));
-                item.add(new Label("fName", user.getFirstName()));
-                item.add(new Label("email", credentials.getEmail()));
-                item.add(new Link<Void>("edit-link") {
-                    @Override
-                    public void onClick() {
-                        setResponsePage(new UsersEditPage(user));
-                    }
-                });
+		UsersDataProvider userDataProvider = new UsersDataProvider();
+		DataView<UserProfile> dataView = new DataView<UserProfile>("rows", userDataProvider, 5) {
+			@Override
+			protected void populateItem(Item<UserProfile> item) {
+				UserProfile user = item.getModelObject();
+				UserCredentials credentials = userService.getCredentials(user.getId());
+				item.add(new Label("id", user.getId()));
+				item.add(new Label("fName", user.getFirstName()));
+				item.add(new Label("lName", user.getLastName()));
+				item.add(new Label("role", user.getRole()));
+				item.add(new Label("state", user.getState()));
+				item.add(new Label("phone", user.getPhone()));
+				item.add(new Label("address", user.getAddress()));
+				item.add(new Label("email", credentials.getEmail()));
 
-            }
-        };
-        add(dataView);
-        add(new PagingNavigator("paging", dataView));
+				item.add(new Link<Void>("edit-link") {
+					@Override
+					public void onClick() {
+						setResponsePage(new UsersEditPage(user));
+					}
+				});
 
-        add(new OrderByBorder("sort-id", UserProfile_.id, userDataProvider));
-        add(new OrderByBorder("sort-name", UserProfile_.firstName, userDataProvider));
-        add(new OrderByBorder("sort-email", UserCredentials_.email, userDataProvider));
+			}
+		};
+		add(dataView);
+		add(new PagingNavigator("paging", dataView));
 
-    }
+		add(new OrderByBorder("sort-id", UserProfile_.id, userDataProvider));
+		add(new OrderByBorder("sort-fname", UserProfile_.firstName, userDataProvider));
+		add(new OrderByBorder("sort-lname", UserProfile_.lastName, userDataProvider));
+		add(new OrderByBorder("sort-role", UserProfile_.role, userDataProvider));
+		add(new OrderByBorder("sort-state", UserProfile_.state, userDataProvider));
+		add(new OrderByBorder("sort-address", UserProfile_.address, userDataProvider));
+	}
 
 	private class UsersDataProvider extends SortableDataProvider<UserProfile, Serializable> {
 

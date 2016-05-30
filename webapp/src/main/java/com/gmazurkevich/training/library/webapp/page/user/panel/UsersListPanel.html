@@ -3,8 +3,13 @@
 		<thead>
 			<tr>
 				<th><a wicket:id="sort-id">id</a></th>
-				<th><a wicket:id="sort-name">first name</a></th>
-				<th><a wicket:id="sort-email">email</a></th>
+				<th><a wicket:id="sort-fname">first name</a></th>
+				<th><a wicket:id="sort-lname">last name</a></th>
+				<th><a wicket:id="sort-role">role</a></th>
+				<th><a wicket:id="sort-state">state</a></th>
+				<th><a wicket:id="sort-address">address</a></th>
+				<th>phone</th>
+				<th>email</th>
 				<th>actions</th>
 			</tr>
 		
@@ -13,8 +18,13 @@
 			<tr wicket:id="rows">
 				<td><span wicket:id="id"/></td>
 				<td><span wicket:id="fName"/></td>
+				<td><span wicket:id="lName"/></td>
+				<td><span wicket:id="role"/></td>
+				<td><span wicket:id="state"/></td>
+				<td><span wicket:id="phone"/></td>
+				<td><span wicket:id="address"/></td>
 				<td><span wicket:id="email"/></td>
-				<td><a>delete</a>/<a wicket:id="edit-link">edit</a></td>
+				<td><a wicket:id="edit-link">edit</a></td>
 			</tr>
 		</tbody>
 	</table>
