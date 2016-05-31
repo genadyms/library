@@ -1,12 +1,9 @@
 <wicket:panel>
-
 	<li><a wicket:id="link-home" class="current">Home</a><span>~</span></li>
-	<li><a wicket:id="link-books">Books</a><span>~</span>
-		<ul>
-			<li><a href="#">Most readable</a></li>
-			<li><a href="#">Most comment</a></li>
-			<li><a href="#">New books</a></li>
-		</ul></li>
+	<li><a wicket:id="link-books">Books</a><span>~</span> 
+		<wicket:container wicket:id="admin-menu"></wicket:container>
+	</li>
 	<wicket:child></wicket:child>
-	<li><a wicket:id="link-departments">Departments</a></li>
+	<li><a wicket:id="link-departments">Departments</a><span>~</span></li>
+	<li><a wicket:id="link-login">Login</a></li>
 </wicket:panel>

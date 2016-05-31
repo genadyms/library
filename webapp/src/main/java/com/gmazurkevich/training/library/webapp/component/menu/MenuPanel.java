@@ -3,11 +3,13 @@ package com.gmazurkevich.training.library.webapp.component.menu;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.catalog.CatalogsPage;
 import com.gmazurkevich.training.library.webapp.page.comment.CommentsPage;
 import com.gmazurkevich.training.library.webapp.page.department.DepartmentsPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
+import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
 
 public class MenuPanel extends Panel {
 
@@ -32,8 +34,7 @@ public class MenuPanel extends Panel {
 				setResponsePage(new BooksPage());
 			}
 		});
-	
-		
+
 		add(new Link("link-departments") {
 			@Override
 			public void onClick() {
@@ -41,5 +42,14 @@ public class MenuPanel extends Panel {
 			}
 		});
 
+		Link link = new Link("link-login") {
+			@Override
+			public void onClick() {
+				setResponsePage(new LoginPage());
+			}
+		};
+		add(link);
+		link.setVisible(!AuthorizedSession.get().isSignedIn());
+		add(new MenuBooksAdminPanel("admin-menu"));
 	}
 }

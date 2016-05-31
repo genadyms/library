@@ -1,5 +1,6 @@
 package com.gmazurkevich.training.library.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -30,4 +31,8 @@ public interface UserService {
 	List<UserProfile> find(UserFilter userFilter);
 
 	long count(UserFilter userFilter);
+
+	UserCredentials getByNameAndPassword(String userName, String password);
+
+	Collection<? extends String> resolveRoles(Long id);
 }

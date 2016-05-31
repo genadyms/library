@@ -1,5 +1,7 @@
 package com.gmazurkevich.training.library.service.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,20 +53,32 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(Long id) throws DeleteActiveUserException{
+	public void delete(Long id) throws DeleteActiveUserException {
 		UserProfile userProfile = userProfileDao.get(id);
-		if(userProfile.getState()!=UserState.NOT_ACTIVE) throw new DeleteActiveUserException();
+		if (userProfile.getState() != UserState.NOT_ACTIVE)
+			throw new DeleteActiveUserException();
 		userProfileDao.delete(id);
 		userCredentialsDao.delete(id);
 	}
+
 	@Override
-	public	List<UserProfile> find(UserFilter filter) {
-        return userProfileDao.find(filter);
-    }
+	public List<UserProfile> find(UserFilter filter) {
+		return userProfileDao.find(filter);
+	}
 
 	@Override
 	public long count(UserFilter userFilter) {
 		return userProfileDao.count(userFilter);
 	}
-	
+
+	@Override
+	public UserCredentials getByNameAndPassword(String userName, String password) {
+		return userCredentialsDao.find(userName, password);
+	}
+
+	@Override
+	public Collection<? extends String> resolveRoles(Long id) {
+		UserProfile userProfile = userProfileDao.get(id);
+		return Collections.singletonList(userProfile.getRole().name());
+	}
 }
