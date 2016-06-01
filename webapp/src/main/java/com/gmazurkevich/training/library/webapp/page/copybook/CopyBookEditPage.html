@@ -1,0 +1,44 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<h2>Book edit</h2>
+
+	<form wicket:id="form">
+
+		<table>
+			<tr>
+				<td><b>Title:</b></td>
+				<td><input type="text" wicket:id="title" /></td>
+			</tr>
+			<tr>
+				<td><b>Isbn:</b></td>
+				<td><input type="text" wicket:id="isbn" /></td>
+			</tr>
+			<tr>
+				<td><b>Pages:</b></td>
+				<td><input type="text" wicket:id="pages" /></td>
+			</tr>
+			<tr>
+				<td><b>Publishing office:</b></td>
+				<td><input type="text" wicket:id="publishingOffice" /></td>
+			</tr>
+			<tr>
+				<td><b>Authors:</b></td>
+				<td><span wicket:id="authors" /></td>
+			</tr>
+			<tr>
+				<td><b>Catalog:</b></td>
+				<td><select wicket:id="catalog"></select></td>
+			</tr>
+
+			<tr>
+				<td><b>Year of publishing:</b></td>
+				<td><input type="text" wicket:id="year" /></td>
+			</tr>
+			<tr>
+				<td><button type="submit" wicket:id="save">SAVE</button></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	<div wicket:id="feedback"></div>
+
+</wicket:extend>

@@ -6,6 +6,7 @@ import com.gmazurkevich.training.library.datamodel.UserRole;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.catalog.CatalogsPage;
 import com.gmazurkevich.training.library.webapp.page.comment.CommentsPage;
+import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
 import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrdersPage;
 import com.gmazurkevich.training.library.webapp.page.user.UsersPage;
@@ -19,7 +20,14 @@ public class MenuPanelLoggedUser extends MenuPanel {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-
+		
+		add(new Link("link-copybooks") {
+			@Override
+			public void onClick() {
+				setResponsePage(new CopyBooksPage());
+			}
+		});
+		
 		add(new Link("link-catalog") {
 			@Override
 			public void onClick() {

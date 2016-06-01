@@ -18,7 +18,8 @@ public class CopyBookServiceImpl implements CopyBookService {
 
 	@Override
 	public CopyBook get(Long id) {
-		return copyBookDao.get(id);
+		 return copyBookDao.get(id);
+//		return copyBookDao.getCopyBookFetchAll(id);
 	}
 
 	@Override
@@ -39,6 +40,16 @@ public class CopyBookServiceImpl implements CopyBookService {
 	@Override
 	public List<CopyBook> find(CopyBookFilter filter) {
 		return copyBookDao.find(filter);
+	}
+
+	@Override
+	public Long count() {
+		return copyBookDao.count();
+	}
+
+	@Override
+	public CopyBook getCopyBookFetchAll(Long id) {
+		return copyBookDao.getCopyBookFetchAll(id);
 	}
 
 }

@@ -19,4 +19,8 @@ public interface CopyBookService {
 	void save(CopyBook copyBook);
 
 	List<CopyBook> find(CopyBookFilter filter);
+
+	Long count();
+
+	CopyBook getCopyBookFetchAll(Long id);
 }
