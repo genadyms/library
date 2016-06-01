@@ -8,6 +8,7 @@ import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.department.DepartmentsPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
+import com.gmazurkevich.training.library.webapp.page.tree.DefaultTreeViewPage;
 
 public class MenuPanel extends Panel {
 
@@ -18,7 +19,6 @@ public class MenuPanel extends Panel {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-
 		
 		add(new Link("link-home") {
 			@Override

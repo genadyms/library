@@ -38,28 +38,26 @@ public class CopyBooksListPanel extends Panel {
 
 			@Override
 			protected void populateItem(Item<CopyBook> item) {
-//				CopyBook copyBook = copyBookService.getCopyBookFetchAll(item.getModelObject().getId());
-				CopyBook copyBook = item.getModelObject();
+				CopyBook copyBook = copyBookService.getCopyBookFetchAll(item.getModelObject().getId());
 				
-				String nameBook = copyBookService.getCopyBookFetchAll(copyBook.getId()).getBook().getTitle();
 				item.add(new Label("id", copyBook.getId()));
-				item.add(new Label("book", nameBook));
-//				item.add(new Label("department", nameDep));
+				item.add(new Label("book", copyBook.getBook().getTitle()));
+				item.add(new Label("department", copyBook.getDepartment().getName()));
 
-//				item.add(new Link<Void>("edit-link") {
-//					@Override
-//					public void onClick() {
-//						setResponsePage(new CopyBookEditPage(copyBook));
-//					}
-//				});
+				item.add(new Link<Void>("edit-link") {
+					@Override
+					public void onClick() {
+						setResponsePage(new CopyBookEditPage(copyBook));
+					}
+				});
 
-//				item.add(new Link<Void>("delete-link") {
-//					@Override
-//					public void onClick() {
-//						copyBookService.delete(copyBook.getId());
-//						setResponsePage(new CopyBooksPage());
-//					}
-//				});
+				item.add(new Link<Void>("delete-link") {
+					@Override
+					public void onClick() {
+						copyBookService.delete(copyBook.getId());
+						setResponsePage(new CopyBooksPage());
+					}
+				});
 
 			}
 
@@ -67,8 +65,8 @@ public class CopyBooksListPanel extends Panel {
 		add(dataView);
 		add(new PagingNavigator("paging", dataView));
 		add(new OrderByBorder("sort-id", CopyBook_.id, copyBooksDataProvider));
-//		add(new OrderByBorder("sort-book", CopyBook_.book, copyBooksDataProvider));
-//		add(new OrderByBorder("sort-department", CopyBook_.department, copyBooksDataProvider));
+		add(new OrderByBorder("sort-book", CopyBook_.book, copyBooksDataProvider));
+		add(new OrderByBorder("sort-department", CopyBook_.department, copyBooksDataProvider));
 
 	}
 
