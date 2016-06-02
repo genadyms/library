@@ -19,14 +19,16 @@ public class CatalogsPage extends AbstractPage {
 		super();
 
 		add(new DefaultNestedTree<Foo>("tree", new FooProvider()) {
-			/**
-			 * To use a custom component for the representation of a node's
-			 * content we would override this method.
-			 */
 			@Override
 			protected Component newContentComponent(String id, IModel<Foo> node) {
 				return super.newContentComponent(id, node);
 			}
 		});
+//		add(new DefaultNestedTree<Catalog>("tree", new CatalogProvider()) {
+//			@Override
+//			protected Component newContentComponent(String id, IModel<Catalog> node) {
+//				return super.newContentComponent(id, node);
+//			}
+//		});
 	}
 }
