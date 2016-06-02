@@ -8,7 +8,6 @@ import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.department.DepartmentsPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
-import com.gmazurkevich.training.library.webapp.page.tree.DefaultTreeViewPage;
 
 public class MenuPanel extends Panel {
 
