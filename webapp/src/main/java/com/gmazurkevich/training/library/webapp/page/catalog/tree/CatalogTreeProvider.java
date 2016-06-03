@@ -16,7 +16,6 @@ package com.gmazurkevich.training.library.webapp.page.catalog.tree;
  * limitations under the License.
  */
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,37 +23,34 @@ import java.util.List;
 import org.apache.wicket.extensions.markup.html.repeater.tree.ITreeProvider;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.model.Model;
+import com.gmazurkevich.training.library.datamodel.Catalog;
 
-/**
- * A provider of {@link Foo}s.
- * 
- * For simplicity all foos are kept as class members, in a real world scenario
- * these would be fetched from a database. If {@link Foo}s were
- * {@link Serializable} you could of course just keep references in instance
- * variables.
- * 
- * @see #model(Foo)
- * 
- * @author Sven Meier
- */
-public class FooProvider implements ITreeProvider<Foo> {
+public class CatalogTreeProvider implements ITreeProvider<Foo> {
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Construct.
-	 */
 	private final static List<Foo> foos = new ArrayList<>();
+	
 
-	public FooProvider() {
-		if (foos.isEmpty())
-			initializeFoo();
+	public CatalogTreeProvider(List<Catalog> catalogs) {
+		makeTempFoo(catalogs);
+
 	}
 
-	/**
-	 * Nothing to do.
-	 */
+	private void makeTempFoo(List<Catalog> catalogs) {
+		for (Catalog current : catalogs) {
+			Foo rootFoo = new Foo(current.getTitle());
+			if (!current.getChilds().isEmpty()) {
+				List<Catalog> childs = current.getChilds();
+				for (Catalog cur : childs) {
+					Foo fooAA = new Foo(rootFoo, cur.getTitle());
+					for (int i=0; i<5; i++)	new Foo(fooAA, "test_book_"+i);
+				}
+			}
+			foos.add(rootFoo);
+		}
+	}
+
 	@Override
 	public void detach() {
 	}
@@ -74,53 +70,9 @@ public class FooProvider implements ITreeProvider<Foo> {
 		return foo.getFoos().iterator();
 	}
 
-	/**
-	 * Creates a {@link FooModel}.
-	 */
 	@Override
 	public IModel<Foo> model(Foo foo) {
 		return new FooModel(foo);
-	}
-
-	private void initializeFoo() {
-		Foo fooA = new Foo("A");
-		{
-			Foo fooAA = new Foo(fooA, "AA");
-			{
-				new Foo(fooAA, "AAA");
-				new Foo(fooAA, "AAB");
-			}
-			Foo fooAB = new Foo(fooA, "AB");
-			{
-				new Foo(fooAB, "ABA");
-				Foo fooABB = new Foo(fooAB, "ABB");
-				{
-					new Foo(fooABB, "ABBA");
-					Foo fooABBB = new Foo(fooABB, "ABBB");
-					{
-						new Foo(fooABBB, "ABBBA");
-					}
-				}
-				new Foo(fooAB, "ABC");
-				new Foo(fooAB, "ABD");
-			}
-			Foo fooAC = new Foo(fooA, "AC");
-			{
-				new Foo(fooAC, "ACA");
-				new Foo(fooAC, "ACB");
-			}
-		}
-		foos.add(fooA);
-
-		Foo fooB = new Foo("B");
-		{
-			new Foo(fooB, "BA");
-			new Foo(fooB, "BB");
-		}
-		foos.add(fooB);
-
-		Foo fooC = new Foo("C");
-		foos.add(fooC);
 	}
 
 	private static Foo getFoo(String id) {
@@ -142,15 +94,6 @@ public class FooProvider implements ITreeProvider<Foo> {
 		return null;
 	}
 
-	/**
-	 * A {@link Model} which uses an id to load its {@link Foo}.
-	 * 
-	 * If {@link Foo}s were {@link Serializable} you could just use a standard
-	 * {@link Model}.
-	 * 
-	 * @see #equals(Object)
-	 * @see #hashCode()
-	 */
 	private static class FooModel extends LoadableDetachableModel<Foo> {
 		private static final long serialVersionUID = 1L;
 
@@ -158,7 +101,6 @@ public class FooProvider implements ITreeProvider<Foo> {
 
 		public FooModel(Foo foo) {
 			super(foo);
-
 			id = foo.getId();
 		}
 
@@ -168,9 +110,6 @@ public class FooProvider implements ITreeProvider<Foo> {
 			return getFoo(id);
 		}
 
-		/**
-		 * Important! Models must be identifyable by their contained object.
-		 */
 		@Override
 		public boolean equals(Object obj) {
 			if (obj instanceof FooModel) {
@@ -179,9 +118,6 @@ public class FooProvider implements ITreeProvider<Foo> {
 			return false;
 		}
 
-		/**
-		 * Important! Models must be identifyable by their contained object.
-		 */
 		@Override
 		public int hashCode() {
 			return id.hashCode();

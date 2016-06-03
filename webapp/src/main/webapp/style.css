@@ -1,18 +1,5 @@
-/*
-Template Name:Koko HTML Template
-Description:A Portfolio HTML Template
-Author:Chris Creed
-URL:http://www.chris-creed.com
-*/
-
-/* Colors:Blue - #00aeef */
-
-@import "reset.css";
-/* -------------------- */
-/* -- General Styles -- */
-/* -------------------- */
 #wrap{
-	width:800px;
+	width:1050px;
 	margin:0 auto;
 	background:url(../images/main-bg.png) repeat-x;
 	background-color:#fff;
@@ -348,4 +335,23 @@ a:hover{
 	color:#888;
 	padding:4px 0 0 0;
 	margin-bottom:0;
+}
+
+table.list-table {
+	border-collapse: collapse;
+}
+
+table.list-table tr th {
+	background-color: #e3f2fd;
+}
+
+table.list-table tr td, table.list-table tr th {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.language-comp select {
+	position: absolute;
+	top: 5px;
+	right: 10px;
 }

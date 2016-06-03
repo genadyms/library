@@ -13,15 +13,11 @@ import org.springframework.stereotype.Component;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
 
-
 @Component("wicketWebApplicationBean")
 public class WicketApplication extends AuthenticatedWebApplication {
 	@Inject
 	private ApplicationContext applicationContext;
 
-	/**
-	 * @see org.apache.wicket.Application#init()
-	 */
 	@Override
 	public void init() {
 		super.init();
@@ -45,9 +41,6 @@ public class WicketApplication extends AuthenticatedWebApplication {
 		return LoginPage.class;
 	}
 
-	/**
-	 * @see org.apache.wicket.Application#getHomePage()
-	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
 		return HomePage.class;
