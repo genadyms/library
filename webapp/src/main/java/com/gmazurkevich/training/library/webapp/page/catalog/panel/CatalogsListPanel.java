@@ -22,22 +22,6 @@ public class CatalogsListPanel extends Panel {
 	public CatalogsListPanel(String id) {
 		super(id);
 
-		// CatalogsDataProvider catalogsDataProvider = new
-		// CatalogsDataProvider();
-		// DataView<Catalog> dataView = new DataView<Catalog>("rows",
-		// catalogsDataProvider, 5) {
-		// @Override
-		// protected void populateItem(Item<Catalog> item) {
-		// Catalog catalog =
-		// catalogService.getCatalog(item.getModelObject().getId());
-		//
-		// item.add(new Label("id", catalog.getId()));
-		// item.add(new Label("title", catalog.getTitle()));
-		//
-		// }
-		// };
-		// add(dataView);
-
 		add(new DefaultNestedTree<Foo>("tree", new CatalogTreeProvider(getCatalogs())) {
 			@Override
 			protected Component newContentComponent(String id, IModel<Foo> node) {
@@ -59,28 +43,5 @@ public class CatalogsListPanel extends Panel {
 		}
 		return catalogsAll;
 	}
-	// private class CatalogsDataProvider extends SortableDataProvider<Catalog,
-	// Serializable> {
-	// public CatalogsDataProvider() {
-	// super();
-	// setSort((Serializable) Catalog_.title, SortOrder.ASCENDING);
-	// }
-	//
-	// @Override
-	// public Iterator<Catalog> iterator(long first, long count) {
-	// return catalogService.getAll().iterator();
-	// }
-	//
-	// @Override
-	// public long size() {
-	// return catalogService.getAll().size();
-	// }
-	//
-	// @Override
-	// public IModel<Catalog> model(Catalog object) {
-	// return new Model(object);
-	// }
-	//
-	// }
 
 }

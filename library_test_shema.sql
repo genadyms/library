@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.2
 -- Dumped by pg_dump version 9.5.2
 
--- Started on 2016-06-03 15:33:03
+-- Started on 2016-06-03 17:05:57
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2072,7 +2072,7 @@ ALTER TABLE ONLY user_profile
     ADD CONSTRAINT user_profile_fk0 FOREIGN KEY (id) REFERENCES user_credentials(id);
 
 
--- Completed on 2016-06-03 15:33:04
+-- Completed on 2016-06-03 17:05:57
 
 --
 -- PostgreSQL database dump complete

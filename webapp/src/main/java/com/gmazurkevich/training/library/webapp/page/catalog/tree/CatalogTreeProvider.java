@@ -30,10 +30,11 @@ public class CatalogTreeProvider implements ITreeProvider<Foo> {
 	private static final long serialVersionUID = 1L;
 
 	private final static List<Foo> foos = new ArrayList<>();
-	
 
 	public CatalogTreeProvider(List<Catalog> catalogs) {
-		makeTempFoo(catalogs);
+		if (foos.isEmpty()) {
+			makeTempFoo(catalogs);
+		}
 
 	}
 
@@ -44,7 +45,8 @@ public class CatalogTreeProvider implements ITreeProvider<Foo> {
 				List<Catalog> childs = current.getChilds();
 				for (Catalog cur : childs) {
 					Foo fooAA = new Foo(rootFoo, cur.getTitle());
-					for (int i=0; i<5; i++)	new Foo(fooAA, "test_book_"+i);
+					for (int i = 0; i < 5; i++)
+						new Foo(fooAA, "test_book_" + i);
 				}
 			}
 			foos.add(rootFoo);

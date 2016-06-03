@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.2
 -- Dumped by pg_dump version 9.5.2
 
--- Started on 2016-06-03 15:32:16
+-- Started on 2016-06-03 17:05:14
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -979,11 +979,11 @@ INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone
 INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1347, 'Ivan', 'Ivanov', '2016-05-25 22:48:32.252695', 2, 2, '1464205712250', 'Grodno, ul.Gorkogo, 89');
 INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1348, 'Ivan', 'Ivanov', '2016-05-25 22:48:32.259604', 2, 1, '1464205712256', 'Grodno, ul.Gorkogo, 89');
 INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1349, 'Ivan', 'Ivanov', '2016-05-25 22:48:32.374532', 2, 2, '1464205712372', 'Grodno, ul.Gorkogo, 89');
-INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1350, 'Ivan', 'Ivanov', '2016-05-25 22:48:32.392133', 2, 1, '1464205712390', 'Grodno, ul.Gorkogo, 89');
 INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1327, 'Ivan', 'Ivanov', '2016-05-15 23:45:13.113769', 2, 1, '1463345113110', 'Grodno, ul.Gorkogo, 89');
 INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1328, 'Ivan', 'Ivanov', '2016-05-15 23:45:13.381243', 1, 0, '1463345113379', 'Grodno, ul.Gorkogo, 89');
 INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1325, 'OtherFirstName', 'OtherLastName', '2016-05-15 23:44:29.131999', 0, 1, '(095)-1234-54321', 'Grodno, ul.NewStreet');
 INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1351, 'Ivan', 'Ivanov', '2016-05-25 22:48:32.416024', 2, 0, '1464205712414', 'Grodno, ul.Gorkogo, 89');
+INSERT INTO user_profile (id, first_name, last_name, created, state, role, phone, address) VALUES (1350, 'Ivan', 'Ivanov', '2016-05-25 22:48:32.392133', 2, 0, '1464205712390', 'Grodno, ul.Gorkogo, 89');
 
 
 --
@@ -1336,7 +1336,7 @@ ALTER TABLE ONLY user_profile
     ADD CONSTRAINT user_profile_fk0 FOREIGN KEY (id) REFERENCES user_credentials(id);
 
 
--- Completed on 2016-06-03 15:32:17
+-- Completed on 2016-06-03 17:05:15
 
 --
 -- PostgreSQL database dump complete

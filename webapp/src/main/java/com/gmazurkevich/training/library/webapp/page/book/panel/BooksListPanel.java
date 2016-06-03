@@ -25,6 +25,7 @@ import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Book_;
 import com.gmazurkevich.training.library.service.AuthorService;
 import com.gmazurkevich.training.library.service.BookService;
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.book.BookEditPage;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderCopyBookPage;
@@ -56,15 +57,16 @@ public class BooksListPanel extends Panel {
 				item.add(new Label("authors", sb.toString()));
 				item.add(new Label("catalog", book.getCatalog()!=null ? book.getCatalog().getTitle(): ""));
 				item.add(DateLabel.forDatePattern("year", Model.of(book.getYear()), "yyyy"));
-
-				item.add(new Link<Void>("edit-link") {
+				
+				Link linkEdit = new Link<Void>("edit-link") {
 					@Override
 					public void onClick() {
 						setResponsePage(new BookEditPage(book));
 					}
-				});
+				};
+				item.add(linkEdit);
 
-				item.add(new Link<Void>("delete-link") {
+				Link linkDelete  = new Link<Void>("delete-link") {
 					@Override
 					public void onClick() {
 						try {
@@ -75,7 +77,15 @@ public class BooksListPanel extends Panel {
 
 						setResponsePage(new BooksPage());
 					}
-				});
+				};
+				
+				item.add(linkDelete);
+				
+				
+				if	(AuthorizedSession.get().getRoles()==null ||!AuthorizedSession.get().getRoles().contains("ADMIN")) {
+					linkEdit.setVisible(false);
+					linkDelete.setVisible(false);
+				}
 				
 				item.add(new Link<Void>("order-link") {
 

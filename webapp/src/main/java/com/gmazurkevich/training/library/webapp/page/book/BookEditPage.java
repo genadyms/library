@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.markup.html.form.palette.Palette;
 import org.apache.wicket.extensions.markup.html.form.palette.theme.DefaultTheme;
@@ -28,6 +29,7 @@ import com.gmazurkevich.training.library.service.CatalogService;
 import com.gmazurkevich.training.library.webapp.common.CatalogChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 
+@AuthorizeInstantiation(value = { "ADMIN"})
 public class BookEditPage extends AbstractPage {
 
 	@Inject
@@ -83,10 +85,6 @@ public class BookEditPage extends AbstractPage {
 
 		palette.add(new DefaultTheme());
 		form.add(palette);
-
-
-//        List<Product> allProducts = productService.find(new ProductFilter());
-//        form.add(new DropDownChoice<>("product", allProducts, ProductChoiceRenderer.INSTANCE));
 
         List<Catalog> allCatalogs = catalogService.getAll();
         form.add(new DropDownChoice<>("catalog", allCatalogs, CatalogChoiceRenderer.INSTANCE));
