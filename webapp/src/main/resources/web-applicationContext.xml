@@ -16,5 +16,6 @@
 
 	<import resource="service-context.xml" /> 
 	<context:component-scan base-package="com.gmazurkevich.training.library.webapp.app" />
+	<context:component-scan base-package="com.gmazurkevich.training.library.webapp.page.catalog.tree" />
 
 </beans>
