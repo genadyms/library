@@ -18,7 +18,7 @@ public class MenuPanel extends Panel {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
+
 		add(new Link("link-home") {
 			@Override
 			public void onClick() {
@@ -48,6 +48,5 @@ public class MenuPanel extends Panel {
 		};
 		add(link);
 		link.setVisible(!AuthorizedSession.get().isSignedIn());
-		add(new MenuBooksAdminPanel("admin-menu"));
 	}
 }

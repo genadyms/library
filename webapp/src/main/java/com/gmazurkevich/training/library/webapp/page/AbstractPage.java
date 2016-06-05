@@ -26,9 +26,9 @@ public abstract class AbstractPage extends WebPage {
         super.onInitialize();
         add(new LanguageSelectionComponent("language-select"));
         if (AuthorizedSession.get().isSignedIn()) {
-            add(new MenuPanelLoggedUser("menu-panel"));
-        } else {
-            add(new MenuPanel("menu-panel"));
+			add(new MenuPanelLoggedUser("menu-panel"));
+		} else {
+			add(new MenuPanel("menu-panel"));
         }
 
     }

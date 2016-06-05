@@ -1,8 +1,15 @@
 <wicket:panel>
-	<li><a wicket:id="link-home"><wicket:message key="menu.home" /></a>&nbsp|&nbsp</li>
-	<li><a wicket:id="link-books"><wicket:message key="menu.books" />&nbsp|&nbsp</a>
-		<wicket:container wicket:id="admin-menu"></wicket:container></li>
-	<li><a wicket:id="link-departments"><wicket:message	key="menu.departments" /></a>&nbsp|&nbsp</li>
-	<li><a wicket:id="link-login"><wicket:message key="menu.login" /></a></li>
-	<wicket:child></wicket:child>
+	<div id="menubar">
+		<ul id="menu">
+			<li><a wicket:id="link-home"> <wicket:message
+						key="menu.home" /></a></li>
+			<li><a wicket:id="link-books"><wicket:message
+						key="menu.books" /></a></li>
+			<li><a wicket:id="link-departments"><wicket:message
+						key="menu.departments" /></a></li>
+			<li><a wicket:id="link-login"><wicket:message
+						key="menu.login" /></a></li>
+						<wicket:child/> 
+		</ul>
+	</div>
 </wicket:panel>
