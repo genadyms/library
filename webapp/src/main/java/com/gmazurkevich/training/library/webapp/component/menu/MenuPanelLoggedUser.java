@@ -21,20 +21,13 @@ public class MenuPanelLoggedUser extends MenuPanel {
 	protected void onInitialize() {
 		super.onInitialize();
 		
-		add(new Link("link-copybooks") {
-			@Override
-			public void onClick() {
-				setResponsePage(new CopyBooksPage());
-			}
-		});
+//		add(new Link("link-copybooks") {
+//			@Override
+//			public void onClick() {
+//				setResponsePage(new CopyBooksPage());
+//			}
+//		});
 		
-		add(new Link("link-catalog") {
-			@Override
-			public void onClick() {
-				setResponsePage(new CatalogsPage());
-			}
-		});
-
 		add(new Link("link-comments") {
 			@Override
 			public void onClick() {

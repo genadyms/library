@@ -11,8 +11,13 @@
 	<entry key="menu.comments">Comments</entry>
 	<entry key="menu.orders">Orders</entry>
 	<entry key="menu.users">Users</entry>
-	
+	<entry key="logo.library">Library</entry>
+	<entry key="logo.span">test project</entry>
+	<entry key="logo.description">Simple. Fast. Very good.</entry>
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>
-	
+	<entry key="panel.catalog">Catalog</entry>
+	<entry key="panel.search">Search</entry>
+	<entry key="panel.advanced_search">Advanced Search</entry>
+	<entry key="page.copyright">Copyright</entry>
 </properties>
