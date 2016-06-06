@@ -18,8 +18,6 @@ public class LoginPage extends AbstractPage {
 		super();
 	}
 
-	public static final String ID_FORM = "form";
-
 	private String username;
 	private String password;
 
@@ -32,7 +30,7 @@ public class LoginPage extends AbstractPage {
 			setResponsePage(Application.get().getHomePage());
 		}
 
-		final Form<Void> form = new Form<Void>(ID_FORM);
+		final Form<Void> form = new Form<Void>("form");
 		form.setDefaultModel(new CompoundPropertyModel<LoginPage>(this));
 		form.add(new RequiredTextField<String>("username"));
 		form.add(new PasswordTextField("password"));

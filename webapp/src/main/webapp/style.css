@@ -52,7 +52,7 @@ h5, h6
 a, a:hover
 { outline: none;
   text-decoration: underline;
-  color: #B48A7C;}
+  color: #ffffff;}
 
 a:hover
 { text-decoration: none;}
@@ -98,7 +98,7 @@ ol li
   margin-right: auto;}
 
 #header
-{ background: #000;
+{ background: #5D3729;
   border-bottom: 1px solid #3d3d3d;
   height: 186px;}
   
@@ -107,13 +107,13 @@ ol li
   width: 860px;
   height: 180px;
   margin-bottom: 20px;
-  border: 10px solid #DDD;}
+  border: 10px solid #e8d5ce;}
 
 #logo
 { width: 880px;
   position: relative;
   height: 140px;
-  background: #1d1d1d;}
+  background: #563224;}
 
 #logo #logo_text 
 { position: absolute; 
@@ -133,7 +133,7 @@ ol li
   text-decoration: none;}
 
 #logo_text h1 a .logo_colour
-{ color: #5E4238;}
+{ color: #5d4137;}
 
 #logo_text a:hover .logo_colour
 { color: #5E4238;}
@@ -141,14 +141,14 @@ ol li
 #logo_text h2
 { font-size: 120%;
   padding: 4px 0 0 0;
-  color: #B48A7C;}
+  color: #a26a58;}
 
 #menubar
 { width: 872px;
   height: 45px;
   padding-right: 8px;
-  background: #2D2D2D;
-  border-top: 1px solid #3D3D3D;} 
+  background: #4c3026;
+  border-top: 1px solid #5D3729;} 
 
 ul#menu
 { float: right;
@@ -169,7 +169,7 @@ ul#menu li a
   text-align: center;
   color: #FFF;
   text-decoration: none;
-  background: #5E4238;} 
+  background: #5d463d;} 
 
 ul#menu li.selected a
 { height: 20px;
@@ -187,7 +187,9 @@ ul#menu li a:hover
 { color: #B48A7C;}
 
 #site_content
-{ width: 880px;
+{ 
+	min-height: 450px;
+	width: 880px;
   overflow: hidden;
   margin: 20px auto 0 auto;
   padding: 0 0 10px 0;} 
@@ -246,12 +248,12 @@ ul#menu li a:hover
   height: 40px;
   padding: 28px 0 5px 0;
   text-align: center; 
-  background: #000;
+  background: #463028;
   border-top: 2px solid #2D2D2D;
   color: #FFF;}
 
 #footer a
-{ color: #FFF;
+{ color: #5D3729;
   text-decoration: none;}
 
 #footer a:hover
@@ -320,7 +322,7 @@ table
 { margin: 10px 0 30px 0;}
 
 table tr th, table tr td
-{ background: #3B3B3B;
+{ background: #583508;
   color: #FFF;
   padding: 7px 4px;
   text-align: left;}
@@ -328,7 +330,8 @@ table tr th, table tr td
 table tr td
 { background: #E5E5DB;
   color: #47433F;
-  border-top: 1px solid #FFF;}
+  border-top: 1px solid #FFF;
+  background: #d2c6be;}
 
 .language-comp select {
 	position: absolute;
