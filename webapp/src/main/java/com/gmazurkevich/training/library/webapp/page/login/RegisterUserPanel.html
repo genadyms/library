@@ -1,0 +1,38 @@
+<wicket:panel>
+	<form wicket:id="form">
+
+		<table>
+			<tr>
+				<td><b>name:</b></td>
+				<td><input type="text" wicket:id="firstName" /></td>
+			</tr>
+			<tr>
+				<td><b>value:</b></td>
+				<td><input type="text" wicket:id="lastName" /></td>
+			</tr>
+			<tr>
+				<td><b>address:</b></td>
+				<td><input type="text" wicket:id="address" /></td>
+			</tr>
+			<tr>
+				<td><b>phone:</b></td>
+				<td><input type="text" wicket:id="phone" /></td>
+			</tr>
+			<!-- tr>
+				<td><b>email:</b></td>
+				<td><input type="text" wicket:id="userProfile.userCredentials.email" /></td>
+			</tr>
+			<tr>
+				<td><b>password:</b></td>
+				<td><input type="text" wicket:id="userProfile.userCredentials.password" /></td>
+			</tr-->
+			<tr>
+				<td colspan="2">
+					<button wicket:id="save">save</button>
+					<button wicket:id="cancel">cancel</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<div wicket:id="feedback"></div>
+</wicket:panel>
