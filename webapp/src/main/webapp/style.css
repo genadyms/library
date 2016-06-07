@@ -52,7 +52,7 @@ h5, h6
 a, a:hover
 { outline: none;
   text-decoration: underline;
-  color: #ffffff;}
+  color: #a59a73;}
 
 a:hover
 { text-decoration: none;}
@@ -322,7 +322,7 @@ table
 { margin: 10px 0 30px 0;}
 
 table tr th, table tr td
-{ background: #583508;
+{ background: #decdb7;
   color: #FFF;
   padding: 7px 4px;
   text-align: left;}

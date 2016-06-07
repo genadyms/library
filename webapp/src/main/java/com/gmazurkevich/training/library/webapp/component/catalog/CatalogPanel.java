@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.wicket.Component;
 import org.apache.wicket.extensions.markup.html.repeater.tree.DefaultNestedTree;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -22,6 +23,11 @@ import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.catalog.tree.CatalogProvider;
 
 public class CatalogPanel extends Panel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private CatalogService catalogService;
 
@@ -36,23 +42,21 @@ public class CatalogPanel extends Panel {
 	protected void onInitialize() {
 		super.onInitialize();
 		add(new DefaultNestedTree<Catalog>("tree", new CatalogProvider()) {
-			// {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected Component newContentComponent(String id, IModel<Catalog> node) {
 				Catalog catalog = node.getObject();
 				List<Catalog> childs = catalogService.getCatalogs(catalog);
 				if (childs.isEmpty()) {
-					BookFilter bookFilter = new BookFilter();
-					bookFilter.setCatalog(catalog);
-					List<Book> books = bookService.find(bookFilter);
-					for (Book current : books) {
-						PageParameters parameters = new PageParameters();
-						parameters.add("id", current.getId());
-						BookmarkablePageLink bookLink = new BookmarkablePageLink<>(id, BooksPage.class, parameters);
-						bookLink.setBody(Model.of(catalog));
-
-						return bookLink;
-					}
+					PageParameters parameters = new PageParameters();
+					parameters.add("catalog", catalog.getId());
+					BookmarkablePageLink booksPageLink = new BookmarkablePageLink<>(id, BooksPage.class, parameters);
+					booksPageLink.setBody(Model.of(catalog));
+					return booksPageLink;
 				}
 				return super.newContentComponent(id, node);
 

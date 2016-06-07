@@ -25,6 +25,8 @@ public class HomePage extends AbstractPage {
 		super.onInitialize();
 		add(new CatalogPanel("catalog-panel"));
 		add(new SearchPanel("search-panel"));
+		Label myLabel = new MyTestLabel("test-label", "test label");
+		add(myLabel);
 //		LoginPanel loginPanel = new LoginPanel("login-panel");
 //		add(loginPanel);
 //		if(AuthorizedSession.get().isSignedIn()) {

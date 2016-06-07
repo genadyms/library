@@ -23,8 +23,10 @@ import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Book_;
+import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.AuthorService;
 import com.gmazurkevich.training.library.service.BookService;
+import com.gmazurkevich.training.library.service.CatalogService;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.book.BookEditPage;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
@@ -36,7 +38,12 @@ public class BooksListPanel extends Panel {
 	private BookService bookService;
 
 	@Inject
+	private CatalogService catalogService;
+
+	@Inject
 	private AuthorService authorService;
+	
+	private Catalog catalog;
 	
 	public BooksListPanel(String id) {
 		super(id);
@@ -46,18 +53,18 @@ public class BooksListPanel extends Panel {
 			@Override
 			protected void populateItem(Item<Book> item) {
 				Book book = bookService.getBookFetchAll(item.getModelObject());
-				
+
 				item.add(new Label("id", book.getId()));
 				item.add(new Label("title", book.getTitle()));
 				item.add(new Label("publishingOffice", book.getPublishingOffice()));
 				StringBuffer sb = new StringBuffer();
-				for(Author author : book.getAuthors()){
+				for (Author author : book.getAuthors()) {
 					sb.append(author.getFirstName()).append(" ").append(author.getSecondName()).append(", ");
 				}
 				item.add(new Label("authors", sb.toString()));
-				item.add(new Label("catalog", book.getCatalog()!=null ? book.getCatalog().getTitle(): ""));
+				item.add(new Label("catalog", book.getCatalog() != null ? book.getCatalog().getTitle() : ""));
 				item.add(DateLabel.forDatePattern("year", Model.of(book.getYear()), "yyyy"));
-				
+
 				Link linkEdit = new Link<Void>("edit-link") {
 					@Override
 					public void onClick() {
@@ -66,7 +73,7 @@ public class BooksListPanel extends Panel {
 				};
 				item.add(linkEdit);
 
-				Link linkDelete  = new Link<Void>("delete-link") {
+				Link linkDelete = new Link<Void>("delete-link") {
 					@Override
 					public void onClick() {
 						try {
@@ -78,22 +85,22 @@ public class BooksListPanel extends Panel {
 						setResponsePage(new BooksPage());
 					}
 				};
-				
+
 				item.add(linkDelete);
-				
-				
-				if	(AuthorizedSession.get().getRoles()==null ||!AuthorizedSession.get().getRoles().contains("ADMIN")) {
+
+				if (AuthorizedSession.get().getRoles() == null
+						|| !AuthorizedSession.get().getRoles().contains("ADMIN")) {
 					linkEdit.setVisible(false);
 					linkDelete.setVisible(false);
 				}
-				
+
 				item.add(new Link<Void>("order-link") {
 
 					@Override
 					public void onClick() {
 						setResponsePage(new OrderCopyBookPage(book));
 					}
-					
+
 				});
 
 			}
@@ -115,6 +122,9 @@ public class BooksListPanel extends Panel {
 		public BooksDataProvider() {
 			super();
 			bookFilter = new BookFilter();
+			if (catalog!=null){
+					bookFilter.setCatalog(catalog);
+			}
 			setSort((Serializable) Book_.title, SortOrder.ASCENDING);
 		}
 
@@ -141,6 +151,12 @@ public class BooksListPanel extends Panel {
 			return new Model(object);
 		}
 
+	}
+
+	public void setCatalogId(Long catalogId) {
+		if (catalogId!=null) {
+			catalog = catalogService.getCatalog(catalogId);
+		}
 	}
 
 }
