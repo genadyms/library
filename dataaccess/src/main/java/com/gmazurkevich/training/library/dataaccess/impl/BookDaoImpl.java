@@ -46,7 +46,10 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		if (bookFilter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(bookFilter.getSortProperty()), bookFilter.isSortOrder()));
 		}
-
+		if (bookFilter.getCatalog() != null) {
+			from.fetch(Book_.catalog);
+			cq.where(cb.equal(from.get(Book_.catalog), bookFilter.getCatalog()));
+		}
 		TypedQuery<Book> q = em.createQuery(cq);
 		setPaging(bookFilter, q);
 		return q.getResultList();

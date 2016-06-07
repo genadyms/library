@@ -42,9 +42,9 @@ public class BooksListPanel extends Panel {
 
 	@Inject
 	private AuthorService authorService;
-	
+
 	private Catalog catalog;
-	
+
 	public BooksListPanel(String id) {
 		super(id);
 
@@ -122,9 +122,6 @@ public class BooksListPanel extends Panel {
 		public BooksDataProvider() {
 			super();
 			bookFilter = new BookFilter();
-			if (catalog!=null){
-					bookFilter.setCatalog(catalog);
-			}
 			setSort((Serializable) Book_.title, SortOrder.ASCENDING);
 		}
 
@@ -138,6 +135,11 @@ public class BooksListPanel extends Panel {
 
 			bookFilter.setLimit((int) count);
 			bookFilter.setOffset((int) first);
+			if (catalog != null) {
+				System.out.println("______________"+catalog.getTitle());
+				bookFilter.setCatalog(catalog);
+			}
+
 			return bookService.find(bookFilter).iterator();
 		}
 
@@ -154,7 +156,7 @@ public class BooksListPanel extends Panel {
 	}
 
 	public void setCatalogId(Long catalogId) {
-		if (catalogId!=null) {
+		if (catalogId != null) {
 			catalog = catalogService.getCatalog(catalogId);
 		}
 	}

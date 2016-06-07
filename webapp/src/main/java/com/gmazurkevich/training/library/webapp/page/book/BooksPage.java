@@ -20,19 +20,19 @@ public class BooksPage extends AbstractPage {
 
 	public BooksPage() {
 		super();
-
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 		BooksListPanel blPanel = new BooksListPanel("list-panel");
-		if(parameters!=null) {
+		if (parameters != null) {
 			StringValue catalog = parameters.get("catalog");
-			if(catalog!=null) {
+			if (catalog != null) {
 				blPanel.setCatalogId(catalog.toLong());
 			}
 		}
+		add(blPanel);
 		Link createNew = new Link("create") {
 			@Override
 			public void onClick() {
