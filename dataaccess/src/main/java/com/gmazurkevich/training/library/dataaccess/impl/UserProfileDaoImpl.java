@@ -51,9 +51,9 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile, Long> imple
 			cq.where(cb.equal(from.get(UserProfile_.department), filter.getDepartment()));
 		}
 		// set fetching
-		if (filter.isFetchCredentials()) {
-			from.fetch(UserProfile_.userCredentials, JoinType.LEFT);
-		}
+//		if (filter.isFetchCredentials()) {
+//			from.fetch(UserProfile_.userCredentials, JoinType.LEFT);
+//		}
 
 		// set sort params
 		if (filter.getSortProperty() != null) {
@@ -86,7 +86,9 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile, Long> imple
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 
 		Root<UserProfile> from = cq.from(UserProfile.class);
-
+		if (filter.getRole()!=null){
+			cq.where(cb.equal(from.get(UserProfile_.role), filter.getRole()));
+		}
 		cq.select(cb.count(from));
 
 		handleFilterParameters(filter, cb, cq, from);

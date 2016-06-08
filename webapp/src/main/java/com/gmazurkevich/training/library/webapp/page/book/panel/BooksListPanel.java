@@ -43,12 +43,24 @@ public class BooksListPanel extends Panel {
 	@Inject
 	private AuthorService authorService;
 
-	private Catalog catalog;
-
-	public BooksListPanel(String id) {
+	private BooksDataProvider booksDataProvider = new BooksDataProvider();
+	
+	public BooksListPanel(String id){
 		super(id);
+	}
+	public BooksListPanel(String id, Long catalogId) {
+		this(id);
+		booksDataProvider.getBookFilter().setCatalog(catalogService.getCatalog(catalogId));
+	}
 
-		BooksDataProvider booksDataProvider = new BooksDataProvider();
+	public BooksListPanel(String id, String fullFindParameter) {
+		this(id);
+		booksDataProvider.getBookFilter().setTitle(fullFindParameter);
+	}
+	
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		DataView<Book> dataView = new DataView<Book>("rows", booksDataProvider, 5) {
 			@Override
 			protected void populateItem(Item<Book> item) {
@@ -85,7 +97,6 @@ public class BooksListPanel extends Panel {
 						setResponsePage(new BooksPage());
 					}
 				};
-
 				item.add(linkDelete);
 
 				if (AuthorizedSession.get().getRoles() == null
@@ -113,16 +124,21 @@ public class BooksListPanel extends Panel {
 		add(new OrderByBorder("sort-publishing_office", Book_.publishingOffice, booksDataProvider));
 		add(new OrderByBorder("sort-catalog", Book_.catalog, booksDataProvider));
 		add(new OrderByBorder("sort-year", Book_.year, booksDataProvider));
+
 	}
 
 	private class BooksDataProvider extends SortableDataProvider<Book, Serializable> {
 
-		private BookFilter bookFilter;
+		private BookFilter bookFilter = new BookFilter();
+		private Catalog catalog;
 
-		public BooksDataProvider() {
+		BooksDataProvider() {
 			super();
-			bookFilter = new BookFilter();
 			setSort((Serializable) Book_.title, SortOrder.ASCENDING);
+		}
+	
+		BookFilter getBookFilter() {
+			return bookFilter;
 		}
 
 		@Override
@@ -135,10 +151,6 @@ public class BooksListPanel extends Panel {
 
 			bookFilter.setLimit((int) count);
 			bookFilter.setOffset((int) first);
-			if (catalog != null) {
-				System.out.println("______________"+catalog.getTitle());
-				bookFilter.setCatalog(catalog);
-			}
 
 			return bookService.find(bookFilter).iterator();
 		}
@@ -153,12 +165,6 @@ public class BooksListPanel extends Panel {
 			return new Model(object);
 		}
 
-	}
-
-	public void setCatalogId(Long catalogId) {
-		if (catalogId != null) {
-			catalog = catalogService.getCatalog(catalogId);
-		}
 	}
 
 }

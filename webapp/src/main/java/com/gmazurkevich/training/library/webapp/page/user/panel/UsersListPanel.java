@@ -92,7 +92,10 @@ public class UsersListPanel extends Panel {
 		public UsersDataProvider() {
 			super();
 			userFilter = new UserFilter();
-			userFilter.setFetchCredentials(true);
+//			userFilter.setFetchCredentials(true);
+			if(AuthorizedSession.get().getRoles().contains(UserRole.LIBRARIAN.toString())) {
+				userFilter.setRole(UserRole.READER);
+			}
 			setSort((Serializable) UserProfile_.firstName, SortOrder.ASCENDING);
 		}
 
@@ -100,9 +103,6 @@ public class UsersListPanel extends Panel {
 		public Iterator<UserProfile> iterator(long first, long count) {
 			Serializable property = getSort().getProperty();
 			SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
-			if(AuthorizedSession.get().getRoles().contains(UserRole.LIBRARIAN.toString())) {
-				userFilter.setRole(UserRole.READER);
-			}
 			userFilter.setSortProperty((SingularAttribute) property);
 			userFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
 

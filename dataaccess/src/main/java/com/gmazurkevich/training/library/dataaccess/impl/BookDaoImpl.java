@@ -24,11 +24,18 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 	}
 
 	@Override
-	public Long count(BookFilter filter) {
+	public Long count(BookFilter bookFilter) {
 		EntityManager em = getEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<Book> from = cq.from(Book.class);
+		if (bookFilter.getCatalog() != null) {
+//			from.fetch(Book_.catalog);
+			cq.where(cb.equal(from.get(Book_.catalog), bookFilter.getCatalog()));
+		}
+		if(bookFilter.getTitle()!=null){
+			cq.where(cb.equal(from.get(Book_.title), bookFilter.getTitle()));
+		}
 		cq.select(cb.count(from));
 		TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult();
@@ -47,8 +54,11 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 			cq.orderBy(new OrderImpl(from.get(bookFilter.getSortProperty()), bookFilter.isSortOrder()));
 		}
 		if (bookFilter.getCatalog() != null) {
-			from.fetch(Book_.catalog);
+//			from.fetch(Book_.catalog);
 			cq.where(cb.equal(from.get(Book_.catalog), bookFilter.getCatalog()));
+		}
+		if(bookFilter.getTitle()!=null){
+			cq.where(cb.equal(from.get(Book_.title), bookFilter.getTitle()));
 		}
 		TypedQuery<Book> q = em.createQuery(cq);
 		setPaging(bookFilter, q);

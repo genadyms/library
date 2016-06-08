@@ -14,15 +14,20 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.string.Strings;
 
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.webapp.page.book.BookEditPage;
+import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 
 public class SearchPanel extends Panel {
+	private final static String MSG_ENTER = "Enter word for search...";
 
 	public SearchPanel(String id) {
 		super(id);
@@ -31,45 +36,25 @@ public class SearchPanel extends Panel {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-	
 		final Form<Void> form = new Form<Void>("form-search");
-		RequiredTextField<String> requiredTextField = new RequiredTextField<String>("search-field");
-		form.add(requiredTextField);
+		TextField<String> searchField = new TextField<String>("search-field");
+		searchField.setDefaultModel(Model.of(MSG_ENTER));
+		form.add(searchField);
 		form.add(new SubmitLink("search-submit") {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
-				if (requiredTextField.isInputNullable()) {
-					requiredTextField.setVisible(false);
+				String inputValue = searchField.getInput().trim();
+				if (inputValue.isEmpty() || MSG_ENTER.equals(inputValue)) {
+					setResponsePage(getPage());
+				} else {
+					PageParameters parameters = new PageParameters();
+					parameters.add("find", inputValue);
+					setResponsePage(BooksPage.class, parameters);
 				}
 			}
 		});
 		add(form);
-//		Model<Integer> counterModel = new Model<Integer>();
-//		counterModel.setObject(0);
-//		Label label = new Label("counter", counterModel) {
-//			@Override
-//			public void onEvent(IEvent<?> event) {
-//				counterModel.setObject(0);
-//
-//			}
-//		};
-//
-//		label.setOutputMarkupId(true);
-//		label.setOutputMarkupPlaceholderTag(true);
-//		add(label);
-//		
-//		Link link = new Link("test-link"){
-//			private boolean isVisible = false;
-//			@Override
-//			public void onClick() {
-//				label.setVisible(isVisible);
-//				isVisible = !isVisible;
-//				
-//			}
-//			
-//		};
-//		add(link);
 	}
 
 }
