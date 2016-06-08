@@ -3,6 +3,7 @@ package com.gmazurkevich.training.library.dataaccess.filters;
 import javax.persistence.metamodel.SingularAttribute;
 
 import com.gmazurkevich.training.library.datamodel.Department;
+import com.gmazurkevich.training.library.datamodel.UserRole;
 
 public class UserFilter extends AbstractFilter {
 
@@ -12,8 +13,17 @@ public class UserFilter extends AbstractFilter {
     private Integer offset;
     private Integer limit;
     private Department department;
+    private UserRole role;
 
-    public Department getDepartment() {
+    public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	public Department getDepartment() {
 		return department;
 	}
 

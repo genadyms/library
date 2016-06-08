@@ -10,12 +10,14 @@ import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.PropertyModel;
 
 import com.gmazurkevich.training.library.datamodel.UserCredentials;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
 import com.gmazurkevich.training.library.datamodel.UserRole;
 import com.gmazurkevich.training.library.datamodel.UserState;
 import com.gmazurkevich.training.library.service.UserService;
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.common.UserRoleChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.common.UserStateChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
@@ -25,59 +27,72 @@ public class UsersEditPage extends AbstractPage {
 	@Inject
 	private UserService userService;
 
-	private UserProfile profile;
-	
-	private UserCredentials credentials;
+	private UserProfile userProfile;
 
-	public UsersEditPage(UserProfile user) {
-        super();
-        this.profile = user;
-        this.credentials = this.profile.getUserCredentials();
-    }
+	private UserCredentials userCredentials;
+
+	public UsersEditPage(UserProfile userProfile, UserCredentials userCredentials) {
+		super();
+		this.userProfile = userProfile;
+		this.userCredentials = userCredentials;
+	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 
-		Form<UserProfile> form = new Form<UserProfile>("form", new CompoundPropertyModel<UserProfile>(profile));
+		Form<?> form = new Form<Void>("form");
 		add(form);
 
-		TextField<String> firstNameField = new TextField<>("firstName");
+		TextField<String> firstNameField = new TextField<>("firstName",
+				new PropertyModel<String>(userProfile, "firstName"));
 		firstNameField.setRequired(true);
-		firstNameField.setEnabled(false);
 		form.add(firstNameField);
 
-		TextField<String> lastNameField = new TextField<>("lastName");
-		lastNameField.setRequired(true);
-		lastNameField.setEnabled(false);
-		form.add(lastNameField);
+		TextField<String> lastName = new TextField<>("lastName", new PropertyModel<String>(userProfile, "lastName"));
+		lastName.setRequired(true);
+		form.add(lastName);
 
-		DropDownChoice<UserRole> roleField = new DropDownChoice<>("role", Arrays.asList(UserRole.values()),
+		DropDownChoice<UserRole> roleField = new DropDownChoice<>("role",
+				new PropertyModel<UserRole>(userProfile, "role"), Arrays.asList(UserRole.values()),
 				UserRoleChoiceRenderer.INSTANCE);
 		roleField.setRequired(true);
 		form.add(roleField);
 
-		DropDownChoice<UserState> stateField = new DropDownChoice<>("state", Arrays.asList(UserState.values()),
+		DropDownChoice<UserState> stateField = new DropDownChoice<>("state",
+				new PropertyModel<UserState>(userProfile, "state"), Arrays.asList(UserState.values()),
 				UserStateChoiceRenderer.INSTANCE);
 		stateField.setRequired(true);
 		form.add(stateField);
 
-		TextField<String> phoneField = new TextField<>("phone");
-		phoneField.setRequired(true);
-		// titleField.setEnabled(false);
-		form.add(phoneField);
+		TextField<String> phone = new TextField<>("phone", new PropertyModel<String>(userProfile, "phone"));
+		phone.setRequired(true);
+		form.add(phone);
 
-		TextField<String> addressField = new TextField<>("address");
-		addressField.setRequired(true);
-		// titleField.setEnabled(false);
-		form.add(addressField);
+		TextField<String> address = new TextField<>("address", new PropertyModel<String>(userProfile, "address"));
+		address.setRequired(true);
+		form.add(address);
 
-
+		TextField<String> pass = new TextField<>("password", new PropertyModel<String>(userCredentials, "password"));
+		pass.isRequired();
+		form.add(pass);
+		TextField<String> email = new TextField<>("email", new PropertyModel<String>(userCredentials, "email"));
+		email.isRequired();
+		form.add(email);
+		if(!AuthorizedSession.get().getRoles().contains(UserRole.ADMIN.toString())) {
+			pass.setVisible(false);
+			email.setVisible(false);
+			roleField.setEnabled(false);
+		}
 		form.add(new SubmitLink("save") {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
-				userService.update(profile);
+				if (userProfile.getId() == null) {
+					userService.register(userProfile, userCredentials);
+				} else {
+					userService.update(userProfile);
+				}
 				setResponsePage(new UsersPage());
 			}
 		});

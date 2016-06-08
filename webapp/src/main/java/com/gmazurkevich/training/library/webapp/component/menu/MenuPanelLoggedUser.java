@@ -49,7 +49,7 @@ public class MenuPanelLoggedUser extends MenuPanel {
 			}
 		};
 		add(linkUsers);
-		linkUsers.setVisible(AuthorizedSession.get().getRoles().contains("ADMIN"));
+		linkUsers.setVisible(AuthorizedSession.get().getRoles().contains(UserRole.ADMIN.toString())||AuthorizedSession.get().getRoles().contains(UserRole.LIBRARIAN.toString()));
 		Link link = new Link("link-logout") {
 			@Override
 			public void onClick() {

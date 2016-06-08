@@ -22,8 +22,10 @@ import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 import com.gmazurkevich.training.library.datamodel.UserCredentials;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
 import com.gmazurkevich.training.library.datamodel.UserProfile_;
+import com.gmazurkevich.training.library.datamodel.UserRole;
 import com.gmazurkevich.training.library.service.UserService;
 import com.gmazurkevich.training.library.service.exception.DeleteActiveUserException;
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.user.UsersEditPage;
 import com.gmazurkevich.training.library.webapp.page.user.UsersPage;
 
@@ -39,24 +41,37 @@ public class UsersListPanel extends Panel {
 		DataView<UserProfile> dataView = new DataView<UserProfile>("rows", userDataProvider, 5) {
 			@Override
 			protected void populateItem(Item<UserProfile> item) {
-				UserProfile user = item.getModelObject();
-				UserCredentials credentials = userService.getCredentials(user.getId());
-				item.add(new Label("id", user.getId()));
-				item.add(new Label("fName", user.getFirstName()));
-				item.add(new Label("lName", user.getLastName()));
-				item.add(new Label("role", user.getRole()));
-				item.add(new Label("state", user.getState()));
-				item.add(new Label("phone", user.getPhone()));
-				item.add(new Label("address", user.getAddress()));
-				item.add(new Label("email", credentials.getEmail()));
+				UserProfile userProfile = item.getModelObject();
+				UserCredentials userCredentials = userService.getCredentials(userProfile.getId());
+				item.add(new Label("id", userProfile.getId()));
+				item.add(new Label("fName", userProfile.getFirstName()));
+				item.add(new Label("lName", userProfile.getLastName()));
+				item.add(new Label("role", userProfile.getRole()));
+				item.add(new Label("state", userProfile.getState()));
+				item.add(new Label("phone", userProfile.getPhone()));
+				item.add(new Label("address", userProfile.getAddress()));
+				item.add(new Label("email", userCredentials.getEmail()));
 
 				item.add(new Link<Void>("edit-link") {
 					@Override
 					public void onClick() {
-						setResponsePage(new UsersEditPage(user));
+						setResponsePage(new UsersEditPage(userProfile,userCredentials));
 					}
 				});
-
+				
+				Link linkDel = new Link<Void>("delete-link") {
+					@Override
+					public void onClick() {
+						try {
+							userService.delete(userProfile.getId());
+						} catch (DeleteActiveUserException e) {
+							e.printStackTrace();
+						}
+						setResponsePage(new UsersPage());
+					}
+				};
+				linkDel.setVisible(!AuthorizedSession.get().getLoggedUser().getId().equals(userProfile.getId()));
+				item.add(linkDel);
 			}
 		};
 		add(dataView);
@@ -85,7 +100,9 @@ public class UsersListPanel extends Panel {
 		public Iterator<UserProfile> iterator(long first, long count) {
 			Serializable property = getSort().getProperty();
 			SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
-
+			if(AuthorizedSession.get().getRoles().contains(UserRole.LIBRARIAN.toString())) {
+				userFilter.setRole(UserRole.READER);
+			}
 			userFilter.setSortProperty((SingularAttribute) property);
 			userFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
 

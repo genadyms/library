@@ -59,6 +59,10 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile, Long> imple
 		if (filter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
 		}
+		
+		if (filter.getRole()!=null){
+			cq.where(cb.equal(from.get(UserProfile_.role), filter.getRole()));
+		}
 
 		TypedQuery<UserProfile> q = em.createQuery(cq);
 
