@@ -45,4 +45,19 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.find(commentFilter);
 	}
 
+	@Override
+	public long count(CommentFilter commentFilter) {
+		return commentDao.count(commentFilter);
+	}
+
+	@Override
+	public void saveOrUpdate(Comment comment) {
+		if(comment.getId()==null) {
+			save(comment);
+		} else {
+			update(comment);
+		}
+		
+	}
+
 }

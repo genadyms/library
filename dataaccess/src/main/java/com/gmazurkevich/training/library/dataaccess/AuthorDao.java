@@ -6,5 +6,5 @@ import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 
 public interface AuthorDao extends AbstractDao<Author, Long> {
-
+	public List<Author> find(String substring);
 }

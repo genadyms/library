@@ -1,0 +1,27 @@
+<wicket:panel>
+	<table class="list-table">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>content</th>
+				<th>date</th>
+				<th>like</th>
+				<th>dislike</th>
+				<th>actions</th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="id"/></td>
+				<td><span wicket:id="content"/></td>
+				<td><span wicket:id="date"/> </td>
+				<td><span wicket:id="like"/> </td>
+				<td><span wicket:id="dislike"/> </td>
+				<td><a wicket:id="delete-link">delete</a><br><a wicket:id="edit-link">edit</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<!--div wicket:id="paging"></div-->
+
+</wicket:panel>

@@ -4,21 +4,12 @@ import java.util.List;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 
-public class BookFilter extends AbstractFilter{
+public class BookFilter extends AbstractFilter {
 	private String isbn;
 	private Catalog catalog;
 	private String publishingOffice;
 	private String title;
 	private List<Author> authors;
-	private boolean fetchComment;
-
-	public boolean isFetchComment() {
-		return fetchComment;
-	}
-
-	public void setFetchComment(boolean fetchComment) {
-		this.fetchComment = fetchComment;
-	}
 
 	public Catalog getCatalog() {
 		return catalog;

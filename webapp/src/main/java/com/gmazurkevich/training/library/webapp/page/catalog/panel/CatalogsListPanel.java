@@ -18,11 +18,9 @@ import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
-import com.gmazurkevich.training.library.webapp.page.catalog.tree.Foo;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.catalog.CatalogsPage;
 import com.gmazurkevich.training.library.webapp.page.catalog.tree.CatalogProvider;
-import com.gmazurkevich.training.library.webapp.page.catalog.tree.CatalogTreeProvider;
 
 public class CatalogsListPanel extends Panel {
 
@@ -36,12 +34,9 @@ public class CatalogsListPanel extends Panel {
 		super(id);
 
 		add(new DefaultNestedTree<Catalog>("tree", new CatalogProvider()) {// CatalogTreeProvider(getCatalogs()))
-																							// {
+																			// {
 			@Override
 			protected Component newContentComponent(String id, IModel<Catalog> node) {
-				// Catalog catalog = node.getObject();
-				// List<Catalog> catalogs = catalogService.getCatalogs(catalog);
-				// return super.newContentComponent(id, node);
 				Catalog catalog = node.getObject();
 				List<Catalog> childs = catalogService.getCatalogs(catalog);
 				if (childs.isEmpty()) {

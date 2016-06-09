@@ -20,5 +20,6 @@ public interface AuthorService {
 	void create(Author author);
 
 	List<Author> getAll();
-
+	
+	List<Author> find(String substring);
 }

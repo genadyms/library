@@ -22,4 +22,8 @@ public interface CommentService {
 	
 	Comment getComment(Long id);
 
+	long count(CommentFilter commentFilter);
+
+	void saveOrUpdate(Comment comment);
+
 }

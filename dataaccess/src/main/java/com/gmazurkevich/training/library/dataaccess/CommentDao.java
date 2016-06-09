@@ -9,4 +9,6 @@ public interface CommentDao extends AbstractDao<Comment, Long> {
 
 	List<Comment> find(CommentFilter commentFilter);
 
+	Long count(CommentFilter commentFilter);
+
 }

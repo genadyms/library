@@ -2,6 +2,8 @@ package com.gmazurkevich.training.library.webapp.page.book.panel;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
@@ -29,6 +31,7 @@ import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.book.BookEditPage;
+import com.gmazurkevich.training.library.webapp.page.book.BookInfoPage;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderCopyBookPage;
 
@@ -55,6 +58,10 @@ public class BooksListPanel extends Panel {
 
 	public BooksListPanel(String id, String fullFindParameter) {
 		this(id);
+		List<Author> authors = authorService.find(fullFindParameter);
+		if(!authors.isEmpty()){
+			booksDataProvider.getBookFilter().setAuthors(authors);
+		}
 		booksDataProvider.getBookFilter().setTitle(fullFindParameter);
 	}
 	
@@ -105,11 +112,11 @@ public class BooksListPanel extends Panel {
 					linkDelete.setVisible(false);
 				}
 
-				item.add(new Link<Void>("order-link") {
+				item.add(new Link<Void>("detail-link") {
 
 					@Override
 					public void onClick() {
-						setResponsePage(new OrderCopyBookPage(book));
+						setResponsePage(new BookInfoPage(book));
 					}
 
 				});

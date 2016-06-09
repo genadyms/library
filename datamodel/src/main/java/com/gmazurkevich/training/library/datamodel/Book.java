@@ -44,54 +44,6 @@ public class Book extends AbstractModel {
 		/* + comments */ + ", publishingOffice=" + publishingOffice + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
-		result = prime * result + ((pages == null) ? 0 : pages.hashCode());
-		result = prime * result + ((publishingOffice == null) ? 0 : publishingOffice.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((year == null) ? 0 : year.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Book other = (Book) obj;
-		if (isbn == null) {
-			if (other.isbn != null)
-				return false;
-		} else if (!isbn.equals(other.isbn))
-			return false;
-		if (pages == null) {
-			if (other.pages != null)
-				return false;
-		} else if (!pages.equals(other.pages))
-			return false;
-		if (publishingOffice == null) {
-			if (other.publishingOffice != null)
-				return false;
-		} else if (!publishingOffice.equals(other.publishingOffice))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (year == null) {
-			if (other.year != null)
-				return false;
-		} else if (!year.equals(other.year))
-			return false;
-		return true;
-	}
 
 	public List<Author> getAuthors() {
 		return authors;

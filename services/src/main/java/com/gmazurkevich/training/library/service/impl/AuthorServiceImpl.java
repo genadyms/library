@@ -58,15 +58,9 @@ public class AuthorServiceImpl implements AuthorService {
 		return authorDao.getAll();
 	}
 
-//	@Override
-//	public List<Book> getBooks(List<Author> authors) {
-//		BookFilter bf = new BookFilter();
-//		return bookDao.find(bf);
-//	}
-	//
-	// @Override
-	// public List<Author> find(Book book) {
-	// return authorDao.find(book);
-	// }
+	@Override
+	public List<Author> find(String substring) {
+		return authorDao.find(substring);
+	}
 
 }

@@ -34,6 +34,11 @@ public class DepartmentsListPanel extends Panel {
 
 	public DepartmentsListPanel(String id) {
 		super(id);
+	}
+	
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		DepartmentsDataProvider departmentsDataProvider = new DepartmentsDataProvider();
 		DataView<Department> dataView = new DataView<Department>("rows", departmentsDataProvider, 5) {
 			@Override
