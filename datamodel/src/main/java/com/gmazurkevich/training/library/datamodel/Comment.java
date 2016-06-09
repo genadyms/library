@@ -34,7 +34,7 @@ public class Comment extends AbstractModel {
 	@Column
 	private String content;
 
-	@Column(insertable = false)
+	@Column
 	private Date created;
 
 	@Column

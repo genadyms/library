@@ -34,7 +34,9 @@ public class CopyBookDaoImpl extends AbstractDaoImpl<CopyBook, Long> implements 
 		if (filter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
 		}
-
+		if(filter.getBook()!=null){
+			cq.where(cb.equal(from.get(CopyBook_.book), filter.getBook()));
+		}
 		TypedQuery<CopyBook> q = em.createQuery(cq);
 		setPaging(filter, q);
 		return q.getResultList();
@@ -65,11 +67,14 @@ public class CopyBookDaoImpl extends AbstractDaoImpl<CopyBook, Long> implements 
 //	}
 
 	@Override
-	public Long count() {
+	public Long count(CopyBookFilter filter) {
 		EntityManager em = getEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<CopyBook> from = cq.from(CopyBook.class);
+		if(filter.getBook()!=null){
+			cq.where(cb.equal(from.get(CopyBook_.book), filter.getBook()));
+		}
 		cq.select(cb.count(from));
 		TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult();

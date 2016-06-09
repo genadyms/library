@@ -1,5 +1,6 @@
 package com.gmazurkevich.training.library.webapp.page.comment;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,13 +37,14 @@ import com.gmazurkevich.training.library.webapp.page.book.AuthorChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.page.book.BookInfoPage;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 
-public class CommentEditPage extends AbstractPage{
+public class CommentEditPage extends AbstractPage {
 	@Inject
 	private CommentService commentService;
-	
+	@Inject
+	private BookService bookService;
 	@Inject
 	private UserService userService;
-	
+
 	private Comment comment;
 
 	public CommentEditPage(Comment comment) {
@@ -61,18 +63,18 @@ public class CommentEditPage extends AbstractPage{
 		contentField.setRequired(true);
 		form.add(contentField);
 
-		DateTextField created = new DateTextField("created");
-		created.add(new DatePicker());
-		created.setRequired(true);
-		form.add(created);
-
 		form.add(new SubmitLink("save") {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
 				UserProfile userProfile = userService.getProfile(AuthorizedSession.get().getLoggedUser().getId());
 				comment.setUserProfile(userProfile);
-				commentService.saveOrUpdate(comment);
+				if (comment.getId() != null) {
+					commentService.update(comment);
+				} else {
+					comment.setCreated(new Date());
+					commentService.save(comment);
+				}
 				setResponsePage(new BookInfoPage(comment.getBook()));
 			}
 		});

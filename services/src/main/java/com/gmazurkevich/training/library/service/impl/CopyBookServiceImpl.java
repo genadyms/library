@@ -42,8 +42,8 @@ public class CopyBookServiceImpl implements CopyBookService {
 	}
 
 	@Override
-	public Long count() {
-		return copyBookDao.count();
+	public Long count(CopyBookFilter filter) {
+		return copyBookDao.count(filter);
 	}
 
 	@Override

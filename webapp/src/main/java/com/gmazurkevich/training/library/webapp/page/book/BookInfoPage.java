@@ -8,6 +8,7 @@ import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.comment.CommentEditPage;
 import com.gmazurkevich.training.library.webapp.page.comment.panel.CommentListPanel;
+import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
 
 public class BookInfoPage extends AbstractPage {
 	private Book book;
@@ -32,6 +33,14 @@ public class BookInfoPage extends AbstractPage {
 			}
 		};
 		add(createNew);
+		add(new Link("order-link"){
+
+			@Override
+			public void onClick() {
+				setResponsePage(new CopyBooksPage(book));
+			}
+			
+		});
 		if (AuthorizedSession.get().getRoles() == null || !AuthorizedSession.get().getRoles().contains("ADMIN"))
 			createNew.setVisibilityAllowed(false);
 	}

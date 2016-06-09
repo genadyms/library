@@ -25,21 +25,28 @@ import com.gmazurkevich.training.library.datamodel.CopyBook_;
 import com.gmazurkevich.training.library.service.CopyBookService;
 import com.gmazurkevich.training.library.webapp.page.copybook.CopyBookEditPage;
 import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
+import com.gmazurkevich.training.library.webapp.page.orders.OrderCopyBookPage;
 
 public class CopyBooksListPanel extends Panel {
 
 	@Inject
 	private CopyBookService copyBookService;
+	private Book book;
 
-	public CopyBooksListPanel(String id) {
+	public CopyBooksListPanel(String id, Book book) {
 		super(id);
+		this.book = book;
+	}
+
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		CopyBooksDataProvider copyBooksDataProvider = new CopyBooksDataProvider();
 		DataView<CopyBook> dataView = new DataView<CopyBook>("rows", copyBooksDataProvider, 5) {
 
 			@Override
 			protected void populateItem(Item<CopyBook> item) {
 				CopyBook copyBook = copyBookService.getCopyBookFetchAll(item.getModelObject().getId());
-				
 				item.add(new Label("id", copyBook.getId()));
 				item.add(new Label("book", copyBook.getBook().getTitle()));
 				item.add(new Label("department", copyBook.getDepartment().getName()));
@@ -55,10 +62,15 @@ public class CopyBooksListPanel extends Panel {
 					@Override
 					public void onClick() {
 						copyBookService.delete(copyBook.getId());
-						setResponsePage(new CopyBooksPage());
 					}
 				});
 
+				item.add(new Link<Void>("order-link") {
+					@Override
+					public void onClick() {
+						setResponsePage(new OrderCopyBookPage(copyBook));
+					}
+				});
 			}
 
 		};
@@ -77,6 +89,7 @@ public class CopyBooksListPanel extends Panel {
 		public CopyBooksDataProvider() {
 			super();
 			copyBookFilter = new CopyBookFilter();
+			copyBookFilter.setBook(book);
 			setSort((Serializable) CopyBook_.id, SortOrder.ASCENDING);
 		}
 
@@ -95,7 +108,7 @@ public class CopyBooksListPanel extends Panel {
 
 		@Override
 		public long size() {
-			return copyBookService.count();
+			return copyBookService.count(copyBookFilter);
 		}
 
 		@Override

@@ -65,7 +65,7 @@ public class CommentListPanel extends Panel {
 					@Override
 					public void onClick() {
 						commentService.delete(currentComment.getId());
-						setResponsePage(BookInfoPage.class);
+						setResponsePage(new BookInfoPage(book));
 					}
 				});
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
@@ -52,14 +53,12 @@ public class CopyBookEditPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
+		
+		add(new Label("title", copyBook.getBook().getTitle()));
 		Form<CopyBook> form = new CopyBookForm<CopyBook>("form", new CompoundPropertyModel<CopyBook>(copyBook));
 		add(form);
 
-		BookFilter filter = new BookFilter();
-        List<Book> allBooks = bookService.find(filter);
-        form.add(new DropDownChoice<>("book", allBooks, BookChoiceRenderer.INSTANCE));
-        
-        List<Department> allDepartments = departmentService.getAll();
+		List<Department> allDepartments = departmentService.getAll();
         form.add(new DropDownChoice<>("department", allDepartments, DepartmentChoiceRenderer.INSTANCE));
         
         form.add(new SubmitLink("save") {
@@ -67,7 +66,7 @@ public class CopyBookEditPage extends AbstractPage {
 			public void onSubmit() {
 				super.onSubmit();
 				copyBookService.update(copyBook);
-				setResponsePage(new CopyBooksPage());
+				setResponsePage(new CopyBooksPage(copyBook.getBook()));
 			}
 		});
 	}

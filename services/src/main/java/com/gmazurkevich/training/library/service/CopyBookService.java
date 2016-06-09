@@ -20,7 +20,7 @@ public interface CopyBookService {
 
 	List<CopyBook> find(CopyBookFilter filter);
 
-	Long count();
+	Long count(CopyBookFilter filter);
 
 	CopyBook getCopyBookFetchAll(Long id);
 }

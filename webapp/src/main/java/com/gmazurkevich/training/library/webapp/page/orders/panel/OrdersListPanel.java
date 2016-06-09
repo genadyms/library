@@ -43,9 +43,17 @@ public class OrdersListPanel extends Panel {
 				Order order = item.getModelObject();
 
 				item.add(new Label("id", order.getId()));
+				String handled = "";DateLabel.forDatePattern("handled", "MM-dd-yyyy").toString();
+				String closed = "";DateLabel.forDatePattern("closed", "MM-dd-yyyy").toString();
+				try{
+					handled = DateLabel.forDatePattern("handled", "MM-dd-yyyy").toString();
+					closed = DateLabel.forDatePattern("closed", "MM-dd-yyyy").toString();
+				}catch(NullPointerException e){
+					
+				}
 				item.add(DateLabel.forDatePattern("created", Model.of(order.getCreated()), "dd-MM-yyyy"));
-				item.add(DateLabel.forDatePattern("handled", Model.of(order.getHandled()), "dd-MM-yyyy"));
-				item.add(DateLabel.forDatePattern("closed", Model.of(order.getClosed()), "dd-MM-yyyy"));
+				item.add(new Label("handled", handled));
+				item.add(new Label("closed", closed));
 
 				item.add(new Link<Void>("edit-link") {
 					@Override

@@ -10,7 +10,7 @@ public interface CopyBookDao extends AbstractDao<CopyBook, Long> {
 
 	List<CopyBook> find(CopyBookFilter filter);
 
-	Long count();
+	Long count(CopyBookFilter filter);
 	
 	CopyBook getCopyBookFetchAll(Long id);
 }
