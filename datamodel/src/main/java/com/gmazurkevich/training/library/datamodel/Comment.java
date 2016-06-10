@@ -11,12 +11,14 @@ import javax.persistence.JoinColumn;
 
 @Entity
 public class Comment extends AbstractModel {
+	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
 	private UserProfile userProfile;
-	
-	@ManyToOne(fetch = FetchType.LAZY,optional=true)
-	@JoinTable(name="book_2_comment", joinColumns={@JoinColumn(name="comment_id", unique=true)}, inverseJoinColumns= {@JoinColumn(name="book_id")})
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinTable(name = "book_2_comment", joinColumns = {
+			@JoinColumn(name = "comment_id", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "book_id") })
 	private Book book;
 
 	public Order getOrder() {
@@ -27,10 +29,11 @@ public class Comment extends AbstractModel {
 		this.order = order;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY,optional=true)
-	@JoinTable(name="order_2_comment", joinColumns={@JoinColumn(name="comment_id", unique=true)}, inverseJoinColumns= {@JoinColumn(name="order_id")})
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinTable(name = "order_2_comment", joinColumns = {
+			@JoinColumn(name = "comment_id", unique = true) }, inverseJoinColumns = { @JoinColumn(name = "order_id") })
 	private Order order;
-	
+
 	@Column
 	private String content;
 

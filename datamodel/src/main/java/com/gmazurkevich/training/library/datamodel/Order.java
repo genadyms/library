@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "\"order\"")
 public class Order extends AbstractModel {
+	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
 	private UserProfile reader;
@@ -25,12 +26,7 @@ public class Order extends AbstractModel {
 	@ManyToOne(targetEntity = CopyBook.class, fetch = FetchType.LAZY)
 	private CopyBook copyBook;
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = Comment.class)
-	@JoinTable(name = "order_2_comment", joinColumns = { @JoinColumn(name = "order_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "comment_id", referencedColumnName = "id", unique = true) })
-	private List<Comment> comments;
-
-	@Column(insertable = false, updatable = false)
+	@Column
 	private Date created;
 
 	@Column
@@ -39,6 +35,16 @@ public class Order extends AbstractModel {
 	@Column
 	private Date closed;
 
+	@Column
+	private Date reserved;
+
+	public Date getReserved() {
+		return reserved;
+	}
+
+	public void setReserved(Date reserved) {
+		this.reserved = reserved;
+	}
 
 	public CopyBook getCopyBook() {
 		return copyBook;
@@ -87,4 +93,5 @@ public class Order extends AbstractModel {
 	public void setLibrarian(UserProfile librarian) {
 		this.librarian = librarian;
 	}
+
 }

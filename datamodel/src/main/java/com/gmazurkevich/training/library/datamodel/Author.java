@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 
 @Entity
 public class Author extends AbstractModel {
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String firstName;
 

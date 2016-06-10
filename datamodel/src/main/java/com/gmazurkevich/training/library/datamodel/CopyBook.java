@@ -9,15 +9,17 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class CopyBook extends AbstractModel {
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne(targetEntity = Book.class, fetch = FetchType.LAZY)
 	private Book book;
 
 	@ManyToOne(targetEntity = Department.class, fetch = FetchType.LAZY)
 	private Department department;
-	
+
 	@OneToMany(mappedBy = "copyBook")
 	private List<Order> orders;
-	
+
 	public Department getDepartment() {
 		return department;
 	}

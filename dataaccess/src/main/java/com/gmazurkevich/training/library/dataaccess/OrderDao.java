@@ -10,4 +10,6 @@ public interface OrderDao extends AbstractDao<Order, Long> {
 	List<Order> find(OrderFilter filter);
 
 	Long count(OrderFilter filter);
+
+	Order getOrderFetchAll(Long id);
 }

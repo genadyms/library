@@ -17,15 +17,19 @@ import javax.persistence.PrePersist;
 
 @Entity
 public class UserProfile extends AbstractModel {
+	private static final long serialVersionUID = 1L;
+
 	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(nullable = false, updatable = false, name = "id")
 	private UserCredentials userCredentials;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-	@JoinTable(name="department_2_user_profile", joinColumns={@JoinColumn(name="user_profile_id", unique=true)}, inverseJoinColumns= {@JoinColumn(name="department_id")})
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinTable(name = "department_2_user_profile", joinColumns = {
+			@JoinColumn(name = "user_profile_id", unique = true) }, inverseJoinColumns = {
+					@JoinColumn(name = "department_id") })
 	private Department department;
-	
+
 	@Column
 	private String firstName;
 
@@ -40,12 +44,12 @@ public class UserProfile extends AbstractModel {
 	@Column
 	private String lastName;
 
-	@Column(insertable=false)
+	@Column(insertable = false)
 	private Date created;
-	
+
 	@PrePersist
 	protected void onCreate() {
-	    created = new Date();
+		created = new Date();
 	}
 
 	@Column
@@ -55,13 +59,13 @@ public class UserProfile extends AbstractModel {
 	@Column
 	@Enumerated(value = EnumType.ORDINAL)
 	private UserRole role;
-	
+
 	@Column
 	private String phone;
 
 	@Column
 	private String address;
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -110,8 +114,6 @@ public class UserProfile extends AbstractModel {
 		this.userCredentials = userCredentials;
 	}
 
-
-	
 	public UserState getState() {
 		return state;
 	}

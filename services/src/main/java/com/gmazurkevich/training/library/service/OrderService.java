@@ -22,7 +22,7 @@ public interface OrderService {
 
 	List<Order> find(OrderFilter filter);
 
-	void saveOrUpdate(Order order);
-
 	long count(OrderFilter orderFilter);
+
+	Order getOrderFetchAll(Long id);
 }

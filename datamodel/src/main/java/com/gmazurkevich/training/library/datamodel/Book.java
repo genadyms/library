@@ -3,8 +3,6 @@ package com.gmazurkevich.training.library.datamodel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +13,9 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Book extends AbstractModel {
+
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String publishingOffice;
 
@@ -43,7 +44,6 @@ public class Book extends AbstractModel {
 		return "Book [isbn=" + isbn + ", title=" + title + ", pages=" + pages + ", year=" + year + ", bookComment="
 		/* + comments */ + ", publishingOffice=" + publishingOffice + "]";
 	}
-
 
 	public List<Author> getAuthors() {
 		return authors;

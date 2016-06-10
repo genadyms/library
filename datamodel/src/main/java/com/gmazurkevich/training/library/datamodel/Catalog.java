@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Catalog extends AbstractModel {
 
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String title;
 

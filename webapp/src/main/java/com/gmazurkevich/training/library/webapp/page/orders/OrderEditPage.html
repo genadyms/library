@@ -5,17 +5,22 @@
 
 		<table>
 			<tr>
+				<td><b>Reserved date:</b></td>
+				<td><input type="text" wicket:id="reserved" /></td>
+			</tr>
+			<tr>
 				<td><b>Handled:</b></td>
-				<td><input type="text" wicket:id="hanled" /></td>
+				<td><input type="text" wicket:id="handled" /></td>
 			</tr>
 			<tr>
-				<td><b>Closed:</b></td>
-				<td><input type="text" wicket:id="closed" /></td>
-			</tr>
-			<tr>
-				<td><button type="submit" wicket:id="save">SAVE</button></td>
+				<td><button type="submit" wicket:id="update">Update order</button></td>
 				<td></td>
 			</tr>
+			<tr>
+				<td><button type="submit" wicket:id="close">Close order</button></td>
+				<td></td>
+			</tr>
+			
 		</table>
 	</form>
 	<div wicket:id="feedback"></div>

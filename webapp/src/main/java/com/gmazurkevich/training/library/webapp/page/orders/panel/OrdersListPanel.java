@@ -30,6 +30,8 @@ import com.gmazurkevich.training.library.webapp.page.orders.OrdersPage;
 
 public class OrdersListPanel extends Panel {
 
+
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private OrderService orderService;
 
@@ -38,31 +40,39 @@ public class OrdersListPanel extends Panel {
 
 		OrdersDataProvider ordersDataProvider = new OrdersDataProvider();
 		DataView<Order> dataView = new DataView<Order>("rows", ordersDataProvider, 5) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void populateItem(Item<Order> item) {
 				Order order = item.getModelObject();
 
 				item.add(new Label("id", order.getId()));
-				String handled = "";DateLabel.forDatePattern("handled", "MM-dd-yyyy").toString();
-				String closed = "";DateLabel.forDatePattern("closed", "MM-dd-yyyy").toString();
-				try{
-					handled = DateLabel.forDatePattern("handled", "MM-dd-yyyy").toString();
-					closed = DateLabel.forDatePattern("closed", "MM-dd-yyyy").toString();
-				}catch(NullPointerException e){
-					
-				}
-				item.add(DateLabel.forDatePattern("created", Model.of(order.getCreated()), "dd-MM-yyyy"));
-				item.add(new Label("handled", handled));
-				item.add(new Label("closed", closed));
+				item.add(DateLabel.forDatePattern("created", Model.of(order.getCreated()), "dd-MM-yyyy hh:mm"));
+				item.add(DateLabel.forDatePattern("reserved", Model.of(order.getReserved()), "dd-MM-yyyy hh:mm"));
+				item.add(DateLabel.forDatePattern("handled", Model.of(order.getHandled()), "dd-MM-yyyy hh:mm"));
+				item.add(DateLabel.forDatePattern("closed", Model.of(order.getClosed()), "dd-MM-yyyy hh:mm"));
+				
+				Link<Void> editLink = new Link<Void>("edit-link") {
+				
+					private static final long serialVersionUID = 1L;
 
-				item.add(new Link<Void>("edit-link") {
 					@Override
 					public void onClick() {
 						setResponsePage(new OrderEditPage(order));
 					}
-				});
-
+					
+					
+				};
+				item.add(editLink);
+				editLink.setVisible(null==order.getClosed());
+				
 				item.add(new Link<Void>("delete-link") {
+					
+					private static final long serialVersionUID = 1L;
+
 					@Override
 					public void onClick() {
 						try {
@@ -79,9 +89,9 @@ public class OrdersListPanel extends Panel {
 		};
 		add(dataView);
 		add(new PagingNavigator("paging", dataView));
-
 		add(new OrderByBorder("sort-id", Order_.id, ordersDataProvider));
 		add(new OrderByBorder("sort-created", Order_.created, ordersDataProvider));
+		add(new OrderByBorder("sort-reserved", Order_.reserved, ordersDataProvider));
 		add(new OrderByBorder("sort-handled", Order_.handled, ordersDataProvider));
 		add(new OrderByBorder("sort-closed", Order_.closed, ordersDataProvider));
 
@@ -89,6 +99,10 @@ public class OrdersListPanel extends Panel {
 
 	private class OrdersDataProvider extends SortableDataProvider<Order, Serializable> {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private OrderFilter orderFilter;
 
 		public OrdersDataProvider() {

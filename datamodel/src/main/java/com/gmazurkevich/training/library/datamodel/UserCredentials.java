@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 @Entity
 public class UserCredentials extends AbstractModel {
 
+	private static final long serialVersionUID = 1L;
+
 	@Column(updatable = false)
 	private String email;
 
