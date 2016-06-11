@@ -8,6 +8,7 @@ import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.department.DepartmentsPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
+import com.gmazurkevich.training.library.webapp.page.registration.RegistrationPage;
 
 public class MenuPanel extends Panel {
 
@@ -40,13 +41,22 @@ public class MenuPanel extends Panel {
 			}
 		});
 
-		Link link = new Link("link-login") {
+		Link linkLogin = new Link("link-login") {
 			@Override
 			public void onClick() {
 				setResponsePage(new LoginPage());
 			}
 		};
-		add(link);
-		link.setVisible(!AuthorizedSession.get().isSignedIn());
+		add(linkLogin);
+		linkLogin.setVisible(!AuthorizedSession.get().isSignedIn());
+		
+		Link linkRegistration = new Link("link-registration") {
+			@Override
+			public void onClick() {
+				setResponsePage(new RegistrationPage());
+			}
+		};
+		add(linkRegistration);
+		linkRegistration.setVisible(!AuthorizedSession.get().isSignedIn());
 	}
 }
