@@ -25,11 +25,11 @@ import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.datamodel.Order_;
 import com.gmazurkevich.training.library.service.OrderService;
 import com.gmazurkevich.training.library.service.impl.DeleteActiveOrderException;
+import com.gmazurkevich.training.library.webapp.page.orders.OrderDetailsPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderEditPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrdersPage;
 
 public class OrdersListPanel extends Panel {
-
 
 	private static final long serialVersionUID = 1L;
 	@Inject
@@ -37,6 +37,12 @@ public class OrdersListPanel extends Panel {
 
 	public OrdersListPanel(String id) {
 		super(id);
+
+	}
+
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 
 		OrdersDataProvider ordersDataProvider = new OrdersDataProvider();
 		DataView<Order> dataView = new DataView<Order>("rows", ordersDataProvider, 5) {
@@ -54,23 +60,32 @@ public class OrdersListPanel extends Panel {
 				item.add(DateLabel.forDatePattern("reserved", Model.of(order.getReserved()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("handled", Model.of(order.getHandled()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("closed", Model.of(order.getClosed()), "dd-MM-yyyy hh:mm"));
-				
+
+				item.add(new Link<Void>("details-link") {
+
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void onClick() {
+						setResponsePage(new OrderDetailsPage(order));
+					}
+				});
+
 				Link<Void> editLink = new Link<Void>("edit-link") {
-				
+
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void onClick() {
 						setResponsePage(new OrderEditPage(order));
 					}
-					
-					
+
 				};
 				item.add(editLink);
-				editLink.setVisible(null==order.getClosed());
-				
+//				editLink.setVisible(null == order.getClosed());
+
 				item.add(new Link<Void>("delete-link") {
-					
+
 					private static final long serialVersionUID = 1L;
 
 					@Override

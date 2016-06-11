@@ -1,0 +1,26 @@
+<wicket:panel>
+	<table class="list-table">
+		<thead>
+			<tr>
+				<th><a wicket:id="sort-id">id</a></th>
+				<th>
+					<!--a wicket:id="sort-dateTake"-->issued<!--/a-->
+				</th>
+				<th>planned return date</th>
+				<th>fact return date</th>
+				<th>actions</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="id" /></td>
+				<td><span wicket:id="date-take" /></td>
+				<td><span wicket:id="plannedDateReturn" /></td>
+				<td><span wicket:id="dateReturn" /></td>
+				<td><a wicket:id="details-link">details</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div wicket:id="paging"></div>
+</wicket:panel>

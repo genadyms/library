@@ -16,8 +16,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.service.OrderService;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
-import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
-import com.gmazurkevich.training.library.webapp.page.home.HomePage;
+import com.gmazurkevich.training.library.webapp.page.issue.IssueEditPage;
 
 public class OrderEditPage extends AbstractPage {
 
@@ -34,13 +33,7 @@ public class OrderEditPage extends AbstractPage {
 
 	public OrderEditPage(Order order) {
 		super();
-		this.order = order;// Service.getOrderFetchAll(order.getId());
-		// this.order = orderService.getOrderFetchAll(order.getId());
-		// order.setClosed(new Date());
-		// order.setReserved(new Date());
-		// order.setClosed(new Date());
-		// orderService.save(order);
-		// System.out.println("_____________"+order.getId());
+		this.order = order;
 	}
 
 	@Override
@@ -72,6 +65,17 @@ public class OrderEditPage extends AbstractPage {
 				super.onSubmit();
 				order.setClosed(new Date());
 				submitExecute();
+			}
+		});
+
+		form.add(new SubmitLink("issue") {
+			@Override
+			public void onSubmit() {
+				super.onSubmit();
+				order.setClosed(new Date());
+				orderService.update(order);
+				Order orderFetch = orderService.getOrderFetchAll(order.getId());
+				setResponsePage(new IssueEditPage(orderFetch.getCopyBook(), orderFetch.getReader()));
 			}
 		});
 
