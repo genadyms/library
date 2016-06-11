@@ -7,6 +7,9 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
+import com.gmazurkevich.training.library.webapp.component.catalog.CatalogPanel;
+import com.gmazurkevich.training.library.webapp.component.search.SearchPanel;
+import com.gmazurkevich.training.library.webapp.component.search.SearchSplitButton;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.book.panel.BooksListPanel;
 
@@ -21,6 +24,7 @@ public class BooksPage extends AbstractPage {
 	public BooksPage() {
 		super();
 		this.bookListPanel = new BooksListPanel(ID_LIST_PANEL);
+		
 	}
 
 	private BooksListPanel getBookListPanel(PageParameters parameters) {
@@ -39,6 +43,9 @@ public class BooksPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
+//		add(new SearchSplitButton("split-search"));
+		add(new CatalogPanel("catalog-panel"));
+		add(new SearchPanel("search-panel"));
 		add(bookListPanel);
 		Link createNew = new Link("create") {
 			@Override

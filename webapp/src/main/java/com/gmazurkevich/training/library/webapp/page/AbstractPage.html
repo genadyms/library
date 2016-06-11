@@ -12,10 +12,12 @@
 			<div id="logo">
 				<div id="logo_text">
 					<h1>
-						<a href="index.html"><wicket:message key="logo.library"/>
-						<span class="logo_colour"><wicket:message key="logo.span"/></span></a>
+						<a href="index.html"><wicket:message key="logo.library" /> <span
+							class="logo_colour"><wicket:message key="logo.span" /></span></a>
 					</h1>
-					<h2><wicket:message key="logo.description"/></h2>
+					<h2>
+						<wicket:message key="logo.description" />
+					</h2>
 				</div>
 			</div>
 
@@ -28,9 +30,14 @@
 
 		<div id="content_footer"></div>
 		<div id="footer">
-			<p><wicket:message key="page.copyright"/> &copy;</p>
+<!-- 			<wicket:container wicket:id="menu-footer"> -->
+<!-- 			</wicket:container> -->
+			<p>
+				<wicket:message key="page.copyright" />
+				&copy;
+			</p>
 		</div>
-				<div wicket:id="language-select" class="language-comp"></div>
+		<div wicket:id="language-select" class="language-comp"></div>
 	</div>
 </body>
 </html>

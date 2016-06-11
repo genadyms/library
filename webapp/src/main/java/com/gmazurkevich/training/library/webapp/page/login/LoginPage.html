@@ -1,21 +1,27 @@
 <wicket:extend>
-	<div id="content_header"></div>
 	<div id="site_content">
-		<div class="login">
-			<h2><span wicket:id="hello-user"></span></h2>
+			<h3>
+				<span wicket:id="hello-user">You are registered!.</span>
+			</h3>
+		<div id="content">
+		<div class="form_settings">
+		
 			<h1>Login</h1>
 			<form wicket:id="form">
-				<p class="input">
-					<input type="text" wicket:id="username" autocomplete="off" />
+				<p>
+					<span>Email address: </span><input class="contact"
+						autocomplete="off" wicket:id="username" />
 				</p>
-				<p class="input">
-					<input type="password" wicket:id="password" />
+				<p>
+					<span>Password:</span><input class="contact" type="password"
+						wicket:id="password" />
 				</p>
-				<button type="submit" class="btn waves-effect"
-					wicket:id="submit-btn">
-					<b>login</b>
-				</button>
+				<p style="padding-top: 15px">
+					<span>&nbsp;</span>
+					<button class="submit" type="submit" wicket:id="submit-btn">login</button>
+				</p>
+
 			</form>
 		</div>
-	</div>
+	</div></div>
 </wicket:extend>

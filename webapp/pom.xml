@@ -66,6 +66,15 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.googlecode.wicket-jquery-ui</groupId>
+			<artifactId>wicket-jquery-ui</artifactId>
+			<version>7.2.1</version> <!-- or 1.5.11, 6.22.2 -->
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.wicket-jquery-ui</groupId>
+			<artifactId>wicket-jquery-ui-theme-uilightness</artifactId>
+			<version>7.2.1</version>
+		</dependency>
 	</dependencies>
 </project>

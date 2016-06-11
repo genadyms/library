@@ -196,7 +196,8 @@ ul#menu li a:hover
 
 #sidebar_container
 { float: left;
-  width: 224px;}
+  width: 224px;
+  margin-top: 53px;}
 
 .sidebar_top
 { width: 222px;
@@ -338,3 +339,25 @@ table tr td
 	top: 5px;
 	right: 10px;
 }
+.form_search {
+	display: block;
+    position: relative;
+    text-align: center;
+}
+.form_search input, .form_settings textarea
+{ padding: 5px; 
+  font: 100% arial; 
+  border: 1px solid #E5E5DB; 
+  background: #FFF; 
+  color: #47433F;}
+  
+.form_search .submit
+{ font: 100% arial; 
+  border: 0; 
+  width: 99px; 
+  margin: 0 0 0 2px; 
+  height: 29px;
+  padding: 2px 0 3px 0;
+  cursor: pointer; 
+  background: #a07878; 
+  color: #FFF;}

@@ -6,6 +6,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.component.localization.LanguageSelectionComponent;
+import com.gmazurkevich.training.library.webapp.component.menu.MenuFooter;
 import com.gmazurkevich.training.library.webapp.component.menu.MenuPanel;
 import com.gmazurkevich.training.library.webapp.component.menu.MenuPanelLoggedUser;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
@@ -30,7 +31,7 @@ public abstract class AbstractPage extends WebPage {
 		} else {
 			add(new MenuPanel("menu-panel"));
         }
-
+//        add(new MenuFooter("menu-footer"));
     }
 
 }

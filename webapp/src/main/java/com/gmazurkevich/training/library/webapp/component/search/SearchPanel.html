@@ -4,17 +4,9 @@
 		<div class="sidebar_item">
 			<wicket:message key="panel.search" />
 			<form wicket:id="form-search">
-
-	
-				<input type="text" wicket:id="search-field"/> 
-				<!--input
-					wicket:id="search-submit" type="image"
-					style="border: 0; margin: 0 0 -9px 5px;" src="images/search.png"
-					alt="Search" title="Search"></input-->
-					<button type="submit" class="btn waves-effect"
-					wicket:id="search-submit">
-					<b>Find</b>
-				</button>
+				<input class="search" placeholder="Enter word..." type="text" wicket:id="search-field" /> <input name="search" wicket:id="search-submit"
+					type="image" style="border: 0; margin: 0 0 -9px 5px;"
+					src="\images\search.png" alt="Search" title="Search" />
 			</form>
 		</div>
 		<div class="sidebar_base"></div>

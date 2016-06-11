@@ -17,15 +17,15 @@ import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 public class LoginPage extends AbstractPage {
 
 	private static final long serialVersionUID = 1L;
-	private UserProfile userProfile;
+	private String messageInfo="";
 
 	public LoginPage() {
 		super();
 	}
 
-	public LoginPage(UserProfile userProfile) {
+	public LoginPage(String messageInfo) {
 		this();
-		this.userProfile = userProfile;
+		this.messageInfo=messageInfo; 
 	}
 
 	private String username;
@@ -37,14 +37,10 @@ public class LoginPage extends AbstractPage {
 		if (AuthenticatedWebSession.get().isSignedIn()) {
 			setResponsePage(Application.get().getHomePage());
 		}
-		boolean isRegisteredUser = userProfile != null;
-		Label greeting = new Label("hello-user");
-		greeting.setVisible(isRegisteredUser);
+		Label greeting = new Label("hello-user", messageInfo);
+		greeting.setVisible(!messageInfo.isEmpty());
 		add(greeting);
-		if(isRegisteredUser){
-			greeting.setDefaultModel
-			(Model.of(String.format("hello %s, you are registered!", userProfile.getFirstName())));
-		}
+
 		final Form<Void> form = new Form<Void>("form");
 		form.setDefaultModel(new CompoundPropertyModel<LoginPage>(this));
 		form.add(new RequiredTextField<String>("username"));
