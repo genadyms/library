@@ -1,29 +1,43 @@
 <wicket:panel>
+	<a wicket:id="sort-title">title</a>
+	<a wicket:id="sort-publishing_office">publishing office</a>
+	<a wicket:id="sort-catalog">catalog</a>
+	<a wicket:id="sort-year">year</a>
+
 	<table class="list-table">
-		<thead>
-			<tr>
-				<th><a wicket:id="sort-id">id</a></th>
-				<th><a wicket:id="sort-title">title</a></th>
-				<th><a wicket:id="sort-publishing_office">publishing office</a></th>
-				<th>authors</th>
-				<th><a wicket:id="sort-catalog">catalog</a></th>
-				<th><a wicket:id="sort-year">year</a></th>
-				<th>actions</th>
-			</tr>
-		
-		</thead>
-		<tbody>
-			<tr wicket:id="rows">
-				<td><span wicket:id="id"/></td>
-				<td><span wicket:id="title"/></td>
-				<td><span wicket:id="publishingOffice"/> </td>
-				<td><span wicket:id="authors"/> </td>
-				<td><span wicket:id="catalog"/> </td>
-				<td><span wicket:id="year"/></td>
-				<td><a wicket:id="delete-link">delete</a>/<a wicket:id="edit-link">edit</a>/<a wicket:id="detail-link">details</a></td>
-			</tr>
-		</tbody>
+
+		<tr wicket:id="rows">
+			<td>
+				<h3>
+					<span wicket:id="title" />
+				</h3>
+				<h4>
+					<span wicket:id="authors" />
+				</h4>
+				<h4>
+					<span wicket:id="publishingOffice" />
+				</h4>
+				<h4>
+					<span wicket:id="year" />
+				</h4>
+				<h4>
+					<span wicket:id="catalog" />
+				</h4>
+
+			</td>
+			<td>
+				<h4>
+					<a wicket:id="detail-link">details</a>
+				</h4>
+				<h4>
+					<a wicket:id="delete-link">delete</a>
+				</h4>
+				<h4>
+					<a wicket:id="edit-link">edit</a>
+				</h4>
+			</td>
+		</tr>
+
 	</table>
 	<div wicket:id="paging"></div>
-
 </wicket:panel>

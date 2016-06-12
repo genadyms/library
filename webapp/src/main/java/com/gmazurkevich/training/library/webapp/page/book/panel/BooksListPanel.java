@@ -49,11 +49,16 @@ public class BooksListPanel extends Panel {
 	private BooksDataProvider booksDataProvider = new BooksDataProvider();
 	
 	public BooksListPanel(String id){
-		super(id);
+		this(id, new BookFilter() );
 	}
 	public BooksListPanel(String id, Long catalogId) {
 		this(id);
 		booksDataProvider.getBookFilter().setCatalog(catalogService.getCatalog(catalogId));
+	}
+
+	public BooksListPanel(String id, BookFilter bookFilter) {
+		super(id);
+		this.booksDataProvider = new BooksDataProvider(bookFilter);
 	}
 
 	public BooksListPanel(String id, String fullFindParameter) {
@@ -73,7 +78,7 @@ public class BooksListPanel extends Panel {
 			protected void populateItem(Item<Book> item) {
 				Book book = bookService.getBookFetchAll(item.getModelObject());
 
-				item.add(new Label("id", book.getId()));
+//				item.add(new Label("id", book.getId()));
 				item.add(new Label("title", book.getTitle()));
 				item.add(new Label("publishingOffice", book.getPublishingOffice()));
 				StringBuffer sb = new StringBuffer();
@@ -126,7 +131,7 @@ public class BooksListPanel extends Panel {
 		add(dataView);
 		add(new PagingNavigator("paging", dataView));
 
-		add(new OrderByBorder("sort-id", Book_.id, booksDataProvider));
+//		add(new OrderByBorder("sort-id", Book_.id, booksDataProvider));
 		add(new OrderByBorder("sort-title", Book_.title, booksDataProvider));
 		add(new OrderByBorder("sort-publishing_office", Book_.publishingOffice, booksDataProvider));
 		add(new OrderByBorder("sort-catalog", Book_.catalog, booksDataProvider));
@@ -136,20 +141,26 @@ public class BooksListPanel extends Panel {
 
 	private class BooksDataProvider extends SortableDataProvider<Book, Serializable> {
 
-		private BookFilter bookFilter = new BookFilter();
+		private BookFilter bookFilter;
 		private Catalog catalog;
 
 		BooksDataProvider() {
+			this(new BookFilter());
+		}
+		
+		BooksDataProvider(BookFilter bookFilter) {
 			super();
+			this.bookFilter=bookFilter;
 			setSort((Serializable) Book_.title, SortOrder.ASCENDING);
 		}
-	
+		
 		BookFilter getBookFilter() {
 			return bookFilter;
 		}
 
 		@Override
 		public Iterator<Book> iterator(long first, long count) {
+			
 			Serializable property = getSort().getProperty();
 			SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
 

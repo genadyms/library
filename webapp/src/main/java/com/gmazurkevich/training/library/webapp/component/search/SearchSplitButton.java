@@ -9,8 +9,11 @@ import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
+import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
+import com.gmazurkevich.training.library.webapp.page.search.AdvancedSearchPage;
 import com.googlecode.wicket.jquery.ui.JQueryIcon;
 import com.googlecode.wicket.jquery.ui.form.button.SplitButton;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
@@ -61,7 +64,9 @@ public class SearchSplitButton extends Panel {
 			@Override
 			protected void onSubmit(IMenuItem item)
 			{
-				this.info(String.format("%s: %s",item.getTitle().getObject(), textField.getModelObject()));
+				PageParameters parameters = new PageParameters();
+				parameters.add("find", textField.getModelObject());
+				setResponsePage(BooksPage.class, parameters);
 			}
 		});
 	}
@@ -89,9 +94,7 @@ public class SearchSplitButton extends Panel {
 			@Override
 			public void onClick(AjaxRequestTarget target)
 			{
-				info("Selected " + this.getTitle().getObject());
-				target.add(feedback);
-				setResponsePage(new HomePage());
+				setResponsePage(new AdvancedSearchPage());
 			}
 		});
 

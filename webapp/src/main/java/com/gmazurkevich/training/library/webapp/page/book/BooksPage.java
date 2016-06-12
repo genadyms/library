@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+
+import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.component.catalog.CatalogPanel;
@@ -16,7 +18,7 @@ import com.gmazurkevich.training.library.webapp.page.book.panel.BooksListPanel;
 public class BooksPage extends AbstractPage {
 	private BooksListPanel bookListPanel;
 	private final static String ID_LIST_PANEL = "list-panel";
-
+	
 	public BooksPage(PageParameters parameters) {
 		this.bookListPanel = getBookListPanel(parameters);
 	}
@@ -24,11 +26,17 @@ public class BooksPage extends AbstractPage {
 	public BooksPage() {
 		super();
 		this.bookListPanel = new BooksListPanel(ID_LIST_PANEL);
-		
+
+	}
+
+	public BooksPage(BookFilter bookFilter) {
+		this();
+//		this.bookListPanel = new BooksListPanel(ID_LIST_PANEL);
+		bookListPanel = new BooksListPanel(ID_LIST_PANEL, bookFilter);
 	}
 
 	private BooksListPanel getBookListPanel(PageParameters parameters) {
-		if (null!=parameters||(!parameters.isEmpty())) {
+		if (null != parameters || (!parameters.isEmpty())) {
 			Set<String> keys = parameters.getNamedKeys();
 			if (keys.contains("catalog")) {
 				return new BooksListPanel(ID_LIST_PANEL, parameters.get("catalog").toLong());
@@ -43,9 +51,8 @@ public class BooksPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-//		add(new SearchSplitButton("split-search"));
+		add(new SearchSplitButton("search-panel"));
 		add(new CatalogPanel("catalog-panel"));
-		add(new SearchPanel("search-panel"));
 		add(bookListPanel);
 		Link createNew = new Link("create") {
 			@Override

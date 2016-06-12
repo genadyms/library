@@ -73,7 +73,6 @@ public class RegistrationPage extends AbstractPage {
 					String message = String.format("You are registered succesfull, %s!",userProfile.getFirstName());
 					setResponsePage(new LoginPage(message));
 				} catch (javax.persistence.PersistenceException e) {
-//					setResponsePage(this.getPage());
 					feedbackPanel.error("email or password allready use");
 				}
 			}

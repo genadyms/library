@@ -10,6 +10,7 @@ public class BookFilter extends AbstractFilter {
 	private String publishingOffice;
 	private String title;
 	private List<Author> authors;
+	private boolean innerJoin;
 
 	public Catalog getCatalog() {
 		return catalog;
@@ -49,6 +50,14 @@ public class BookFilter extends AbstractFilter {
 
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
+	}
+
+	public boolean isInnerJoin() {
+		return innerJoin;
+	}
+
+	public void setInnerJoin(boolean innerJoin) {
+		this.innerJoin = innerJoin;
 	}
 
 }

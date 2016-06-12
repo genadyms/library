@@ -33,14 +33,7 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<Book> from = cq.from(Book.class);
-		if (bookFilter.getCatalog() != null) {
-			cq.where(cb.equal(from.get(Book_.catalog), bookFilter.getCatalog()));
-		}
-
-		List<Predicate> ands = getPredicates(bookFilter, cb, from);
-		if (!ands.isEmpty()) {
-			cq.where(cb.or(ands.toArray(new Predicate[ands.size()])));
-		}
+		buildPredicateQuery(bookFilter, cb, cq, from);
 		cq.select(cb.count(from));
 		TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult();
@@ -56,35 +49,49 @@ public class BookDaoImpl extends AbstractDaoImpl<Book, Long> implements BookDao 
 		if (bookFilter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(bookFilter.getSortProperty()), bookFilter.isSortOrder()));
 		}
-		List<Predicate> ands = getPredicates(bookFilter, cb, from);
-		if (!ands.isEmpty()) {
-			cq.where(cb.or(ands.toArray(new Predicate[ands.size()])));
-		}
+		buildPredicateQuery(bookFilter, cb, cq, from);
 		TypedQuery<Book> q = em.createQuery(cq);
 		setPaging(bookFilter, q);
 		return q.getResultList();
 	}
 
-	private List<Predicate> getPredicates(BookFilter bookFilter, CriteriaBuilder cb, Root<Book> from) {
-		final List<Predicate> ands = new ArrayList();
+	private void buildPredicateQuery(BookFilter bookFilter, CriteriaBuilder cb, CriteriaQuery<?> cq,
+			Root<Book> from) {
+		List<Predicate> allPredicates = new ArrayList<Predicate>();
+		if (bookFilter.getAuthors() != null/* || !bookFilter.getAuthors().isEmpty()*/) {
+			List<Predicate> authorsPredicates = new ArrayList<>();
+			List<Author> authors = bookFilter.getAuthors();
+			for (final Author author : authors) {
+				authorsPredicates.add(cb.isMember(author, from.get(Book_.authors)));
+			}
+			Predicate fullPred = cb.or(authorsPredicates.toArray(new Predicate[authorsPredicates.size()]));
+			allPredicates.add(fullPred);
+		}
 		if (bookFilter.getTitle() != null) {
 			Expression<String> upper = cb.upper(from.get(Book_.title));
 			Predicate predicate = cb.like(upper, "%" + bookFilter.getTitle().toUpperCase() + "%");
-			ands.add(predicate);
+			allPredicates.add(predicate);
 		}
-		if (bookFilter
-				.getAuthors() != null/* && !bookFilter.getAuthors().isEmpty() */) {
-
-			List<Author> authors = bookFilter.getAuthors();
-			for (final Author author : authors) {
-				ands.add(cb.isMember(author, from.get(Book_.authors)));
-			}
+		if (bookFilter.getPublishingOffice() != null) {
+			Expression<String> upper = cb.upper(from.get(Book_.publishingOffice));
+			Predicate predicate = cb.like(upper, "%" + bookFilter.getPublishingOffice().toUpperCase() + "%");
+			allPredicates.add(predicate);
 		}
 		if (bookFilter.getCatalog() != null) {
-			ands.add(cb.equal(from.get(Book_.catalog), bookFilter.getCatalog()));
+			Predicate pred = cb.equal(from.get(Book_.catalog), bookFilter.getCatalog());
+			allPredicates.add(pred);
 		}
-		return ands;
-
+		if (bookFilter.getIsbn() != null) {
+			Predicate pred = cb.equal(from.get(Book_.isbn), bookFilter.getIsbn());
+			allPredicates.add(pred);
+		}
+		if (!allPredicates.isEmpty()) {
+			if (bookFilter.isInnerJoin()) {
+				cq.where(cb.and(allPredicates.toArray(new Predicate[allPredicates.size()])));
+			} else {
+				cq.where(cb.or(allPredicates.toArray(new Predicate[allPredicates.size()])));
+			}
+		}
 	}
 
 	@Override
