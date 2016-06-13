@@ -8,13 +8,18 @@ import com.gmazurkevich.training.library.webapp.page.FeedbackPanelPage;
 
 public class HomePage extends AbstractPage {
 	private static final long serialVersionUID = 1L;
-
 	public HomePage() {
 		super();
 		add(new Link("link-test") {
 			@Override
 			public void onClick() {
 				setResponsePage(new FeedbackPanelPage());
+			}
+		});
+		add(new Link("link-test2") {
+			@Override
+			public void onClick() {
+				setResponsePage(new DefaultMultiSelectPage ());
 			}
 		});
 	}

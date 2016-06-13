@@ -32,7 +32,7 @@ import com.gmazurkevich.training.library.webapp.common.CatalogChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.googlecode.wicket.kendo.ui.form.multiselect.MultiSelect;
 
-@AuthorizeInstantiation(value = { "ADMIN"})
+@AuthorizeInstantiation(value = { "ADMIN" })
 public class BookEditPage extends AbstractPage {
 
 	@Inject
@@ -40,11 +40,13 @@ public class BookEditPage extends AbstractPage {
 
 	@Inject
 	private AuthorService authorService;
-	
+
 	@Inject
 	private CatalogService catalogService;
 
 	private Book book;
+	private static final List<String> GENRES = Arrays.asList("Black Metal", "Death Metal", "Doom Metal", "Folk Metal",
+			"Gothic Metal", "Heavy Metal", "Power Metal", "Symphonic Metal", "Trash Metal", "Vicking Metal");
 
 	public BookEditPage(PageParameters parameters) {
 		super(parameters);
@@ -52,16 +54,25 @@ public class BookEditPage extends AbstractPage {
 
 	public BookEditPage(Book book) {
 		super();
-		this.book = book;
+		this.book = bookService.getBookFetchAll(book);
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-
+		
 		Form<Book> form = new BookForm<Book>("form", new CompoundPropertyModel<Book>(book));
 		add(form);
-
+		//////////////
+		List<String> selected = new ArrayList<String>();
+		selected.add("Heavy Metal");
+		selected.add("Trash Metal");
+		List<Author> allAuthors = authorService.getAll();
+		
+		final MultiSelect<Author> multiselect = new MultiSelect<Author>("authors", Model.ofList(book.getAuthors()),
+				Model.ofList(allAuthors),AuthorChoiceRenderer.INSTANCE);
+		form.add(multiselect.setOutputMarkupId(true));
+/////////////////////
 		TextField<String> titleField = new TextField<>("title");
 		titleField.setRequired(true);
 		// titleField.setEnabled(false);
@@ -82,25 +93,27 @@ public class BookEditPage extends AbstractPage {
 		yearField.add(new DatePicker());
 		yearField.setRequired(true);
 		form.add(yearField);
-		List<Author> allAuthors = authorService.getAll();
-		final Palette<Author> palette = new Palette<Author>("authors", Model.ofList(book.getAuthors()),
-				new CollectionModel<Author>(allAuthors), AuthorChoiceRenderer.INSTANCE, 15, false, true);
-
-		palette.add(new DefaultTheme());
-		form.add(palette);
-		
-//		List<String> selected = new ArrayList<String>();
-//		selected.add("Heavy Metal");
-//		selected.add("Trash Metal");
-//		List<String> GENRES = Arrays.asList("Black Metal", "Death Metal", "Doom Metal", "Folk Metal", "Gothic Metal", "Heavy Metal", "Power Metal", "Symphonic Metal", "Trash Metal", "Vicking Metal");
+//		final Palette<Author> palette = new Palette<Author>("authors", Model.ofList(book.getAuthors()),
+//				new CollectionModel<Author>(allAuthors), AuthorChoiceRenderer.INSTANCE, 15, false, true);
 //
-//		final MultiSelect<String> multiselect = new MultiSelect<String>("select", Model.ofList(selected), Model.ofList(GENRES));
-//		form.add(multiselect.setOutputMarkupId(true));
-		
-		
-        List<Catalog> allCatalogs = catalogService.getAll();
-        form.add(new DropDownChoice<>("catalog", allCatalogs, CatalogChoiceRenderer.INSTANCE));
-        
+//		palette.add(new DefaultTheme());
+//		form.add(palette);
+
+		// List<String> selected = new ArrayList<String>();
+		// selected.add("Heavy Metal");
+		// selected.add("Trash Metal");
+		// List<String> GENRES = Arrays.asList("Black Metal", "Death Metal",
+		// "Doom Metal", "Folk Metal", "Gothic Metal", "Heavy Metal", "Power
+		// Metal", "Symphonic Metal", "Trash Metal", "Vicking Metal");
+		//
+		// final MultiSelect<String> multiselect = new
+		// MultiSelect<String>("select", Model.ofList(selected),
+		// Model.ofList(GENRES));
+		// form.add(multiselect.setOutputMarkupId(true));
+
+		List<Catalog> allCatalogs = catalogService.getAll();
+		form.add(new DropDownChoice<>("catalog", allCatalogs, CatalogChoiceRenderer.INSTANCE));
+
 		form.add(new SubmitLink("save") {
 			@Override
 			public void onSubmit() {

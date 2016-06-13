@@ -1,43 +1,34 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 	<div id="site_content">
-		<div id="content">
-			<h2>Book edit</h2>
-			<div class="form_settings">
-				<form wicket:id="form">
-					<p>
-						<span>Title:</span> <input type="text" class="contact"
-							wicket:id="title" />
-					</p>
-					<p>
-						<span>Isbn:</span><input type="text" class="contact"
-							wicket:id="isbn" />
-					</p>
-					<p>
-						<span>Pages:</span><input type="text" class="contact"
-							wicket:id="pages" />
-					</p>
-					<p>
-						<span>Publishing office:</span><input type="text" class="contact"
-							wicket:id="publishingOffice" />
-					</p>
-					<p>
-												<span>Authors:</span><span wicket:id="authors" />
-<!-- 						<select wicket:id="select" style="width: 460px;"></select> -->
-					</p>
-					<p>
-						<span>Catalog: </span><select style="height:29px;" class="contact" wicket:id="catalog"></select>
-					</p>
-					<p>
-						<span>Year of publishing:</span><input type="text" class="contact"
-							wicket:id="year" />
-					</p>
-					<p style="padding-top: 15px">
-						<span>&nbsp;</span>
-						<button class="submit" type="submit" wicket:id="save">SAVE</button>
-					</p>
-				</form>
-			</div>
-			<div wicket:id="feedback"></div>
-		</div>
+		<h2>Book edit</h2>
+		<form wicket:id="form">
+			<p>
+				Title: <input type="text" class="contact" wicket:id="title" />
+			</p>
+			<p>
+				Isbn: <input type="text" class="contact" wicket:id="isbn" />
+			</p>
+			<p>
+				Pages: <input type="text" class="contact" wicket:id="pages" />
+			</p>
+
+			<p>
+				Publishing office: <input type="text" class="contact"
+					wicket:id="publishingOffice" />
+			</p>
+			<p>
+				Authors: <select wicket:id="authors" style="width: 460px;"></select>
+			</p>
+			<p>
+				Catalog: <select wicket:id="catalog"></select>
+			</p>
+			<p>
+				Year of publishing: <input type="text" wicket:id="year" />
+			</p>
+			<p>
+				<button class="submit" type="submit" wicket:id="save">SAVE</button>
+			</p>
+		</form>
+		<div wicket:id="feedback"></div>
 	</div>
 </wicket:extend>
