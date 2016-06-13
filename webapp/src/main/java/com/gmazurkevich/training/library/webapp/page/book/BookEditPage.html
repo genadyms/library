@@ -1,44 +1,43 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-	<h2>Book edit</h2>
-
-	<form wicket:id="form">
-
-		<table>
-			<tr>
-				<td><b>Title:</b></td>
-				<td><input type="text" wicket:id="title" /></td>
-			</tr>
-			<tr>
-				<td><b>Isbn:</b></td>
-				<td><input type="text" wicket:id="isbn" /></td>
-			</tr>
-			<tr>
-				<td><b>Pages:</b></td>
-				<td><input type="text" wicket:id="pages" /></td>
-			</tr>
-			<tr>
-				<td><b>Publishing office:</b></td>
-				<td><input type="text" wicket:id="publishingOffice" /></td>
-			</tr>
-			<tr>
-				<td><b>Authors:</b></td>
-				<td><span wicket:id="authors" /></td>
-			</tr>
-			<tr>
-				<td><b>Catalog:</b></td>
-				<td><select wicket:id="catalog"></select></td>
-			</tr>
-
-			<tr>
-				<td><b>Year of publishing:</b></td>
-				<td><input type="text" wicket:id="year" /></td>
-			</tr>
-			<tr>
-				<td><button type="submit" wicket:id="save">SAVE</button></td>
-				<td></td>
-			</tr>
-		</table>
-	</form>
-	<div wicket:id="feedback"></div>
-
+	<div id="site_content">
+		<div id="content">
+			<h2>Book edit</h2>
+			<div class="form_settings">
+				<form wicket:id="form">
+					<p>
+						<span>Title:</span> <input type="text" class="contact"
+							wicket:id="title" />
+					</p>
+					<p>
+						<span>Isbn:</span><input type="text" class="contact"
+							wicket:id="isbn" />
+					</p>
+					<p>
+						<span>Pages:</span><input type="text" class="contact"
+							wicket:id="pages" />
+					</p>
+					<p>
+						<span>Publishing office:</span><input type="text" class="contact"
+							wicket:id="publishingOffice" />
+					</p>
+					<p>
+												<span>Authors:</span><span wicket:id="authors" />
+<!-- 						<select wicket:id="select" style="width: 460px;"></select> -->
+					</p>
+					<p>
+						<span>Catalog: </span><select style="height:29px;" class="contact" wicket:id="catalog"></select>
+					</p>
+					<p>
+						<span>Year of publishing:</span><input type="text" class="contact"
+							wicket:id="year" />
+					</p>
+					<p style="padding-top: 15px">
+						<span>&nbsp;</span>
+						<button class="submit" type="submit" wicket:id="save">SAVE</button>
+					</p>
+				</form>
+			</div>
+			<div wicket:id="feedback"></div>
+		</div>
+	</div>
 </wicket:extend>

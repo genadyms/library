@@ -1,5 +1,7 @@
 package com.gmazurkevich.training.library.webapp.page.book;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,6 +30,7 @@ import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
 import com.gmazurkevich.training.library.webapp.common.CatalogChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
+import com.googlecode.wicket.kendo.ui.form.multiselect.MultiSelect;
 
 @AuthorizeInstantiation(value = { "ADMIN"})
 public class BookEditPage extends AbstractPage {
@@ -85,7 +88,16 @@ public class BookEditPage extends AbstractPage {
 
 		palette.add(new DefaultTheme());
 		form.add(palette);
-
+		
+//		List<String> selected = new ArrayList<String>();
+//		selected.add("Heavy Metal");
+//		selected.add("Trash Metal");
+//		List<String> GENRES = Arrays.asList("Black Metal", "Death Metal", "Doom Metal", "Folk Metal", "Gothic Metal", "Heavy Metal", "Power Metal", "Symphonic Metal", "Trash Metal", "Vicking Metal");
+//
+//		final MultiSelect<String> multiselect = new MultiSelect<String>("select", Model.ofList(selected), Model.ofList(GENRES));
+//		form.add(multiselect.setOutputMarkupId(true));
+		
+		
         List<Catalog> allCatalogs = catalogService.getAll();
         form.add(new DropDownChoice<>("catalog", allCatalogs, CatalogChoiceRenderer.INSTANCE));
         

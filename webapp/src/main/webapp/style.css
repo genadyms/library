@@ -348,7 +348,7 @@ ul#menu li a:hover {
 
 .form_settings select {
 	width: 310px;
-	height: 25px;
+	height: 65px;
 }
 
 .form_settings .checkbox {
@@ -396,4 +396,7 @@ table tr td {
 	display: block;
 	position: relative;
 	text-align: center;
+}
+#select-authors select{
+	height: 70px;
 }
