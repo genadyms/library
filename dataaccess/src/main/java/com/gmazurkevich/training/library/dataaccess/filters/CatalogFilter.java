@@ -6,7 +6,9 @@ public class CatalogFilter extends AbstractFilter {
 	private String title;
 	private Catalog parent;
 	private boolean fetchParent;
-
+	private boolean root;
+	private boolean books;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -29,6 +31,22 @@ public class CatalogFilter extends AbstractFilter {
 
 	public void setFetchParent(boolean fetchParent) {
 		this.fetchParent = fetchParent;
+	}
+
+	public boolean isRoot() {
+		return root;
+	}
+
+	public void setRoot(boolean root) {
+		this.root = root;
+	}
+
+	public boolean isBooks() {
+		return books;
+	}
+
+	public void setBooks(boolean books) {
+		this.books = books;
 	}
 
 }

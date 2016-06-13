@@ -2,6 +2,8 @@ package com.gmazurkevich.training.library.webapp.page.book;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
+
+import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Comment;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
@@ -22,6 +24,14 @@ public class BookInfoPage extends AbstractPage {
 		super.onInitialize();
 
 		add(new Label("title", book.getTitle()));
+		StringBuffer sb = new StringBuffer();
+		for (Author author : book.getAuthors()) {
+			sb.append(author.getFirstName()).append(" ").append(author.getSecondName()).append(", ");
+		}
+		
+		add(new Label("author", sb.toString()));
+		
+		
 		add(new CommentListPanel("list-panel", book));
 
 		Link createNew = new Link("create") {

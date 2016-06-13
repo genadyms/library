@@ -21,6 +21,7 @@ import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.common.UserRoleChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.common.UserStateChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
+import com.googlecode.wicket.kendo.ui.panel.KendoFeedbackPanel;
 
 public class UsersEditPage extends AbstractPage {
 
@@ -96,8 +97,7 @@ public class UsersEditPage extends AbstractPage {
 				setResponsePage(new UsersPage());
 			}
 		});
-
-		add(new FeedbackPanel("feedback"));
+		add(new KendoFeedbackPanel("feedback"));
 	}
 
 }

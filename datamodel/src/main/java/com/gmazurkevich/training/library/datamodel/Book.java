@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Book extends AbstractModel {
@@ -43,6 +44,17 @@ public class Book extends AbstractModel {
 	public String toString() {
 		return "Book [isbn=" + isbn + ", title=" + title + ", pages=" + pages + ", year=" + year + ", bookComment="
 		/* + comments */ + ", publishingOffice=" + publishingOffice + "]";
+	}
+
+	@OneToMany(mappedBy = "book")
+	private List<CopyBook> copyBooks;
+
+	public List<CopyBook> getCopyBooks() {
+		return copyBooks;
+	}
+
+	public void setCopyBooks(List<CopyBook> copyBooks) {
+		this.copyBooks = copyBooks;
 	}
 
 	public List<Author> getAuthors() {

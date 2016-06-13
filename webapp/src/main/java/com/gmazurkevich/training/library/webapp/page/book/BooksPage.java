@@ -31,7 +31,6 @@ public class BooksPage extends AbstractPage {
 
 	public BooksPage(BookFilter bookFilter) {
 		this();
-//		this.bookListPanel = new BooksListPanel(ID_LIST_PANEL);
 		bookListPanel = new BooksListPanel(ID_LIST_PANEL, bookFilter);
 	}
 

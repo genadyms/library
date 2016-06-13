@@ -3,7 +3,6 @@ package com.gmazurkevich.training.library.webapp.page.home;
 import org.apache.wicket.markup.html.link.Link;
 
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
-import com.gmazurkevich.training.library.webapp.page.DefaultMultiSelectPage;
 import com.gmazurkevich.training.library.webapp.page.FeedbackPanelPage;
 
 public class HomePage extends AbstractPage {
@@ -16,11 +15,11 @@ public class HomePage extends AbstractPage {
 				setResponsePage(new FeedbackPanelPage());
 			}
 		});
-		add(new Link("link-test2") {
-			@Override
-			public void onClick() {
-				setResponsePage(new DefaultMultiSelectPage ());
-			}
-		});
+//		add(new Link("link-test2") {
+//			@Override
+//			public void onClick() {
+//				setResponsePage(new DefaultMultiSelectPage ());
+//			}
+//		});
 	}
 }

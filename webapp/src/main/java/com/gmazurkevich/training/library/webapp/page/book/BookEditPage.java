@@ -31,6 +31,7 @@ import com.gmazurkevich.training.library.service.CatalogService;
 import com.gmazurkevich.training.library.webapp.common.CatalogChoiceRenderer;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.googlecode.wicket.kendo.ui.form.multiselect.MultiSelect;
+import com.googlecode.wicket.kendo.ui.panel.KendoFeedbackPanel;
 
 @AuthorizeInstantiation(value = { "ADMIN" })
 public class BookEditPage extends AbstractPage {
@@ -45,45 +46,37 @@ public class BookEditPage extends AbstractPage {
 	private CatalogService catalogService;
 
 	private Book book;
-	private static final List<String> GENRES = Arrays.asList("Black Metal", "Death Metal", "Doom Metal", "Folk Metal",
-			"Gothic Metal", "Heavy Metal", "Power Metal", "Symphonic Metal", "Trash Metal", "Vicking Metal");
-
+	
 	public BookEditPage(PageParameters parameters) {
 		super(parameters);
 	}
 
 	public BookEditPage(Book book) {
 		super();
-		this.book = bookService.getBookFetchAll(book);
+		this.book = book.getId()==null ? book : bookService.getBookFetchAll(book);
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
+
 		Form<Book> form = new BookForm<Book>("form", new CompoundPropertyModel<Book>(book));
 		add(form);
-		//////////////
-		List<String> selected = new ArrayList<String>();
-		selected.add("Heavy Metal");
-		selected.add("Trash Metal");
 		List<Author> allAuthors = authorService.getAll();
-		
+
 		final MultiSelect<Author> multiselect = new MultiSelect<Author>("authors", Model.ofList(book.getAuthors()),
-				Model.ofList(allAuthors),AuthorChoiceRenderer.INSTANCE);
+				Model.ofList(allAuthors), AuthorChoiceRenderer.INSTANCE);
 		form.add(multiselect.setOutputMarkupId(true));
-/////////////////////
 		TextField<String> titleField = new TextField<>("title");
 		titleField.setRequired(true);
-		// titleField.setEnabled(false);
 		form.add(titleField);
 
 		TextField<String> isbnField = new TextField<>("isbn");
 		form.add(isbnField);
 
-		TextField<Integer> pagesTitle = new TextField<>("pages");
-		pagesTitle.setRequired(true);
-		form.add(pagesTitle);
+		TextField<Integer> countPages = new TextField<>("pages");
+		countPages.setRequired(true);
+		form.add(countPages);
 
 		TextField<String> publishingOfficeField = new TextField<>("publishingOffice");
 		publishingOfficeField.setRequired(true);
@@ -93,27 +86,13 @@ public class BookEditPage extends AbstractPage {
 		yearField.add(new DatePicker());
 		yearField.setRequired(true);
 		form.add(yearField);
-//		final Palette<Author> palette = new Palette<Author>("authors", Model.ofList(book.getAuthors()),
-//				new CollectionModel<Author>(allAuthors), AuthorChoiceRenderer.INSTANCE, 15, false, true);
-//
-//		palette.add(new DefaultTheme());
-//		form.add(palette);
 
-		// List<String> selected = new ArrayList<String>();
-		// selected.add("Heavy Metal");
-		// selected.add("Trash Metal");
-		// List<String> GENRES = Arrays.asList("Black Metal", "Death Metal",
-		// "Doom Metal", "Folk Metal", "Gothic Metal", "Heavy Metal", "Power
-		// Metal", "Symphonic Metal", "Trash Metal", "Vicking Metal");
-		//
-		// final MultiSelect<String> multiselect = new
-		// MultiSelect<String>("select", Model.ofList(selected),
-		// Model.ofList(GENRES));
-		// form.add(multiselect.setOutputMarkupId(true));
-
-		List<Catalog> allCatalogs = catalogService.getAll();
-		form.add(new DropDownChoice<>("catalog", allCatalogs, CatalogChoiceRenderer.INSTANCE));
-
+		List<Catalog> catalogsWithBook = catalogService.getCatalogsWithBooks();
+		form.add(new DropDownChoice<>("catalog", catalogsWithBook, CatalogChoiceRenderer.INSTANCE));
+		
+		final KendoFeedbackPanel feedbackPanel = new KendoFeedbackPanel("feedback");
+		add(feedbackPanel);
+		
 		form.add(new SubmitLink("save") {
 			@Override
 			public void onSubmit() {
@@ -122,8 +101,6 @@ public class BookEditPage extends AbstractPage {
 				setResponsePage(new BooksPage());
 			}
 		});
-
-		add(new FeedbackPanel("feedback"));
 	}
 
 	private class BookForm<T> extends Form<T> {

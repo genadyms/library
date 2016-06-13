@@ -70,4 +70,11 @@ public class CatalogServiceImpl implements CatalogService {
 		return catalogDao.getAll();
 	}
 
+	@Override
+	public List<Catalog> getCatalogsWithBooks() {
+		CatalogFilter filter = new CatalogFilter();
+		filter.setBooks(true);
+		return catalogDao.find(filter);
+	}
+
 }

@@ -10,6 +10,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.gmazurkevich.training.library.dataaccess.CatalogDao;
+import com.gmazurkevich.training.library.dataaccess.filters.CatalogFilter;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 
 import com.gmazurkevich.training.library.datamodel.Catalog_;
@@ -32,6 +33,19 @@ public class CatalogDaoImpl extends AbstractDaoImpl<Catalog, Long> implements Ca
 		} else {
 			from.fetch(Catalog_.parent);
 			cq.select(from).where(cb.equal(from.get(Catalog_.parent), parent));
+		}
+		List<Catalog> res = em.createQuery(cq).getResultList();
+		return res;
+	}
+
+	@Override
+	public List<Catalog> find(CatalogFilter filter) {
+		EntityManager em = getEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Catalog> cq = cb.createQuery(Catalog.class);
+		Root<Catalog> from = cq.from(Catalog.class);
+		if(filter.isBooks()) {
+			cq.select(from).where(cb.isNotNull(from.get(Catalog_.parent)));
 		}
 		List<Catalog> res = em.createQuery(cq).getResultList();
 		return res;

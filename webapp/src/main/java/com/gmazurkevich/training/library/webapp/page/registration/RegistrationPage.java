@@ -18,6 +18,8 @@ import com.gmazurkevich.training.library.service.UserService;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
+import com.googlecode.wicket.jquery.core.Options;
+import com.googlecode.wicket.kendo.ui.panel.KendoFeedbackPanel;
 
 public class RegistrationPage extends AbstractPage {
 	private static final long serialVersionUID = 1L;
@@ -60,23 +62,29 @@ public class RegistrationPage extends AbstractPage {
 		TextArea<String> address = new TextArea<>("address", new PropertyModel<String>(userProfile, "address"));
 		address.setRequired(true);
 		form.add(address);
-		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		add(feedbackPanel);
+
+		final KendoFeedbackPanel feedbackPanel = new KendoFeedbackPanel("feedback");
+		add(new KendoFeedbackPanel("feedback"));
 		form.add(new SubmitLink("save") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
+				String phoneInput = phone.getInput().replaceAll("-", "").replaceAll(")", "").replace("(", "");
+				if (Integer.valueOf(phoneInput) < 0) {
+					feedbackPanel.error("phone number is not validate!");
+				}
 				try {
+
 					userService.register(userProfile, userCredentials);
-					String message = String.format("You are registered succesfull, %s!",userProfile.getFirstName());
+					String message = String.format("You are registered succesfull, %s!", userProfile.getFirstName());
 					setResponsePage(new LoginPage(message));
 				} catch (javax.persistence.PersistenceException e) {
 					feedbackPanel.error("email or password allready use");
 				}
 			}
 		});
-		
+
 	}
 }
