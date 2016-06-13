@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.link.Link;
 
 import com.gmazurkevich.training.library.datamodel.UserRole;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
+import com.gmazurkevich.training.library.webapp.page.author.AuthorsPage;
 import com.gmazurkevich.training.library.webapp.page.catalog.CatalogsPage;
 import com.gmazurkevich.training.library.webapp.page.comment.CommentsPage;
 import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
@@ -23,12 +24,12 @@ public class MenuPanelLoggedUser extends MenuPanel {
 	protected void onInitialize() {
 		super.onInitialize();
 
-		// add(new Link("link-copybooks") {
-		// @Override
-		// public void onClick() {
-		// setResponsePage(new CopyBooksPage());
-		// }
-		// });
+		add(new Link("link-authors") {
+			@Override
+			public void onClick() {
+				setResponsePage(new AuthorsPage());
+			}
+		});
 
 		add(new Link("link-comments") {
 			@Override

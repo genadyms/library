@@ -10,11 +10,15 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import com.gmazurkevich.training.library.dataaccess.AuthorDao;
+import com.gmazurkevich.training.library.dataaccess.filters.AuthorFilter;
+import com.gmazurkevich.training.library.dataaccess.filters.OrderFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Author_;
+import com.gmazurkevich.training.library.datamodel.Order;
 
 @Repository
 public class AuthorDaoImpl extends AbstractDaoImpl<Author, Long> implements AuthorDao {
@@ -36,4 +40,33 @@ public class AuthorDaoImpl extends AbstractDaoImpl<Author, Long> implements Auth
 		TypedQuery<Author> q = em.createQuery(cq);
 		return q.getResultList();
 	}
+
+	@Override
+	public Long count(AuthorFilter filter) {
+		EntityManager em = getEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+		Root<Author> from = cq.from(Author.class);
+		cq.select(cb.count(from));
+		TypedQuery<Long> q = em.createQuery(cq);
+		return q.getSingleResult();
+	}
+
+	 @Override
+	    public List<Author> find(AuthorFilter filter) {
+	        EntityManager em = getEntityManager();
+	        CriteriaBuilder cb = em.getCriteriaBuilder();
+	        CriteriaQuery<Author> cq = cb.createQuery(Author.class);
+	        Root<Author> from = cq.from(Author.class);
+	        cq.select(from);
+	        // set sort params
+	        
+	        if (filter.getSortProperty() != null) {
+	        	cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
+	        }
+
+	        TypedQuery<Author> q = em.createQuery(cq);
+	        setPaging(filter, q);
+	        return q.getResultList();
+	    }
 }

@@ -3,6 +3,7 @@ package com.gmazurkevich.training.library.service;
 import java.util.List;
 import javax.transaction.Transactional;
 
+import com.gmazurkevich.training.library.dataaccess.filters.AuthorFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.service.exception.DeleteAuthorWithBooksException;
 
@@ -20,6 +21,12 @@ public interface AuthorService {
 	void create(Author author);
 
 	List<Author> getAll();
-	
+
 	List<Author> find(String substring);
+
+	List<Author> find(AuthorFilter filter);
+
+	Long count(AuthorFilter filter);
+
+	void saveOrUpdate(Author author);
 }

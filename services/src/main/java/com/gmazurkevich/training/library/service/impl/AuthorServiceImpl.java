@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.AuthorDao;
 import com.gmazurkevich.training.library.dataaccess.BookDao;
+import com.gmazurkevich.training.library.dataaccess.filters.AuthorFilter;
 import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
@@ -19,7 +20,7 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Inject
 	private AuthorDao authorDao;
-	
+
 	@Inject
 	private BookDao bookDao;
 
@@ -35,7 +36,8 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Override
 	public void delete(Author author) throws DeleteAuthorWithBooksException {
-		if (authorHasBooks(author)) throw new DeleteAuthorWithBooksException();
+		if (authorHasBooks(author))
+			throw new DeleteAuthorWithBooksException();
 		authorDao.delete(author.getId());
 	}
 
@@ -61,6 +63,25 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public List<Author> find(String substring) {
 		return authorDao.find(substring);
+	}
+
+	@Override
+	public void saveOrUpdate(Author author) {
+		if (author.getId() == null) {
+			create(author);
+		} else {
+			update(author);
+		}
+	}
+
+	@Override
+	public List<Author> find(AuthorFilter filter) {
+		return authorDao.find(filter);
+	}
+
+	@Override
+	public Long count(AuthorFilter filter) {
+		return authorDao.count(filter);
 	}
 
 }
