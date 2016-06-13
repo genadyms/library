@@ -12,6 +12,7 @@ import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.author.panel.AuthorsListPanel;
 
 public class AuthorsPage extends AbstractPage {
+	public ModalWindow modalWindow;
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -22,25 +23,10 @@ public class AuthorsPage extends AbstractPage {
 
 		addModalWindow(authorsListPanel);
 
-		// addSearchComponents(attributesListPanel);
-	}
-
-	private void addSearchComponents(AuthorsListPanel authorsListPanel) {
-		Form form = new Form("searchForm");
-		add(form);
-
-		form.add(new AjaxSubmitLink("search-link") {
-			@Override
-			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				super.onSubmit(target, form);
-				target.add(authorsListPanel);
-			}
-		});
-
 	}
 
 	private void addModalWindow(AuthorsListPanel authorsListPanel) {
-		ModalWindow modalWindow = new ModalWindow("modal");
+		modalWindow = new ModalWindow("modal");
 		add(modalWindow);
 
 		add(new AjaxLink("create") {

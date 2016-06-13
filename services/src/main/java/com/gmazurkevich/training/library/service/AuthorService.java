@@ -20,6 +20,9 @@ public interface AuthorService {
 	@Transactional
 	void create(Author author);
 
+	@Transactional
+	void saveOrUpdate(Author author);
+
 	List<Author> getAll();
 
 	List<Author> find(String substring);
@@ -27,6 +30,4 @@ public interface AuthorService {
 	List<Author> find(AuthorFilter filter);
 
 	Long count(AuthorFilter filter);
-
-	void saveOrUpdate(Author author);
 }

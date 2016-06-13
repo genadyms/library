@@ -3,8 +3,9 @@
 	<thead>
 		<tr>
 			<th><a wicket:id="sort-id">id</a></th>
-			<th><a wicket:id="sort-name">name</a></th>
-			<th>value</th>
+			<th><a wicket:id="sort-fname">first name</a></th>
+			<th><a wicket:id="sort-lname">last name</a></th>
+			<th>actions</th>
 		</tr>
 
 	</thead>
@@ -13,6 +14,7 @@
 			<td><span wicket:id="id" /></td>
 			<td><span wicket:id="firstName" /></td>
 			<td><span wicket:id="secondName" /></td>
+			<td><button wicket:id="edit">edit</button><button wicket:id="delete">delete</button></td>
 		</tr>
 	</tbody>
 </table>

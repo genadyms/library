@@ -1,21 +1,18 @@
 <wicket:panel>
-	<form wicket:id="form">
-
-		<table>
-			<tr>
-				<td><b>name:</b></td>
-				<td><input type="text" wicket:id="firstName" /></td>
-			</tr>
-			<tr>
-				<td><b>value:</b></td>
-				<td><input type="text" wicket:id="secondName" /></td>
-			</tr>
-			<tr>
-				<td colspan="2">
+	<div id="site_content">
+<!-- 		<div style="background:green; width:200px; height: 100px;" id="content"> -->
+<!-- 			<div style="width: 300px;" class="form_settings"> -->
+				<form wicket:id="form">
+					<p>
+						<span>First Name:</span><input type="text" wicket:id="firstName" />
+					</p>
+					<p>
+						<span>Second name:</span><input type="text" wicket:id="secondName" />
+					</p>
 					<button wicket:id="save">save</button>
 					<button wicket:id="cancel">cancel</button>
-				</td>
-			</tr>
-		</table>
-	</form>
+				</form>
+<!-- 			</div> -->
+<!-- 		</div> -->
+	</div>
 </wicket:panel>
