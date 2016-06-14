@@ -1,11 +1,12 @@
 <wicket:extend>
 	<div id="content_header"></div>
 	<div id="site_content">
-		<span wicket:id="title" />
-		<span wicket:id="author" />
-		<h2>Book comments:</h2>
+		<span wicket:id="title" /> <span wicket:id="author" />
+		<h2><wicket:message key="menu.comments" /></h2>
 		<div wicket:id="list-panel"></div>
-		<button wicket:id="create">create new comment</button>
-		<button wicket:id="order-link">order book</button>
+		<button wicket:id="create"><wicket:message key="new.comment" /></button>
+		<button wicket:id="new-copybook">
+			<wicket:message key="new.copybook" />
+		</button>
 	</div>
 </wicket:extend>

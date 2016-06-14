@@ -1,34 +1,44 @@
 package com.gmazurkevich.training.library.webapp.page.copybook;
 
-import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 
-import com.gmazurkevich.training.library.datamodel.Book;
-import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.copybook.panel.CopyBooksListPanel;
+import com.googlecode.wicket.kendo.ui.widget.notification.Notification;
 
 public class CopyBooksPage extends AbstractPage {
 	private static final long serialVersionUID = 1L;
-	private Book book;
 
-	public CopyBooksPage(Book book) {
+	private CopyBooksListPanel listPanel;
+	public ModalWindow modalWindow;
+	final public Notification notification = new Notification("notification");
+	
+	public CopyBooksPage() {
 		super();
-		this.book = book;
+		listPanel = new CopyBooksListPanel("list-panel");
+		listPanel.setOutputMarkupId(true);
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		add(new CopyBooksListPanel("list-panel", book));
+		add(listPanel);
+		addModalWindow(listPanel);
+		add(notification);
+	}
 
-		add(new Link("create") {
+	private void addModalWindow(CopyBooksListPanel authorsListPanel) {
+		modalWindow = new ModalWindow("modal");
+		add(modalWindow);
+		modalWindow.setWindowClosedCallback(new WindowClosedCallback() {
+
 			@Override
-			public void onClick() {
-				CopyBook newCopyBook = new CopyBook();
-				newCopyBook.setBook(book);
-				setResponsePage(new CopyBookEditPage(newCopyBook));
+			public void onClose(AjaxRequestTarget target) {
+				target.add(authorsListPanel);
+
 			}
 		});
 	}
-
 }

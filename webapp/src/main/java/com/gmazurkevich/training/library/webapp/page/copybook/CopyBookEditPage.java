@@ -66,7 +66,7 @@ public class CopyBookEditPage extends AbstractPage {
 			public void onSubmit() {
 				super.onSubmit();
 				copyBookService.update(copyBook);
-				setResponsePage(new CopyBooksPage(copyBook.getBook()));
+//				setResponsePage(new CopyBooksPage(copyBook.getBook()));
 			}
 		});
 	}

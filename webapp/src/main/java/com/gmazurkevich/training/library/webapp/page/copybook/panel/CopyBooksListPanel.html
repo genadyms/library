@@ -4,8 +4,9 @@
 			<tr>
 				<th><a wicket:id="sort-id">id</a></th>
 				<th><a wicket:id="sort-book">book</a></th>
-				<th><a wicket:id="sort-department">department</a></th>
-				<th>busyTo</th>
+				<th><a wicket:id="sort-departmentName">department name</a></th>
+				<th><a wicket:id="sort-departmentType">department type</a></th>
+				<th>free date</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -13,11 +14,14 @@
 			<tr wicket:id="rows">
 				<td><span wicket:id="id" /></td>
 				<td><span wicket:id="book" /></td>
-				<td><span wicket:id="department" /></td>
-				<td><span wicket:id="busyTo" /></td>
-				<td><a wicket:id="delete-link">delete</a>/<a
-					wicket:id="edit-link">edit</a>
-					/<a	wicket:id="order-link">order</a></td>
+				<td><span wicket:id="departmentName" /></td>
+				<td><span wicket:id="departmentType" /></td>
+				<td><span wicket:id="free-date" /></td>
+				<td><a wicket:id="delete-link">delete</a>/
+					<a wicket:id="edit-link"><wicket:message
+						key="edit" /></a>
+					/<a	wicket:id="order-link"><wicket:message
+						key="order" /></a></td>
 			</tr>
 		</tbody>
 	</table>

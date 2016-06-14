@@ -42,13 +42,13 @@ public class OrderEditPage extends AbstractPage {
 		Form<Order> form = new OrderForm<Order>("form", new CompoundPropertyModel<Order>(order));
 		add(form);
 
-		DateTextField reservedDateField = new DateTextField("reserved");
-		reservedDateField.add(new DatePicker());
-		form.add(reservedDateField);
+		DateTextField reserveField = new DateTextField("dateReserve");
+		reserveField.add(new DatePicker());
+		form.add(reserveField);
 
-		DateTextField handledField = new DateTextField("handled");
-		handledField.add(new DatePicker());
-		form.add(handledField);
+		DateTextField returnField = new DateTextField("dateReturn");
+		returnField.add(new DatePicker());
+		form.add(returnField);
 
 		form.add(new SubmitLink("update") {
 			@Override

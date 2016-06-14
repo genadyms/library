@@ -37,7 +37,6 @@ import com.gmazurkevich.training.library.webapp.page.book.BookEditPage;
 import com.gmazurkevich.training.library.webapp.page.book.BookInfoPage;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
 import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
-import com.gmazurkevich.training.library.webapp.page.orders.OrderCopyBookPage;
 
 public class BooksListPanel extends Panel {
 
@@ -141,7 +140,7 @@ public class BooksListPanel extends Panel {
 
 					@Override
 					public void onClick() {
-						setResponsePage(new CopyBooksPage(book));
+//						setResponsePage(new CopyBooksPage(book));
 					}
 				});
 				linkOrder.setVisible(!copyBooks.isEmpty());

@@ -6,10 +6,12 @@ import org.apache.wicket.markup.html.link.Link;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Comment;
+import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.comment.CommentEditPage;
 import com.gmazurkevich.training.library.webapp.page.comment.panel.CommentListPanel;
+import com.gmazurkevich.training.library.webapp.page.copybook.CopyBookEditPage;
 import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
 
 public class BookInfoPage extends AbstractPage {
@@ -43,13 +45,13 @@ public class BookInfoPage extends AbstractPage {
 			}
 		};
 		add(createNew);
-		add(new Link("order-link"){
-
+		add(new Link("new-copybook"){
 			@Override
 			public void onClick() {
-				setResponsePage(new CopyBooksPage(book));
+				CopyBook copyBook = new CopyBook();
+				copyBook.setBook(book);
+				setResponsePage(new CopyBookEditPage(copyBook));
 			}
-			
 		});
 		if (AuthorizedSession.get().getRoles() == null || !AuthorizedSession.get().getRoles().contains("ADMIN"))
 			createNew.setVisibilityAllowed(false);

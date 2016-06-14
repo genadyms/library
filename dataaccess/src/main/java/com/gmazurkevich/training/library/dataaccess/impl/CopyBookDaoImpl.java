@@ -41,7 +41,12 @@ public class CopyBookDaoImpl extends AbstractDaoImpl<CopyBook, Long> implements 
 		if (filter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
 		}
-		
+		if(filter.isFetchBook()){
+			from.fetch(CopyBook_.book, JoinType.INNER);
+		}
+		if(filter.isFetchDepartment()){
+			from.fetch(CopyBook_.department, JoinType.INNER);
+		}
 		if(filter.getBook()!=null){
 			cq.where(cb.equal(from.get(CopyBook_.book), filter.getBook()));
 		}
@@ -76,22 +81,46 @@ public class CopyBookDaoImpl extends AbstractDaoImpl<CopyBook, Long> implements 
 		TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult();
 	}
-
-	@Override
-	public CopyBook fetchAll(Long id) {
-		EntityManager em = getEntityManager();
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<CopyBook> cq = cb.createQuery(CopyBook.class);
-		Root<CopyBook> from = cq.from(CopyBook.class);
-		cq.select(from);
-		from.fetch(CopyBook_.department, JoinType.INNER);
-		from.fetch(CopyBook_.orders, JoinType.INNER);
-		from.fetch(CopyBook_.issues, JoinType.LEFT);
-		from.fetch(CopyBook_.book, JoinType.INNER);
-		cq.where(cb.equal(from.get(Book_.id), id));
-		cq.distinct(true);
-		TypedQuery<CopyBook> q = em.createQuery(cq);
-		return q.getSingleResult();
-	}
-	
+//
+//	@Override
+//	public CopyBook fetchCopyBook(CopyBookFilter filter) {
+//		EntityManager em = getEntityManager();
+//		CriteriaBuilder cb = em.getCriteriaBuilder();
+//		CriteriaQuery<CopyBook> cq = cb.createQuery(CopyBook.class);
+//		Root<CopyBook> from = cq.from(CopyBook.class);
+//		cq.select(from);
+//		if(filter.isFetchDepartment()){
+//			
+//		}
+//		from.fetch(CopyBook_.department, JoinType.INNER);
+//		from.fetch(CopyBook_.orders, JoinType.INNER);
+//		from.fetch(CopyBook_.issues, JoinType.LEFT);
+//		from.fetch(CopyBook_.book, JoinType.INNER);
+//		cq.where(cb.equal(from.get(Book_.id), id));
+//		cq.distinct(true);
+//		TypedQuery<CopyBook> q = em.createQuery(cq);
+//		return q.getSingleResult();
+//	}
+//	    public List<CopyBook> find(CopyBookFilter filter) {
+//	         EntityManager em = getEntityManager();
+//	         CriteriaBuilder cb = em.getCriteriaBuilder();
+//	         CriteriaQuery<CopyBook> cq = cb.createQuery(CopyBook.class);
+//	         Root<CopyBook> from = cq.from(CopyBook.class);
+//	         cq.select(from);
+//	         if (filter.getBook() != null) {
+//	             if (filter.isFindFreeCopyBook()) {
+//	                 // Predicate noOrders = cb.isNull(from.get(CopyBook_.orders));
+//	                Join<CopyBook, Order> orders = from.join(CopyBook_.orders, JoinType.LEFT);
+//	                 cq.where(cb.and(cb.isNotNull(orders.get(Order_.closed)),
+//	                         cb.equal(from.get(CopyBook_.book), filter.getBook())));
+//	             } else {
+//	                cq.where(cb.equal(from.get(CopyBook_.book), filter.getBook()));
+//	             }
+//	         }
+//	         if (filter.getDepartment() != null) {
+//	             cq.where(cb.equal(from.get(CopyBook_.department), filter.getDepartment()));
+//	         }
+//	         List<CopyBook> res = em.createQuery(cq).getResultList();
+//	         return res;
+//	    }
 }

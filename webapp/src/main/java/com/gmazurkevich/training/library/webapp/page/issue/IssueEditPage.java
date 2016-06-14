@@ -30,7 +30,7 @@ public class IssueEditPage extends AbstractPage {
 	private static final long serialVersionUID = 1L;
 
 	public IssueEditPage(CopyBook copyBook, UserProfile reader) {
-		this.copyBook = copyBookService.fetchAll(copyBook.getId());
+//		this.copyBook = copyBookService.fetchAll(copyBook.getId());
 		this.reader=reader;
 		issue = new Issue();
 		issue.setCopyBook(copyBook);

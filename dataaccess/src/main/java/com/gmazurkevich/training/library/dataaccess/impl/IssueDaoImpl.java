@@ -15,6 +15,7 @@ import com.gmazurkevich.training.library.dataaccess.IssueDao;
 import com.gmazurkevich.training.library.dataaccess.filters.IssueFilter;
 import com.gmazurkevich.training.library.datamodel.Issue;
 import com.gmazurkevich.training.library.datamodel.Issue_;
+import com.gmazurkevich.training.library.datamodel.Order_;
 
 @Repository
 public class IssueDaoImpl extends AbstractDaoImpl<Issue, Long> implements IssueDao {
@@ -56,11 +57,8 @@ public class IssueDaoImpl extends AbstractDaoImpl<Issue, Long> implements IssueD
 		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 		Root<Issue> from = cq.from(Issue.class);
 		cq.select(from);
-		if (filter.getCopyBook() != null) {
-			cq.where(cb.equal(from.get(Issue_.copyBook), filter.getCopyBook()));
-		}
-		if (filter.isStatusActive()) {
-			cq.where(cb.isNull(from.get(Issue_.dateReturn)));
+		if (filter.getCopyBook() != null&&filter.isStatusActive()) {
+			cq.where(cb.and(cb.isNotNull(from.get(Issue_.copyBook)),cb.equal(from.get(Issue_.copyBook), filter.getCopyBook()),cb.isNull(from.get(Issue_.dateReturn))));
 		}
 		cq.distinct(true);
 		TypedQuery<Issue> q = em.createQuery(cq);

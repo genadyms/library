@@ -8,9 +8,12 @@ public class CopyBookFilter extends AbstractFilter {
 	private Book book;
 
 	private boolean findFreeCopyBook;
-	
-	private boolean fetchAll;
-	
+
+	private boolean fetchBook;
+	private boolean fetchDepartment;
+
+	// private boolean fetchAll;
+
 	public Book getBook() {
 		return book;
 	}
@@ -35,13 +38,22 @@ public class CopyBookFilter extends AbstractFilter {
 		this.findFreeCopyBook = findFreeCopyBook;
 	}
 
-	public boolean isFetchAll() {
-		return fetchAll;
-	}
-
-	public void setFetchAll(boolean fetchAll) {
-		this.fetchAll = fetchAll;
-	}
-
 	private Department department;
+
+	public boolean isFetchBook() {
+		return fetchBook;
+	}
+
+	public void setFetchBook(boolean fetchBook) {
+		this.fetchBook = fetchBook;
+	}
+
+	public boolean isFetchDepartment() {
+		return fetchDepartment;
+	}
+
+	public void setFetchDepartment(boolean fetchDepartment) {
+		this.fetchDepartment = fetchDepartment;
+	}
+
 }

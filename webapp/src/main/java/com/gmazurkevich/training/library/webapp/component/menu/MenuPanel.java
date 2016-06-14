@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
+import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
 import com.gmazurkevich.training.library.webapp.page.department.DepartmentsPage;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 import com.gmazurkevich.training.library.webapp.page.login.LoginPage;
@@ -33,7 +34,14 @@ public class MenuPanel extends Panel {
 				setResponsePage(new BooksPage());
 			}
 		});
-
+		
+		add(new Link("link-copyBooks") {
+			@Override
+			public void onClick() {
+				setResponsePage(new CopyBooksPage());
+			}
+		});
+		
 		add(new Link("link-departments") {
 			@Override
 			public void onClick() {

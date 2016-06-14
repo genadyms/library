@@ -46,9 +46,7 @@ public class OrdersListPanel extends Panel {
 
 		OrdersDataProvider ordersDataProvider = new OrdersDataProvider();
 		DataView<Order> dataView = new DataView<Order>("rows", ordersDataProvider, 5) {
-			/**
-			 * 
-			 */
+			
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -56,6 +54,7 @@ public class OrdersListPanel extends Panel {
 				Order order = item.getModelObject();
 
 				item.add(new Label("id", order.getId()));
+				item.add(new Label("copyBook", order.getCopyBook().getId()));
 				item.add(DateLabel.forDatePattern("created", Model.of(order.getCreated()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("dateReserve", Model.of(order.getDateReserve()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("dateReturn", Model.of(order.getDateReturn()), "dd-MM-yyyy hh:mm"));
@@ -106,6 +105,7 @@ public class OrdersListPanel extends Panel {
 		add(dataView);
 		add(new PagingNavigator("paging", dataView));
 		add(new OrderByBorder("sort-id", Order_.id, ordersDataProvider));
+		add(new OrderByBorder("sort-copyBook", Order_.copyBook, ordersDataProvider));
 		add(new OrderByBorder("sort-created", Order_.created, ordersDataProvider));
 		add(new OrderByBorder("sort-dateReserve", Order_.dateReserve, ordersDataProvider));
 		add(new OrderByBorder("sort-dateReturn", Order_.dateReturn, ordersDataProvider));

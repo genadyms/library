@@ -15,6 +15,10 @@
 	<entry key="menu.users">Пользователи</entry>
 	<entry key="menu.authoks">Авторы</entry>
 	<entry key="menu.registration">Регистрация</entry>
+	<entry key="new.copybook">Новый экземпляр</entry>
+	<entry key="new.comment">Новый комментарий</entry>
+	<entry key="order">Заказать</entry>
+	<entry key="edit">Редактировать</entry>
 	<entry key="US">Английский</entry>
 	<entry key="RU">Русский</entry>
 	<entry key="logo.library">Библиотека</entry>
