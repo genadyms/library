@@ -5,8 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.gmazurkevich.training.library.dataaccess.filters.IssueFilter;
+import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Issue;
-import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
 
 public interface IssueService {
 	Issue get(Long id);
@@ -25,4 +25,6 @@ public interface IssueService {
 	Long count(IssueFilter issueFilter);
 
 	List<Issue> getAll();
+
+	Issue getActiveIssue(CopyBook copyBook);
 }

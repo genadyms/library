@@ -30,7 +30,7 @@ public class OrderDetailsPage extends AbstractPage {
 	
 	public OrderDetailsPage(Order order) {
 		this.order = orderService.getOrderFetchAll(order.getId());
-		this.copyBook = copyBookService.getCopyBookFetchAll(this.order.getCopyBook().getId()); 
+		this.copyBook = copyBookService.fetchAll(this.order.getCopyBook().getId()); 
 	}
 	
 	@Override

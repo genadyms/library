@@ -22,5 +22,6 @@ public interface CopyBookService {
 
 	Long count(CopyBookFilter filter);
 
-	CopyBook getCopyBookFetchAll(Long id);
+	CopyBook fetchAll(Long id);
+
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.gmazurkevich.training.library.dataaccess.IssueDao;
 import com.gmazurkevich.training.library.dataaccess.filters.IssueFilter;
 import com.gmazurkevich.training.library.datamodel.Issue;
+import com.gmazurkevich.training.library.datamodel.Issue_;
 
 @Repository
 public class IssueDaoImpl extends AbstractDaoImpl<Issue, Long> implements IssueDao {
@@ -45,6 +46,24 @@ public class IssueDaoImpl extends AbstractDaoImpl<Issue, Long> implements IssueD
 		Root<Issue> from = cq.from(Issue.class);
 		cq.select(cb.count(from));
 		TypedQuery<Long> q = em.createQuery(cq);
+		return q.getSingleResult();
+	}
+	
+	@Override
+	public Issue findCopyBook(IssueFilter filter) {
+		EntityManager em = getEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
+		Root<Issue> from = cq.from(Issue.class);
+		cq.select(from);
+		if (filter.getCopyBook() != null) {
+			cq.where(cb.equal(from.get(Issue_.copyBook), filter.getCopyBook()));
+		}
+		if (filter.isStatusActive()) {
+			cq.where(cb.isNull(from.get(Issue_.dateReturn)));
+		}
+		cq.distinct(true);
+		TypedQuery<Issue> q = em.createQuery(cq);
 		return q.getSingleResult();
 	}
 }

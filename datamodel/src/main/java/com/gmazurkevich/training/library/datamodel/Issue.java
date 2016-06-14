@@ -14,6 +14,7 @@ public class Issue extends AbstractModel {
 	
 	@ManyToOne(targetEntity = CopyBook.class, fetch = FetchType.LAZY)
 	private CopyBook copyBook;
+	
 	@ManyToOne(targetEntity = UserProfile.class, fetch = FetchType.LAZY)
 	private UserProfile reader;
 

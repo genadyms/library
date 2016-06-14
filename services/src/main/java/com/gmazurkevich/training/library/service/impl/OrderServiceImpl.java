@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.OrderDao;
 import com.gmazurkevich.training.library.dataaccess.filters.OrderFilter;
+import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.service.OrderService;
 
@@ -53,6 +54,14 @@ public class OrderServiceImpl implements OrderService {
 	public Order getOrderFetchAll(Long id) {
 		Long idTest = id;
 		return orderDao.getOrderFetchAll(id);
+	}
+
+	@Override
+	public Order getActiveOrder(CopyBook copyBook) {
+		OrderFilter filter = new OrderFilter();
+		filter.setCopyBook(copyBook);
+		filter.setStatusActive(true);
+		return orderDao.findCopyBook(filter);
 	}
 
 }

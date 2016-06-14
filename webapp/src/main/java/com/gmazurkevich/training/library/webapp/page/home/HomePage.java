@@ -3,6 +3,7 @@ package com.gmazurkevich.training.library.webapp.page.home;
 import org.apache.wicket.markup.html.link.Link;
 
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
+import com.gmazurkevich.training.library.webapp.page.DefaultWizardPage;
 import com.gmazurkevich.training.library.webapp.page.FeedbackPanelPage;
 
 public class HomePage extends AbstractPage {
@@ -12,7 +13,7 @@ public class HomePage extends AbstractPage {
 		add(new Link("link-test") {
 			@Override
 			public void onClick() {
-				setResponsePage(new FeedbackPanelPage());
+				setResponsePage(new DefaultWizardPage());
 			}
 		});
 //		add(new Link("link-test2") {

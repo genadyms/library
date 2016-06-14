@@ -47,8 +47,8 @@ public class CopyBookServiceImpl implements CopyBookService {
 	}
 
 	@Override
-	public CopyBook getCopyBookFetchAll(Long id) {
-		return copyBookDao.getCopyBookFetchAll(id);
+	public CopyBook fetchAll(Long id) {
+		return copyBookDao.fetchAll(id);
 	}
 
 }

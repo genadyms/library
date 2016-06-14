@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.gmazurkevich.training.library.dataaccess.filters.OrderFilter;
+import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.service.impl.DeleteActiveOrderException;
 
@@ -25,4 +26,6 @@ public interface OrderService {
 	long count(OrderFilter orderFilter);
 
 	Order getOrderFetchAll(Long id);
+
+	Order getActiveOrder(CopyBook copyBook);
 }

@@ -36,14 +36,27 @@ public class Order extends AbstractModel {
 	private Date closed;
 
 	@Column
-	private Date reserved;
+	private Date dateReserve;
+	
+	@Column
+	private Date dateReturn;
 
-	public Date getReserved() {
-		return reserved;
+	
+
+	public Date getDateReserve() {
+		return dateReserve;
 	}
 
-	public void setReserved(Date reserved) {
-		this.reserved = reserved;
+	public void setDateReserve(Date dateReserve) {
+		this.dateReserve = dateReserve;
+	}
+
+	public Date getDateReturn() {
+		return dateReturn;
+	}
+
+	public void setDateReturn(Date dateReturn) {
+		this.dateReturn = dateReturn;
 	}
 
 	public CopyBook getCopyBook() {

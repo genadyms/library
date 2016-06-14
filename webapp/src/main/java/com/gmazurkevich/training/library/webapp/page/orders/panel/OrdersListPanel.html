@@ -4,7 +4,8 @@
 			<tr>
 				<th><a wicket:id="sort-id">id</a></th>
 				<th><a wicket:id="sort-created">created</a></th>
-				<th><a wicket:id="sort-reserved">reserved date</a></th>
+				<th><a wicket:id="sort-dateReserve">reserved date</a></th>
+				<th><a wicket:id="sort-dateReturn">return date</a></th>
 				<th><a wicket:id="sort-handled">handled</a></th>
 				<th><a wicket:id="sort-closed">closed</a></th>
 				<th>actions</th>
@@ -15,7 +16,8 @@
 			<tr wicket:id="rows">
 				<td><span wicket:id="id" /></td>
 				<td><span wicket:id="created" /></td>
-				<td><span wicket:id="reserved"/></td>
+				<td><span wicket:id="dateReserve"/></td>
+				<td><span wicket:id="dateReturn"/></td>
 				<td><span wicket:id="handled"/></td>
 				<td><span wicket:id="closed"/></td>
 				<td><a wicket:id="details-link">details</a>/<a wicket:id="delete-link">delete</a>/<a

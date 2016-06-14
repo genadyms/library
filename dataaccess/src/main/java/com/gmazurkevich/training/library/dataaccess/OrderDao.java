@@ -12,4 +12,6 @@ public interface OrderDao extends AbstractDao<Order, Long> {
 	Long count(OrderFilter filter);
 
 	Order getOrderFetchAll(Long id);
+
+	Order findCopyBook(OrderFilter filter);
 }

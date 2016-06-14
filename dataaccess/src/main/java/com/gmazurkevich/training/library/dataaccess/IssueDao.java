@@ -9,4 +9,6 @@ public interface IssueDao extends AbstractDao<Issue, Long> {
 	List<Issue> find(IssueFilter filter);
 
 	long count(IssueFilter filter);
+	
+	Issue findCopyBook(IssueFilter filter);
 }

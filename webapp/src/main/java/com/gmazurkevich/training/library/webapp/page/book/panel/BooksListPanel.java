@@ -22,13 +22,16 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
+import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Book_;
 import com.gmazurkevich.training.library.datamodel.Catalog;
+import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.service.AuthorService;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
+import com.gmazurkevich.training.library.service.CopyBookService;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.book.BookEditPage;
 import com.gmazurkevich.training.library.webapp.page.book.BookInfoPage;
@@ -46,6 +49,9 @@ public class BooksListPanel extends Panel {
 
 	@Inject
 	private AuthorService authorService;
+
+	@Inject
+	private CopyBookService copyBookService;
 
 	private BooksDataProvider booksDataProvider = new BooksDataProvider();
 	
@@ -78,7 +84,10 @@ public class BooksListPanel extends Panel {
 			@Override
 			protected void populateItem(Item<Book> item) {
 				Book book = bookService.getBookFetchAll(item.getModelObject());
-
+				CopyBookFilter copyBookFilter = new CopyBookFilter();
+				copyBookFilter.setBook(book);
+				List<CopyBook> copyBooks = copyBookService.find(copyBookFilter);
+				book.setCopyBooks(copyBooks);
 //				item.add(new Label("id", book.getId()));
 				item.add(new Label("title", book.getTitle()));
 				item.add(new Label("publishingOffice", book.getPublishingOffice()));
@@ -88,6 +97,7 @@ public class BooksListPanel extends Panel {
 				}
 				item.add(new Label("authors", sb.toString()));
 				item.add(new Label("catalog", book.getCatalog() != null ? book.getCatalog().getTitle() : ""));
+				item.add(new Label("copyBooks", copyBooks.size()));
 				item.add(DateLabel.forDatePattern("year", Model.of(book.getYear()), "yyyy"));
 
 				Link linkEdit = new Link<Void>("edit-link") {
@@ -127,15 +137,17 @@ public class BooksListPanel extends Panel {
 
 				});
 				
-				item.add(new Link("order-link"){
+				Link linkOrder = (new Link("order-link"){
 
 					@Override
 					public void onClick() {
 						setResponsePage(new CopyBooksPage(book));
 					}
 				});
+				linkOrder.setVisible(!copyBooks.isEmpty());
+				item.add(linkOrder);
 
-
+				
 			}
 		};
 		add(dataView);

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.IssueDao;
 import com.gmazurkevich.training.library.dataaccess.filters.IssueFilter;
+import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Issue;
 import com.gmazurkevich.training.library.service.IssueService;
 
@@ -49,6 +50,14 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public List<Issue> getAll() {
 		return issueDao.getAll();
+	}
+
+	@Override
+	public Issue getActiveIssue(CopyBook copyBook) {
+		IssueFilter filter = new IssueFilter();
+		filter.setCopyBook(copyBook);
+		filter.setStatusActive(true);
+		return issueDao.findCopyBook(filter);
 	}
 
 }

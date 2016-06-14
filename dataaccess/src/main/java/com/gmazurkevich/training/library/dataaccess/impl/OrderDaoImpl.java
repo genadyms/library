@@ -23,7 +23,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 	protected OrderDaoImpl() {
 		super(Order.class);
 	}
-	
+
 	@Override
 	public Long count(OrderFilter filter) {
 		EntityManager em = getEntityManager();
@@ -35,23 +35,41 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 		return q.getSingleResult();
 	}
 
-	 @Override
-	    public List<Order> find(OrderFilter orderFilter) {
-	        EntityManager em = getEntityManager();
-	        CriteriaBuilder cb = em.getCriteriaBuilder();
-	        CriteriaQuery<Order> cq = cb.createQuery(Order.class);
-	        Root<Order> from = cq.from(Order.class);
-	        cq.select(from);
-	        // set sort params
-	        
-	        if (orderFilter.getSortProperty() != null) {
-	        	cq.orderBy(new OrderImpl(from.get(orderFilter.getSortProperty()), orderFilter.isSortOrder()));
-	        }
+	@Override
+	public List<Order> find(OrderFilter orderFilter) {
+		EntityManager em = getEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
+		Root<Order> from = cq.from(Order.class);
+		cq.select(from);
+		// set sort params
 
-	        TypedQuery<Order> q = em.createQuery(cq);
-	        setPaging(orderFilter, q);
-	        return q.getResultList();
-	    }
+		if (orderFilter.getSortProperty() != null) {
+			cq.orderBy(new OrderImpl(from.get(orderFilter.getSortProperty()), orderFilter.isSortOrder()));
+		}
+
+		TypedQuery<Order> q = em.createQuery(cq);
+		setPaging(orderFilter, q);
+		return q.getResultList();
+	}
+
+	@Override
+	public Order findCopyBook(OrderFilter filter) {
+		EntityManager em = getEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
+		Root<Order> from = cq.from(Order.class);
+		cq.select(from);
+		if (filter.getCopyBook() != null) {
+			cq.where(cb.equal(from.get(Order_.copyBook), filter.getCopyBook()));
+		}
+		if (filter.isStatusActive()) {
+			cq.where(cb.isNull(from.get(Order_.closed)));
+		}
+		cq.distinct(true);
+		TypedQuery<Order> q = em.createQuery(cq);
+		return q.getSingleResult();
+	}
 
 	@Override
 	public Order getOrderFetchAll(Long id) {
@@ -63,7 +81,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 		from.fetch(Order_.reader, JoinType.LEFT);
 		from.fetch(Order_.librarian, JoinType.LEFT);
 		from.fetch(Order_.copyBook, JoinType.LEFT);
-//		from.fetch(Order_.comments, JoinType.LEFT);
+		// from.fetch(Order_.comments, JoinType.LEFT);
 		cq.where(cb.equal(from.get(Order_.id), id));
 		cq.distinct(true);
 		TypedQuery<Order> q = em.createQuery(cq);

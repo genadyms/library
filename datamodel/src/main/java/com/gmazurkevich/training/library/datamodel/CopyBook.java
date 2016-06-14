@@ -19,6 +19,17 @@ public class CopyBook extends AbstractModel {
 
 	@OneToMany(mappedBy = "copyBook")
 	private List<Order> orders;
+	
+	public List<Issue> getIssues() {
+		return issues;
+	}
+
+	public void setIssues(List<Issue> issues) {
+		this.issues = issues;
+	}
+
+	@OneToMany(mappedBy = "copyBook")
+	private List<Issue> issues;
 
 	public Department getDepartment() {
 		return department;

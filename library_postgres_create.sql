@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.2
 -- Dumped by pg_dump version 9.5.2
 
--- Started on 2016-06-10 17:38:03
+-- Started on 2016-06-14 15:23:13
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -318,7 +318,8 @@ CREATE TABLE "order" (
     librarian_id integer,
     handled timestamp without time zone,
     closed timestamp without time zone,
-    reserved timestamp without time zone
+    date_reserve timestamp without time zone,
+    date_return timestamp with time zone
 );
 
 
@@ -566,103 +567,23 @@ ALTER TABLE ONLY user_credentials ALTER COLUMN id SET DEFAULT nextval('user_cred
 -- Data for Name: author; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO author (id, first_name, second_name) VALUES (195, 'Anton', 'Chehov 1463074149553');
-INSERT INTO author (id, first_name, second_name) VALUES (196, 'Anton', 'Chehov 1463074149767');
-INSERT INTO author (id, first_name, second_name) VALUES (197, 'Anton', 'Chehov 1463074149771');
-INSERT INTO author (id, first_name, second_name) VALUES (198, 'Anton', 'Chehov 1463084730571');
-INSERT INTO author (id, first_name, second_name) VALUES (199, 'Anton', 'Chehov 1463084732188');
-INSERT INTO author (id, first_name, second_name) VALUES (201, 'new first name', 'new second name 1463084732286');
-INSERT INTO author (id, first_name, second_name) VALUES (202, 'Anton', 'Chehov 1463084858871');
-INSERT INTO author (id, first_name, second_name) VALUES (203, 'Anton', 'Chehov 1463084859493');
+INSERT INTO author (id, first_name, second_name) VALUES (201, 'Алексей', 'Пришвин');
 INSERT INTO author (id, first_name, second_name) VALUES (205, 'new first name', 'new second name 1463084859531');
-INSERT INTO author (id, first_name, second_name) VALUES (206, 'Anton', 'Chehov 1463084916931');
-INSERT INTO author (id, first_name, second_name) VALUES (207, 'Anton', 'Chehov 1463084917481');
-INSERT INTO author (id, first_name, second_name) VALUES (209, 'new first name', 'new second name 1463084917524');
-INSERT INTO author (id, first_name, second_name) VALUES (210, 'Anton', 'Chehov 1463084924707');
-INSERT INTO author (id, first_name, second_name) VALUES (211, 'Anton', 'Chehov 1463084925396');
-INSERT INTO author (id, first_name, second_name) VALUES (213, 'new first name', 'new second name 1463084925432');
-INSERT INTO author (id, first_name, second_name) VALUES (214, 'Anton', 'Chehov 1463086376776');
-INSERT INTO author (id, first_name, second_name) VALUES (215, 'Anton', 'Chehov 1463086377347');
-INSERT INTO author (id, first_name, second_name) VALUES (217, 'new first name', 'new second name 1463086377382');
-INSERT INTO author (id, first_name, second_name) VALUES (218, 'Anton', 'Chehov 1463086499073');
-INSERT INTO author (id, first_name, second_name) VALUES (219, 'Anton', 'Chehov 1463086499682');
-INSERT INTO author (id, first_name, second_name) VALUES (221, 'new first name', 'new second name 1463086499722');
-INSERT INTO author (id, first_name, second_name) VALUES (222, 'Anton', 'Chehov 1463086665423');
-INSERT INTO author (id, first_name, second_name) VALUES (223, 'Anton', 'Chehov 1463086666008');
-INSERT INTO author (id, first_name, second_name) VALUES (225, 'new first name', 'new second name 1463086666049');
-INSERT INTO author (id, first_name, second_name) VALUES (226, 'Anton', 'Chehov 1463087218444');
-INSERT INTO author (id, first_name, second_name) VALUES (227, 'Anton', 'Chehov 1463087218986');
-INSERT INTO author (id, first_name, second_name) VALUES (229, 'new first name', 'new second name 1463087219024');
-INSERT INTO author (id, first_name, second_name) VALUES (230, 'Anton', 'Chehov 1463087294813');
-INSERT INTO author (id, first_name, second_name) VALUES (231, 'Anton', 'Chehov 1463087295425');
-INSERT INTO author (id, first_name, second_name) VALUES (233, 'new first name', 'new second name 1463087295486');
-INSERT INTO author (id, first_name, second_name) VALUES (234, 'Anton', 'Chehov 1463087344119');
-INSERT INTO author (id, first_name, second_name) VALUES (235, 'Anton', 'Chehov 1463087344763');
-INSERT INTO author (id, first_name, second_name) VALUES (237, 'new first name', 'new second name 1463087344810');
-INSERT INTO author (id, first_name, second_name) VALUES (238, 'Anton', 'Chehov 1463088887029');
-INSERT INTO author (id, first_name, second_name) VALUES (239, 'Anton', 'Chehov 1463088887498');
-INSERT INTO author (id, first_name, second_name) VALUES (241, 'new first name', 'new second name 1463088887543');
-INSERT INTO author (id, first_name, second_name) VALUES (242, 'Anton', 'Chehov 1463094837191');
-INSERT INTO author (id, first_name, second_name) VALUES (243, 'Anton', 'Chehov 1463094837317');
-INSERT INTO author (id, first_name, second_name) VALUES (245, 'new first name', 'new second name 1463094837370');
-INSERT INTO author (id, first_name, second_name) VALUES (246, 'Anton', 'Chehov 1463094861907');
-INSERT INTO author (id, first_name, second_name) VALUES (247, 'Anton', 'Chehov 1463094862471');
-INSERT INTO author (id, first_name, second_name) VALUES (249, 'new first name', 'new second name 1463094862510');
-INSERT INTO author (id, first_name, second_name) VALUES (250, 'Anton', 'Chehov 1463119888611');
-INSERT INTO author (id, first_name, second_name) VALUES (251, 'Anton', 'Chehov 1463119890469');
-INSERT INTO author (id, first_name, second_name) VALUES (253, 'new first name', 'new second name 1463119890580');
-INSERT INTO author (id, first_name, second_name) VALUES (254, 'Anton', 'Chehov 1463126073537');
-INSERT INTO author (id, first_name, second_name) VALUES (255, 'Anton', 'Chehov 1463126074801');
-INSERT INTO author (id, first_name, second_name) VALUES (257, 'new first name', 'new second name 1463126074908');
-INSERT INTO author (id, first_name, second_name) VALUES (258, 'Anton', 'Chehov 1463126561750');
-INSERT INTO author (id, first_name, second_name) VALUES (259, 'Anton', 'Chehov 1463126562935');
-INSERT INTO author (id, first_name, second_name) VALUES (261, 'new first name', 'new second name 1463126563102');
-INSERT INTO author (id, first_name, second_name) VALUES (262, 'Anton', 'Chehov 1463126615811');
-INSERT INTO author (id, first_name, second_name) VALUES (263, 'Anton', 'Chehov 1463126617700');
-INSERT INTO author (id, first_name, second_name) VALUES (265, 'new first name', 'new second name 1463126617920');
-INSERT INTO author (id, first_name, second_name) VALUES (266, 'Anton', 'Chehov 1463127551521');
-INSERT INTO author (id, first_name, second_name) VALUES (267, 'Anton', 'Chehov 1463127552519');
-INSERT INTO author (id, first_name, second_name) VALUES (269, 'new first name', 'new second name 1463127552603');
-INSERT INTO author (id, first_name, second_name) VALUES (270, 'Anton', 'Chehov 1463133953227');
-INSERT INTO author (id, first_name, second_name) VALUES (271, 'Anton', 'Chehov 1463133954287');
-INSERT INTO author (id, first_name, second_name) VALUES (273, 'new first name', 'new second name 1463133954365');
-INSERT INTO author (id, first_name, second_name) VALUES (274, 'Anton', 'Chehov 1463149211211');
-INSERT INTO author (id, first_name, second_name) VALUES (275, 'Anton', 'Chehov 1463149212299');
-INSERT INTO author (id, first_name, second_name) VALUES (277, 'new first name', 'new second name 1463149212365');
-INSERT INTO author (id, first_name, second_name) VALUES (278, 'Anton', 'Chehov 1463210046038');
-INSERT INTO author (id, first_name, second_name) VALUES (279, 'Anton', 'Chehov 1463210046186');
-INSERT INTO author (id, first_name, second_name) VALUES (281, 'new first name', 'new second name 1463210046208');
-INSERT INTO author (id, first_name, second_name) VALUES (282, 'Anton', 'Chehov 1463217374788');
-INSERT INTO author (id, first_name, second_name) VALUES (283, 'Anton', 'Chehov 1463217377335');
-INSERT INTO author (id, first_name, second_name) VALUES (285, 'new first name', 'new second name 1463217377522');
-INSERT INTO author (id, first_name, second_name) VALUES (286, 'Anton', 'Chehov 1463224478765');
-INSERT INTO author (id, first_name, second_name) VALUES (287, 'Anton', 'Chehov 1463224479393');
-INSERT INTO author (id, first_name, second_name) VALUES (289, 'new first name', 'new second name 1463224479471');
-INSERT INTO author (id, first_name, second_name) VALUES (290, 'Anton', 'Chehov 1463225535143');
-INSERT INTO author (id, first_name, second_name) VALUES (291, 'Anton', 'Chehov 1463225535732');
-INSERT INTO author (id, first_name, second_name) VALUES (293, 'new first name', 'new second name 1463225535781');
-INSERT INTO author (id, first_name, second_name) VALUES (294, 'Anton', 'Chehov 1463323246082');
-INSERT INTO author (id, first_name, second_name) VALUES (295, 'Anton', 'Chehov 1463323247143');
-INSERT INTO author (id, first_name, second_name) VALUES (297, 'new first name', 'new second name 1463323247250');
-INSERT INTO author (id, first_name, second_name) VALUES (298, 'Anton', 'Chehov 1463323437843');
-INSERT INTO author (id, first_name, second_name) VALUES (299, 'Anton', 'Chehov 1463323438397');
-INSERT INTO author (id, first_name, second_name) VALUES (301, 'new first name', 'new second name 1463323438433');
-INSERT INTO author (id, first_name, second_name) VALUES (302, 'Anton', 'Chehov 1463324823125');
-INSERT INTO author (id, first_name, second_name) VALUES (303, 'Anton', 'Chehov 1463324824106');
-INSERT INTO author (id, first_name, second_name) VALUES (305, 'new first name', 'new second name 1463324824253');
-INSERT INTO author (id, first_name, second_name) VALUES (306, 'Anton', 'Chehov 1463328457169');
-INSERT INTO author (id, first_name, second_name) VALUES (307, 'Anton', 'Chehov 1463328458553');
-INSERT INTO author (id, first_name, second_name) VALUES (309, 'new first name', 'new second name 1463328458644');
-INSERT INTO author (id, first_name, second_name) VALUES (310, 'Anton', 'Chehov 1463345092631');
-INSERT INTO author (id, first_name, second_name) VALUES (311, 'Anton', 'Chehov 1463345093236');
-INSERT INTO author (id, first_name, second_name) VALUES (313, 'new first name', 'new second name 1463345093279');
-INSERT INTO author (id, first_name, second_name) VALUES (314, 'Anton', 'Chehov 1464205687632');
-INSERT INTO author (id, first_name, second_name) VALUES (315, 'Anton', 'Chehov 1464205698412');
-INSERT INTO author (id, first_name, second_name) VALUES (317, 'new first name', 'new second name 1464205699086');
 INSERT INTO author (id, first_name, second_name) VALUES (318, 'Anton', 'Chehov 1464541950671');
 INSERT INTO author (id, first_name, second_name) VALUES (319, 'Anton', 'Chehov 1464541951063');
 INSERT INTO author (id, first_name, second_name) VALUES (320, 'Anton', 'Chehov 1464541951068');
 INSERT INTO author (id, first_name, second_name) VALUES (321, 'new first name', 'new second name 1464541951259');
+INSERT INTO author (id, first_name, second_name) VALUES (322, 'asasasas', 'dsads');
+INSERT INTO author (id, first_name, second_name) VALUES (326, 'лев', 'толстой');
+INSERT INTO author (id, first_name, second_name) VALUES (327, 'яков', 'файн');
+INSERT INTO author (id, first_name, second_name) VALUES (328, 'конан', 'дойл');
+INSERT INTO author (id, first_name, second_name) VALUES (329, 'федор', 'достоевский');
+INSERT INTO author (id, first_name, second_name) VALUES (195, 'Anton', 'Chehov');
+INSERT INTO author (id, first_name, second_name) VALUES (198, 'aName', 'Chehov');
+INSERT INTO author (id, first_name, second_name) VALUES (330, 'михаил', 'шолохов');
+INSERT INTO author (id, first_name, second_name) VALUES (331, 'Михайло', 'Ломоносов');
+INSERT INTO author (id, first_name, second_name) VALUES (197, 'Antoio', 'Banderas');
+INSERT INTO author (id, first_name, second_name) VALUES (196, 'Anton', 'Chehoff');
 
 
 --
@@ -671,7 +592,7 @@ INSERT INTO author (id, first_name, second_name) VALUES (321, 'new first name', 
 -- Name: author_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('author_id_seq', 321, true);
+SELECT pg_catalog.setval('author_id_seq', 331, true);
 
 
 --
@@ -686,7 +607,9 @@ INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) V
 INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) VALUES (1762, 4518, 'asas', 2, '2016-06-30 00:00:00', 'eww', 'sd');
 INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) VALUES (1763, 4518, 're', 34, '2016-06-02 00:00:00', 're', 're');
 INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) VALUES (1765, 4520, 'tre', 43, '2016-06-14 00:00:00', 'tre', 'tre');
-INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) VALUES (1764, 4518, 'anton', 32, '2016-06-10 00:00:00', 'wewe', 'erw');
+INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) VALUES (1766, 4520, 'Война и мир', 1240, '2016-05-10 00:00:00', 'Библиотека', NULL);
+INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) VALUES (1767, 4520, 'Example book', 23, '2016-06-01 00:00:00', 'Питер', NULL);
+INSERT INTO book (id, catalog_id, title, pages, year, publishing_office, isbn) VALUES (1764, 4520, 'sdsdsd', 434, '2016-06-10 00:00:00', 'wewe', NULL);
 
 
 --
@@ -704,6 +627,10 @@ INSERT INTO book_2_author (book_id, author_id) VALUES (1762, 198);
 INSERT INTO book_2_author (book_id, author_id) VALUES (1763, 196);
 INSERT INTO book_2_author (book_id, author_id) VALUES (1765, 197);
 INSERT INTO book_2_author (book_id, author_id) VALUES (1765, 201);
+INSERT INTO book_2_author (book_id, author_id) VALUES (1766, 195);
+INSERT INTO book_2_author (book_id, author_id) VALUES (1767, 331);
+INSERT INTO book_2_author (book_id, author_id) VALUES (1767, 329);
+INSERT INTO book_2_author (book_id, author_id) VALUES (1764, 319);
 INSERT INTO book_2_author (book_id, author_id) VALUES (1764, 198);
 
 
@@ -723,7 +650,7 @@ INSERT INTO book_2_comment (comment_id, book_id) VALUES (646, 1764);
 -- Name: book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('book_id_seq', 1765, true);
+SELECT pg_catalog.setval('book_id_seq', 1767, true);
 
 
 --
@@ -790,6 +717,8 @@ INSERT INTO copy_book (id, book_id, department_id) VALUES (368, 1764, 159);
 INSERT INTO copy_book (id, book_id, department_id) VALUES (369, 1764, 154);
 INSERT INTO copy_book (id, book_id, department_id) VALUES (370, 1764, 152);
 INSERT INTO copy_book (id, book_id, department_id) VALUES (371, 1764, 158);
+INSERT INTO copy_book (id, book_id, department_id) VALUES (372, 1757, 152);
+INSERT INTO copy_book (id, book_id, department_id) VALUES (373, 1758, 151);
 
 
 --
@@ -798,7 +727,7 @@ INSERT INTO copy_book (id, book_id, department_id) VALUES (371, 1764, 158);
 -- Name: copy_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('copy_book_id_seq', 371, true);
+SELECT pg_catalog.setval('copy_book_id_seq', 373, true);
 
 
 --
@@ -940,6 +869,7 @@ SELECT pg_catalog.setval('department_id_seq', 265, true);
 -- Data for Name: issue; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO issue (id, reader_id, copy_book_id, date_take, planned_date_return, date_return) VALUES (1, 1357, 367, '2016-06-13 17:06:54.792', '2016-06-13 17:06:54.792', NULL);
 
 
 --
@@ -948,7 +878,7 @@ SELECT pg_catalog.setval('department_id_seq', 265, true);
 -- Name: issuing_journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('issuing_journal_id_seq', 1, false);
+SELECT pg_catalog.setval('issuing_journal_id_seq', 1, true);
 
 
 --
@@ -957,8 +887,18 @@ SELECT pg_catalog.setval('issuing_journal_id_seq', 1, false);
 -- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, reserved) VALUES (227, 1357, 371, '2016-06-10 15:44:01.49', NULL, NULL, '2016-06-10 17:18:37.946', NULL);
-INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, reserved) VALUES (226, 1357, 367, '2016-06-10 15:43:24.418', NULL, '2016-06-01 00:00:00', '2016-06-10 17:06:38.432', '2016-06-01 00:00:00');
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (227, 1357, 371, '2016-06-10 15:44:01.49', NULL, NULL, '2016-06-10 17:18:37.946', NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (226, 1357, 367, '2016-06-10 15:43:24.418', NULL, '2016-06-01 00:00:00', '2016-06-10 17:06:38.432', '2016-06-01 00:00:00', NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (228, 1357, 367, '2016-06-13 17:06:37.13', NULL, NULL, '2016-06-13 17:06:54.628', NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (229, 1357, 361, '2016-06-14 12:10:25.518', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (230, 1357, 372, '2016-06-14 12:10:56.655', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (231, 1357, 361, '2016-06-14 12:39:50.621', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (232, 1357, 361, '2016-06-14 12:42:49.106', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (233, 1357, 372, '2016-06-14 12:48:38.282', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (234, 1357, 372, '2016-06-14 12:52:07.787', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (235, 1357, 361, '2016-06-14 13:06:08.586', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (236, 1357, 1761, '2016-06-14 13:06:29.791', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "order" (id, reader_id, copy_book_id, created, librarian_id, handled, closed, date_reserve, date_return) VALUES (237, 1357, 361, '2016-06-14 14:35:15.27', NULL, NULL, NULL, NULL, NULL);
 
 
 --
@@ -993,7 +933,7 @@ SELECT pg_catalog.setval('order_2_comment_order_id_seq', 1, false);
 -- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_id_seq', 227, true);
+SELECT pg_catalog.setval('order_id_seq', 237, true);
 
 
 --
@@ -1406,7 +1346,7 @@ ALTER TABLE ONLY user_profile
     ADD CONSTRAINT user_profile_fk0 FOREIGN KEY (id) REFERENCES user_credentials(id);
 
 
--- Completed on 2016-06-10 17:38:04
+-- Completed on 2016-06-14 15:23:14
 
 --
 -- PostgreSQL database dump complete

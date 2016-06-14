@@ -57,7 +57,8 @@ public class OrdersListPanel extends Panel {
 
 				item.add(new Label("id", order.getId()));
 				item.add(DateLabel.forDatePattern("created", Model.of(order.getCreated()), "dd-MM-yyyy hh:mm"));
-				item.add(DateLabel.forDatePattern("reserved", Model.of(order.getReserved()), "dd-MM-yyyy hh:mm"));
+				item.add(DateLabel.forDatePattern("dateReserve", Model.of(order.getDateReserve()), "dd-MM-yyyy hh:mm"));
+				item.add(DateLabel.forDatePattern("dateReturn", Model.of(order.getDateReturn()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("handled", Model.of(order.getHandled()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("closed", Model.of(order.getClosed()), "dd-MM-yyyy hh:mm"));
 
@@ -106,7 +107,8 @@ public class OrdersListPanel extends Panel {
 		add(new PagingNavigator("paging", dataView));
 		add(new OrderByBorder("sort-id", Order_.id, ordersDataProvider));
 		add(new OrderByBorder("sort-created", Order_.created, ordersDataProvider));
-		add(new OrderByBorder("sort-reserved", Order_.reserved, ordersDataProvider));
+		add(new OrderByBorder("sort-dateReserve", Order_.dateReserve, ordersDataProvider));
+		add(new OrderByBorder("sort-dateReturn", Order_.dateReturn, ordersDataProvider));
 		add(new OrderByBorder("sort-handled", Order_.handled, ordersDataProvider));
 		add(new OrderByBorder("sort-closed", Order_.closed, ordersDataProvider));
 
