@@ -25,7 +25,7 @@ public interface OrderService {
 
 	long count(OrderFilter orderFilter);
 
-	Order getOrderFetchAll(Long id);
+//	Order getOrderFetchAll(Long id);
 
 	Order getActiveOrder(CopyBook copyBook);
 }

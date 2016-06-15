@@ -39,7 +39,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 	}
 
 	@Override
-	public List<Order> find(OrderFilter orderFilter) {
+	public List<Order> find(OrderFilter filter) {
 		EntityManager em = getEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
@@ -47,12 +47,15 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 		cq.select(from);
 		// set sort params
 		from.fetch(Order_.copyBook);
-		if (orderFilter.getSortProperty() != null) {
-			cq.orderBy(new OrderImpl(from.get(orderFilter.getSortProperty()), orderFilter.isSortOrder()));
+		if (filter.getSortProperty() != null) {
+			cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
 		}
-
+		if (filter.getCopyBook() != null&&filter.isStatusActive()) {
+			cq.where(cb.and(cb.isNotNull(from.get(Order_.copyBook)),cb.equal(from.get(Order_.copyBook), filter.getCopyBook()),cb.isNull(from.get(Order_.closed))));
+			cq.orderBy(new OrderImpl(from.get(Order_.dateReturn)));
+		}
 		TypedQuery<Order> q = em.createQuery(cq);
-		setPaging(orderFilter, q);
+		setPaging(filter, q);
 		return q.getResultList();
 	}
 	@Override

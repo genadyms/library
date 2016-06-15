@@ -36,7 +36,6 @@ import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.book.BookEditPage;
 import com.gmazurkevich.training.library.webapp.page.book.BookInfoPage;
 import com.gmazurkevich.training.library.webapp.page.book.BooksPage;
-import com.gmazurkevich.training.library.webapp.page.copybook.CopyBooksPage;
 
 public class BooksListPanel extends Panel {
 

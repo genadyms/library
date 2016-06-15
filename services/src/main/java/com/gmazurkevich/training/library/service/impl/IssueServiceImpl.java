@@ -57,7 +57,15 @@ public class IssueServiceImpl implements IssueService {
 		IssueFilter filter = new IssueFilter();
 		filter.setCopyBook(copyBook);
 		filter.setStatusActive(true);
-		return issueDao.findCopyBook(filter);
+		List<Issue> result = issueDao.find(filter);
+		return result.isEmpty() ? null : result.get(0);
 	}
+//	@Override
+//	public Issue getActiveIssue(CopyBook copyBook) {
+//		IssueFilter filter = new IssueFilter();
+//		filter.setCopyBook(copyBook);
+//		filter.setStatusActive(true);
+//		return issueDao.findCopyBook(filter);
+//	}
 
 }

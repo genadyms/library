@@ -45,7 +45,7 @@ public class CopyBookServiceImpl implements CopyBookService {
 
 	@Override
 	public void save(CopyBook copyBook) {
-		
+
 		copyBookDao.insert(copyBook);
 	}
 
@@ -61,19 +61,30 @@ public class CopyBookServiceImpl implements CopyBookService {
 
 	@Override
 	public Date getFreeDateFrom(CopyBook copyBook) {
-		try {
-			Issue issue = issueService.getActiveIssue(copyBook);
-			if (issue != null) {
-				return issue.getPlannedDateReturn();
-			}
-			Order order = orderService.getActiveOrder(copyBook);
-			if (order != null) {
-				return order.getDateReturn();
-			}
-		} catch (javax.persistence.NoResultException e) {
-			
+		Issue issue = issueService.getActiveIssue(copyBook);
+		if (issue != null) {
+			return issue.getPlannedDateReturn();
+		}
+		Order order = orderService.getActiveOrder(copyBook);
+		if (order != null) {
+			return order.getDateReturn();
 		}
 		return new Date();
 	}
-
+	// @Override
+	// public Date getFreeDateFrom(CopyBook copyBook) {
+	// try {
+	// Issue issue = issueService.getActiveIssue(copyBook);
+	// if (issue != null) {
+	// return issue.getPlannedDateReturn();
+	// }
+	// Order order = orderService.getActiveOrder(copyBook);
+	// if (order != null) {
+	// return order.getDateReturn();
+	// }
+	// } catch (javax.persistence.NoResultException e) {
+	//
+	// }
+	// return new Date();
+	// }
 }

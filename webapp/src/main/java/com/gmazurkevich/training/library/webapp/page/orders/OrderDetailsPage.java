@@ -29,18 +29,18 @@ public class OrderDetailsPage extends AbstractPage {
 	private CopyBook copyBook;
 	
 	public OrderDetailsPage(Order order) {
-		this.order = orderService.getOrderFetchAll(order.getId());
+//		this.order = orderService.getOrderFetchAll(order.getId());
 //		this.copyBook = copyBookService.fetchAll(this.order.getCopyBook().getId()); 
 	}
 	
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		add(new Label("title-book", copyBook.getBook().getTitle()));
-		add(new Label("firstname-reader", order.getReader().getFirstName()));
-		add(new Label("lastname-reader", order.getReader().getLastName()));
-		add(new Label("name-department", copyBook.getDepartment().getName()));
-		add(new Label("type-department", copyBook.getDepartment().getType()));
+//		add(new Label("title-book", copyBook.getBook().getTitle()));
+//		add(new Label("firstname-reader", order.getReader().getFirstName()));
+//		add(new Label("lastname-reader", order.getReader().getLastName()));
+//		add(new Label("name-department", copyBook.getDepartment().getName()));
+//		add(new Label("type-department", copyBook.getDepartment().getType()));
 		
 	}
 }

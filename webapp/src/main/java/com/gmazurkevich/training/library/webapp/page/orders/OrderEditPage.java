@@ -72,10 +72,10 @@ public class OrderEditPage extends AbstractPage {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
-				order.setClosed(new Date());
-				orderService.update(order);
-				Order orderFetch = orderService.getOrderFetchAll(order.getId());
-				setResponsePage(new IssueEditPage(orderFetch.getCopyBook(), orderFetch.getReader()));
+//				order.setClosed(new Date());
+//				orderService.update(order);
+//				Order orderFetch = orderService.getOrderFetchAll(order.getId());
+//				setResponsePage(new IssueEditPage(orderFetch.getCopyBook(), orderFetch.getReader()));
 			}
 		});
 

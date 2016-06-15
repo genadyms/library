@@ -22,6 +22,7 @@ import org.apache.wicket.model.Model;
 import com.gmazurkevich.training.library.dataaccess.filters.IssueFilter;
 import com.gmazurkevich.training.library.datamodel.Issue;
 import com.gmazurkevich.training.library.datamodel.Issue_;
+import com.gmazurkevich.training.library.datamodel.Order_;
 import com.gmazurkevich.training.library.service.IssueService;
 import com.gmazurkevich.training.library.webapp.page.home.HomePage;
 
@@ -49,6 +50,7 @@ public class IssueListPanel extends Panel {
 				Issue issue = item.getModelObject();
 
 				item.add(new Label("id", issue.getId()));
+				item.add(new Label("copyBook", issue.getCopyBook().getId()));
 				item.add(DateLabel.forDatePattern("date-take", Model.of(issue.getDateTake()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("plannedDateReturn", Model.of(issue.getPlannedDateReturn()), "dd-MM-yyyy hh:mm"));
 				item.add(DateLabel.forDatePattern("dateReturn", Model.of(issue.getDateReturn()), "dd-MM-yyyy hh:mm"));
@@ -69,6 +71,8 @@ public class IssueListPanel extends Panel {
 		add(dataView);
 		add(new PagingNavigator("paging", dataView));
 		add(new OrderByBorder("sort-id", Issue_.id, issueDataProvider));
+		add(new OrderByBorder("sort-copyBook", Issue_.copyBook, issueDataProvider));
+		
 //		add(new OrderByBorder("sort-date-take", Issue_.dateTake, issueDataProvider));
 //		add(new OrderByBorder("sort-reserved", Order_.reserved, issueDataProvider));
 //		add(new OrderByBorder("sort-handled", Order_.handled, issueDataProvider));

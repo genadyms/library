@@ -31,8 +31,12 @@ public class IssueDaoImpl extends AbstractDaoImpl<Issue, Long> implements IssueD
 		CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 		Root<Issue> from = cq.from(Issue.class);
 		cq.select(from);
+		from.fetch(Issue_.copyBook);
 		if (filter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
+		}
+		if (filter.getCopyBook() != null&&filter.isStatusActive()) {
+			cq.where(cb.and(cb.isNotNull(from.get(Issue_.copyBook)),cb.equal(from.get(Issue_.copyBook), filter.getCopyBook()),cb.isNull(from.get(Issue_.dateReturn))));
 		}
 		TypedQuery<Issue> q = em.createQuery(cq);
 		setPaging(filter, q);
