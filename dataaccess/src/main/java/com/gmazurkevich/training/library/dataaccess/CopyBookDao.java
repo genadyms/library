@@ -3,7 +3,6 @@ package com.gmazurkevich.training.library.dataaccess;
 import java.util.List;
 
 import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
-import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.CopyBook;
 
 public interface CopyBookDao extends AbstractDao<CopyBook, Long> {
@@ -12,7 +11,5 @@ public interface CopyBookDao extends AbstractDao<CopyBook, Long> {
 
 	Long count(CopyBookFilter filter);
 
-//	CopyBook fetchAll(Long id);
-//
-//	CopyBook fetchCopyBook(CopyBookFilter filter);
+	CopyBook getFetchCopyBook(CopyBookFilter filter);
 }

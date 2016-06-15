@@ -1,21 +1,26 @@
 package com.gmazurkevich.training.library.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.CopyBookDao;
 import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
+import com.gmazurkevich.training.library.dataaccess.filters.IssueFilter;
 import com.gmazurkevich.training.library.dataaccess.filters.OrderFilter;
 import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Issue;
 import com.gmazurkevich.training.library.datamodel.Order;
+import com.gmazurkevich.training.library.datamodel.Order_;
 import com.gmazurkevich.training.library.service.CopyBookService;
 import com.gmazurkevich.training.library.service.IssueService;
 import com.gmazurkevich.training.library.service.OrderService;
+import com.gmazurkevich.training.library.service.util.NextDateUtil;
 
 @Service
 public class CopyBookServiceImpl implements CopyBookService {
@@ -55,36 +60,53 @@ public class CopyBookServiceImpl implements CopyBookService {
 	}
 
 	@Override
+	public CopyBook fetchOrderIssue(CopyBook copyBook) {
+		CopyBookFilter filter = new CopyBookFilter();
+		filter.setFetchBook(true);
+		filter.setFetchDepartment(true);
+		filter.setFetchIssue(true);
+		filter.setFetchOrder(true);
+		filter.setCopyBookId(copyBook.getId());
+		return copyBookDao.getFetchCopyBook(filter);
+	}
+
+	@Override
 	public Long count(CopyBookFilter filter) {
 		return copyBookDao.count(filter);
 	}
 
 	@Override
 	public Date getFreeDateFrom(CopyBook copyBook) {
-		Issue issue = issueService.getActiveIssue(copyBook);
-		if (issue != null) {
-			return issue.getPlannedDateReturn();
+		Date result = new Date();
+		List<Date> allReturnDates = new ArrayList<Date>();
+		allReturnDates.add(result);
+		IssueFilter issueFilter = new IssueFilter();
+		issueFilter.setCopyBook(copyBook);
+		List<Issue> issues = issueService.find(issueFilter);
+		for (Issue curr : issues) {
+			if (curr.getDateReturn() != null) {
+				allReturnDates.add(curr.getPlannedDateReturn());
+			}
 		}
-		Order order = orderService.getActiveOrder(copyBook);
-		if (order != null) {
-			return order.getDateReturn();
+		OrderFilter orderFilter = new OrderFilter();
+		orderFilter.setCopyBook(copyBook);
+		List<Order> orders = orderService.find(orderFilter);
+		for (Order order : orders) {
+			if (order.getDateReturn() != null) {
+				allReturnDates.add(order.getDateReturn());
+			}
 		}
-		return new Date();
+		if (allReturnDates.size() > 1) {
+			Collections.sort(allReturnDates, new Comparator<Date>() {
+				@Override
+				public int compare(Date date1, Date date2) {
+					return (-date1.compareTo(date2));
+				}
+
+			});
+			result = NextDateUtil.getNextDate(allReturnDates.get(0));
+		}
+		return result;
 	}
-	// @Override
-	// public Date getFreeDateFrom(CopyBook copyBook) {
-	// try {
-	// Issue issue = issueService.getActiveIssue(copyBook);
-	// if (issue != null) {
-	// return issue.getPlannedDateReturn();
-	// }
-	// Order order = orderService.getActiveOrder(copyBook);
-	// if (order != null) {
-	// return order.getDateReturn();
-	// }
-	// } catch (javax.persistence.NoResultException e) {
-	//
-	// }
-	// return new Date();
-	// }
+
 }

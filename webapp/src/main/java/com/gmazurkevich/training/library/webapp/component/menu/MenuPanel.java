@@ -35,12 +35,7 @@ public class MenuPanel extends Panel {
 			}
 		});
 		
-		add(new Link("link-copyBooks") {
-			@Override
-			public void onClick() {
-				setResponsePage(new CopyBooksPage());
-			}
-		});
+		
 		
 		add(new Link("link-departments") {
 			@Override

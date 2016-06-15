@@ -6,13 +6,35 @@ import com.gmazurkevich.training.library.datamodel.Department;
 public class CopyBookFilter extends AbstractFilter {
 
 	private Book book;
-
-	private boolean findFreeCopyBook;
-
 	private boolean fetchBook;
 	private boolean fetchDepartment;
+	private boolean fetchIssue;
+	private boolean fetchOrder;
+	private Long copyBookId;
 
-	// private boolean fetchAll;
+	public Long getCopyBookId() {
+		return copyBookId;
+	}
+
+	public void setCopyBookId(Long copyBookId) {
+		this.copyBookId = copyBookId;
+	}
+
+	public boolean isFetchIssue() {
+		return fetchIssue;
+	}
+
+	public void setFetchIssue(boolean fetchIssue) {
+		this.fetchIssue = fetchIssue;
+	}
+
+	public boolean isFetchOrder() {
+		return fetchOrder;
+	}
+
+	public void setFetchOrder(boolean fetchOrder) {
+		this.fetchOrder = fetchOrder;
+	}
 
 	public Book getBook() {
 		return book;
@@ -28,14 +50,6 @@ public class CopyBookFilter extends AbstractFilter {
 
 	public void setDepartment(Department department) {
 		this.department = department;
-	}
-
-	public boolean isFindFreeCopyBook() {
-		return findFreeCopyBook;
-	}
-
-	public void setFindFreeCopyBook(boolean findFreeCopyBook) {
-		this.findFreeCopyBook = findFreeCopyBook;
 	}
 
 	private Department department;

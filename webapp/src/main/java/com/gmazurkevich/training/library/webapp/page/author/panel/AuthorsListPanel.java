@@ -25,6 +25,7 @@ import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Author_;
 import com.gmazurkevich.training.library.service.AuthorService;
 import com.gmazurkevich.training.library.service.exception.DeleteAuthorWithBooksException;
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.author.AuthorEditPanel;
 import com.gmazurkevich.training.library.webapp.page.author.AuthorsPage;
 
@@ -52,15 +53,17 @@ public class AuthorsListPanel extends Panel {
 				item.add(new Label("id", author.getId()));
 				item.add(new Label("firstName", author.getFirstName()));
 				item.add(new Label("secondName", author.getSecondName()));
-				item.add(new AjaxLink("edit") {
+				AjaxLink editLink = new AjaxLink("edit") {
 					@Override
 					public void onClick(AjaxRequestTarget target) {
 						
 						modalWindow.setContent(new AuthorEditPanel(modalWindow, author));
 						modalWindow.show(target);
 					}
-				});
-				item.add(new AjaxLink("delete") {
+				};
+				editLink.setVisible(false);
+				item.add(editLink);
+				AjaxLink deleteLink = new AjaxLink("delete") {
 					@Override
 					public void onClick(AjaxRequestTarget target) {
 						try {
@@ -70,7 +73,14 @@ public class AuthorsListPanel extends Panel {
 							modalWindow.setContent(new AuthorEditPanel(modalWindow, author));
 						}
 					}
-				});
+				};
+				deleteLink.setVisible(false);
+				item.add(deleteLink);
+				
+				if (null!=AuthorizedSession.get().getRoles()&&AuthorizedSession.get().getRoles().contains("admin")) {
+					editLink.setVisible(true);
+					deleteLink.setVisible(true);
+				}
 			}
 		};
 		add(dataView);

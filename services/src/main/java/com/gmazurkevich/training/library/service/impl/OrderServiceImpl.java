@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.OrderDao;
@@ -14,6 +15,7 @@ import com.gmazurkevich.training.library.datamodel.Issue;
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.service.IssueService;
 import com.gmazurkevich.training.library.service.OrderService;
+import com.gmazurkevich.training.library.service.util.NextDateUtil;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -73,11 +75,33 @@ public class OrderServiceImpl implements OrderService {
 	// }
 
 	@Override
-	public Order getActiveOrder(CopyBook copyBook) {
+	public Order geLastActiveOrder(CopyBook copyBook) {
 		OrderFilter filter = new OrderFilter();
 		filter.setCopyBook(copyBook);
 		filter.setStatusActive(true);
 		List<Order> result = orderDao.find(filter);
-		return result.isEmpty() ? null : result.get(0);
+		for(Order curr : result) {
+			System.out.println("-----------------------");
+			System.out.println(curr.getCreated());
+			System.out.println(curr.getDateReserve());
+			System.out.println(curr.getDateReturn());
+			System.out.println(curr.getCopyBook().getId());
+			System.out.println(NextDateUtil.getNextDate(curr.getDateReturn()));
+			System.out.println("-----------------------");
+		}
+		Order res = null;
+		if(!result.isEmpty()){
+			res = result.get(result.size()-1);
+			System.out.println("=====================================");
+			System.out.println(res.getCreated());
+			System.out.println(res.getDateReserve());
+			System.out.println(res.getDateReturn());
+			System.out.println(res.getCopyBook().getId());
+			System.out.println(NextDateUtil.getNextDate(res.getDateReturn()));
+			System.out.println("=====================================");
+			
+		}
+		return res;
+//		return result.isEmpty() ? null : result.get(0);
 	}
 }

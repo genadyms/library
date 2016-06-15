@@ -22,8 +22,10 @@ import org.apache.wicket.model.Model;
 import com.gmazurkevich.training.library.dataaccess.filters.DepartmentFilter;
 import com.gmazurkevich.training.library.datamodel.Department;
 import com.gmazurkevich.training.library.datamodel.Department_;
+import com.gmazurkevich.training.library.datamodel.UserRole;
 import com.gmazurkevich.training.library.service.DepartmentService;
 import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.department.DepartmentEditPage;
 import com.gmazurkevich.training.library.webapp.page.department.DepartmentsPage;
 
@@ -35,7 +37,7 @@ public class DepartmentsListPanel extends Panel {
 	public DepartmentsListPanel(String id) {
 		super(id);
 	}
-	
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -50,14 +52,16 @@ public class DepartmentsListPanel extends Panel {
 				item.add(new Label("phone", department.getPhone()));
 				item.add(new Label("address", department.getAddress()));
 
-				item.add(new Link<Void>("edit-link") {
+				Link editLink = new Link<Void>("edit-link") {
 					@Override
 					public void onClick() {
 						setResponsePage(new DepartmentEditPage(department));
 					}
-				});
 
-				item.add(new Link<Void>("delete-link") {
+				};
+				item.add(editLink);
+
+				Link deleteLink = new Link<Void>("delete-link") {
 					@Override
 					public void onClick() {
 						try {
@@ -67,10 +71,18 @@ public class DepartmentsListPanel extends Panel {
 						}
 						setResponsePage(DepartmentsPage.class);
 					}
-				});
-
+				};
+				item.add(deleteLink);
+				deleteLink.setVisible(false);
+				editLink.setVisible(false);
+				if (null!=AuthorizedSession.get().getRoles()&&AuthorizedSession.get().getRoles().contains("admin")) {
+					deleteLink.setVisible(true);
+					editLink.setVisible(true);
+				}
 			}
+
 		};
+
 		add(dataView);
 		add(new PagingNavigator("paging", dataView));
 

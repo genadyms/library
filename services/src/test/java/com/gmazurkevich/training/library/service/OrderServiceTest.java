@@ -172,7 +172,7 @@ public class OrderServiceTest {
 			orderService.save(order);
 		}
 		CopyBookFilter filter = new CopyBookFilter();
-		filter.setFindFreeCopyBook(true);
+//		filter.setFindFreeCopyBook(true);
 		filter.setBook(book);
 		Assert.assertEquals(copyBookService.find(filter).size(), 9);//countCopyBook);
 	}

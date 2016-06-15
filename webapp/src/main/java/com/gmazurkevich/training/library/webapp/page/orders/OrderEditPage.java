@@ -15,6 +15,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.service.OrderService;
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.issue.IssueEditPage;
 
@@ -43,14 +44,14 @@ public class OrderEditPage extends AbstractPage {
 		add(form);
 
 		DateTextField reserveField = new DateTextField("dateReserve");
-		reserveField.add(new DatePicker());
+		reserveField.setEnabled(false);
 		form.add(reserveField);
 
 		DateTextField returnField = new DateTextField("dateReturn");
-		returnField.add(new DatePicker());
+		returnField.setEnabled(false);
 		form.add(returnField);
 
-		form.add(new SubmitLink("update") {
+		form.add(new SubmitLink("order") {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
@@ -59,26 +60,29 @@ public class OrderEditPage extends AbstractPage {
 
 		});
 
-		form.add(new SubmitLink("close") {
+		SubmitLink closeLink = new SubmitLink("close") {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
 				order.setClosed(new Date());
 				submitExecute();
 			}
-		});
+		};
 
-		form.add(new SubmitLink("issue") {
+		SubmitLink issueLink = new SubmitLink("issue") {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
-//				order.setClosed(new Date());
-//				orderService.update(order);
-//				Order orderFetch = orderService.getOrderFetchAll(order.getId());
-//				setResponsePage(new IssueEditPage(orderFetch.getCopyBook(), orderFetch.getReader()));
 			}
-		});
-
+		};
+		form.add(closeLink);
+		form.add(issueLink);
+		closeLink.setVisible(false);
+		issueLink.setVisible(false);
+		if (null!=AuthorizedSession.get().getRoles()&&(AuthorizedSession.get().getRoles().contains("librarian")||AuthorizedSession.get().getRoles().contains("admin"))) {
+			closeLink.setVisible(true);
+			issueLink.setVisible(true);
+		}
 		add(new FeedbackPanel("feedback"));
 	}
 

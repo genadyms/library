@@ -24,7 +24,9 @@ import com.gmazurkevich.training.library.dataaccess.filters.OrderFilter;
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.datamodel.Order_;
 import com.gmazurkevich.training.library.service.OrderService;
+import com.gmazurkevich.training.library.service.UserService;
 import com.gmazurkevich.training.library.service.impl.DeleteActiveOrderException;
+import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderDetailsPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderEditPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrdersPage;
@@ -34,6 +36,8 @@ public class OrdersListPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private OrderService orderService;
+	@Inject
+	private UserService userService;
 
 	public OrdersListPanel(String id) {
 		super(id);
@@ -46,7 +50,7 @@ public class OrdersListPanel extends Panel {
 
 		OrdersDataProvider ordersDataProvider = new OrdersDataProvider();
 		DataView<Order> dataView = new DataView<Order>("rows", ordersDataProvider, 5) {
-			
+
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -82,9 +86,9 @@ public class OrdersListPanel extends Panel {
 
 				};
 				item.add(editLink);
-//				editLink.setVisible(null == order.getClosed());
+				
 
-				item.add(new Link<Void>("delete-link") {
+				Link deleteLink = new Link<Void>("delete-link") {
 
 					private static final long serialVersionUID = 1L;
 
@@ -98,8 +102,12 @@ public class OrdersListPanel extends Panel {
 
 						setResponsePage(new OrdersPage());
 					}
-				});
-
+				};
+				item.add(deleteLink);
+				if (AuthorizedSession.get().getRoles().contains("reader")) {
+					editLink.setVisible(false);
+					deleteLink.setVisible(false);
+				}
 			}
 		};
 		add(dataView);
@@ -125,6 +133,9 @@ public class OrdersListPanel extends Panel {
 		public OrdersDataProvider() {
 			super();
 			orderFilter = new OrderFilter();
+			if (AuthorizedSession.get().getRoles().contains("reader")) {
+				orderFilter.setReader(userService.getProfile(AuthorizedSession.get().getLoggedUser().getId()));
+			}
 			setSort((Serializable) Order_.created, SortOrder.ASCENDING);
 		}
 

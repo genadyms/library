@@ -27,5 +27,5 @@ public interface OrderService {
 
 //	Order getOrderFetchAll(Long id);
 
-	Order getActiveOrder(CopyBook copyBook);
+	Order geLastActiveOrder(CopyBook copyBook);
 }

@@ -2,6 +2,8 @@ package com.gmazurkevich.training.library.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
@@ -24,5 +26,6 @@ public interface CopyBookService {
 	Long count(CopyBookFilter filter);
 
 	Date getFreeDateFrom(CopyBook copyBook);
-
+	
+	CopyBook fetchOrderIssue(CopyBook copyBook);
 }

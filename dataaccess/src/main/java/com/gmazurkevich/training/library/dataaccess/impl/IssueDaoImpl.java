@@ -35,8 +35,8 @@ public class IssueDaoImpl extends AbstractDaoImpl<Issue, Long> implements IssueD
 		if (filter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
 		}
-		if (filter.getCopyBook() != null&&filter.isStatusActive()) {
-			cq.where(cb.and(cb.isNotNull(from.get(Issue_.copyBook)),cb.equal(from.get(Issue_.copyBook), filter.getCopyBook()),cb.isNull(from.get(Issue_.dateReturn))));
+		if (filter.getCopyBook() != null) {
+			cq.where(cb.equal(from.get(Issue_.copyBook), filter.getCopyBook()));
 		}
 		TypedQuery<Issue> q = em.createQuery(cq);
 		setPaging(filter, q);

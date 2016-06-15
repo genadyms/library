@@ -34,6 +34,9 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<Order> from = cq.from(Order.class);
 		cq.select(cb.count(from));
+		if(filter.getReader()!=null){
+			cq.where(cb.equal(from.get(Order_.reader), filter.getReader()));
+		}
 		TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult();
 	}
@@ -45,19 +48,21 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
 		Root<Order> from = cq.from(Order.class);
 		cq.select(from);
-		// set sort params
 		from.fetch(Order_.copyBook);
 		if (filter.getSortProperty() != null) {
 			cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
 		}
-		if (filter.getCopyBook() != null&&filter.isStatusActive()) {
-			cq.where(cb.and(cb.isNotNull(from.get(Order_.copyBook)),cb.equal(from.get(Order_.copyBook), filter.getCopyBook()),cb.isNull(from.get(Order_.closed))));
-			cq.orderBy(new OrderImpl(from.get(Order_.dateReturn)));
+		if (filter.getCopyBook() != null) {
+			cq.where(cb.equal(from.get(Order_.copyBook), filter.getCopyBook()));
+		}
+		if(filter.getReader()!=null){
+			cq.where(cb.equal(from.get(Order_.reader), filter.getReader()));
 		}
 		TypedQuery<Order> q = em.createQuery(cq);
 		setPaging(filter, q);
 		return q.getResultList();
 	}
+
 	@Override
 	public Order findCopyBook(OrderFilter filter) {
 		EntityManager em = getEntityManager();
@@ -65,14 +70,16 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
 		Root<Order> from = cq.from(Order.class);
 		cq.select(from);
-		if (filter.getCopyBook() != null&&filter.isStatusActive()) {
-			cq.where(cb.and(cb.isNotNull(from.get(Order_.copyBook)),cb.equal(from.get(Order_.copyBook), filter.getCopyBook()),cb.isNull(from.get(Order_.closed))));
+		if (filter.getCopyBook() != null && filter.isStatusActive()) {
+			cq.where(cb.and(cb.isNotNull(from.get(Order_.copyBook)),
+					cb.equal(from.get(Order_.copyBook), filter.getCopyBook()), cb.isNull(from.get(Order_.closed))));
 		}
 		cq.distinct(true);
 		TypedQuery<Order> q = em.createQuery(cq);
 		Order current = q.getSingleResult();
 		return current;
 	}
+
 	@Override
 	public Order getOrderFetchAll(Long id) {
 		EntityManager em = getEntityManager();

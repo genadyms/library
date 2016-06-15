@@ -4,6 +4,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 
+import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.webapp.page.AbstractPage;
 import com.gmazurkevich.training.library.webapp.page.copybook.panel.CopyBooksListPanel;
 import com.googlecode.wicket.kendo.ui.widget.notification.Notification;
@@ -20,7 +21,12 @@ public class CopyBooksPage extends AbstractPage {
 		listPanel = new CopyBooksListPanel("list-panel");
 		listPanel.setOutputMarkupId(true);
 	}
-
+	public CopyBooksPage(Book book) {
+		super();
+		listPanel = new CopyBooksListPanel("list-panel", book);
+		listPanel.setOutputMarkupId(true);
+		
+	}
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();

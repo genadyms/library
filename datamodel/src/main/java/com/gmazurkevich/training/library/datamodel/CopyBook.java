@@ -20,6 +20,9 @@ public class CopyBook extends AbstractModel {
 	@OneToMany(mappedBy = "copyBook")
 	private List<Order> orders;
 	
+	@OneToMany(mappedBy = "copyBook")
+	private List<Issue> issues;
+
 	public List<Issue> getIssues() {
 		return issues;
 	}
@@ -27,9 +30,6 @@ public class CopyBook extends AbstractModel {
 	public void setIssues(List<Issue> issues) {
 		this.issues = issues;
 	}
-
-	@OneToMany(mappedBy = "copyBook")
-	private List<Issue> issues;
 
 	public Department getDepartment() {
 		return department;
