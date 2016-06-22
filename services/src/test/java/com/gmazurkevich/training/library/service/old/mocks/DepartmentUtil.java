@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.service.mocks;
+package com.gmazurkevich.training.library.service.old.mocks;
 
 import com.gmazurkevich.training.library.datamodel.Department;
 import com.gmazurkevich.training.library.datamodel.DepartmentType;

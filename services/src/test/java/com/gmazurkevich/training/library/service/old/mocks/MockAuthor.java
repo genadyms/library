@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.service.mocks;
+package com.gmazurkevich.training.library.service.old.mocks;
 
 import java.util.ArrayList;
 import java.util.HashSet;

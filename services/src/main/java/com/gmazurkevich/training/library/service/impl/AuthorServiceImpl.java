@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.AuthorDao;
@@ -13,11 +15,12 @@ import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.datamodel.Author;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.service.AuthorService;
+import com.gmazurkevich.training.library.service.AuthorServiceTest;
 import com.gmazurkevich.training.library.service.exception.DeleteAuthorWithBooksException;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
-
+	private static Logger LOGGER = LoggerFactory.getLogger(AuthorServiceImpl.class);
 	@Inject
 	private AuthorDao authorDao;
 
@@ -32,13 +35,17 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public void update(Author author) {
 		authorDao.update(author);
+		LOGGER.info("Update {} in database.", author);
 	}
 
 	@Override
 	public void delete(Author author) throws DeleteAuthorWithBooksException {
-		if (authorHasBooks(author))
+		if (authorHasBooks(author)) {
+			LOGGER.info("Generate DeleteAuthorWithBooksExceptione: {}", author);
 			throw new DeleteAuthorWithBooksException();
+		}
 		authorDao.delete(author.getId());
+		LOGGER.info("Delete {} from database.", author);
 	}
 
 	private boolean authorHasBooks(Author author) {
@@ -53,6 +60,7 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public void create(Author author) {
 		authorDao.insert(author);
+		LOGGER.info("save new {} in database", author);
 	}
 
 	@Override

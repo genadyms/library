@@ -3,12 +3,16 @@ package com.gmazurkevich.training.library.service.impl;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.CatalogDao;
 import com.gmazurkevich.training.library.dataaccess.filters.BookFilter;
 import com.gmazurkevich.training.library.dataaccess.filters.CatalogFilter;
 import com.gmazurkevich.training.library.datamodel.Catalog;
+import com.gmazurkevich.training.library.service.AuthorServiceTest;
 import com.gmazurkevich.training.library.service.BookService;
 import com.gmazurkevich.training.library.service.CatalogService;
 import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
@@ -16,6 +20,7 @@ import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemExc
 @Service
 public class CatalogServiceImpl implements CatalogService {
 
+	private static Logger LOGGER = LoggerFactory.getLogger(CatalogServiceImpl.class);
 	@Inject
 	private CatalogDao catalogDao;
 
@@ -30,14 +35,17 @@ public class CatalogServiceImpl implements CatalogService {
 	@Override
 	public void create(Catalog catalog) {
 		catalogDao.insert(catalog);
+		LOGGER.info("Create {}", catalog);
 	}
 
 	@Override
 	public void delete(Catalog catalog) throws DeleteNotEmptyItemException {
 		if (catalogNotEmpty(catalog)) {
+			LOGGER.info("Generate DeleteNotEmptyItemException for delete {}", catalog);
 			throw new DeleteNotEmptyItemException();
 		}
 		catalogDao.delete(catalog.getId());
+		LOGGER.info("Delete {}", catalog);
 	}
 
 	@Override

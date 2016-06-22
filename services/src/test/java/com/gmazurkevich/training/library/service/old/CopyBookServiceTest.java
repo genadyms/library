@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.service;
+package com.gmazurkevich.training.library.service.old;
 
 import javax.inject.Inject;
 
@@ -12,8 +12,11 @@ import com.gmazurkevich.training.library.dataaccess.filters.CopyBookFilter;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Department;
-import com.gmazurkevich.training.library.service.mocks.BookUtil;
-import com.gmazurkevich.training.library.service.mocks.DepartmentUtil;
+import com.gmazurkevich.training.library.service.BookService;
+import com.gmazurkevich.training.library.service.CopyBookService;
+import com.gmazurkevich.training.library.service.DepartmentService;
+import com.gmazurkevich.training.library.service.old.mocks.BookUtil;
+import com.gmazurkevich.training.library.service.old.mocks.DepartmentUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })

@@ -25,7 +25,7 @@ import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.datamodel.Order_;
 import com.gmazurkevich.training.library.service.OrderService;
 import com.gmazurkevich.training.library.service.UserService;
-import com.gmazurkevich.training.library.service.impl.DeleteActiveOrderException;
+import com.gmazurkevich.training.library.service.exception.DeleteActiveOrderException;
 import com.gmazurkevich.training.library.webapp.app.AuthorizedSession;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderDetailsPage;
 import com.gmazurkevich.training.library.webapp.page.orders.OrderEditPage;

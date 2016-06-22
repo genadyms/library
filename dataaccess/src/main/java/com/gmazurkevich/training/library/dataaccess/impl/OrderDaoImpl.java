@@ -90,7 +90,6 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 		from.fetch(Order_.reader, JoinType.LEFT);
 		from.fetch(Order_.librarian, JoinType.LEFT);
 		from.fetch(Order_.copyBook, JoinType.LEFT);
-		// from.fetch(Order_.comments, JoinType.LEFT);
 		cq.where(cb.equal(from.get(Order_.id), id));
 		cq.distinct(true);
 		TypedQuery<Order> q = em.createQuery(cq);

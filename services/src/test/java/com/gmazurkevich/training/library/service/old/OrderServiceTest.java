@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.service;
+package com.gmazurkevich.training.library.service.old;
 
 import java.util.Date;
 
@@ -17,10 +17,15 @@ import com.gmazurkevich.training.library.datamodel.Department;
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
 import com.gmazurkevich.training.library.datamodel.UserRole;
-import com.gmazurkevich.training.library.service.impl.DeleteActiveOrderException;
-import com.gmazurkevich.training.library.service.mocks.BookUtil;
-import com.gmazurkevich.training.library.service.mocks.DepartmentUtil;
-import com.gmazurkevich.training.library.service.mocks.UserUtil;
+import com.gmazurkevich.training.library.service.BookService;
+import com.gmazurkevich.training.library.service.CopyBookService;
+import com.gmazurkevich.training.library.service.DepartmentService;
+import com.gmazurkevich.training.library.service.OrderService;
+import com.gmazurkevich.training.library.service.UserService;
+import com.gmazurkevich.training.library.service.exception.DeleteActiveOrderException;
+import com.gmazurkevich.training.library.service.old.mocks.BookUtil;
+import com.gmazurkevich.training.library.service.old.mocks.DepartmentUtil;
+import com.gmazurkevich.training.library.service.old.mocks.UserUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })

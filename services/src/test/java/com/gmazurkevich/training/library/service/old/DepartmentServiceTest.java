@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.service;
+package com.gmazurkevich.training.library.service.old;
 
 import javax.inject.Inject;
 
@@ -11,9 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gmazurkevich.training.library.datamodel.Department;
 import com.gmazurkevich.training.library.datamodel.DepartmentType;
 import com.gmazurkevich.training.library.datamodel.UserProfile;
+import com.gmazurkevich.training.library.service.DepartmentService;
+import com.gmazurkevich.training.library.service.UserService;
 import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
-import com.gmazurkevich.training.library.service.mocks.DepartmentUtil;
-import com.gmazurkevich.training.library.service.mocks.UserUtil;
+import com.gmazurkevich.training.library.service.old.mocks.DepartmentUtil;
+import com.gmazurkevich.training.library.service.old.mocks.UserUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })

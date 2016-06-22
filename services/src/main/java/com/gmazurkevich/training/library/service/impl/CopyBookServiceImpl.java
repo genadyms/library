@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.CopyBookDao;
@@ -17,6 +19,7 @@ import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Issue;
 import com.gmazurkevich.training.library.datamodel.Order;
 import com.gmazurkevich.training.library.datamodel.Order_;
+import com.gmazurkevich.training.library.service.AuthorServiceTest;
 import com.gmazurkevich.training.library.service.CopyBookService;
 import com.gmazurkevich.training.library.service.IssueService;
 import com.gmazurkevich.training.library.service.OrderService;
@@ -24,6 +27,7 @@ import com.gmazurkevich.training.library.service.util.NextDateUtil;
 
 @Service
 public class CopyBookServiceImpl implements CopyBookService {
+	private static Logger LOGGER = LoggerFactory.getLogger(CopyBookServiceImpl.class);
 	@Inject
 	private CopyBookDao copyBookDao;
 
@@ -41,17 +45,19 @@ public class CopyBookServiceImpl implements CopyBookService {
 	@Override
 	public void update(CopyBook copyBook) {
 		copyBookDao.update(copyBook);
+		LOGGER.info("Update {}", copyBook);
 	}
 
 	@Override
 	public void delete(Long id) {
 		copyBookDao.delete(id);
+		LOGGER.info("Delete copybook with id {}", id);
 	}
 
 	@Override
 	public void save(CopyBook copyBook) {
-
 		copyBookDao.insert(copyBook);
+		LOGGER.info("Save {}", copyBook);
 	}
 
 	@Override

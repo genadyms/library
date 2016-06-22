@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import com.gmazurkevich.training.library.dataaccess.filters.OrderFilter;
 import com.gmazurkevich.training.library.datamodel.CopyBook;
 import com.gmazurkevich.training.library.datamodel.Order;
-import com.gmazurkevich.training.library.service.impl.DeleteActiveOrderException;
+import com.gmazurkevich.training.library.service.exception.DeleteActiveOrderException;
 
 public interface OrderService {
 	Order get(Long id);

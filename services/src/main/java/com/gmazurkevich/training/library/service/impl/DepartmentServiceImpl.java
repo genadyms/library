@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.DepartmentDao;
@@ -18,6 +20,7 @@ import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemExc
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
+	private static Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
 	@Inject
 	private DepartmentDao departmentDao;
 
@@ -35,13 +38,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public void update(Department department) {
 		departmentDao.update(department);
+		LOGGER.info("Update {}", department);
 	}
 
 	@Override
 	public void delete(Department department) throws DeleteNotEmptyItemException {
-		if (isNotEmpty(department))
+		if (isNotEmpty(department)) {
+			LOGGER.info("throws DeleteNotEmptyItemException with {}", department);
 			throw new DeleteNotEmptyItemException();
+		}
 		departmentDao.delete(department.getId());
+		LOGGER.info("Delete {}", department);
 	}
 
 	private boolean isNotEmpty(Department department) {
@@ -64,6 +71,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public void save(Department department) {
 		departmentDao.insert(department);
+		LOGGER.info("Save {}", department);
 	}
 
 	@Override

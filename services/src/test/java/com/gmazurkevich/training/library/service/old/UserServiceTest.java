@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.service;
+package com.gmazurkevich.training.library.service.old;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import com.gmazurkevich.training.library.datamodel.UserRole;
 import com.gmazurkevich.training.library.datamodel.UserState;
 import com.gmazurkevich.training.library.service.UserService;
 import com.gmazurkevich.training.library.service.exception.DeleteActiveUserException;
-import com.gmazurkevich.training.library.service.mocks.UserUtil;
+import com.gmazurkevich.training.library.service.old.mocks.UserUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })

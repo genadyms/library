@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.gmazurkevich.training.library.dataaccess.UserCredentialsDao;
@@ -19,6 +21,7 @@ import com.gmazurkevich.training.library.dataaccess.filters.UserFilter;
 
 @Service
 public class UserServiceImpl implements UserService {
+	private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 	@Inject
 	private UserProfileDao userProfileDao;
 
@@ -30,6 +33,8 @@ public class UserServiceImpl implements UserService {
 		userCredentialsDao.insert(userCredentials);
 		profile.setUserCredentials(userCredentials);
 		userProfileDao.insert(profile);
+		LOGGER.info("Save {} | {}", profile,userCredentials);
+
 	}
 
 	@Override
@@ -50,15 +55,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void update(UserProfile profile) {
 		userProfileDao.update(profile);
+		LOGGER.info("Update {}", profile);
 	}
 
 	@Override
 	public void delete(Long id) throws DeleteActiveUserException {
 		UserProfile userProfile = userProfileDao.get(id);
-		if (userProfile.getState() != UserState.NOT_ACTIVE)
+		if (userProfile.getState() != UserState.NOT_ACTIVE) {
+			LOGGER.info("Throws DeleteActiveUserException in delete user with id {}", id);
 			throw new DeleteActiveUserException();
+		}
 		userProfileDao.delete(id);
 		userCredentialsDao.delete(id);
+		LOGGER.info("Delete user with id  {}", id);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.gmazurkevich.training.library.service;
+package com.gmazurkevich.training.library.service.old;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gmazurkevich.training.library.datamodel.Book;
 import com.gmazurkevich.training.library.datamodel.Catalog;
 import com.gmazurkevich.training.library.service.exception.DeleteNotEmptyItemException;
-import com.gmazurkevich.training.library.service.mocks.MockBook;
+import com.gmazurkevich.training.library.service.old.mocks.MockBook;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:service-context-test.xml" })
